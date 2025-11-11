@@ -49,7 +49,7 @@ const Product = () => {
         buttonText="Explore Our Varieties"
       />
       <ProductCatagory />
-      <FAQ faqData={productFaqData} />
+      <FAQ faqData={productFaqData} title="Frequently Asked Questions About Our Products" subtitle="Get answers to common questions about our products and services" />
       <CallToAction
         title="Partner With a Reliable Trading Company in Oman"
         subtitle="From construction materials and food products to chemicals and IT solutions, Leading Network LLC delivers certified products with transparent service and international reliability."
