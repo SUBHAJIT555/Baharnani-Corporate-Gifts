@@ -186,12 +186,12 @@ const TopSaver = ({
 
               <Swiper
                 modules={[Pagination, Autoplay]}
-                spaceBetween={20}
-                slidesPerView={1}
+                spaceBetween={12}
+                slidesPerView={2}
                 breakpoints={{
                   640: {
                     slidesPerView: 2,
-                    spaceBetween: 24,
+                    spaceBetween: 20,
                   },
                   1024: {
                     slidesPerView: 4,
@@ -308,14 +308,14 @@ const TopSaver = ({
             </div>
 
             {/* Right Side: Video Banner */}
-            <div className="w-full lg:w-1/3">
+            <div className="w-full lg:w-1/3 shrink-0">
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={
                   isSwiperInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }
                 }
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="relative w-full h-full min-h-[400px] sm:min-h-[450px] md:min-h-[500px] lg:min-h-[600px] rounded-lg overflow-hidden shadow-lg"
+                className="relative w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-full lg:min-h-[500px] xl:min-h-[600px] 2xl:min-h-[700px] rounded-lg overflow-hidden shadow-lg"
               >
                 <video
                   ref={videoRef}

@@ -90,6 +90,8 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
   const { addToQuote, isInQuote } = useQuote();
   const [selectedBrand, setSelectedBrand] = useState<BrandCard | null>(null);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const isHeadingInView = useInView(headingRef, {
     once: true,
@@ -132,6 +134,11 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
     }
   };
 
+  const handleSlideChange = (swiper: SwiperType) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
   return (
     <section className="w-full py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20 2xl:py-24 overflow-x-hidden">
       <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 max-w-[1920px] mx-auto">
@@ -168,7 +175,12 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
             <div className="flex items-center justify-end gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 md:mb-10">
               {/* Previous Button */}
               <button
-                className="flex items-center gap-2 hover:opacity-70 transition-opacity"
+                disabled={isBeginning}
+                className={`flex items-center gap-2 transition-opacity ${
+                  isBeginning
+                    ? "opacity-40 cursor-not-allowed"
+                    : "hover:opacity-70 cursor-pointer"
+                }`}
                 onClick={() => swiperInstanceRef.current?.slidePrev()}
                 aria-label="Previous slide"
               >
@@ -180,7 +192,12 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
 
               {/* Next Button */}
               <button
-                className="flex items-center gap-2 hover:opacity-70 transition-opacity"
+                disabled={isEnd}
+                className={`flex items-center gap-2 transition-opacity ${
+                  isEnd
+                    ? "opacity-40 cursor-not-allowed"
+                    : "hover:opacity-70 cursor-pointer"
+                }`}
                 onClick={() => swiperInstanceRef.current?.slideNext()}
                 aria-label="Next slide"
               >
@@ -225,7 +242,10 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
               className="feature-brand-swiper"
               onSwiper={(swiper) => {
                 swiperInstanceRef.current = swiper;
+                setIsBeginning(swiper.isBeginning);
+                setIsEnd(swiper.isEnd);
               }}
+              onSlideChange={handleSlideChange}
             >
               {brands.map((brand, index) => (
                 <SwiperSlide key={brand.id}>
