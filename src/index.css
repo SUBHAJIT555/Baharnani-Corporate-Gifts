@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+/* fonts import */
+@font-face {
+  font-family: "Khand";
+  src: url("./assets/fonts/Khand-Variable.woff") format("woff");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Switzer";
+  src: url("./assets/fonts/Switzer-Variable.woff") format("woff");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Tanker";
+  src: url("./assets/fonts/Tanker-Regular.woff") format("woff");
+  font-style: normal;
+}
+
+@layer base {
+  :root {
+    /* Primary Colors */
+    --bg: #ffffe3;
+    --textcolor: #10100e;
+    --dark2: #3a5a40;
+    --dark3: #588157;
+    --highlighttext: #cad2c5;
+    --primary: #0077b6;
+    --secondary: #d64045;
+    --highlight: #b497d6;
+    --black: #000000;
+    --white: #fffbfa;
+  }
+}
+
+/* theme variables */
+
+@theme {
+  --font-khand: "Khand", sans-serif;
+  --font-switzer: "Switzer", sans-serif;
+  --font-tanker: "Tanker", sans-serif;
+
+  --color-bg: var(--bg);
+  --color-textcolor: var(--textcolor);
+  --color-highlight: var(--highlight);
+}
+html {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  /* Hide scrollbar */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+body {
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+  /* Hide scrollbar */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+/* Selection color styling */
+::selection {
+  background-color: var(--color-highlight);
+  color: var(--color-bg);
+}
+
+::-moz-selection {
+  background-color: var(--color-highlight);
+  color: var(--color-bg);
+}
+
+
+/* Prevent horizontal overflow globally */
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure root containers respect viewport width */
+#root {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Swiper Custom Styles */
+.why-choose-us-swiper {
+  height: auto !important;
+}
+
+.why-choose-us-swiper .swiper-wrapper {
+  align-items: stretch !important;
+}
+
+.why-choose-us-swiper .swiper-slide {
+  height: 100% !important;
+  display: flex !important;
+}
+
+.why-choose-us-swiper .swiper-button-next,
+.why-choose-us-swiper .swiper-button-prev {
+  display: none !important;
+}
+
+.why-choose-us-swiper .swiper-pagination {
+  display: none !important;
+}
+
+/* Custom Navigation Buttons */
+.swiper-button-prev-custom-style,
+.swiper-button-next-custom-style {
+  min-width: auto !important;
+  height: 40px !important;
+  /* background: #e1e1e1 !important; */
+  /* border-radius: 20px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important; */
+  border: none !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #4a4a4a !important;
+  transition: all 0.3s ease !important;
+  padding: 8px 16px !important;
+  margin: 0 !important;
+  /* font-family: var(--font-switzer) !important; */
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+}
+
+.swiper-button-prev-custom-style:hover,
+.swiper-button-next-custom-style:hover {
+  /* background: #e1e1e1 !important; */
+  transform: scale(1.05) !important;
+}
+
+.swiper-button-prev-custom-style:disabled,
+.swiper-button-next-custom-style:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+.swiper-button-prev-custom-style svg,
+.swiper-button-next-custom-style svg {
+  flex-shrink: 0 !important;
+}
+
+/* Custom Pagination */
+.swiper-pagination-custom {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  position: static !important;
+  width: auto !important;
+}
+
+.swiper-pagination-custom .swiper-pagination-bullet {
+  background: #4a4a4a !important;
+  opacity: 0.3 !important;
+  width: 10px !important;
+  height: 10px !important;
+  transition: all 0.3s ease !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+}
+
+.swiper-pagination-custom .swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  width: 24px !important;
+  border-radius: 5px !important;
+}
+
+/* Hide scrollbar for horizontal scrollable filter */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
