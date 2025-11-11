@@ -7,11 +7,11 @@ import type { FeatureCard } from "../components/WhyChooseUs";
 import FAQ from "../components/FAQ";
 import type { FAQItem } from "../components/FAQ";
 import CallToAction from "../components/CallToAction";
-import { TicketCheck , Users, Leaf, Clock } from "lucide-react";
+import { TicketCheck, Users, Leaf, Clock } from "lucide-react";
 import { BiWorld } from "react-icons/bi";
 
-import { PackageSearch } from 'lucide-react';
-import { PiSealQuestionDuotone } from "react-icons/pi";
+import { PackageSearch } from "lucide-react";
+import { PiSealQuestionDuotone, PiGiftDuotone, PiHandshakeDuotone} from "react-icons/pi";
 import FeatureBrand from "../components/FeatureBrand";
 import TopSaver from "../components/TopSaver";
 import BestSelling from "../components/BestSelling";
@@ -31,31 +31,36 @@ const homeFaqData: FAQItem[] = [
   },
   {
     id: 3,
-    question: "What types of corporate gifts does Baharnani Advertising offer in Dubai?",
+    question:
+      "What types of corporate gifts does Baharnani Advertising offer in Dubai?",
     answer:
       "We offer a diverse collection of customized, luxury, promotional, and eco-friendly corporate gifts, including mugs, pens, hampers, gadgets, chocolates, and branded accessories.",
   },
   {
     id: 4,
-    question: "Can Baharnani Advertising customize corporate gifts with our logo?",
+    question:
+      "Can Baharnani Advertising customize corporate gifts with our logo?",
     answer:
       "Yes, we provide full branding and personalization options such as logo engraving, embossing, printing, and packaging customization for all types of gifts.",
   },
   {
     id: 5,
-    question: "How do I choose the right corporate gift from Baharnani Advertising?",
+    question:
+      "How do I choose the right corporate gift from Baharnani Advertising?",
     answer:
       "Our team will help you select gifts based on your budget, audience, and purpose, ensuring your gift aligns perfectly with your brand image.",
   },
   {
     id: 6,
-    question: "Are eco-friendly corporate gifts available at Baharnani Advertising?",
+    question:
+      "Are eco-friendly corporate gifts available at Baharnani Advertising?",
     answer:
       "Absolutely. We have a dedicated collection of sustainable gifts like reusable bottles, bamboo kits, jute bags, and organic hampers to promote green gifting.",
   },
   {
     id: 7,
-    question: "Why should I choose Baharnani Advertising for corporate gifts in Dubai?",
+    question:
+      "Why should I choose Baharnani Advertising for corporate gifts in Dubai?",
     answer:
       "We combine creativity, premium quality, fast delivery, and customization expertise, making us one of the most trusted corporate gift suppliers in Dubai and UAE.",
   },
@@ -158,15 +163,24 @@ const Home = () => {
           <>
             Why
             <PiSealQuestionDuotone className="inline-block align-middle rotate-45" />{" "}
-            choose Baharnani Advertising as your trusted corporate gifts
-            supplier?
+            choose Baharnani Advertising <br /> as your trusted
+            <PiHandshakeDuotone className="inline-block align-middle rotate-45" />{" "}
+            corporate gifts supplier?
           </>
         }
         subtitle="With years of expertise, we have become one of the most reliable names among corporate gift suppliers in Dubai and the UAE, offering creative concepts and superior-quality products that represent your brand’s identity."
       />
       <FAQ
         faqData={homeFaqData}
-        title="Frequently Asked Questions About Corporate Gifts in Dubai & UAE"
+        title={
+          <>
+            Frequently{" "}
+            <PiSealQuestionDuotone className="inline-block align-middle" />{" "}
+            Asked Questions <br /> About{" "}
+            <PiGiftDuotone className="inline-block align-middle rotate-45" />{" "}
+            Corporate Gifts in Dubai & UAE
+          </>
+        }
         subtitle="Get answers to common questions about our products and services"
       />
       <CallToAction

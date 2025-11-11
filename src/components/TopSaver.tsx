@@ -12,6 +12,7 @@ import { foodstuff } from "../data/foodstuff";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { PiSealPercentDuotone } from "react-icons/pi";
 
 interface TopSaverProps {
   products?: Product[];
@@ -137,7 +138,8 @@ const TopSaver = ({
           className="mb-8 sm:mb-10 md:mb-12 lg:mb-16"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-tanker text-textcolor leading-tight mb-3 sm:mb-4 md:mb-5 lg:mb-6">
-            Top Saver Corporate Gift Deals in Dubai
+            Top Saver <PiSealPercentDuotone className="inline-block align-middle " />
+            Corporate Gift Deals in Dubai
           </h2>
           <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-switzer tracking-widest sm:tracking-wider md:tracking-widest text-textcolor font-medium">
             Grab exclusive discounts on our eco-friendly and premium corporate

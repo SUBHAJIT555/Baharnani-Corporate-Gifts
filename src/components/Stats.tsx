@@ -73,10 +73,10 @@ const Stats = () => {
   const stats = [
     {
       number: "10+ Years",
-      description: "of Trading Experience",
+      description: "of UAE Market Experience",
     },
     {
-      number: "8+ Key Sectors",
+      number: "9+ Key Sectors",
       description: "Covered",
     },
     {

@@ -11,6 +11,7 @@ import type { Product } from "../data/constructionMaterials";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { PiCrownDuotone } from "react-icons/pi";
 
 export interface BrandCard {
   id: number;
@@ -153,7 +154,8 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
           className="mb-8 sm:mb-10 md:mb-12 lg:mb-16"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-tanker text-textcolor leading-tight mb-3 sm:mb-4 md:mb-5 lg:mb-6">
-            Featured Corporate Gift Brands Trusted by Businesses Across Dubai
+            Featured Corporate Gift Brands <PiCrownDuotone className="inline-block align-middle -rotate-45" />
+            Trusted by Businesses Across Dubai
           </h2>
           <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-switzer tracking-widest sm:tracking-wider md:tracking-widest text-textcolor font-medium">
             Elevate your brand image with premium corporate gifts from top-rated

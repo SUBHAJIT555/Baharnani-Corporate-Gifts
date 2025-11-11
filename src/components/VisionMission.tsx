@@ -101,12 +101,12 @@ const VisionMission = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-switzer text-textcolor leading-relaxed"
               >
-                To be recognized as one of the{" "}
+                To be recognized as the{" "}
                 <strong className="font-semibold text-textcolor">
-                  most dependable and diversified trading companies in Oman
+                  leading corporate gift supplier in Dubai and the UAE
                 </strong>
-                , connecting industries worldwide with sustainable and
-                innovative trade solutions.
+                , setting new standards in creativity, quality, and personalized
+                gifting solutions that strengthen business relationships.
               </motion.p>
             </div>
           </motion.div>
@@ -167,13 +167,14 @@ const VisionMission = () => {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-switzer text-textcolor leading-relaxed"
               >
-                To provide{" "}
+                To deliver{" "}
                 <strong className="font-semibold text-textcolor">
-                  high-quality, certified products
+                  exceptional corporate gifts and customized solutions
                 </strong>{" "}
-                across multiple industries through efficient sourcing,
-                transparent trade practices, and global distribution networks
-                that drive value and trust for our clients and partners.
+                that enhance brand visibility, strengthen client relationships,
+                and create lasting impressions through premium quality, creative
+                designs, and personalized branding services across Dubai, Abu
+                Dhabi, and the UAE.
               </motion.p>
             </div>
           </motion.div>
@@ -224,9 +225,11 @@ const VisionMission = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-tanker text-textcolor leading-relaxed text-center pt-4 sm:pt-6 md:pt-8 pb-4 sm:pb-6 md:pb-8 px-4 sm:px-6 md:px-8"
             >
-              We aim to expand our network across emerging markets while
-              continuing to uphold ethical trade standards, supply reliability,
-              and environmentally responsible business operations.
+              We are committed to expanding our diverse collection of luxury,
+              eco-friendly, and promotional gifts while maintaining the highest
+              standards of quality, timely delivery, and exceptional customer
+              service that defines Baharnani Advertising as a trusted partner in
+              corporate gifting.
             </motion.p>
 
             {/* Bottom Right Quote */}

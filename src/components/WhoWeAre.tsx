@@ -52,10 +52,10 @@ const WhoWeAre = () => {
             className="bg-bg  rounded-lg p-6 sm:p-7 md:p-8 lg:p-10 border border-textcolor border-dashed hover:shadow-xl transition-shadow duration-300"
           >
             <p className="text-center font-khand font-bold text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
-              Founded in Oman, Leading Network LLC simplifies global supply
-              chains across seven key sectors: construction materials,
-              foodstuff, building materials, contracting, import & export,
-              electronics & IT, and chemicals.
+              Based in Dubai, Baharnani Advertising LLC specializes in premium
+              corporate gifts, offering a comprehensive range of customized,
+              luxury, promotional, and eco-friendly solutions for businesses
+              across Dubai, Abu Dhabi, and the UAE.
             </p>
           </motion.div>
 
@@ -68,9 +68,10 @@ const WhoWeAre = () => {
             className="bg-bg  rounded-lg p-6 sm:p-7 md:p-8 lg:p-10 border border-textcolor border-dashed hover:shadow-xl transition-shadow duration-300"
           >
             <p className="text-center font-khand font-bold text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
-              Our journey began with a clear goal — to deliver quality products
-              and services that meet international standards while fostering
-              sustainable partnerships between manufacturers and end-users.
+              Our mission is to deliver exceptional corporate gifts that
+              strengthen business relationships, enhance brand visibility, and
+              create lasting impressions through quality craftsmanship, creative
+              designs, and personalized branding solutions.
             </p>
           </motion.div>
 
@@ -83,10 +84,11 @@ const WhoWeAre = () => {
             className="bg-bg  rounded-lg p-6 sm:p-7 md:p-8 lg:p-10 border border-textcolor border-dashed hover:shadow-xl transition-shadow duration-300 sm:col-span-1 md:col-span-2 lg:col-span-1"
           >
             <p className="text-center font-khand font-bold text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
-              We operate with integrity and a client-first mindset, ensuring
-              each deal reflects trust, transparency, and efficiency — the core
-              values that define Leading Network LLC as a reliable name in the
-              Oman trading landscape.
+              We operate with creativity, integrity, and a client-first
+              approach, ensuring every gift reflects trust, excellence, and
+              attention to detail — the core values that define Baharnani
+              Advertising as a trusted name in the corporate gifting landscape
+              of Dubai and the UAE.
             </p>
           </motion.div>
         </div>

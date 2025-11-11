@@ -3,16 +3,25 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "react-router";
 import CustomButton from "./ui/CustomButton";
 
-
-// images 
-import ConstructionMaterialsImage from "../assets/images/Products-hero-image/Construction-Materials-hero.webp";
-import FoodStuffImage from "../assets/images/Products-hero-image/food-stuff-hero.webp";
-import BuildingMaterialsImage from "../assets/images/Products-hero-image/Building-Materials-hero.webp";
-import ContractingSolutionsImage from "../assets/images/Products-hero-image/Contracting-Solutions-hero.webp";
-import ImportExportImage from "../assets/images/Products-hero-image/Import-&-Export-hero.webp";
-import ElectronicsITImage from "../assets/images/Products-hero-image/Electronics-&-IT-hero.webp";
-import ChemicalsImage from "../assets/images/Products-hero-image/Chemicals-&-Additives-hero.webp";
-import OilProductsImage from "../assets/images/Products-hero-image/oil-products-hero.webp";
+// Image URLs from internet
+const ApparelImage =
+  "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80";
+const BagsTravelImage =
+  "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80";
+const OfficeStationaryImage =
+  "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&q=80";
+const TechnologyImage =
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80";
+const EatingDrinkingImage =
+  "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80";
+const SportsRecreationImage =
+  "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80";
+const EcoFriendlyImage =
+  "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80";
+const PremiumGiftSetsImage =
+  "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&q=80";
+const LuxuryGiftsImage =
+  "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80";
 
 interface ProductCategory {
   id: number;
@@ -28,196 +37,219 @@ interface ProductCategory {
 const categories: ProductCategory[] = [
   {
     id: 1,
-    title: "Construction Materials",
+    title: "Apparel and Accessories",
     description:
-      "We supply a comprehensive range of construction and infrastructure materials that meet ASTM and ISO standards, supporting major contractors and individual developers across Oman and the GCC.",
+      "Elevate your corporate brand with premium quality apparel and accessories. From custom-embroidered polo shirts and branded jackets to elegant ties and scarves, we offer a comprehensive range of corporate wear that reflects professionalism and style.",
     productRange: [
-      "Cement, white cement, and concrete blocks",
-      "Reinforcement steel (rebar, mesh, angles)",
-      "Aggregates, sand, and gravel",
-      "Gypsum boards, plaster, and wall compounds",
-      "Tiles, marble, and granite",
-      "Paints, adhesives, waterproofing solutions",
+      "Custom polo shirts and t-shirts with embroidery",
+      "Corporate jackets, blazers, and vests",
+      "Business ties, scarves, and pocket squares",
+      "Branded caps, beanies, and headwear",
+      "Corporate uniforms and workwear",
+      "Accessories: belts, wallets, and keychains",
     ],
     highlights: [
-      "Bulk and retail supply options",
-      "Technical compliance documentation (ASTM / BS)",
-      "Direct sourcing from leading mills and factories",
-      "Reliable logistics for local and export delivery",
+      "Premium fabric quality and durability",
+      "Custom branding and embroidery services",
+      "Wide range of sizes and color options",
+      "Bulk order discounts and flexible delivery",
     ],
-    imageUrl:
-      ConstructionMaterialsImage,
-    buttonText: "Explore Construction Materials",
-    buttonLink: "/products/construction-materials",
+    imageUrl: ApparelImage,
+    buttonText: "Explore Apparel & Accessories",
+    buttonLink: "/products/apparel-and-accessories",
   },
   {
     id: 2,
-    title: "Food Stuff",
+    title: "Bags and Travel",
     description:
-      "Leading Network LLC trades and distributes high-quality food commodities and packaged goods across the Middle East, Africa, and Asia — ensuring freshness, safety, and compliance with HACCP standards.",
+      "Professional travel solutions and branded bags that combine functionality with corporate identity. From executive laptop bags to travel luggage sets, our collection ensures your brand travels with style and sophistication.",
     productRange: [
-      "Rice (Basmati, Non-Basmati, Parboiled, Jasmine)",
-      "Sugar, pulses, lentils, and beans",
-      "Cooking oils and ghee",
-      "Spices, seasonings, and condiments",
-      "Canned food and frozen products",
-      "Dry fruits, nuts, and snacks",
-      "Beverages, tea, and coffee",
+      "Laptop bags and briefcases",
+      "Backpacks and messenger bags",
+      "Travel luggage and suitcases",
+      "Tote bags and shopping bags",
+      "Duffel bags and gym bags",
+      "Travel accessories and organizers",
     ],
     highlights: [
-      "HACCP and ISO-certified global sourcing",
-      "Packaging in various sizes (consumer & bulk)",
-      "Temperature-controlled logistics",
-      "Private labeling and white-label services available",
+      "Durable materials and quality craftsmanship",
+      "Custom logo printing and embroidery",
+      "Ergonomic designs for comfort",
+      "Variety of styles for different occasions",
     ],
-    imageUrl:
-      FoodStuffImage,
-    buttonText: "Explore Food Products",
-    buttonLink: "/products/food-stuff",
+    imageUrl: BagsTravelImage,
+    buttonText: "Explore Bags & Travel",
+    buttonLink: "/products/bags-and-travel",
   },
   {
     id: 3,
-    title: "Building Materials",
+    title: "Office and Stationary",
     description:
-      "We supply a full range of interior and exterior building materials that meet quality and performance requirements for residential, commercial, and industrial projects.",
+      "Complete your corporate workspace with premium office supplies and branded stationery. From elegant pen sets to custom notebooks and desk accessories, we provide everything needed to create a professional and organized work environment.",
     productRange: [
-      "Sanitaryware, faucets, and plumbing fixtures",
-      "Electrical fittings, cables, and switches",
-      "Paints, sealants, adhesives, and insulation",
-      "Door handles, locks, and hardware tools",
-      "Ceiling tiles, flooring materials, and lighting systems",
-      "Fasteners, pipes, and building accessories",
+      "Premium pen sets and writing instruments",
+      "Custom notebooks and journals",
+      "Desk organizers and accessories",
+      "Notepads, sticky notes, and planners",
+      "File folders and document holders",
+      "Corporate calendars and wall planners",
     ],
     highlights: [
-      "Trusted brands and certified quality",
-      "Ready stock for ongoing construction projects",
-      "Technical support and specification compliance",
-      "Bulk order fulfillment with flexible delivery schedules",
+      "High-quality materials and finishes",
+      "Custom branding and personalization",
+      "Eco-friendly options available",
+      "Bulk pricing for corporate orders",
     ],
-    imageUrl:
-      BuildingMaterialsImage,
-    buttonText: "Explore Building Materials",
-    buttonLink: "/products/building-materials",
+    imageUrl: OfficeStationaryImage,
+    buttonText: "Explore Office & Stationary",
+    buttonLink: "/products/office-and-stationary",
   },
   {
     id: 4,
-    title: "Contracting Solutions",
+    title: "Technology and Accessories",
     description:
-      "Beyond product trading, Leading Network LLC offers comprehensive contracting services, integrating materials, manpower, and project execution under one umbrella.",
+      "Stay ahead with cutting-edge technology gifts and accessories. From wireless chargers and power banks to premium headphones and smart devices, we offer the latest tech solutions that make perfect corporate gifts for clients and employees.",
     productRange: [
-      "Civil and structural works",
-      "MEP (Mechanical, Electrical & Plumbing)",
-      "Interior fit-outs and renovations",
-      "Facility maintenance and upgrades",
-      "Painting, waterproofing, and finishing works",
+      "Wireless chargers and power banks",
+      "Bluetooth speakers and headphones",
+      "USB drives and external storage",
+      "Smart watches and fitness trackers",
+      "Phone cases and screen protectors",
+      "Cable organizers and tech accessories",
     ],
     highlights: [
-      "Experienced project management team",
-      "Integration with in-house materials division",
-      "On-site safety and compliance assurance",
-      "End-to-end service from design to delivery",
+      "Latest technology and innovations",
+      "Branded packaging options",
+      "Warranty and support included",
+      "Compatible with all major devices",
     ],
-    imageUrl:
-      ContractingSolutionsImage,
-    buttonText: "Explore Contracting Services",
-    buttonLink: "/products/contracting-solutions",
+    imageUrl: TechnologyImage,
+    buttonText: "Explore Technology & Accessories",
+    buttonLink: "/products/technology-and-accessories",
   },
   {
     id: 5,
-    title: "Import & Export",
+    title: "Eating and Drinking",
     description:
-      "We manage the entire import and export process — from global sourcing and supplier verification to freight forwarding, customs documentation, and distribution.",
+      "Impress clients and employees with elegant dining and beverage solutions. From premium coffee sets and tea collections to branded water bottles and wine accessories, we curate sophisticated options for every corporate occasion.",
     productRange: [
-      "Product sourcing and vendor evaluation",
-      "Export of raw materials and finished goods",
-      "Customs documentation and clearance",
-      "Freight forwarding (sea, air, and land)",
-      "Warehousing and inventory support",
+      "Premium coffee and tea gift sets",
+      "Branded water bottles and tumblers",
+      "Wine glasses and bar accessories",
+      "Gourmet gift baskets and hampers",
+      "Custom mugs and drinkware",
+      "Cutlery sets and serving accessories",
     ],
     highlights: [
-      "Global supply network spanning Asia, Africa & Europe",
-      "Efficient documentation and clearance handling",
-      "Dedicated logistics coordination team",
-      "End-to-end import/export compliance support",
+      "Premium quality and presentation",
+      "Custom engraving and branding",
+      "Eco-friendly and sustainable options",
+      "Perfect for corporate events and gifting",
     ],
-    imageUrl:
-      ImportExportImage,
-    buttonText: "Explore Import & Export",
-    buttonLink: "/products/import-and-export",
+    imageUrl: EatingDrinkingImage,
+    buttonText: "Explore Eating & Drinking",
+    buttonLink: "/products/eating-and-drinking",
   },
   {
     id: 6,
-    title: "Electronics & IT",
+    title: "Sports and Recreation",
     description:
-      "We supply technology hardware and smart systems for corporate, educational, and industrial applications — bridging the gap between innovation and accessibility.",
+      "Promote wellness and team spirit with our range of sports and recreation gifts. From branded athletic wear to fitness equipment and outdoor gear, we help you reward active lifestyles and build stronger corporate teams.",
     productRange: [
-      "Laptops, desktops, and tablets",
-      "Servers, storage, and UPS systems",
-      "Networking devices (routers, switches, access points)",
-      "CCTV, surveillance, and security systems",
-      "LED screens, digital signage, and interactive kiosks",
-      "Smart home and IoT devices",
+      "Branded athletic wear and sportswear",
+      "Fitness equipment and accessories",
+      "Outdoor gear and camping supplies",
+      "Sports water bottles and hydration packs",
+      "Team building activity kits",
+      "Golf accessories and equipment",
     ],
     highlights: [
-      "Partnerships with leading global brands",
-      "Project-based B2B and B2C supply models",
-      "Installation and after-sales support available",
-      "Fast delivery and warranty handling",
+      "Durable and performance-oriented",
+      "Team branding and customization",
+      "Suitable for corporate wellness programs",
+      "Variety for different sports and activities",
     ],
-    imageUrl:
-      ElectronicsITImage,
-    buttonText: "Explore Electronics & IT",
-    buttonLink: "/products/electronics-and-it",
+    imageUrl: SportsRecreationImage,
+    buttonText: "Explore Sports & Recreation",
+    buttonLink: "/products/sports-and-recreation",
   },
   {
     id: 7,
-    title: "Chemicals & Additives",
+    title: "Eco Friendly",
     description:
-      "We trade in industrial, agricultural, food-grade, and pharmaceutical chemicals that meet strict global standards for quality, purity, and safety.",
+      "Demonstrate your commitment to sustainability with our eco-friendly corporate gift collection. From reusable products to sustainable materials, we offer environmentally conscious options that align with your corporate values and green initiatives.",
     productRange: [
-      "Food Additives & Preservatives – Emulsifiers, stabilizers, colorants, flavor agents",
-      "Pharma Grade Chemicals – Laboratory reagents, solvents, excipients",
-      "Agricultural & Fertilizer Chemicals – NPK, urea, micronutrients, crop enhancers",
-      "Water-Treatment Chemicals – Coagulants, flocculants, pH regulators, disinfectants",
+      "Reusable water bottles and coffee cups",
+      "Bamboo and recycled material products",
+      "Organic cotton apparel and bags",
+      "Solar-powered accessories",
+      "Plantable stationery and seed packets",
+      "Sustainable packaging solutions",
     ],
     highlights: [
-      "MSDS, COA, and REACH documentation provided",
-      "GHS-compliant labeling and safe packaging",
-      "Reliable supply chain for bulk and drum quantities",
-      "Environmentally responsible and compliant handling",
+      "Certified sustainable materials",
+      "Carbon-neutral shipping options",
+      "Eco-friendly packaging",
+      "Supports corporate sustainability goals",
     ],
-    imageUrl:
-      ChemicalsImage,
-    buttonText: "Explore Chemicals",
-    buttonLink: "/products/chemicals-and-additives",
+    imageUrl: EcoFriendlyImage,
+    buttonText: "Explore Eco Friendly",
+    buttonLink: "/products/eco-friendly",
   },
   {
     id: 8,
-    title: "Oil Products",
+    title: "Premium Gift Sets",
     description:
-      "We supply a comprehensive range of oil products for industrial, automotive, and specialty applications — sourced from top refineries and certified global manufacturers, serving clients across Oman.",
+      "Curated premium gift sets that combine multiple products for maximum impact. From executive gift boxes to luxury hampers, we create sophisticated collections that leave a lasting impression on your most valued clients and partners.",
     productRange: [
-      "Automotive Engine Oils – Synthetic, conventional, high-mileage, diesel, and racing oils",
-      "Industrial Lubricants – Hydraulic, compressor, turbine, gear, and spindle oils",
-      "Transmission & Gear Oils – Automatic, manual, differential, CVT, and transfer case fluids",
-      "Specialty Fluids – Transformer, white oils, pharmaceutical, and food-grade oils",
+      "Executive gift boxes and hampers",
+      "Luxury skincare and wellness sets",
+      "Gourmet food and beverage collections",
+      "Premium office accessory bundles",
+      "Seasonal and themed gift sets",
+      "Custom-curated corporate packages",
     ],
     highlights: [
-      "API, SAE, and ISO certified oil products",
-      "Temperature-resistant formulations for extreme conditions",
-      "Bulk supply capabilities with flexible packaging options",
-      "Technical support and oil analysis services available",
+      "Expertly curated collections",
+      "Premium packaging and presentation",
+      "Customizable contents and branding",
+      "Perfect for special occasions and milestones",
     ],
-    imageUrl:
-      OilProductsImage,
-    buttonText: "Explore Oil Products",
-    buttonLink: "/products/oil-products",
+    imageUrl: PremiumGiftSetsImage,
+    buttonText: "Explore Premium Gift Sets",
+    buttonLink: "/products/premium-gift-sets",
+  },
+  {
+    id: 9,
+    title: "Luxury Corporate Gifts",
+    description:
+      "Make an unforgettable impression with our exclusive collection of luxury corporate gifts. From high-end timepieces and leather goods to premium electronics and artisanal products, we offer sophisticated options for your most distinguished clients and executives.",
+    productRange: [
+      "Luxury watches and timepieces",
+      "Premium leather goods and wallets",
+      "High-end electronics and gadgets",
+      "Artisanal and handcrafted items",
+      "Luxury home and office decor",
+      "Exclusive branded merchandise",
+    ],
+    highlights: [
+      "Premium brands and craftsmanship",
+      "Exclusive and limited edition items",
+      "Personalized engraving and customization",
+      "Elegant presentation and packaging",
+    ],
+    imageUrl: LuxuryGiftsImage,
+    buttonText: "Explore Luxury Corporate Gifts",
+    buttonLink: "/products/luxury-corporate-gifts",
   },
 ];
 
 const ProductCatagory = () => {
   return (
-    <section className="w-full py-8 sm:py-10 md:py-12 lg:py-16 overflow-x-hidden bg-bg" id="product-varieties">
+    <section
+      className="w-full py-8 sm:py-10 md:py-12 lg:py-16 overflow-x-hidden bg-bg"
+      id="product-varieties"
+    >
       <div className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 max-w-[1400px] mx-auto">
         {categories.map((category, index) => {
           const isEven = index % 2 === 0;

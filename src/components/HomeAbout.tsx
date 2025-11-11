@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 // import { CiGift } from "react-icons/ci";
 // import { SlPlane } from "react-icons/sl";
 // import { MdOutlineBusinessCenter } from "react-icons/md";
+import companyIcon from "../assets/images/icons/icon.svg";
 
 const aboutImage =
   "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80";
@@ -44,7 +45,7 @@ const HomeAbout = () => {
           className="mb-6 sm:mb-8 md:mb-10 lg:mb-12"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-tanker text-textcolor leading-tight">
-            About Baharnani Advertising L.L.C.
+            About <img src={companyIcon} alt="Baharnani Advertising L.L.C." className="inline-block align-middle w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 bg-white border border-textcolor rounded-lg p-1 sm:p-1.5 md:p-2" /> Baharnani Advertising L.L.C.
           </h2>
         </motion.div>
 
