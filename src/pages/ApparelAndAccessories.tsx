@@ -56,27 +56,30 @@ const ConstructionMaterials = () => {
   return (
     <div>
       <CommonHero
-        title="High-Quality Construction Materials for Every Project"
+        title="Buy apparel & accessories in Dubai"
         titlesuffix=""
-        subtitle="From cement and steel to tiles and waterproofing solutions — Leading Network LLC supplies durable, certified materials trusted by contractors, developers, and construction firms across Oman and the GCC."
+        subtitle="Find the Perfect Gift Set in Dubai – From Luxury Perfume Collections to Elegant Corporate Gift Boxes."
         imageUrl={ConstructionMaterialsImage}
         buttonLink="#construction-materials"
-        buttonText="Explore Construction Materials"
+        buttonText="Shop Apparel & Accessories"
       />
       <OverView
         content={
           <>
-            We deliver a full range of construction and infrastructure materials
-            sourced directly from certified mills and factories that meet ASTM
-            and ISO standards.
-            <br />
-            Whether it's a residential project, commercial complex, or
-            industrial development, our materials ensure strength, consistency,
-            and reliability from foundation to finish.
+            Looking for the best gift sets in Dubai to surprise someone special
+            or delight your clients? Our exclusive collection features luxury
+            gift sets, perfume gift sets, and birthday gift sets, thoughtfully
+            curated for every taste and occasion. Whether you need a gift set
+            for her, an elegant corporate gift set, or a budget-friendly option,
+            we’ve got you covered with the finest selection across the UAE.
           </>
         }
       />
-      <ProductGrid title="Our Product Range" productType="construction" id="construction-materials" />
+      <ProductGrid
+        title="Explore Our Collection of Apparel & Accessories"
+        productType="construction"
+        id="construction-materials"
+      />
       <WhyChooseUs features={constructionMaterialsFeatures} />
       <CallToAction
         title="Your Reliable Partner for Construction Supplies in Oman"
@@ -87,13 +90,13 @@ const ConstructionMaterials = () => {
             text: "Contact Our Team",
             className:
               "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker!",
-              link: "/contact-us",
+            link: "/contact-us",
           },
           {
             text: "Explore Product Calagories",
             className:
               "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-textcolor! text-textcolor! font-tanker!",
-              link: "/products",
+            link: "/products",
           },
         ]}
       />

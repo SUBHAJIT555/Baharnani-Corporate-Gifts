@@ -116,6 +116,16 @@ const Navbar = () => {
       title: "Eco friendly",
       link: "/products/eco-friendly",
     },
+      {
+        id: "9",
+        title: "Premium gift sets",
+        link: "/products/premium-gift-sets",
+      },
+      {
+        id: "10",
+        title: "Luxury corporate gifts",
+        link: "/products/luxury-corporate-gifts",
+      },
   ];
 
   return (

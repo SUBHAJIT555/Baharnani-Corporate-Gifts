@@ -1,0 +1,234 @@
+import CommonHero from "../components/ui/CommonHero"
+import LuxuryCorporateGiftsImage from "../assets/images/Products-hero-image/food-stuff-hero.webp"
+import OverView from "../components/OverView"
+import ProductGrid from "../components/ProductGrid"
+import { giftItems } from "../data/giftItems";
+import ProductCarousel from "../components/ui/ProductCarousel"
+import WhyChooseUs, { type FeatureCard } from "../components/WhyChooseUs";
+import { Award } from "lucide-react";
+import { AnimatedTestimonials } from "../components/ui/AnimatedTestimonial";
+import FAQ, { type FAQItem } from "../components/FAQ";
+
+const testimonials = [
+  {
+    quote: "I have been working with Leading Network LLC for over 10 years and they have always been a great partner. They are reliable, transparent, and always deliver on time.",
+    name: "John Doe",
+    designation: "CEO",
+    src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+  },
+  {
+    quote: "I have been working with Leading Network LLC for over 10 years and they have always been a great partner. They are reliable, transparent, and always deliver on time.",
+    name: "John Doe",
+    designation: "CEO",
+    src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+  },
+  {
+    quote: "I have been working with Leading Network LLC for over 10 years and they have always been a great partner. They are reliable, transparent, and always deliver on time.",
+    name: "John Doe",
+    designation: "CEO",
+    src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+  },
+  {
+    quote: "I have been working with Leading Network LLC for over 10 years and they have always been a great partner. They are reliable, transparent, and always deliver on time.",
+    name: "John Doe",
+    designation: "CEO",
+    src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+  },
+  {
+    quote: "I have been working with Leading Network LLC for over 10 years and they have always been a great partner. They are reliable, transparent, and always deliver on time.",
+    name: "John Doe",
+    designation: "CEO",
+    src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+  },
+];
+const luxuryCorporateGiftsFeatures: FeatureCard[] = [
+  {
+    id: 1,
+    number: "01",
+    title: "Explore Our Luxury Corporate Gift Categories",
+    description: "Discover our extensive collection of luxury corporate gifts across multiple categories, from premium tech accessories to elegant executive gifts, all designed to make a lasting impression on your clients and employees.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+  },
+  {
+    id: 2,
+    number: "02",
+    title: "Best Luxury Corporate Gifts Dubai Online",
+    description: "Shop the finest selection of luxury corporate gifts available online in Dubai. Our curated collection features premium brands and exclusive items that reflect your company's commitment to excellence and quality.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+    },
+  {
+    id: 3,
+    number: "03",
+    title: "Corporate Gift Ideas for Every Occasion",
+    description: "From milestone celebrations to client appreciation events, we provide tailored corporate gift solutions for every business occasion. Our diverse range ensures you'll find the perfect gift to strengthen professional relationships.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+  },
+  {
+    id: 4,
+    number: "04",
+    title: "Luxury Brands that Are Cheaper in Dubai",
+    description: "Take advantage of Dubai's competitive luxury market with our selection of premium international brands offered at exceptional value. Get authentic luxury corporate gifts at prices that maximize your gifting budget.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+  },
+];
+const luxuryCorporateGiftsWhy: FeatureCard[] = [
+  {
+    id: 1,
+    number: "01",
+    title: "Build Stronger Client Relationships",
+    description: "Show your clients that you value their business with high-end gifts that demonstrate your commitment to excellence and strengthen professional partnerships for long-term success.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+  },
+  {
+    id: 2,
+    number: "02",
+    title: "Memorable & Customized",
+    description: "Stand out by offering unique customized corporate gifts that speak to your company's values and create lasting impressions that recipients will remember and appreciate.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+  },
+  {
+    id: 3,
+    number: "03",
+    title: "Corporate Gifting Solutions Tailored to Your Needs",
+    description: "Choose from a variety of gifts, from luxury gift hampers to branded items that reflect your business identity and meet your specific corporate gifting requirements.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+  },
+  {
+    id: 4,
+    number: "04",
+    title: "Reliable Delivery Across Dubai",
+    description: "Fast and efficient delivery of all your luxury corporate gifts across Dubai, ensuring your gifts arrive on time and in perfect condition for every important occasion.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+  },
+  {
+    id: 5,
+    number: "05",
+    title: "Customization Options",
+    description: "We offer a wide range of customized corporate gifts that fit your brand and message perfectly, allowing you to create personalized experiences that align with your corporate identity.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+  },
+  {
+    id: 6,
+    number: "06",
+    title: "Competitive Prices for Luxury Gifts in Dubai",
+    description: "We offer top-quality products at reasonable rates, including luxury gifts that are cheaper in Dubai compared to other markets, maximizing your gifting budget without compromising on quality.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+  },
+];
+const faqItems: FAQItem[] = [
+  {
+    id: 1,
+    question: "What are the best luxury corporate gifts for clients in Dubai?",
+    answer: "We offer a wide range of luxury corporate gifts that include everything from customized hampers, exclusive tech gifts, to branded leather items.",
+  },
+  {
+    id: 2,
+    question: "How can I get customized corporate gifts in Dubai?",
+    answer: "We offer personalization options for all gifts. Add your company's logo, message, or choose from a variety of premium branding services.",
+  },
+  {
+    id: 3,
+    question: "What is the best time to order corporate gifts in Dubai?",
+    answer: "To ensure timely delivery, we recommend placing orders at least 2 weeks in advance, especially for customized luxury corporate gifts.",
+  },
+  {
+    id: 4,
+    question: "Do you offer luxury gift hampers in Dubai?",
+    answer: "Yes, we specialize in luxury gift hampers, beautifully curated to make a lasting impression.",
+  },
+  {
+    id: 5,
+    question: "Are your corporate gifting companies in Dubai reliable?",
+    answer: "Absolutely! We have years of experience and a reputation for providing high-quality gifts and on-time delivery for businesses across Dubai.",
+  },
+];
+const LuxuryCorporateGifts = () => {
+  return (
+    <div>
+      <CommonHero
+        title="Luxury Corporate Gifts in Dubai - Make Your Business Relationships Stronger"
+        titlesuffix=""
+        subtitle="xplore the Best Selection of Customized Corporate Gifts for Clients & Employees in Dubai"
+        imageUrl={LuxuryCorporateGiftsImage}
+        buttonLink="#luxury-corporate-gifts"
+        buttonText="Shop Luxury Corporate Gifts"
+      />
+      <OverView
+        content={
+          <>
+            Luxury Corporate Gifts for Every Occasion: Whether you're
+            celebrating a company milestone or rewarding your top clients, our
+            selection of luxury corporate gifts ensures your brand stands out
+            with sophistication and quality. We offer customized corporate
+            gifts, luxury gift hampers, and more, delivered across Dubai.
+          </>
+        }
+      />
+      <ProductGrid
+        title="Explore Our Collection of Gift Sets"
+        productType="custom"
+        products={giftItems}
+        id="gift-set"
+      />
+      {/* Top Corporate Gifts for Clients & Employees in Dubai */}
+      <ProductCarousel
+        products={giftItems}
+        heading="Top Corporate Gifts for Clients & Employees in Dubai"
+        description=""
+        paginationId="luxury-corporate-gifts-carousel-pagination"
+        autoplay={true}
+        autoplayDelay={4000}
+      />
+      {/* Customized Luxury Corporate Gifts */}
+      <ProductCarousel
+        products={giftItems}
+        heading="Customized Luxury Corporate Gifts"
+        description="<strong>Personalized Gifts:</strong> Get your corporate gifts personalized with your company’s logo or a special message for that extra touch.<br />
+        <strong>Gift Hampers & Luxury Packaging:</strong> Our luxury gift hampers come beautifully packaged, making an impact from the moment they’re received."
+        paginationId="luxury-corporate-gifts-carousel-pagination"
+        autoplay={true}
+        autoplayDelay={4000}
+      />
+      {/* Premium Gift Ideas for Clients & Partners */}
+      <ProductCarousel
+        products={giftItems}
+        heading="Premium Gift Ideas for Clients & Partners"
+        description="<strong>Corporate Gift Ideas:</strong> Whether it's a high-end watch, leather accessories, or customized electronics, we offer a wide selection for every business need."
+        paginationId="luxury-corporate-gifts-carousel-pagination"
+        autoplay={true}
+        autoplayDelay={4000}
+      />
+      {/* why choose us section */}
+      <WhyChooseUs
+        title="Featured Corporate Gift Categories"
+        features={luxuryCorporateGiftsFeatures}
+      />
+      {/* testimonial section */}
+      <AnimatedTestimonials testimonials={testimonials} />
+
+      {/* why choose us section 2  */}
+      <WhyChooseUs
+        title="Why Choose Our Luxury Corporate Gifts in Dubai?"
+        features={luxuryCorporateGiftsWhy}
+      />
+      {/* faq section */}
+      <FAQ
+        title="Frequently Asked Questions About Corporate Gifts"
+        subtitle="Get answers to common questions about our corporate gifts"
+        faqData={faqItems}
+      />
+    </div>
+  );
+}
+
+export default LuxuryCorporateGifts

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
@@ -50,6 +50,10 @@ const WhyChooseUs = ({
     margin: "-100px",
   });
 
+  const [isMobile, setIsMobile] = useState(false);
+  const hasFewItems = features.length <= 3;
+  const shouldUseFlexbox = hasFewItems && !isMobile;
+
   // Equalize card heights
   const equalizeHeights = () => {
     if (cardRefs.current.length === 0) return;
@@ -90,6 +94,23 @@ const WhyChooseUs = ({
     });
   };
 
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint
+    };
+
+    // Check on mount
+    checkMobile();
+
+    // Check on resize
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
+
   useEffect(() => {
     if (isSwiperInView) {
       // Equalize after animations complete - longer delays to ensure all content is rendered
@@ -110,7 +131,7 @@ const WhyChooseUs = ({
         window.removeEventListener("resize", handleResize);
       };
     }
-  }, [isSwiperInView, features]);
+  }, [isSwiperInView, features, hasFewItems]);
 
   return (
     <section className="w-full py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20 2xl:py-24 overflow-x-hidden">
@@ -146,55 +167,12 @@ const WhyChooseUs = ({
           className="w-full relative"
         >
           <div className="relative">
-            <Swiper
-              modules={[Pagination, Autoplay]}
-              spaceBetween={20}
-              slidesPerView={1}
-              breakpoints={{
-                640: {
-                  slidesPerView: 1,
-                  spaceBetween: 24,
-                },
-                768: {
-                  slidesPerView: 2,
-                  spaceBetween: 28,
-                },
-                1024: {
-                  slidesPerView: 3,
-                  spaceBetween: 32,
-                },
-              }}
-              pagination={{
-                clickable: true,
-                el: ".swiper-pagination-why-choose-us",
-                dynamicBullets: false,
-              }}
-              autoplay={{
-                delay: 4000,
-                disableOnInteraction: false,
-              }}
-              grabCursor={true}
-              className="why-choose-us-swiper"
-              onSwiper={(swiper) => {
-                swiperInstanceRef.current = swiper;
-                // Equalize heights after swiper is initialized
-                setTimeout(() => {
-                  equalizeHeights();
-                }, 500);
-                setTimeout(() => {
-                  equalizeHeights();
-                }, 1000);
-              }}
-              onResize={() => {
-                equalizeHeights();
-              }}
-              onSlideChange={() => {
-                equalizeHeights();
-              }}
-            >
-              {features.map((feature, index) => (
-                <SwiperSlide key={feature.id}>
+            {shouldUseFlexbox ? (
+              /* Flexbox Layout for 3 or fewer items on desktop */
+              <div className="flex flex-wrap justify-center items-stretch gap-4 sm:gap-6 md:gap-8">
+                {features.map((feature, index) => (
                   <motion.div
+                    key={feature.id}
                     initial={{ opacity: 0, y: 30 }}
                     animate={
                       isSwiperInView
@@ -202,13 +180,13 @@ const WhyChooseUs = ({
                         : { opacity: 0, y: 30 }
                     }
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="h-full w-full"
+                    className="flex-1 min-w-[280px] sm:min-w-[300px] md:min-w-[320px] max-w-[400px]"
                   >
                     <div
                       ref={(el) => {
                         cardRefs.current[index] = el;
                       }}
-                      className="bg-[#e1e1e1] rounded-lg p-6 sm:p-7 md:p-8 lg:p-10 flex flex-col border border-textcolor hover:shadow-lg transition-shadow duration-300"
+                      className="bg-[#e1e1e1] rounded-lg p-6 sm:p-7 md:p-8 lg:p-10 flex flex-col border border-textcolor hover:shadow-lg transition-shadow duration-300 h-full"
                     >
                       {/* Icon and Number */}
                       <div className="flex items-center gap-4 sm:gap-5 mb-4 sm:mb-5 md:mb-6">
@@ -240,39 +218,141 @@ const WhyChooseUs = ({
                       </p>
                     </div>
                   </motion.div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                ))}
+              </div>
+            ) : (
+              <>
+                <Swiper
+                  modules={[Pagination, Autoplay]}
+                  spaceBetween={20}
+                  slidesPerView={1}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 1,
+                      spaceBetween: 24,
+                    },
+                    768: {
+                      slidesPerView: 2,
+                      spaceBetween: 28,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                      spaceBetween: 32,
+                    },
+                  }}
+                  pagination={{
+                    clickable: true,
+                    el: ".swiper-pagination-why-choose-us",
+                    dynamicBullets: false,
+                  }}
+                  autoplay={{
+                    delay: 4000,
+                    disableOnInteraction: false,
+                  }}
+                  grabCursor={true}
+                  className="why-choose-us-swiper"
+                  onSwiper={(swiper) => {
+                    swiperInstanceRef.current = swiper;
+                    // Equalize heights after swiper is initialized
+                    setTimeout(() => {
+                      equalizeHeights();
+                    }, 500);
+                    setTimeout(() => {
+                      equalizeHeights();
+                    }, 1000);
+                  }}
+                  onResize={() => {
+                    equalizeHeights();
+                  }}
+                  onSlideChange={() => {
+                    equalizeHeights();
+                  }}
+                >
+                  {features.map((feature, index) => (
+                    <SwiperSlide key={feature.id}>
+                      <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={
+                          isSwiperInView
+                            ? { opacity: 1, y: 0 }
+                            : { opacity: 0, y: 30 }
+                        }
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="h-full w-full"
+                      >
+                        <div
+                          ref={(el) => {
+                            cardRefs.current[index] = el;
+                          }}
+                          className="bg-[#e1e1e1] rounded-lg p-6 sm:p-7 md:p-8 lg:p-10 flex flex-col border border-textcolor hover:shadow-lg transition-shadow duration-300"
+                        >
+                          {/* Icon and Number */}
+                          <div className="flex items-center gap-4 sm:gap-5 mb-4 sm:mb-5 md:mb-6">
+                            <div
+                              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg flex items-center justify-center shrink-0"
+                              style={{ backgroundColor: feature.iconColor }}
+                            >
+                              <div className="text-textcolor">
+                                {feature.icon}
+                              </div>
+                            </div>
+                            <span
+                              className="text-3xl sm:text-4xl md:text-5xl font-tanker text-textcolor "
+                              style={{
+                                WebkitTextStroke: "1px #10100e",
+                                WebkitTextFillColor: "transparent",
+                              }}
+                            >
+                              {feature.number}
+                            </span>
+                          </div>
 
-            {/* Custom Navigation and Pagination */}
-            <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8 mt-6 sm:mt-8 md:mt-10">
-              {/* Previous Button */}
-              <button
-                className="swiper-button-prev-custom swiper-button-prev-custom-style flex items-center gap-2"
-                onClick={() => swiperInstanceRef.current?.slidePrev()}
-                aria-label="Previous slide"
-              >
-                <ChevronLeft size={24} />
-                <span className="text-textcolor font-tanker font-medium">
-                  Previous
-                </span>
-              </button>
+                          {/* Title */}
+                          <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-tanker text-textcolor  mb-3 sm:mb-4 md:mb-5">
+                            {feature.title}
+                          </h3>
 
-              {/* Pagination Dots */}
-              <div className="swiper-pagination-why-choose-us"></div>
+                          {/* Description */}
+                          <p className="text-sm sm:text-base md:text-lg lg:text-xl font-switzer text-textcolor leading-relaxed grow">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </motion.div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
 
-              {/* Next Button */}
-              <button
-                className="swiper-button-next-custom swiper-button-next-custom-style flex items-center gap-2"
-                onClick={() => swiperInstanceRef.current?.slideNext()}
-                aria-label="Next slide"
-              >
-                <span className="text-textcolor font-tanker font-medium">
-                  Next
-                </span>
-                <ChevronRight size={24} />
-              </button>
-            </div>
+                {/* Custom Navigation and Pagination */}
+                <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8 mt-6 sm:mt-8 md:mt-10">
+                  {/* Previous Button */}
+                  <button
+                    className="swiper-button-prev-custom swiper-button-prev-custom-style flex items-center gap-2"
+                    onClick={() => swiperInstanceRef.current?.slidePrev()}
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeft size={24} />
+                    <span className="text-textcolor font-tanker font-medium">
+                      Previous
+                    </span>
+                  </button>
+
+                  {/* Pagination Dots */}
+                  <div className="swiper-pagination-why-choose-us"></div>
+
+                  {/* Next Button */}
+                  <button
+                    className="swiper-button-next-custom swiper-button-next-custom-style flex items-center gap-2"
+                    onClick={() => swiperInstanceRef.current?.slideNext()}
+                    aria-label="Next slide"
+                  >
+                    <span className="text-textcolor font-tanker font-medium">
+                      Next
+                    </span>
+                    <ChevronRight size={24} />
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </motion.div>
       </div>

@@ -30,9 +30,10 @@ interface ProductGridProps {
     | "importandexport"
     | "electronicsandit"
     | "chemicalsandadditives"
-    | "oilproducts"
     | "bestsellingitems"
+    | "oilproducts"
     | "custom";
+    
   id?: string;
 }
 

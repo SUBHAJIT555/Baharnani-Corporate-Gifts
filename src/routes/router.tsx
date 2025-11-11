@@ -3,7 +3,7 @@ import { MainLayout } from "../layouts/MainLayout";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Product from "../pages/Product";
-import ConstructionMaterials from "../pages/ConstructionMaterials";
+import ApparelAndAccessories from "../pages/ApparelAndAccessories";
 import FoodStuff from "../pages/FoodStuff";
 import BuildingMaterials from "../pages/BuildingMaterials";
 import Quote from "../pages/Quote";
@@ -11,11 +11,12 @@ import Contracting from "../pages/Contracting";
 import ImportAndExport from "../pages/ImportAndExport";
 import ElectronicsAndIT from "../pages/ElectronicsAndIT";
 import ChemicalsAndAdditives from "../pages/ChemicalsAndAdditives";
-import OilProducts from "../pages/OilProducts";
+import GiftSet from "../pages/GiftSet";
 import Contact from "../pages/Contact";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsAndConditions from "../pages/TermsAndConditions";
 import CookiePolicy from "../pages/CookiePolicy";
+import LuxuryCorporateGifts from "../pages/LuxuryCorporateGifts";
 
 
 export const router = createBrowserRouter([
@@ -30,8 +31,8 @@ export const router = createBrowserRouter([
         element: <Product />,
       },
       {
-        path: "/products/construction-materials",
-        element: <ConstructionMaterials />,
+        path: "/products/apparel-and-accessories",
+        element: <ApparelAndAccessories />,
       },
       {
         path: "/products/food-stuff",
@@ -58,8 +59,12 @@ export const router = createBrowserRouter([
         element: <ChemicalsAndAdditives />,
       },
       {
-        path: "/products/oil-products",
-        element: <OilProducts />,
+        path: "/products/premium-gift-sets",
+        element: <GiftSet />,
+      },
+      {
+        path: "/products/luxury-corporate-gifts",
+        element: <LuxuryCorporateGifts />,
       },
       {
         path: "/quote",
