@@ -33,7 +33,12 @@ const AnimatedNumber = ({
     }
   }, [isInView, value, duration, count]);
 
-  return <span ref={ref}>{displayValue}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {displayValue}
+      {suffix}
+    </span>
+  );
 };
 
 const Stats = () => {
@@ -113,13 +118,17 @@ const Stats = () => {
                   <br />
                   YEARS
                 </>
-              ) : stat.number === "8+ Key Sectors" ? (
+              ) : stat.number === "9+ Key Sectors" ? (
                 <>
-                  <AnimatedNumber value={8} suffix="+" duration={2} /> Key Sectors
+                  <AnimatedNumber value={9} suffix="+" duration={2} />
+                  <br />
+                  KEY SECTORS
                 </>
               ) : stat.number === "100% Commitment" ? (
                 <>
-                  <AnimatedNumber value={100} suffix="%" duration={2} /> Commitment
+                  <AnimatedNumber value={100} suffix="%" duration={2} />
+                  <br />
+                  COMMITMENT
                 </>
               ) : (
                 stat.number

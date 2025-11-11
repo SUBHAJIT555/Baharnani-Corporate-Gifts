@@ -8,34 +8,37 @@ import { Link } from "react-router-dom";
 // images
 import ConstructionMaterialsImage from "../assets/images/Hero-images/Home-hero-Construction-Materials.webp";
 import FoodStuffImage from "../assets/images/Hero-images/Home-hero-food-stuff.webp";
-import BuildingMaterialsImage from "../assets/images/Hero-images/Home-hero-Building-Materials.webp";
 import ContractingSolutionsImage from "../assets/images/Hero-images/Home-hero-Contracting-Solutions.webp";
 import ImportExportImage from "../assets/images/Hero-images/Home-hero-Import-&-Export.webp";
 import ElectronicsITImage from "../assets/images/Hero-images/Home-hero-Electronics-&-IT.webp";
 import ChemicalsImage from "../assets/images/Hero-images/Home-hero-Chemicals-&-Additives.webp";
 import OilProductsImage from "../assets/images/Hero-images/Home-hero-oil-products.webp";
+import PremiumGiftSetsImage from "../assets/images/Hero-images/Home-hero-Contact.webp";
+import LuxuryCorporateGiftsImage from "../assets/images/Hero-images/Home-hero-Terms & Condition.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const IMAGES = [
   ConstructionMaterialsImage,
   FoodStuffImage,
-  BuildingMaterialsImage,
   ContractingSolutionsImage,
   ImportExportImage,
   ElectronicsITImage,
   ChemicalsImage,
   OilProductsImage,
+  PremiumGiftSetsImage,
+  LuxuryCorporateGiftsImage,
 ];
 
 const H2_TEXTS = [
-  "Apparel and accessories",
-  "Bags and travel",
-  "Office and stationary",
-  "Technology and accessories",
-  "Eating and drinking",
-  "Premiums and tools",
-  "Sports and recreation",
+  "Premium gift sets",
+  "Luxury corporate gifts",
+  "Apparel & accessories",
+  "Bags & travel",
+  "Office & stationary",
+  "Technology & accessories",
+  "Eating & drinking",
+  "Sports & recreation",
   "Eco friendly",
 ];
 
