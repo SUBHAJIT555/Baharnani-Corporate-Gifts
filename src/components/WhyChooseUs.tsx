@@ -27,8 +27,13 @@ interface WhyChooseUsProps {
 
 const WhyChooseUs = ({
   features,
-  title = <>Why <PiSealQuestionDuotone className="inline-block align-middle rotate-45" />
- Choose Us</>,
+  title = (
+    <>
+      Why{" "}
+      <PiSealQuestionDuotone className="inline-block align-middle rotate-45" />
+      Choose Us
+    </>
+  ),
   subtitle = "Delivering quality, reliability, and consistency in every shipment.",
 }: WhyChooseUsProps) => {
   const headingRef = useRef<HTMLDivElement>(null);
@@ -161,7 +166,8 @@ const WhyChooseUs = ({
               }}
               pagination={{
                 clickable: true,
-                el: ".swiper-pagination-custom",
+                el: ".swiper-pagination-why-choose-us",
+                dynamicBullets: false,
               }}
               autoplay={{
                 delay: 4000,
@@ -253,7 +259,7 @@ const WhyChooseUs = ({
               </button>
 
               {/* Pagination Dots */}
-              <div className="swiper-pagination-custom"></div>
+              <div className="swiper-pagination-why-choose-us"></div>
 
               {/* Next Button */}
               <button

@@ -84,7 +84,6 @@ body::-webkit-scrollbar {
   color: var(--color-bg);
 }
 
-
 /* Prevent horizontal overflow globally */
 * {
   box-sizing: border-box;
@@ -161,29 +160,37 @@ body::-webkit-scrollbar {
 }
 
 /* Custom Pagination */
-.swiper-pagination-custom {
+.swiper-pagination-custom,
+.swiper-pagination-why-choose-us {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
   position: static !important;
   width: auto !important;
+  min-height: 10px !important;
 }
 
-.swiper-pagination-custom .swiper-pagination-bullet {
-  background: #4a4a4a !important;
+.swiper-pagination-custom .swiper-pagination-bullet,
+.swiper-pagination-why-choose-us .swiper-pagination-bullet {
+  background: #10100e !important;
   opacity: 0.3 !important;
   width: 10px !important;
   height: 10px !important;
+  border-radius: 50% !important;
   transition: all 0.3s ease !important;
   margin: 0 !important;
   cursor: pointer !important;
+  display: inline-block !important;
 }
 
-.swiper-pagination-custom .swiper-pagination-bullet-active {
+.swiper-pagination-custom .swiper-pagination-bullet-active,
+.swiper-pagination-why-choose-us .swiper-pagination-bullet-active {
+  background: #10100e !important;
   opacity: 1 !important;
-  width: 24px !important;
-  border-radius: 5px !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
 }
 
 /* Hide scrollbar for horizontal scrollable filter */
