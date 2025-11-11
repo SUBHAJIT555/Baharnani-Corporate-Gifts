@@ -9,7 +9,7 @@ import CallToAction from "../components/CallToAction";
 
 // images 
 import ImportExportImage from "../assets/images/Products-hero-image/Import-&-Export-hero.webp";
-const importExportFeatures: FeatureCard[] = [
+const eatingAndDrinkingFeatures: FeatureCard[] = [
   {
     id: 1,
     number: "01",
@@ -59,7 +59,7 @@ const importExportFeatures: FeatureCard[] = [
     iconColor: "#2196F3",
   },
 ];
-const ImportAndExport = () => {
+const EatingAndDrinking = () => {
  
   return (
     <div>
@@ -87,7 +87,7 @@ const ImportAndExport = () => {
         }
       />
       <ProductGrid title="Our Product Range" productType="importandexport" id="import-and-export" />
-      <WhyChooseUs features={importExportFeatures} />
+      <WhyChooseUs features={eatingAndDrinkingFeatures} />
       <CallToAction
         title="Your Global Trading Bridge from Oman"
         subtitle="Partner with Leading Network LLC for seamless import, export, and logistics management — backed by trusted suppliers, compliance expertise, and reliable delivery across borders."
@@ -111,4 +111,4 @@ const ImportAndExport = () => {
   );
 }
 
-export default ImportAndExport
+export default EatingAndDrinking;

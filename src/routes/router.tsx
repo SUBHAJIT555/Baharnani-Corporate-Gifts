@@ -4,13 +4,13 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Product from "../pages/Product";
 import ApparelAndAccessories from "../pages/ApparelAndAccessories";
-import FoodStuff from "../pages/FoodStuff";
-import BuildingMaterials from "../pages/BuildingMaterials";
+import OfficeAndStationary from "../pages/OfficeAndStationary";
+import BagsAndTravels from "../pages/BagsAndTravels";
 import Quote from "../pages/Quote";
-import Contracting from "../pages/Contracting";
-import ImportAndExport from "../pages/ImportAndExport";
-import ElectronicsAndIT from "../pages/ElectronicsAndIT";
-import ChemicalsAndAdditives from "../pages/ChemicalsAndAdditives";
+import TechnologyAndAccessories from "../pages/TechnologyAndAccessories";
+import EatingAndDrinking from "../pages/EatingAndDrinking";
+import SportsAndRecreation from "../pages/SportsAndRecreation";
+import EcoFriendly from "../pages/EcoFriendly";
 import GiftSet from "../pages/GiftSet";
 import Contact from "../pages/Contact";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
@@ -35,28 +35,29 @@ export const router = createBrowserRouter([
         element: <ApparelAndAccessories />,
       },
       {
-        path: "/products/food-stuff",
-        element: <FoodStuff />,
+        path: "/products/bags-and-travel",
+        element: <BagsAndTravels />,
       },
       {
-        path: "/products/building-materials",
-        element: <BuildingMaterials />,
+        path: "/products/office-and-stationary",
+        element: <OfficeAndStationary />,
+      },
+
+      {
+        path: "/products/technology-and-accessories",
+        element: <TechnologyAndAccessories />,
       },
       {
-        path: "/products/contracting-solutions",
-        element: <Contracting />,
+        path: "/products/eating-and-drinking",
+        element: <EatingAndDrinking />,
       },
       {
-        path: "/products/import-and-export",
-        element: <ImportAndExport />,
+        path: "/products/sports-and-recreation",
+        element: <SportsAndRecreation />,
       },
       {
-        path: "/products/electronics-and-it",
-        element: <ElectronicsAndIT />,
-      },
-      {
-        path: "/products/chemicals-and-additives",
-        element: <ChemicalsAndAdditives />,
+        path: "/products/eco-friendly",
+        element: <EcoFriendly />,
       },
       {
         path: "/products/premium-gift-sets",

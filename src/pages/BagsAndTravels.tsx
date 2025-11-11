@@ -9,13 +9,13 @@ import CallToAction from "../components/CallToAction";
 // images 
 import BuildingMaterialsImage from "../assets/images/Products-hero-image/Building-Materials-hero.webp";
 
-const BuildingMaterials = () => {
-  const buildingMaterialsFeatures: FeatureCard[] = [
+const BagsAndTravels = () => {
+  const bagsAndTravelsFeatures: FeatureCard[] = [
     {
       id: 1,
       number: "01",
-      title: "Certified Quality",
-      description: "All materials comply with Oman and international standards.",
+      title: "Wide Range of Bags & Travel Accessories",
+      description: "Explore our extensive collection of bags and travel accessories, including suitcases, backpacks, travel wallets, and more, designed to meet your needs for every journey.",
       icon: <Award size={32} />,
       iconColor: "#4CAF50",
     },
@@ -85,7 +85,7 @@ const BuildingMaterials = () => {
         }
       />
       <ProductGrid title="Our Product Range" productType="building" id="building-materials" />
-      <WhyChooseUs features={buildingMaterialsFeatures} />
+      <WhyChooseUs features={bagsAndTravelsFeatures} />
       <CallToAction
         title="Partner With Oman’s Reliable Building Materials Supplier"
         subtitle="From structural steel to insulation materials, Leading Network LLC ensures durability, design, and compliance with global standards for every construction project."
@@ -109,4 +109,4 @@ const BuildingMaterials = () => {
   );
 }
 
-export default BuildingMaterials
+export default BagsAndTravels

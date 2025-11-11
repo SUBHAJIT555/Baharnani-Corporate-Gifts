@@ -101,28 +101,24 @@ const Navbar = () => {
       title: "Eating and drinking",
       link: "/products/eating-and-drinking",
     },
+    
     {
       id: "6",
-      title: "Premiums and tools",
-      link: "/products/premiums-and-tools",
-    },
-    {
-      id: "7",
       title: "Sports and recreation",
       link: "/products/sports-and-recreation",
     },
     {
-      id: "8",
+      id: "7",
       title: "Eco friendly",
       link: "/products/eco-friendly",
     },
       {
-        id: "9",
+        id: "8",
         title: "Premium gift sets",
         link: "/products/premium-gift-sets",
       },
       {
-        id: "10",
+        id: "9",
         title: "Luxury corporate gifts",
         link: "/products/luxury-corporate-gifts",
       },

@@ -8,8 +8,8 @@ import { Shield, FileText, Package, Leaf, Globe } from "lucide-react";
 import CallToAction from "../components/CallToAction";
 
 // images 
-import ChemicalsAndAdditivesImage from "../assets/images/Products-hero-image/Chemicals-&-Additives-hero.webp";
-const chemicalsandadditivesFeatures: FeatureCard[] = [
+import EcoFriendlyImage from "../assets/images/Products-hero-image/Contracting-Solutions-hero.webp";
+const ecoFriendlyFeatures: FeatureCard[] = [
   {
     id: 1,
     number: "01",
@@ -60,14 +60,14 @@ const chemicalsandadditivesFeatures: FeatureCard[] = [
   },
 ];
 
-const ChemicalsAndAdditives = () => {
+const EcoFriendly = () => {
   return (
     <div>
       <CommonHero
         title="Trusted Supplier of Industrial, Food, and Pharmaceutical Chemicals"
         titlesuffix=""
         subtitle="Leading Network LLC provides high-quality industrial, agricultural, and food-grade chemicals — sourced from certified global manufacturers and delivered safely across Oman and international markets."
-        imageUrl={ChemicalsAndAdditivesImage}
+        imageUrl={EcoFriendlyImage}
         buttonLink="#chemicals-and-additives"
         buttonText="Explore Electronics & IT Solutions"
       />
@@ -90,11 +90,11 @@ const ChemicalsAndAdditives = () => {
         productType="chemicalsandadditives"
         id="chemicals-and-additives"
       />
-      <WhyChooseUs features={chemicalsandadditivesFeatures} />
+      <WhyChooseUs features={ecoFriendlyFeatures} />
       <CallToAction
         title="Partner With a Certified Chemical Supplier in Oman"
         subtitle="From food additives and pharma-grade compounds to industrial and water-treatment chemicals, Leading Network LLC ensures safe sourcing, reliable delivery, and full compliance every time."
-        backgroundImageUrl={ChemicalsAndAdditivesImage}
+        backgroundImageUrl={EcoFriendlyImage}
         buttons={[
           {
             text: "Contact Our Team",
@@ -114,4 +114,4 @@ const ChemicalsAndAdditives = () => {
   );
 }
 
-export default ChemicalsAndAdditives
+export default EcoFriendly;

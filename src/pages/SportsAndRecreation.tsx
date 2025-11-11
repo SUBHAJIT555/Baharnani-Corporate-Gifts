@@ -8,8 +8,8 @@ import { Shield, Wrench, Package, Users, Zap, HeadphonesIcon } from "lucide-reac
 import CallToAction from "../components/CallToAction";
 
 // images 
-import ElectronicsITImage from "../assets/images/Products-hero-image/Electronics-&-IT-hero.webp";
-const electronicsanditFeatures: FeatureCard[] = [
+import SportsAndRecreationImage from "../assets/images/Hero-images/Home-hero-Contact.webp";
+const sportsAndRecreationFeatures: FeatureCard[] = [
   {
     id: 1,
     number: "01",
@@ -60,14 +60,14 @@ const electronicsanditFeatures: FeatureCard[] = [
   },
 ];
 
-const ElectronicsAndIT = () => {
+const SportsAndRecreation = () => {
   return (
     <div>
       <CommonHero
         title="Innovative Electronics & IT Solutions for Modern Businesses"
         titlesuffix=""
         subtitle="Leading Network LLC delivers cutting-edge technology hardware, networking solutions, and smart systems designed to empower corporate, educational, and industrial sectors across Oman and the GCC."
-        imageUrl={ElectronicsITImage}
+        imageUrl={SportsAndRecreationImage}
         buttonLink="#electronics-and-it"
         buttonText="Explore Electronics & IT Solutions"
       />
@@ -86,11 +86,11 @@ const ElectronicsAndIT = () => {
         }
       />
       <ProductGrid title="Our Product Range" productType="electronicsandit" id="electronics-and-it" />
-      <WhyChooseUs features={electronicsanditFeatures} />
+      <WhyChooseUs features={sportsAndRecreationFeatures} />
       <CallToAction
         title="Empower Your Business with Reliable Technology"
         subtitle="From computers and networking systems to CCTV and smart solutions, Leading Network LLC ensures that every product delivers performance, reliability, and long-term value."
-        backgroundImageUrl={ElectronicsITImage}
+        backgroundImageUrl={SportsAndRecreationImage}
         buttons={[
           {
             text: "Contact Our Team",
@@ -110,4 +110,4 @@ const ElectronicsAndIT = () => {
   );
 }
 
-export default ElectronicsAndIT
+export default SportsAndRecreation;

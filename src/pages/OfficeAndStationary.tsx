@@ -9,82 +9,79 @@ import CallToAction from "../components/CallToAction";
 // images 
 import FoodStuffImage from "../assets/images/Products-hero-image/food-stuff-hero.webp";
 
-const foodstuffFeatures: FeatureCard[] = [
+const officeAndStationaryFeatures: FeatureCard[] = [
   {
     id: 1,
     number: "01",
-    title: "Certified Sourcing",
-    description: "All products from HACCP, ISO, and FDA-approved suppliers.",
+    title: "Wide Range of Office & Stationery Supplies",
+    description: "Explore our extensive collection of office and stationery supplies, including pens, notebooks, office supplies, and more, designed to meet your needs for every office.",
     icon: <Award size={32} />,
     iconColor: "#4CAF50",
   },
   {
     id: 2,
     number: "02",
-    title: "Flexible Packaging",
-    description: "Consumer (1–10 kg) and bulk (25 kg / 50 kg / container) options.",
+    title: "Quality & Durability",
+    description: "All products are made from durable materials and designed to last for years of use.",
     icon: <Package size={32} />,
     iconColor: "#FF6B6B",
   },
   {
     id: 3,
     number: "03",
-    title: "Private Labeling",
-    description: "Full white-label support for retail and export brands.",
+    title: "Customization Options",
+    description: "We offer customization options for all products. Add your company's logo, message, or choose from a variety of premium branding services.",
     icon: <Users size={32} />,
     iconColor: "#FF9800",
   },
   {
     id: 4,
     number: "04",
-    title: "Cold-Chain Logistics",
-    description: "Specialized storage and delivery for frozen & chilled items.",
+    title: "Global Reach",
+    description: "Distribution across GCC, Africa, and South-East Asia.",
     icon: <Leaf size={32} />,
     iconColor: "#8BC34A",
   },
   {
     id: 5,
     number: "05",
-    title: "Global Reach",
-    description: "Distribution across GCC, Africa, and South-East Asia.",
+    title: "Quality Assurance",
+    description: "Batch testing and full documentation (COA, inspection reports).",
     icon: <Globe size={32} />,
     iconColor: "#3F3F9F",
   },
   {
     id: 6,
     number: "06",
-    title: "Quality Assurance",
-    description: "Batch testing and full documentation (COA, inspection reports).",
+    title: "Customization Options",
+    description: "We offer customization options for all products. Add your company's logo, message, or choose from a variety of premium branding services.",
     icon: <Award size={32} />,
     iconColor: "#4CAF50",
   },
 ];
-const FoodStuff = () => {
+const OfficeAndStationary = () => {
   return (
     <div>
       <CommonHero
-        title="Leading Food Stuff Trading Company in Oman"
+        title="Leading Office & Stationery Trading Company in Oman"
         titlesuffix=""
-        subtitle="We supply and export premium food commodities, frozen goods, and packaged products sourced from HACCP and ISO-certified producers — ensuring freshness, safety, and quality across Oman, the Middle East, Africa, and Asia."
+        subtitle="We supply and export premium office and stationery supplies, ensuring quality, durability, and customization across Oman, the Middle East, Africa, and Asia."
         imageUrl={FoodStuffImage}
-        buttonLink="#food-stuff"
-        buttonText="Explore Food Stuff"
+        buttonLink="#office-and-stationary"
+        buttonText="Explore Office & Stationery"
       />
       <OverView
         content={
           <>
-            At Leading Network LLC, we specialize in the wholesale and export of
-            food products — from rice, sugar, and pulses to frozen foods and
-            beverages.
+              At Leading Network LLC, we specialize in the wholesale and export of
+            office and stationery supplies, ensuring quality, durability, and customization across Oman, the Middle East, Africa, and Asia.
             <br /> Our end-to-end trading network connects global suppliers with
-            regional distributors, ensuring safe handling,
-            temperature-controlled logistics, and consistent quality across all
-            deliveries.
+            regional distributors, ensuring safe handling, temperature-controlled logistics, and consistent quality across all deliveries.
           </>
         }
       />
       <ProductGrid title="Our Product Range" productType="foodstuff" id="food-stuff" />
-      <WhyChooseUs features={foodstuffFeatures} />
+      <WhyChooseUs features={officeAndStationaryFeatures} />
       <CallToAction
         title="Partner With Oman’s Reliable Food Trading Company"
         subtitle="From rice and pulses to frozen meats and beverages, Leading Network LLC ensures every product meets international food-safety and freshness standards."
@@ -108,4 +105,4 @@ const FoodStuff = () => {
   );
 };
 
-export default FoodStuff;
+export default OfficeAndStationary;

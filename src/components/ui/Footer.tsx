@@ -330,26 +330,6 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/products/premiums-and-tools">
-                    <motion.li
-                      className="footer-link group relative flex items-center cursor-pointer"
-                      whileHover={{ x: 8 }}
-                      whileTap={{ scale: 0.96 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      }}
-                    >
-                      <span className="relative inline-block transition-colors">
-                        Premiums and tools
-                        <span className="absolute left-0 -bottom-0.5 h-px bg-[#499F68] w-0 group-hover:w-full transition-all duration-300"></span>
-                      </span>
-                      <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                        →
-                      </span>
-                    </motion.li>
-                  </Link>
                   <Link to="/products/sports-and-recreation">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
@@ -383,6 +363,46 @@ const Footer = () => {
                     >
                       <span className="relative inline-block transition-colors">
                         Eco friendly
+                        <span className="absolute left-0 -bottom-0.5 h-px bg-[#499F68] w-0 group-hover:w-full transition-all duration-300"></span>
+                      </span>
+                      <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        →
+                      </span>
+                    </motion.li>
+                  </Link>
+                  <Link to="/products/premium-gift-sets">
+                    <motion.li
+                      className="footer-link group relative flex items-center cursor-pointer"
+                      whileHover={{ x: 8 }}
+                      whileTap={{ scale: 0.96 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                    >
+                      <span className="relative inline-block transition-colors">
+                        Premium gift sets
+                        <span className="absolute left-0 -bottom-0.5 h-px bg-[#499F68] w-0 group-hover:w-full transition-all duration-300"></span>
+                      </span>
+                      <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        →
+                      </span>
+                    </motion.li>
+                  </Link>
+                  <Link to="/products/luxury-corporate-gifts">
+                    <motion.li
+                      className="footer-link group relative flex items-center cursor-pointer"
+                      whileHover={{ x: 8 }}
+                      whileTap={{ scale: 0.96 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                    >
+                      <span className="relative inline-block transition-colors">
+                        Luxury corporate gifts
                         <span className="absolute left-0 -bottom-0.5 h-px bg-[#499F68] w-0 group-hover:w-full transition-all duration-300"></span>
                       </span>
                       <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -527,7 +547,7 @@ const Footer = () => {
             <p className="text-bg text-lg leading-none text-center">
               &copy; {new Date().getFullYear()}{" "}
               <Link to="/" className="text-[#aef6c7] text-lg font-normal">
-                {`[ Leading Network L.L.C. ]`}
+                {`[ Baharnani Advertising L.L.C. ]`}
               </Link>{" "}
               All rights reserved.&nbsp; Made with{" "}
               <FaHeart className="inline text-bg text-base" /> by:&nbsp;
