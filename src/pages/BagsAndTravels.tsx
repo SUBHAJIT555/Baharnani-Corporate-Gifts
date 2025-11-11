@@ -3,110 +3,136 @@ import OverView from "../components/OverView";
 import ProductGrid from "../components/ProductGrid";
 import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
-import { Award, Globe, Leaf, Package, Users } from "lucide-react";
+import {
+  Award,
+  Briefcase,
+  Globe,
+  Luggage,
+  Package,
+  Sparkles,
+} from "lucide-react";
 import CallToAction from "../components/CallToAction";
+import { giftItems } from "../data/giftItems";
 
-// images 
-import BuildingMaterialsImage from "../assets/images/Products-hero-image/Building-Materials-hero.webp";
+// images
+import FoodStuffImage from "../assets/images/Products-hero-image/food-stuff-hero.webp";
+
+// Filter bags and travel items from giftItems
+const bagsAndTravelItems = giftItems.filter(
+  (item) => item.category === "Bags and travel"
+);
 
 const BagsAndTravels = () => {
   const bagsAndTravelsFeatures: FeatureCard[] = [
     {
       id: 1,
       number: "01",
-      title: "Wide Range of Bags & Travel Accessories",
-      description: "Explore our extensive collection of bags and travel accessories, including suitcases, backpacks, travel wallets, and more, designed to meet your needs for every journey.",
-      icon: <Award size={32} />,
+      title: "Premium Quality Bags & Travel Accessories",
+      description:
+        "From executive briefcases to luxury luggage sets, we offer high-quality bags and travel accessories perfect for corporate gifting and business professionals.",
+      icon: <Luggage size={32} />,
       iconColor: "#4CAF50",
     },
     {
       id: 2,
       number: "02",
-      title: "Wide Range",
-      description: "From plumbing and electrical to flooring and finishes — all under one roof.",
-      icon: <Package size={32} />,
+      title: "Custom Branding Options",
+      description:
+        "Personalize your corporate gifts with custom logo printing, embroidery, and branded packaging to strengthen your brand identity with every journey.",
+      icon: <Sparkles size={32} />,
       iconColor: "#FF6B6B",
     },
     {
       id: 3,
       number: "03",
-      title: "Technical Expertise",
-      description: "Support for specification sheets, samples, and on-site guidance.",
-      icon: <Users size={32} />,
+      title: "Wide Range of Products",
+      description:
+        "Explore our collection of briefcases, backpacks, travel bags, luggage sets, and document holders that make perfect corporate gifts for clients and employees.",
+      icon: <Package size={32} />,
       iconColor: "#FF9800",
     },
     {
       id: 4,
       number: "04",
-      title: "Project Ready",
-      description: "Ready stock for ongoing and upcoming construction works.",
-      icon: <Leaf size={32} />,
+      title: "Perfect for Business Travelers",
+      description:
+        "Our travel accessories are designed for professionals on the go, featuring durable materials, smart compartments, and modern designs.",
+      icon: <Briefcase size={32} />,
       iconColor: "#8BC34A",
     },
     {
       id: 5,
       number: "05",
-      title: "Flexible Orders",
-      description: "Bulk and project-based supply with reliable delivery schedules.",
+      title: "Flexible Ordering",
+      description:
+        "From individual gifts to bulk orders, we accommodate orders of all sizes with reliable delivery across Dubai and the UAE.",
       icon: <Globe size={32} />,
       iconColor: "#3F3F9F",
     },
     {
       id: 6,
       number: "06",
-      title: "Trusted Brands",
-      description: "Sourced from leading manufacturers and authorized distributors.",
+      title: "Trusted Quality",
+      description:
+        "Sourced from leading manufacturers, our bags and travel accessories combine style, durability, and functionality for lasting impressions.",
       icon: <Award size={32} />,
       iconColor: "#4CAF50",
     },
   ];
- 
+
   return (
     <div>
       <CommonHero
-        title="Your Reliable Source for Building Materials in Oman"
+        title="Premium Bags & Travel Accessories for Corporate Gifting in Dubai"
         titlesuffix=""
-        subtitle="Whether it’s plumbing, electrical, finishing, or hardware, Leading Network LLC delivers certified materials, consistent supply, and competitive pricing across Oman and the GCC."
-        imageUrl={BuildingMaterialsImage}
-        buttonLink="#building-materials"
-        buttonText="Explore Building Materials"
+        subtitle="Discover our exclusive collection of high-quality bags and luxury travel accessories, perfect for corporate gifts, client appreciation, and employee recognition programs."
+        imageUrl={FoodStuffImage}
+        buttonLink="#bags-travel"
+        buttonText="Shop Bags & Travel"
       />
       <OverView
         content={
           <>
-            We provide a complete portfolio of building materials covering
-            civil, electrical, plumbing, and finishing requirements.
-            <br /> Our goal is to deliver quality materials, reliable stock
-            availability, and to deliver quality materials, reliable stock
-            availability, and technical support — enabling contractors,
-            developers, and architects to complete their projects with
-            confidence and precision.
+            Looking for the perfect corporate gift that combines style,
+            functionality, and professionalism? Our premium collection of bags
+            and travel accessories features everything from executive leather
+            briefcases and premium travel backpacks to luxury luggage sets and
+            document holders. Each item is carefully selected to make a lasting
+            impression on your clients, partners, and employees. Whether you
+            need branded travel bags for business professionals or sophisticated
+            luggage for client appreciation, we've got you covered with the
+            finest selection across Dubai and the UAE.
           </>
         }
       />
-      <ProductGrid title="Our Product Range" productType="building" id="building-materials" />
+      <ProductGrid
+        title="Explore Our Collection of Bags & Travel Accessories"
+        productType="custom"
+        products={bagsAndTravelItems}
+        id="bags-travel"
+      />
       <WhyChooseUs features={bagsAndTravelsFeatures} />
       <CallToAction
-        title="Partner With Oman’s Reliable Building Materials Supplier"
-        subtitle="From structural steel to insulation materials, Leading Network LLC ensures durability, design, and compliance with global standards for every construction project."
-        backgroundImageUrl={BuildingMaterialsImage}
+        title="Your Trusted Partner for Corporate Bags & Travel Accessories in Dubai"
+        subtitle="From custom-branded briefcases to luxury luggage sets, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence."
+        backgroundImageUrl={FoodStuffImage}
         buttons={[
           {
             text: "Contact Our Team",
             className:
               "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker!",
-              link: "/contact-us",
+            link: "/contact-us",
           },
           {
-            text: "Explore Product Calagories",
+            text: "Explore Product Categories",
             className:
               "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-textcolor! text-textcolor! font-tanker!",
-              link: "/products",
+            link: "/products",
           },
         ]}
       />
     </div>
   );
-}
+};
 
-export default BagsAndTravels
+export default BagsAndTravels;

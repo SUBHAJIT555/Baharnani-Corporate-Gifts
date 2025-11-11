@@ -5,9 +5,9 @@ const Contact = () => {
   return (
     <div>
       <CommonHero
-        title="Get in Touch With Leading Network "
+        title="Connect With Dubai's Premier Corporate Gift Supplier"
         titlesuffix=""
-        subtitle="We're here to help with product inquiries, partnership opportunities, and service support. Reach out to our team for construction materials, foodstuff, chemicals, electronics, or contracting services — we respond within 24 hours."
+        subtitle="Ready to elevate your corporate gifting? Our team is here to help with custom gift solutions, bulk orders, branding inquiries, and partnership opportunities. Get in touch today and let's create memorable gifts that strengthen your business relationships."
         imageUrl="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg"
         buttonLink="#"
         buttonText="Get in Touch"

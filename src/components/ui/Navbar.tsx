@@ -78,50 +78,50 @@ const Navbar = () => {
   const productCategories = [
     {
       id: "1",
+      title: "Premium gift sets",
+      link: "/products/premium-gift-sets",
+    },
+    {
+      id: "2",
+      title: "Luxury corporate gifts",
+      link: "/products/luxury-corporate-gifts",
+    },
+    {
+      id: "3",
       title: "Apparel and accessories",
       link: "/products/apparel-and-accessories",
     },
     {
-      id: "2",
+      id: "4",
       title: "Bags and travel",
       link: "/products/bags-and-travel",
     },
     {
-      id: "3",
+      id: "5",
       title: "Office and stationary",
       link: "/products/office-and-stationary",
     },
     {
-      id: "4",
+      id: "6",
       title: "Technology and accessories",
       link: "/products/technology-and-accessories",
     },
     {
-      id: "5",
+      id: "7",
       title: "Eating and drinking",
       link: "/products/eating-and-drinking",
     },
-    
+
     {
-      id: "6",
+      id: "8",
       title: "Sports and recreation",
       link: "/products/sports-and-recreation",
     },
     {
-      id: "7",
+      id: "9",
       title: "Eco friendly",
       link: "/products/eco-friendly",
     },
-      {
-        id: "8",
-        title: "Premium gift sets",
-        link: "/products/premium-gift-sets",
-      },
-      {
-        id: "9",
-        title: "Luxury corporate gifts",
-        link: "/products/luxury-corporate-gifts",
-      },
   ];
 
   return (

@@ -1,60 +1,72 @@
-import CommonHero from "../components/ui/CommonHero"
-import OverView from "../components/OverView"
-import ProductGrid from "../components/ProductGrid"
-import WhyChooseUs from "../components/WhyChooseUs"
-import { type FeatureCard } from "../components/WhyChooseUs";
-
-import { Shield, FileText, Package, Leaf, Globe } from "lucide-react";
+import CommonHero from "../components/ui/CommonHero";
+import OverView from "../components/OverView";
+import ProductGrid from "../components/ProductGrid";
+import WhyChooseUs from "../components/WhyChooseUs";
+import type { FeatureCard } from "../components/WhyChooseUs";
+import { Leaf, Award, Package, Users, Globe } from "lucide-react";
 import CallToAction from "../components/CallToAction";
+import { giftItems } from "../data/giftItems";
 
-// images 
+// images
 import EcoFriendlyImage from "../assets/images/Products-hero-image/Contracting-Solutions-hero.webp";
+
+// Filter eco-friendly items from giftItems
+const ecoFriendlyItems = giftItems.filter(
+  (item) => item.category === "Eco friendly"
+);
+
 const ecoFriendlyFeatures: FeatureCard[] = [
   {
     id: 1,
     number: "01",
-    title: "Regulatory Compliance",
-    description: "All shipments come with MSDS, COA, and REACH documentation.",
-    icon: <FileText size={32} />,
+    title: "Sustainable Materials",
+    description:
+      "From bamboo desk organizers to recycled paper notebooks, we offer eco-friendly products made from sustainable and renewable materials.",
+    icon: <Leaf size={32} />,
     iconColor: "#4CAF50",
   },
   {
     id: 2,
     number: "02",
-    title: "Certified Supply Chain",
-    description: "Sourced only from GMP, ISO, and GHS-compliant manufacturers.",
-    icon: <Shield size={32} />,
+    title: "Custom Branding Options",
+    description:
+      "Personalize your eco-friendly corporate gifts with custom printing, logo engraving, and sustainable packaging to strengthen your brand identity.",
+    icon: <Award size={32} />,
     iconColor: "#FF6B6B",
   },
   {
     id: 3,
     number: "03",
-    title: "Flexible Quantities",
-    description: "Available in drums, IBC tanks, and bulk containers.",
+    title: "Wide Range of Products",
+    description:
+      "Explore our collection of bamboo products, reusable items, solar-powered accessories, and organic materials that make perfect sustainable corporate gifts.",
     icon: <Package size={32} />,
     iconColor: "#FF9800",
   },
   {
     id: 4,
     number: "04",
-    title: "Safe Packaging",
-    description: "Leak-proof drums, chemical-resistant liners, and export-grade packing.",
-    icon: <Shield size={32} />,
+    title: "Environmentally Conscious",
+    description:
+      "Demonstrate your commitment to sustainability with gifts that align with your corporate values and green initiatives.",
+    icon: <Leaf size={32} />,
     iconColor: "#8BC34A",
   },
   {
     id: 5,
     number: "05",
-    title: "Environmentally Responsible",
-    description: "Handling and disposal aligned with Oman and international environmental regulations.",
-    icon: <Leaf size={32} />,
+    title: "Perfect for Every Occasion",
+    description:
+      "Whether it's client appreciation, employee recognition, or corporate events, our eco-friendly products suit every gifting occasion.",
+    icon: <Users size={32} />,
     iconColor: "#3F3F9F",
   },
   {
     id: 6,
     number: "06",
-    title: "Global Distribution",
-    description: "Serving clients across GCC, Africa, and Asia with consistent delivery timelines.",
+    title: "Flexible Ordering",
+    description:
+      "From individual gifts to bulk orders, we accommodate orders of all sizes with reliable delivery across Dubai and the UAE.",
     icon: <Globe size={32} />,
     iconColor: "#2196F3",
   },
@@ -64,54 +76,57 @@ const EcoFriendly = () => {
   return (
     <div>
       <CommonHero
-        title="Trusted Supplier of Industrial, Food, and Pharmaceutical Chemicals"
+        title="Eco-Friendly Corporate Gifts for Sustainable Branding in Dubai"
         titlesuffix=""
-        subtitle="Leading Network LLC provides high-quality industrial, agricultural, and food-grade chemicals — sourced from certified global manufacturers and delivered safely across Oman and international markets."
+        subtitle="Discover our exclusive collection of sustainable and environmentally conscious corporate gifts, perfect for showcasing your commitment to green values while strengthening client and employee relationships."
         imageUrl={EcoFriendlyImage}
-        buttonLink="#chemicals-and-additives"
-        buttonText="Explore Electronics & IT Solutions"
+        buttonLink="#eco-friendly"
+        buttonText="Shop Eco-Friendly Gifts"
       />
       <OverView
         content={
           <>
-            Our Chemicals Division serves multiple industries — from food and
-            pharmaceutical manufacturing to agriculture and water treatment.{" "}
-            <br /> We focus on quality assurance, regulatory compliance, and
-            consistent supply, working only with certified global producers.{" "}
-            <br />
-            Each shipment is handled with care — from documentation (MSDS, COA)
-            to packaging and delivery — ensuring our clients receive chemicals
-            that meet both international safety and performance standards.
+            Looking for corporate gifts that align with your sustainability
+            values? Our premium collection of eco-friendly products features
+            everything from bamboo desk organizers and recycled paper notebooks
+            to solar-powered chargers and reusable bamboo cutlery sets. Each
+            item is carefully selected to demonstrate your commitment to
+            environmental responsibility while making a lasting impression on
+            your clients, partners, and employees. Whether you need sustainable
+            office accessories for client appreciation or eco-conscious products
+            for corporate events, we've got you covered with the finest
+            selection across Dubai and the UAE.
           </>
         }
       />
       <ProductGrid
-        title="Our Product Range"
-        productType="chemicalsandadditives"
-        id="chemicals-and-additives"
+        title="Explore Our Collection of Eco-Friendly Corporate Gifts"
+        productType="custom"
+        products={ecoFriendlyItems}
+        id="eco-friendly"
       />
       <WhyChooseUs features={ecoFriendlyFeatures} />
       <CallToAction
-        title="Partner With a Certified Chemical Supplier in Oman"
-        subtitle="From food additives and pharma-grade compounds to industrial and water-treatment chemicals, Leading Network LLC ensures safe sourcing, reliable delivery, and full compliance every time."
+        title="Your Trusted Partner for Eco-Friendly Corporate Gifts in Dubai"
+        subtitle="From sustainable bamboo products to reusable accessories, we deliver premium quality eco-friendly corporate gifts that strengthen relationships, elevate your brand presence, and demonstrate your commitment to environmental responsibility."
         backgroundImageUrl={EcoFriendlyImage}
         buttons={[
           {
             text: "Contact Our Team",
             className:
               "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker!",
-              link: "/contact-us",
+            link: "/contact-us",
           },
           {
-            text: "Explore Product Calagories",
+            text: "Explore Product Categories",
             className:
               "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-textcolor! text-textcolor! font-tanker!",
-              link: "/products",
+            link: "/products",
           },
         ]}
       />
     </div>
   );
-}
+};
 
 export default EcoFriendly;

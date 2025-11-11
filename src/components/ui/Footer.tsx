@@ -227,9 +227,49 @@ const Footer = () => {
               {/* Products */}
               <div className="col-span-2 sm:col-span-1">
                 <h3 className="text-[#499F68] text-2xl underline underline-offset-4 decoration-[#499F68] decoration-1 font-tanker">
-                  Our Products
+                  Product Categories
                 </h3>
                 <ul className="text-bg text-xl font-tanker mt-5">
+                  <Link to="/products/premium-gift-sets">
+                    <motion.li
+                      className="footer-link group relative flex items-center cursor-pointer"
+                      whileHover={{ x: 8 }}
+                      whileTap={{ scale: 0.96 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                    >
+                      <span className="relative inline-block transition-colors">
+                        Premium gift sets
+                        <span className="absolute left-0 -bottom-0.5 h-px bg-[#499F68] w-0 group-hover:w-full transition-all duration-300"></span>
+                      </span>
+                      <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        →
+                      </span>
+                    </motion.li>
+                  </Link>
+                  <Link to="/products/luxury-corporate-gifts">
+                    <motion.li
+                      className="footer-link group relative flex items-center cursor-pointer"
+                      whileHover={{ x: 8 }}
+                      whileTap={{ scale: 0.96 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                    >
+                      <span className="relative inline-block transition-colors">
+                        Luxury corporate gifts
+                        <span className="absolute left-0 -bottom-0.5 h-px bg-[#499F68] w-0 group-hover:w-full transition-all duration-300"></span>
+                      </span>
+                      <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        →
+                      </span>
+                    </motion.li>
+                  </Link>
                   <Link to="/products/apparel-and-accessories">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
@@ -370,46 +410,6 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/products/premium-gift-sets">
-                    <motion.li
-                      className="footer-link group relative flex items-center cursor-pointer"
-                      whileHover={{ x: 8 }}
-                      whileTap={{ scale: 0.96 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      }}
-                    >
-                      <span className="relative inline-block transition-colors">
-                        Premium gift sets
-                        <span className="absolute left-0 -bottom-0.5 h-px bg-[#499F68] w-0 group-hover:w-full transition-all duration-300"></span>
-                      </span>
-                      <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                        →
-                      </span>
-                    </motion.li>
-                  </Link>
-                  <Link to="/products/luxury-corporate-gifts">
-                    <motion.li
-                      className="footer-link group relative flex items-center cursor-pointer"
-                      whileHover={{ x: 8 }}
-                      whileTap={{ scale: 0.96 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 20,
-                      }}
-                    >
-                      <span className="relative inline-block transition-colors">
-                        Luxury corporate gifts
-                        <span className="absolute left-0 -bottom-0.5 h-px bg-[#499F68] w-0 group-hover:w-full transition-all duration-300"></span>
-                      </span>
-                      <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                        →
-                      </span>
-                    </motion.li>
-                  </Link>
                 </ul>
               </div>
 
@@ -479,7 +479,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="mailto:info@leadingnetworkllc.com">
+                  <Link to="mailto:amit@baharnani.com">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}

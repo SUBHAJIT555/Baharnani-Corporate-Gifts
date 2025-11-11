@@ -12,9 +12,9 @@ const CookiePolicy = () => {
   return (
     <div>
       <CommonHero
-        title="Cookie Policy "
+        title="Cookie Policy"
         titlesuffix=""
-        subtitle="This Cookie Policy explains how Leading Network LLC uses cookies and similar tracking technologies on our website. By continuing to browse or use our Website, you consent to the use of cookies as described below."
+        subtitle="This Cookie Policy explains how Baharnani Advertising L.L.C uses cookies and similar tracking technologies on our website. By continuing to browse or use our Website, you consent to the use of cookies as described below."
         imageUrl="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg"
         buttonLink="#"
         buttonText="Get in Touch"
@@ -29,30 +29,26 @@ const CookiePolicy = () => {
         <div className="prose prose-lg max-w-none">
           {/* Last Updated */}
           <p className="text-sm md:text-base text-textcolor/70 font-switzer mb-8">
-            <strong>Last Updated:</strong>{" "}
-            {new Date().toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            <strong>Last Updated:</strong> September 16, 2024
           </p>
 
           {/* Section 1: Introduction */}
           <section className="mb-10 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-tanker text-textcolor mb-4 md:mb-6">
-              1. Introduction
+              1. INTRODUCTION
             </h2>
             <p className="text-base md:text-lg font-switzer text-textcolor leading-relaxed mb-4">
               This <strong>Cookie Policy</strong> explains how{" "}
-              <strong>Leading Network LLC</strong> ("we", "our", or "us") uses
-              cookies and similar tracking technologies on our website{" "}
+              <strong>Baharnani Advertising L.L.C</strong> ("we", "our", or
+              "us") uses cookies and similar tracking technologies on our
+              website{" "}
               <a
-                href="http://www.leadingnetworkllc.com"
+                href="https://corporategiftsdubaii.ae"
                 className="text-primary hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                www.leadingnetworkllc.com
+                https://corporategiftsdubaii.ae
               </a>{" "}
               ("Website").
             </p>
@@ -69,7 +65,7 @@ const CookiePolicy = () => {
           {/* Section 2: What Are Cookies */}
           <section className="mb-10 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-tanker text-textcolor mb-4 md:mb-6">
-              2. What Are Cookies
+              2. WHAT ARE COOKIES
             </h2>
             <p className="text-base md:text-lg font-switzer text-textcolor leading-relaxed mb-4">
               Cookies are small text files stored on your device (computer,
@@ -84,7 +80,7 @@ const CookiePolicy = () => {
           {/* Section 3: Types of Cookies We Use */}
           <section className="mb-10 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-tanker text-textcolor mb-4 md:mb-6">
-              3. Types of Cookies We Use
+              3. TYPES OF COOKIES WE USE
             </h2>
 
             <div className="mb-6">
@@ -145,7 +141,7 @@ const CookiePolicy = () => {
           {/* Section 4: Managing or Disabling Cookies */}
           <section className="mb-10 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-tanker text-textcolor mb-4 md:mb-6">
-              4. Managing or Disabling Cookies
+              4. MANAGING OR DISABLING COOKIES
             </h2>
             <p className="text-base md:text-lg font-switzer text-textcolor leading-relaxed mb-4">
               You can control cookie behavior through your browser settings:
@@ -175,7 +171,7 @@ const CookiePolicy = () => {
           {/* Section 5: Third-Party Tools and Services */}
           <section className="mb-10 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-tanker text-textcolor mb-4 md:mb-6">
-              5. Third-Party Tools and Services
+              5. THIRD-PARTY TOOLS AND SERVICES
             </h2>
             <p className="text-base md:text-lg font-switzer text-textcolor leading-relaxed mb-4">
               We may integrate analytics, advertising, or embedded services that
@@ -205,7 +201,7 @@ const CookiePolicy = () => {
           {/* Section 6: Updates to This Policy */}
           <section className="mb-10 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-tanker text-textcolor mb-4 md:mb-6">
-              6. Updates to This Policy
+              6. UPDATES TO THIS POLICY
             </h2>
             <p className="text-base md:text-lg font-switzer text-textcolor leading-relaxed mb-4">
               We may revise this Cookie Policy periodically to reflect changes
@@ -224,7 +220,7 @@ const CookiePolicy = () => {
           {/* Section 7: Contact Us */}
           <section className="mb-10 md:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-tanker text-textcolor mb-4 md:mb-6">
-              7. Contact Us
+              7. CONTACT US
             </h2>
             <p className="text-base md:text-lg font-switzer text-textcolor leading-relaxed mb-6">
               For any questions regarding our Cookie Policy or data practices,
@@ -232,22 +228,34 @@ const CookiePolicy = () => {
             </p>
             <div className="bg-bg border border-textcolor border-dashed rounded-lg p-6 md:p-8">
               <p className="text-lg md:text-xl font-tanker text-textcolor mb-4">
-                Leading Network LLC
+                Baharnani Advertising L.L.C
               </p>
               <p className="text-base md:text-lg font-switzer text-textcolor mb-2">
-                Muscat, Sultanate of Oman
+                Al Quoz – Al Quoz 3 – Dubai
               </p>
               <p className="text-base md:text-lg font-switzer text-textcolor mb-2">
-                📧 <strong>Email:</strong>{" "}
+                Dubai, إمارة دبيّ 49757
+              </p>
+              <p className="text-base md:text-lg font-switzer text-textcolor mb-2">
+                United Arab Emirates
+              </p>
+              <p className="text-base md:text-lg font-switzer text-textcolor mb-2">
+                📞 <strong>Phone:</strong>{" "}
                 <a
-                  href="mailto:info@leadingnetworkllc.com"
+                  href="tel:+97143805587"
                   className="text-primary hover:underline"
                 >
-                  info@leadingnetworkllc.com
+                  (+971)43805587
                 </a>
               </p>
               <p className="text-base md:text-lg font-switzer text-textcolor">
-                📞 <strong>Phone:</strong> +968 XX XXX XXXX
+                📧 <strong>Email:</strong>{" "}
+                <a
+                  href="mailto:info@baharnani.com"
+                  className="text-primary hover:underline"
+                >
+                  info@baharnani.com
+                </a>
               </p>
             </div>
           </section>

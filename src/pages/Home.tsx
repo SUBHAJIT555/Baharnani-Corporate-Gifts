@@ -184,18 +184,18 @@ const Home = () => {
         subtitle="Get answers to common questions about our products and services"
       />
       <CallToAction
-        title="Partner With a Leading Trading Company in Oman"
-        subtitle="From construction and chemicals to food and IT — Leading Network LLC is your one-stop trading partner for reliable supply and sustainable growth."
-        backgroundImageUrl="https://images.pexels.com/photos/17485710/pexels-photo-17485710.png"
+        title="Ready to Elevate Your Corporate Gifting?"
+        subtitle="Partner with Baharnani Advertising, Dubai's premier corporate gift supplier. From premium gift sets to custom branding solutions, we help you make lasting impressions that strengthen business relationships."
+        backgroundImageUrl="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&q=80"
         buttons={[
           {
-            text: "Contact Us",
+            text: "Get Quote",
             className:
               "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker!",
             link: "/contact-us",
           },
           {
-            text: "Explore Products",
+            text: "View Products",
             className:
               "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-textcolor! text-textcolor! font-tanker!",
             link: "/products",

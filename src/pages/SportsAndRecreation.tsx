@@ -2,60 +2,72 @@ import CommonHero from "../components/ui/CommonHero";
 import OverView from "../components/OverView";
 import ProductGrid from "../components/ProductGrid";
 import WhyChooseUs from "../components/WhyChooseUs";
-
-import { type FeatureCard } from "../components/WhyChooseUs";
-import { Shield, Wrench, Package, Users, Zap, HeadphonesIcon } from "lucide-react";
+import type { FeatureCard } from "../components/WhyChooseUs";
+import { Dumbbell, Trophy, Activity, Target, Heart, Gift } from "lucide-react";
 import CallToAction from "../components/CallToAction";
+import { giftItems } from "../data/giftItems";
 
-// images 
+// images
 import SportsAndRecreationImage from "../assets/images/Hero-images/Home-hero-Contact.webp";
+
+// Filter sports and recreation items from giftItems
+const sportsAndRecreationItems = giftItems.filter(
+  (item) => item.category === "Sports and recreation"
+);
+
 const sportsAndRecreationFeatures: FeatureCard[] = [
   {
     id: 1,
     number: "01",
-    title: "Authorized Partnerships",
-    description: "Official reseller and distributor of major tech brands.",
-    icon: <Shield size={32} />,
+    title: "Premium Quality Sports Equipment",
+    description:
+      "From fitness trackers to yoga mats, we offer high-quality sports and recreation products perfect for corporate wellness programs and employee recognition.",
+    icon: <Dumbbell size={32} />,
     iconColor: "#4CAF50",
   },
   {
     id: 2,
     number: "02",
-    title: "Turnkey Projects",
-    description: "Supply, installation, and after-sales warranty support included.",
-    icon: <Wrench size={32} />,
+    title: "Custom Branding Options",
+    description:
+      "Personalize your corporate gifts with custom logo printing, embroidery, and branded packaging to strengthen your brand identity with every activity.",
+    icon: <Trophy size={32} />,
     iconColor: "#FF6B6B",
   },
   {
     id: 3,
     number: "03",
-    title: "Flexible Supply Models",
-    description: "B2B, institutional, and project-based orders accepted.",
-    icon: <Package size={32} />,
+    title: "Wide Range of Products",
+    description:
+      "Explore our collection of fitness trackers, yoga mats, golf sets, tennis rackets, gym bags, and resistance bands that make perfect corporate gifts.",
+    icon: <Activity size={32} />,
     iconColor: "#FF9800",
   },
   {
     id: 4,
     number: "04",
-    title: "Technical Expertise",
-    description: "Dedicated IT professionals for configuration and integration.",
-    icon: <Users size={32} />,
+    title: "Perfect for Wellness Programs",
+    description:
+      "Whether it's employee wellness initiatives, corporate sports events, or team building activities, our sports products suit every occasion.",
+    icon: <Heart size={32} />,
     iconColor: "#8BC34A",
   },
   {
     id: 5,
     number: "05",
-    title: "Fast Delivery",
-    description: "Stock availability for immediate dispatch within Oman.",
-    icon: <Zap size={32} />,
+    title: "Flexible Ordering",
+    description:
+      "From individual gifts to bulk orders, we accommodate orders of all sizes with reliable delivery across Dubai and the UAE.",
+    icon: <Target size={32} />,
     iconColor: "#3F3F9F",
   },
   {
     id: 6,
     number: "06",
-    title: "After-Sales Service",
-    description: "Warranty management and support for hardware replacements.",
-    icon: <HeadphonesIcon size={32} />,
+    title: "Trusted Quality",
+    description:
+      "Sourced from premium suppliers, our sports and recreation products combine quality, durability, and elegant presentation for lasting impressions.",
+    icon: <Gift size={32} />,
     iconColor: "#2196F3",
   },
 ];
@@ -64,50 +76,56 @@ const SportsAndRecreation = () => {
   return (
     <div>
       <CommonHero
-        title="Innovative Electronics & IT Solutions for Modern Businesses"
+        title="Premium Sports & Recreation Products for Corporate Gifting in Dubai"
         titlesuffix=""
-        subtitle="Leading Network LLC delivers cutting-edge technology hardware, networking solutions, and smart systems designed to empower corporate, educational, and industrial sectors across Oman and the GCC."
+        subtitle="Discover our exclusive collection of high-quality sports equipment and recreational items, perfect for corporate gifts, employee wellness programs, and team building activities."
         imageUrl={SportsAndRecreationImage}
-        buttonLink="#electronics-and-it"
-        buttonText="Explore Electronics & IT Solutions"
+        buttonLink="#sports-recreation"
+        buttonText="Shop Sports & Recreation"
       />
       <OverView
         content={
           <>
-            Our Electronics & IT division connects organizations with reliable
-            hardware, smart devices, and digital display systems that enhance
-            efficiency, communication, and security. <br /> We supply products
-            from top global brands, providing complete support — from
-            procurement and installation to after-sales service and warranty
-            management. <br /> Whether it’s setting up a smart office, securing
-            a warehouse, or building a digital signage network, Leading Network
-            LLC delivers quality technology on time and within budget.
+            Looking for the perfect corporate gift that promotes health,
+            wellness, and active living? Our premium collection of sports and
+            recreation products features everything from fitness trackers and
+            yoga mats to golf sets and tennis rackets. Each item is carefully
+            selected to encourage an active lifestyle while making a lasting
+            impression on your clients, partners, and employees. Whether you
+            need branded fitness equipment for wellness programs or
+            sophisticated sports accessories for corporate events, we've got you
+            covered with the finest selection across Dubai and the UAE.
           </>
         }
       />
-      <ProductGrid title="Our Product Range" productType="electronicsandit" id="electronics-and-it" />
+      <ProductGrid
+        title="Explore Our Collection of Sports & Recreation Products"
+        productType="custom"
+        products={sportsAndRecreationItems}
+        id="sports-recreation"
+      />
       <WhyChooseUs features={sportsAndRecreationFeatures} />
       <CallToAction
-        title="Empower Your Business with Reliable Technology"
-        subtitle="From computers and networking systems to CCTV and smart solutions, Leading Network LLC ensures that every product delivers performance, reliability, and long-term value."
+        title="Your Trusted Partner for Corporate Sports & Recreation Gifts in Dubai"
+        subtitle="From custom-branded fitness equipment to premium sports accessories, we deliver high-quality products that promote wellness, strengthen relationships, and elevate your brand presence."
         backgroundImageUrl={SportsAndRecreationImage}
         buttons={[
           {
             text: "Contact Our Team",
             className:
               "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker!",
-              link: "/contact-us",
+            link: "/contact-us",
           },
           {
-            text: "Explore Product Calagories",
+            text: "Explore Product Categories",
             className:
               "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-textcolor! text-textcolor! font-tanker!",
-              link: "/products",
+            link: "/products",
           },
         ]}
       />
     </div>
   );
-}
+};
 
 export default SportsAndRecreation;

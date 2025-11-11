@@ -128,10 +128,10 @@ const ContactDetails = () => {
           variants={fadeInUp}
           className="text-lg text-textcolor md:text-xl font-switzer font-medium mb-10 max-w-3xl"
         >
-          We're here to help you with your construction materials, foodstuff,
-          chemicals, electronics, oil products, and contracting services. Reach
-          out to our team for personalized solutions tailored to your business
-          needs.
+          We're here to help you with premium corporate gifts, customized
+          promotional items, luxury gift sets, and personalized branding
+          solutions. Reach out to our team for creative concepts and superior
+          quality products tailored to your business needs.
         </motion.p>
 
         {/* Left-Right Layout: Form & Contact Info (Reversed) */}
@@ -352,7 +352,7 @@ const ContactDetails = () => {
                       >
                         I agree with the{" "}
                         <a
-                          href="#"
+                          href="/privacy-policy"
                           className="underline underline-offset-2 decoration-1 decoration-highlighttext"
                         >
                           Privacy Policy
@@ -402,15 +402,21 @@ const ContactDetails = () => {
                   <div className="shrink-0 mt-1">
                     <FaEnvelope className="text-textcolor text-xl" />
                   </div>
-                  <div>
+                  <div className="flex flex-col gap-2">
                     <p className="text-textcolor font-tanker font-medium mb-1">
                       Email
                     </p>
                     <a
-                      href="mailto:info@leadingnetwork.om"
+                      href="mailto:amit@baharnani.com"
                       className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
                     >
-                      info@leadingnetwork.om
+                      amit@baharnani.com 
+                    </a>
+                    <a
+                      href="mailto:info@baharnani.com"
+                      className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
+                    >
+                      info@baharnani.com 
                     </a>
                   </div>
                 </motion.div>
@@ -422,15 +428,21 @@ const ContactDetails = () => {
                   <div className="shrink-0 mt-1">
                     <FaPhone className="text-textcolor text-xl" />
                   </div>
-                  <div>
+                  <div className="flex flex-col gap-2">
                     <p className="text-textcolor font-tanker font-medium mb-1">
                       Phone Number
                     </p>
                     <a
-                      href="tel:+96812345678"
+                      href="tel:+971526240517"
                       className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
                     >
-                      +968 1234 5678
+                      (+971) 52 624 0517 - WhatsApp / Phone Call
+                    </a>
+                    <a
+                      href="tel:+97143805587"
+                      className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
+                    >
+                      (+971)43805587 - Landline
                     </a>
                   </div>
                 </motion.div>
@@ -447,8 +459,8 @@ const ContactDetails = () => {
                       Address
                     </p>
                     <p className="text-textcolor font-switzer">
-                      Leading Network LLC, Muscat -Sultanate of Oman, P.O. Box :
-                      415, Postal Code : 112
+                      Baharnani Advertising L.L.C, Al Quoz – Al Quoz 3 – Dubai,
+                      Dubai, إمارة دبيّ 49757, United Arab Emirates
                     </p>
                   </div>
                 </motion.div>
@@ -488,7 +500,7 @@ const ContactDetails = () => {
                       <FaFacebookF className="text-2xl" />
                     </motion.a>
                     <motion.a
-                      href="https://wa.me/96812345678"
+                      href="https://wa.me/97143805587"
                       target="_blank"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
@@ -516,10 +528,10 @@ const ContactDetails = () => {
               Our Address :
             </h3>
             <p className="text-lg text-textcolor font-switzer font-medium">
-              Leading Network LLC <br />
-              Muscat - Sultanate of Oman <br />
-              P.O. Box : 415,
-               Postal Code : 112
+              Baharnani Advertising L.L.C <br />
+              Al Quoz – Al Quoz 3 – Dubai <br />
+              Dubai, إمارة دبيّ 49757 <br />
+              United Arab Emirates
             </p>
           </div>
           <motion.div
@@ -531,7 +543,7 @@ const ContactDetails = () => {
           >
             <iframe
               className="rounded-2xl border-2 border-textcolor"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.2573929!2d58.4059!3d23.5859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDM1JzA5LjMiTiA1OMKwMjQnMjEuMiJF!5e0!3m2!1sen!2som!4v1703837058988!5m2!1sen!2som"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.2573929!2d55.2318626!3d25.1626598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f69c4ae8eb43b:0x34670daac58a6f22!2sBaharnani%20Advertising%20LLC%20-%20Corporate%20gifts%20Company%20Dubai%20%7C%20Exhibition%20stand%20Contractors%20Dubai!5e0!3m2!1sen!2som!4v1703837058988!5m2!1sen!2som"
               style={{
                 height: "100%",
                 width: "100%",
@@ -545,7 +557,6 @@ const ContactDetails = () => {
           </motion.div>
         </motion.div>
       </div>
-      
     </div>
   );
 };
