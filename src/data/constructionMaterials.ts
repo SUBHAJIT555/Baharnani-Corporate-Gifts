@@ -22,18 +22,11 @@ import PrecastConcreteElements from "../assets/images/Construction-Materials-pro
 import SteelWireRope from "../assets/images/Construction-Materials-products-images/Steel Wire Rope.webp";
 import GravelCrushedStone from "../assets/images/Construction-Materials-products-images/Gravel & Crushed Stone.webp";
 import FormworkPlywood from "../assets/images/Construction-Materials-products-images/Formwork Plywood.webp";
+import type { Product } from "../services/api";
 
-export interface Product {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-}
-
-export const constructionMaterials: Product[] = [
+export const constructionMaterials = [
   {
-    id: "1",
+    id: 1,
     title: "Portland Cement Type I",
     description:
       "High-quality ordinary Portland cement suitable for general construction purposes. Meets ASTM C150 standards.",

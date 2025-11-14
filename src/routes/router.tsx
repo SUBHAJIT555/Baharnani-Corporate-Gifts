@@ -17,6 +17,8 @@ import PrivacyPolicy from "../pages/PrivacyPolicy";
 import TermsAndConditions from "../pages/TermsAndConditions";
 import CookiePolicy from "../pages/CookiePolicy";
 import LuxuryCorporateGifts from "../pages/LuxuryCorporateGifts";
+import Shop from "../pages/Shop";
+import ThankYou from "../pages/ThankYou";
 
 
 export const router = createBrowserRouter([
@@ -26,50 +28,55 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/about-us", element: <About /> },
+      { path: "/shop", element: <Shop /> },
       {
         path: "/products",
         element: <Product />,
       },
       {
-        path: "/products/apparel-and-accessories",
+        path: "/product-category/apparel-and-accessories",
         element: <ApparelAndAccessories />,
       },
       {
-        path: "/products/bags-and-travel",
+        path: "/product-category/bags-and-travel",
         element: <BagsAndTravels />,
       },
       {
-        path: "/products/office-and-stationary",
+        path: "/product-category/office-and-stationary",
         element: <OfficeAndStationary />,
       },
 
       {
-        path: "/products/technology-and-accessories",
+        path: "/product-category/technology-and-accessories",
         element: <TechnologyAndAccessories />,
       },
       {
-        path: "/products/eating-and-drinking",
+        path: "/product-category/eating-and-drinking",
         element: <EatingAndDrinking />,
       },
       {
-        path: "/products/sports-and-recreation",
+        path: "/product-category/sports-and-recreation",
         element: <SportsAndRecreation />,
       },
       {
-        path: "/products/eco-friendly",
+        path: "/product-category/eco-friendly",
         element: <EcoFriendly />,
       },
       {
-        path: "/products/premium-gift-sets",
+        path: "/product-category/gift-sets",
         element: <GiftSet />,
       },
       {
-        path: "/products/luxury-corporate-gifts",
+        path: "/product-category/luxury-corporate-gifts",
         element: <LuxuryCorporateGifts />,
       },
       {
         path: "/quote",
         element: <Quote />,
+      },
+      {
+        path: "/thank-you",
+        element: <ThankYou />,
       },
       {
         path: "/contact-us",

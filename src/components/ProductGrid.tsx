@@ -1,54 +1,49 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  constructionMaterials,
-  type Product,
-} from "../data/constructionMaterials";
-import { foodstuff } from "../data/foodstuff";
-import { buildingMaterials } from "../data/buildingmaterials";
+import type { Product, ProductCategory } from "../services/api";
 import { useQuote } from "../contexts/QuoteContext";
-import { contractingServices } from "../data/contracting";
-import { importExportServices } from "../data/importandexport";
-import { electronicsandit } from "../data/electronicsandit";
-import { chemicalsandadditives } from "../data/chemicalsandadditives";
-import { oilproducts } from "../data/oilproducts";
-import { bestSellingItems } from "../data/bestselling";
 import { FiFilter } from "react-icons/fi";
 import { ImCross } from "react-icons/im";
 import { IoArrowForwardOutline } from "react-icons/io5";
+import { cn } from "../lib/utilts";
+
 
 interface ProductGridProps {
-  products?: Product[];
-  categoryFilter?: string;
+  products: Product[];
+  categories: ProductCategory[];
   title?: string;
+  isLoading: boolean;
+  error: Error | null;
   subtitle?: string;
+  selectedCategory?: number | null;
+  setSelectedCategory?: (category: number | null) => void;
   productType?:
-    | "construction"
-    | "foodstuff"
-    | "building"
-    | "contracting"
-    | "importandexport"
-    | "electronicsandit"
-    | "chemicalsandadditives"
-    | "bestsellingitems"
-    | "oilproducts"
-    | "custom";
-    
+  | "construction"
+  | "foodstuff"
+  | "building"
+  | "contracting"
+  | "importandexport"
+  | "electronicsandit"
+  | "chemicalsandadditives"
+  | "bestsellingitems"
+  | "oilproducts"
+  | "custom";
+
   id?: string;
 }
 
 const ProductGrid = ({
   products,
-  categoryFilter,
-  title = "Our Products ",
+  categories,
+  isLoading,
+  error,
+  title,
   subtitle,
-  productType = "custom",
+  selectedCategory,
+  setSelectedCategory,
   id,
 }: ProductGridProps) => {
   const { addToQuote, isInQuote } = useQuote();
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(
-    categoryFilter || null
-  );
   const [showFloatingFilter, setShowFloatingFilter] = useState(false);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -57,11 +52,11 @@ const ProductGrid = ({
   const lastScrollY = useRef(0);
 
   // Update selected category when categoryFilter prop changes
-  useEffect(() => {
-    if (categoryFilter !== undefined) {
-      setSelectedCategory(categoryFilter || null);
-    }
-  }, [categoryFilter]);
+  // useEffect(() => {
+  //   if (categoryFilter !== undefined) {
+  //     setSelectedCategory(categoryFilter as unknown as number | null);
+  //   }
+  // }, [categoryFilter]);
 
   // Handle scroll to show/hide floating filter button
   useEffect(() => {
@@ -105,51 +100,51 @@ const ProductGrid = ({
   }, []);
 
   // Get products based on productType
-  const getProducts = (): Product[] => {
-    // If products prop is provided, use it (highest priority)
-    if (products) {
-      return products;
-    }
+  // const getProducts = (): Product[] => {
+  //   // If products prop is provided, use it (highest priority)
+  //   if (products) {
+  //     return products;
+  //   }
 
-    // Otherwise, use productType to determine which dataset to use
-    switch (productType) {
-      case "construction":
-        return constructionMaterials;
-      case "foodstuff":
-        return foodstuff;
-      case "building":
-        return buildingMaterials;
-      case "custom":
-      case "contracting":
-        return contractingServices;
-      case "importandexport":
-        return importExportServices;
-      case "electronicsandit":
-        return electronicsandit;
-      case "chemicalsandadditives":
-        return chemicalsandadditives;
-      case "oilproducts":
-        return oilproducts;
-      case "bestsellingitems":
-        return bestSellingItems;
-      default:
-        // If custom type but no products provided, return empty array
-        // This allows for future product types to be added easily
-        return [];
-    }
-  };
+  //   // Otherwise, use productType to determine which dataset to use
+  //   // switch (productType) {
+  //   //   case "construction":
+  //   //     return constructionMaterials;
+  //   //   case "foodstuff":
+  //   //     return foodstuff;
+  //   //   case "building":
+  //   //     return buildingMaterials;
+  //   //   case "custom":
+  //   //   case "contracting":
+  //   //     return contractingServices;
+  //   //   case "importandexport":
+  //   //     return importExportServices;
+  //   //   case "electronicsandit":
+  //   //     return electronicsandit;
+  //   //   case "chemicalsandadditives":
+  //   //     return chemicalsandadditives;
+  //   //   case "oilproducts":
+  //   //     return oilproducts;
+  //   //   case "bestsellingitems":
+  //   //     return bestSellingItems;
+  //   //   default:
+  //   //     // If custom type but no products provided, return empty array
+  //   //     // This allows for future product types to be added easily
+  //   //     return [];
+  //   // }
+  // };
 
-  const allProducts = getProducts();
+  // const allProducts = getProducts();
 
   // Get unique categories from products
-  const categories = Array.from(
-    new Set(allProducts.map((product) => product.category))
-  ).sort();
+  // const categories = Array.from(
+  //   new Set(allProducts.map((product) => product.category))
+  // ).sort();
 
   // Filter products by selected category
-  const filteredProducts = selectedCategory
-    ? allProducts.filter((product) => product.category === selectedCategory)
-    : allProducts;
+  // const filteredProducts = selectedCategory
+  //   ? allProducts.filter((product) => product.category === selectedCategory)
+  //   : allProducts;
 
   const handleAddToQuote = (product: Product, e?: React.MouseEvent) => {
     e?.stopPropagation(); // Prevent card click when clicking button
@@ -169,8 +164,8 @@ const ProductGrid = ({
     setTimeout(() => setSelectedProduct(null), 300);
   };
 
-  const handleCategoryFilter = (category: string | null) => {
-    setSelectedCategory(category);
+  const handleCategoryFilter = (category: number | null) => {
+    setSelectedCategory?.(category);
     // Close bottom sheet after selection on mobile
     if (window.innerWidth < 1024) {
       setIsBottomSheetOpen(false);
@@ -191,20 +186,20 @@ const ProductGrid = ({
     category,
     isAll = false,
   }: {
-    category: string | null;
+    category: ProductCategory | null;
     isAll?: boolean;
   }) => (
     <button
-      onClick={() => handleCategoryFilter(category)}
-      className={`px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-md font-switzer font-medium text-sm sm:text-base transition-all duration-200 whitespace-nowrap ${
-        selectedCategory === category
-          ? "bg-textcolor text-white shadow-md"
-          : "bg-gray-200 text-textcolor hover:bg-gray-300"
-      }`}
+      onClick={() => handleCategoryFilter(category?.id || null)}
+      className={cn(`px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-md font-switzer font-medium text-sm sm:text-base transition-all duration-200 whitespace-nowrap bg-gray-200 text-textcolor hover:bg-gray-300`, selectedCategory === category?.id || selectedCategory === null && isAll
+        ? "bg-textcolor text-white shadow-md"
+        : "bg-gray-200 text-textcolor hover:bg-gray-300"
+      )}
     >
-      {isAll ? "All" : category}
+      {isAll ? "All" : category?.name}
     </button>
   );
+
 
   return (
     <section
@@ -223,15 +218,15 @@ const ProductGrid = ({
           </p>
         )}
 
-        {/* Desktop Filter - Flex Wrap (lg and above) */}
-        {categories.length > 0 && (
+        {/* Desktop Filter-Flex Wrap (lg and above) */}
+        {categories && categories.length > 0 && (
           <>
             {/* Desktop Filter Buttons */}
             <div className="hidden lg:block mb-6 sm:mb-8 md:mb-10">
               <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
                 <FilterButton category={null} isAll />
                 {categories.map((category) => (
-                  <FilterButton key={category} category={category} />
+                  <FilterButton key={category.id} category={category} />
                 ))}
               </div>
             </div>
@@ -242,7 +237,7 @@ const ProductGrid = ({
                 <div className="flex gap-2 sm:gap-3 min-w-max">
                   <FilterButton category={null} isAll />
                   {categories.map((category) => (
-                    <FilterButton key={category} category={category} />
+                    <FilterButton key={category.id} category={category} />
                   ))}
                 </div>
               </div>
@@ -250,9 +245,9 @@ const ProductGrid = ({
           </>
         )}
 
-        {/* Floating Filter Button - Appears when scrolling on all screen sizes */}
+        {/* Floating Filter Button-Appears when scrolling on all screen sizes */}
         <AnimatePresence>
-          {showFloatingFilter && categories.length > 0 && (
+          {showFloatingFilter && categories && categories.length > 0 && (
             <motion.button
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -338,25 +333,23 @@ const ProductGrid = ({
                     <div className="flex flex-col gap-3">
                       <button
                         onClick={() => handleCategoryFilter(null)}
-                        className={`w-full px-5 py-3.5 rounded-lg font-switzer font-medium text-left transition-all duration-200 ${
-                          selectedCategory === null
-                            ? "bg-textcolor text-white shadow-md"
-                            : "bg-gray-100 text-textcolor hover:bg-gray-200"
-                        }`}
+                        className={`w-full px-5 py-3.5 rounded-lg font-switzer font-medium text-left transition-all duration-200 ${selectedCategory === null
+                          ? "bg-textcolor text-white shadow-md"
+                          : "bg-gray-100 text-textcolor hover:bg-gray-200"
+                          } `}
                       >
                         All Categories
                       </button>
-                      {categories.map((category) => (
+                      {categories && categories.map((category) => (
                         <button
-                          key={category}
-                          onClick={() => handleCategoryFilter(category)}
-                          className={`w-full px-5 py-3.5 rounded-lg font-switzer font-medium text-left transition-all duration-200 ${
-                            selectedCategory === category
-                              ? "bg-textcolor text-white shadow-md"
-                              : "bg-gray-100 text-textcolor hover:bg-gray-200"
-                          }`}
+                          key={category.id}
+                          onClick={() => handleCategoryFilter(category.id)}
+                          className={`w-full px-5 py-3.5 rounded-lg font-switzer font-medium text-left transition-all duration-200 ${selectedCategory === category.id
+                            ? "bg-textcolor text-white shadow-md"
+                            : "bg-gray-100 text-textcolor hover:bg-gray-200"
+                            } `}
                         >
-                          {category}
+                          {category.name}
                         </button>
                       ))}
                     </div>
@@ -367,53 +360,57 @@ const ProductGrid = ({
           )}
         </AnimatePresence>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-5 md:gap-6">
-          {filteredProducts.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              onClick={() => handleProductClick(product)}
-              className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col cursor-pointer"
-            >
-              {/* Product Image */}
-              <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-200">
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+        {isLoading ? (<div>Loading...</div>) : (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-5 md:gap-6">
+            {products?.map((product, index) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                onClick={() => handleProductClick(product)}
+                className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col cursor-pointer"
+              >
+                {/* Product Image */}
+                <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-200">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-              {/* Product Content */}
-              <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
-                {/* Category Badge */}
-                <span className="text-xs sm:text-sm font-switzer text-textcolor/60 mb-2 uppercase tracking-wide">
-                  {product.category}
-                </span>
+                {/* Product Content */}
+                <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
+                  {/* Category Badge */}
+                  <span className="text-xs sm:text-sm font-switzer text-textcolor/60 mb-2 uppercase tracking-wide">
+                    {/* {product.category?.name} */}
+                  </span>
 
-                {/* Product Title */}
-                <h3 className="text-lg sm:text-xl md:text-2xl font-tanker text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
-                  {product.title}
-                </h3>
+                  {/* Product Title */}
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-tanker text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
+                    {product.name}
+                  </h3>
 
-                {/* Add to Quote Button */}
-                <button
-                  disabled={isInQuote(product.id)}
-                  className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${
-                    isInQuote(product.id)
+                  {/* Add to Quote Button */}
+                  <button
+                    disabled={isInQuote(product.id)}
+                    className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(product.id)
                       ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
                       : "bg-textcolor hover:bg-textcolor/70 text-white "
-                  }`}
-                  onClick={(e) => handleAddToQuote(product, e)}
-                >
-                  {isInQuote(product.id) ? "Added to Quote" : "Add to Quote"}
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                      } `}
+                    onClick={(e) => handleAddToQuote(product, e)}
+                  >
+                    {isInQuote(product.id) ? "Added to Quote" : "Add to Quote"}
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+        {error && (
+          <div>Error: {error?.message}</div>
+        )}
 
         {/* Product Detail Modal */}
         <AnimatePresence>
@@ -444,7 +441,7 @@ const ProductGrid = ({
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="w-full h-[95vh] sm:h-full sm:max-h-[90vh] max-w-6xl bg-bg  shadow-2xl overflow-hidden flex flex-col relative">
-                  {/* Close Button - Inside modal for desktop */}
+                  {/* Close Button-Inside modal for desktop */}
                   <button
                     onClick={handleCloseModal}
                     className="hidden lg:block absolute top-4 right-4 z-10 p-2.5 bg-red-500 hover:bg-textcolor rounded-full shadow-lg transition-colors"
@@ -453,14 +450,14 @@ const ProductGrid = ({
                     <ImCross className="h-6 w-6 text-bg" />
                   </button>
 
-                  {/* Modal Content - Scrollable */}
+                  {/* Modal Content-Scrollable */}
                   <div className="flex-1 overflow-y-auto">
                     <div className="flex flex-col lg:flex-row h-full">
                       {/* Image Section */}
                       <div className="w-full lg:w-1/2 h-56 sm:h-72 md:h-80 lg:h-full bg-gray-100 shrink-0">
                         <img
                           src={selectedProduct.image}
-                          alt={selectedProduct.title}
+                          alt={selectedProduct.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -469,12 +466,12 @@ const ProductGrid = ({
                       <div className="w-full lg:w-1/2 p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col pb-20 sm:pb-6 lg:pb-10">
                         {/* Category Badge */}
                         <span className="text-xs font-switzer text-textcolor mb-2 sm:mb-3 uppercase border border-textcolor/30 rounded-md w-fit p-1 bg-white tracking-wide">
-                          {selectedProduct.category}
+                          {/* {selectedProduct.category?.name} */}
                         </span>
 
                         {/* Product Title */}
                         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-tanker text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight">
-                          {selectedProduct.title}
+                          {selectedProduct.name}
                         </h2>
 
                         {/* Description/Details */}
@@ -483,7 +480,8 @@ const ProductGrid = ({
                             Product Details :
                           </h3>
                           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-switzer text-textcolor/80 leading-relaxed">
-                            {selectedProduct.description}
+                            {/* {selectedProduct.description} */}
+                            {/* {selectedProduct.description} */}
                           </p>
                         </div>
 
@@ -491,11 +489,10 @@ const ProductGrid = ({
                         <div className="hidden lg:block mt-auto">
                           <button
                             disabled={isInQuote(selectedProduct.id)}
-                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${
-                              isInQuote(selectedProduct.id)
-                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                                : "bg-textcolor hover:bg-textcolor/70 text-white"
-                            }`}
+                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${isInQuote(selectedProduct.id)
+                              ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                              : "bg-textcolor hover:bg-textcolor/70 text-white"
+                              } `}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleAddToQuote(selectedProduct, e);
@@ -514,11 +511,10 @@ const ProductGrid = ({
                   <div className="lg:hidden sticky bottom-0 left-0 right-0 bg-bg border-t border-gray-200 p-4 pt-3 shadow-lg z-10">
                     <button
                       disabled={isInQuote(selectedProduct.id)}
-                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${
-                        isInQuote(selectedProduct.id)
-                          ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                          : "bg-textcolor hover:bg-textcolor/70 text-white"
-                      }`}
+                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${isInQuote(selectedProduct.id)
+                        ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                        : "bg-textcolor hover:bg-textcolor/70 text-white"
+                        } `}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleAddToQuote(selectedProduct, e);
@@ -531,7 +527,7 @@ const ProductGrid = ({
                   </div>
                 </div>
 
-                {/* Close Button - Outside modal for mobile/tablet */}
+                {/* Close Button-Outside modal for mobile/tablet */}
                 <button
                   onClick={handleCloseModal}
                   className="lg:hidden absolute top-3 right-3 sm:top-4 sm:right-4 z-50 p-2 sm:p-2.5 bg-red-500 hover:bg-textcolor rounded-full shadow-lg transition-colors"

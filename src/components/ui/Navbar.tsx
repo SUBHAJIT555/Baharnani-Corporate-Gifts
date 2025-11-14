@@ -49,7 +49,7 @@ const Navbar = () => {
       console.log("scrollY", scrollY?.get(), scrollY?.getPrevious());
       setHidden(
         scrollY?.get() > 50 &&
-          (scrollY?.getPrevious() ?? 0) < (scrollY?.get() ?? 0)
+        (scrollY?.getPrevious() ?? 0) < (scrollY?.get() ?? 0)
       );
       setIsAtTop(scrollY.get() === 0);
       setIsScrollingDown((scrollY?.get() ?? 0) > (scrollY?.getPrevious() ?? 0));
@@ -71,7 +71,8 @@ const Navbar = () => {
     { key: 1, name: "Home", href: "/" },
     { key: 2, name: "About", href: "/about-us" },
     { key: 3, name: "Products", href: "/products", hasDropdown: true },
-    { key: 4, name: "Blog", href: "/blog" },
+    { key: 3, name: "Shop", href: "/shop" },
+    { key: 4, name: "Blog", href: "https://stagingv1.corporategiftsdubaii.ae/blog" },
     { key: 5, name: "Contact", href: "/contact-us" },
   ];
 
@@ -79,48 +80,48 @@ const Navbar = () => {
     {
       id: "1",
       title: "Premium gift sets",
-      link: "/products/premium-gift-sets",
+      link: "/product-category/premium-gift-sets",
     },
     {
       id: "2",
       title: "Luxury corporate gifts",
-      link: "/products/luxury-corporate-gifts",
+      link: "/product-category/luxury-corporate-gifts",
     },
     {
       id: "3",
       title: "Apparel and accessories",
-      link: "/products/apparel-and-accessories",
+      link: "/product-category/apparel-and-accessories",
     },
     {
       id: "4",
       title: "Bags and travel",
-      link: "/products/bags-and-travel",
+      link: "/product-category/bags-and-travel",
     },
     {
       id: "5",
       title: "Office and stationary",
-      link: "/products/office-and-stationary",
+      link: "/product-category/office-and-stationary",
     },
     {
       id: "6",
       title: "Technology and accessories",
-      link: "/products/technology-and-accessories",
+      link: "/product-category/technology-and-accessories",
     },
     {
       id: "7",
       title: "Eating and drinking",
-      link: "/products/eating-and-drinking",
+      link: "/product-category/eating-and-drinking",
     },
 
     {
       id: "8",
       title: "Sports and recreation",
-      link: "/products/sports-and-recreation",
+      link: "/product-category/sports-and-recreation",
     },
     {
       id: "9",
       title: "Eco friendly",
-      link: "/products/eco-friendly",
+      link: "/product-category/eco-friendly",
     },
   ];
 
@@ -138,22 +139,21 @@ const Navbar = () => {
             }}
             animate={hidden ? "hidden" : "visible"}
             transition={{ duration: 0.35, ease: "easeInOut" }}
-            className={`max-w-7xl mx-auto flex justify-between items-center px-5 py-4 rounded-lg mt-4 bg-[#080f0f]/20    ${
-              (isAtTop && !isMenuOpen) || isScrollingDown
-                ? "bg-transparent"
-                : "bg-[#080f0f]/20 backdrop-blur-sm shadow-md"
-            }`}
+            className={`max-w-7xl mx-auto flex justify-between items-center px-5 py-4 rounded-lg mt-4 bg-[#080f0f]/20    ${(isAtTop && !isMenuOpen) || isScrollingDown
+              ? "bg-transparent"
+              : "bg-[#080f0f]/20 backdrop-blur-sm shadow-md"
+              }`}
           >
             <div className="mr-auto">
               {/* <h1 className="text-2xl md:text-2xl lg:text-3xl font-tanker  text-[#e1e1e1] select-none">
                 Leading Network LLC
               </h1> */}
               <Link to="/">
-              <img
-                src={logo}
-                alt="Leading Network LLC"
-                className="w-40"
-              />
+                <img
+                  src={logo}
+                  alt="Leading Network LLC"
+                  className="w-40"
+                />
               </Link>
             </div>
 
@@ -222,6 +222,14 @@ const Navbar = () => {
                         )}
                       </AnimatePresence>
                     </div>
+                  ) : item.name === "Blog" ? (
+                    <a href={item.href} key={index} onClick={closeMenu}>
+                      {item.name}
+                      {/* Top border animation */}
+                      <span className="absolute top-0 left-0 w-0 h-px bg-[#499F68] transition-all duration-300 group-hover:w-full"></span>
+                      {/* Bottom border animation */}
+                      <span className="absolute bottom-0 right-0 w-0 h-px bg-[#499F68] transition-all duration-300 group-hover:w-full"></span>
+                    </a>
                   ) : (
                     <Link to={item.href} key={index} onClick={closeMenu}>
                       {item.name}

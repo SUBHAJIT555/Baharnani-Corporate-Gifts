@@ -181,7 +181,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/blog">
+                  <a href="https://stagingv1.corporategiftsdubaii.ae/blog">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}
@@ -200,7 +200,7 @@ const Footer = () => {
                         →
                       </span>
                     </motion.li>
-                  </Link>
+                  </a>
                   <Link to="/contact-us">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
@@ -230,7 +230,7 @@ const Footer = () => {
                   Product Categories
                 </h3>
                 <ul className="text-bg text-xl font-tanker mt-5">
-                  <Link to="/products/premium-gift-sets">
+                  <Link to="/product-category/premium-gift-sets">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}
@@ -250,7 +250,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/products/luxury-corporate-gifts">
+                  <Link to="/product-category/luxury-corporate-gifts">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}
@@ -270,7 +270,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/products/apparel-and-accessories">
+                  <Link to="/product-category/apparel-and-accessories">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}
@@ -290,7 +290,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/products/bags-and-travel">
+                  <Link to="/product-category/bags-and-travel">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}
@@ -310,7 +310,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/products/office-and-stationary">
+                  <Link to="/product-category/office-and-stationary">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}
@@ -330,7 +330,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/products/technology-and-accessories">
+                  <Link to="/product-category/technology-and-accessories">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}
@@ -350,7 +350,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/products/eating-and-drinking">
+                  <Link to="/product-category/eating-and-drinking">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}
@@ -370,7 +370,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/products/sports-and-recreation">
+                  <Link to="/product-category/sports-and-recreation">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}
@@ -390,7 +390,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/products/eco-friendly">
+                  <Link to="/product-category/eco-friendly">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}

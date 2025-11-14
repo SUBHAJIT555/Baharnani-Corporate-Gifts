@@ -32,7 +32,7 @@ const products: ProductCategory[] = [
       "Custom branded t-shirts, polo shirts, caps, and accessories with premium printing and embroidery.",
     image:
       ConstructionMaterialsImage,
-    link: "/products/apparel-and-accessories",
+    link: "/product-category/apparel-and-accessories",
   },
   {
     id: "2",
@@ -41,7 +41,7 @@ const products: ProductCategory[] = [
       "Personalized laptop bags, backpacks, travel kits, and luggage with custom logo printing.",
     image:
       FoodStuffImage,
-    link: "/products/bags-and-travel",
+    link: "/product-category/bags-and-travel",
   },
   {
     id: "3",
@@ -49,7 +49,7 @@ const products: ProductCategory[] = [
     description: "Branded pens, notebooks, planners, and desk accessories with laser engraving and custom printing.",
     image:
       BuildingMaterialsImage,
-    link: "/products/office-and-stationary",
+    link: "/product-category/office-and-stationary",
   },
   {
     id: "4",
@@ -57,7 +57,7 @@ const products: ProductCategory[] = [
     description: "Custom power banks, USB drives, wireless chargers, and tech gadgets with logo printing.",
     image:
       ContractingSolutionsImage,
-    link: "/products/technology-and-accessories",
+    link: "/product-category/technology-and-accessories",
   },
   {
     id: "5",
@@ -66,7 +66,7 @@ const products: ProductCategory[] = [
       "Personalized mugs, water bottles, tumblers, and drinkware with premium printing and engraving.",
     image:
       ImportExportImage,
-    link: "/products/eating-and-drinking",
+    link: "/product-category/eating-and-drinking",
   },
   {
     id: "6",
@@ -75,7 +75,7 @@ const products: ProductCategory[] = [
       "Curated luxury gift hampers and premium sets with custom packaging and branding solutions.",
     image:
       ElectronicsITImage,
-    link: "/products/premium-gift-sets",
+    link: "/product-category/premium-gift-sets",
   },
   {
     id: "7",
@@ -83,7 +83,7 @@ const products: ProductCategory[] = [
     description: "Custom sports equipment, fitness accessories, and recreational items with branded printing.",
     image:
       ChemicalsImage,
-    link: "/products/sports-and-recreation",
+    link: "/product-category/sports-and-recreation",
   },
   {
     id: "8",
@@ -91,7 +91,7 @@ const products: ProductCategory[] = [
     description: "Sustainable bamboo products, reusable items, and eco-conscious gifts with custom branding.",
     image:
       OilProductsImage,
-    link: "/products/eco-friendly",
+    link: "/product-category/eco-friendly",
   },
   {
     id: "9",
@@ -99,7 +99,7 @@ const products: ProductCategory[] = [
     description: "Premium executive gifts, leather accessories, and high-end corporate presents with elegant customization.",
     image:
       OilProductsImage,
-    link: "/products/luxury-corporate-gifts",
+    link: "/product-category/luxury-corporate-gifts",
   },
 ];
 

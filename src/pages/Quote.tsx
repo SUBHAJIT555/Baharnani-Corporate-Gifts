@@ -1,25 +1,25 @@
 import { useQuote } from "../contexts/QuoteContext";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Trash2, Plus, Minus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useQuoteSubmission } from "../hooks/useQuoteSubmission";
+import Loading from "../components/ui/Loading";
 
 interface QuoteFormData {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   phone: string;
-  address: string;
+  address_1: string;
   city: string;
-  additionalNotes: string;
+  note: string;
 }
 
 const Quote = () => {
   const { items, removeFromQuote, updateQuantity, clearQuote } = useQuote();
   const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState("");
+  const quoteMutation = useQuoteSubmission();
 
   const {
     register,
@@ -28,46 +28,45 @@ const Quote = () => {
     reset,
   } = useForm<QuoteFormData>({
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
       phone: "",
-      address: "",
+      address_1: "",
       city: "",
-      additionalNotes: "",
+      note: "",
     },
   });
 
   const onSubmit = async (data: QuoteFormData) => {
-    setIsSubmitting(true);
-    setSubmitMessage("");
+    if (items.length === 0) {
+      return;
+    }
+
+    const payload = {
+      billing: {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        phone: data.phone,
+        address_1: data.address_1,
+        city: data.city,
+        country: "AE",
+      },
+      items: items.map((item) => ({
+        product_id: item.id,
+        quantity: item.quantity,
+      })),
+      note: data.note || undefined,
+    };
 
     try {
-      // Simulate API call - replace with actual API endpoint
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // Here you would send the data to your backend
-      console.log("Quote Request:", {
-        ...data,
-        items: items.map((item) => ({
-          id: item.id,
-          title: item.title,
-          quantity: item.quantity,
-        })),
-      });
-
-      setSubmitMessage("Quote request submitted successfully!");
+      await quoteMutation.mutateAsync(payload);
       reset();
       clearQuote();
-
-      setTimeout(() => {
-        navigate("/products");
-      }, 2000);
+      navigate("/thank-you");
     } catch (error) {
-      setSubmitMessage("Failed to submit quote request. Please try again.");
-      console.error(error);
-    } finally {
-      setIsSubmitting(false);
+      console.error("Quote submission error:", error);
     }
   };
 
@@ -124,19 +123,18 @@ const Quote = () => {
                       <div className="flex gap-4">
                         <img
                           src={item.image}
-                          alt={item.title}
+                          alt={item.name}
                           className="w-20 h-20 object-cover rounded-md"
                         />
                         <div className="flex-1">
                           <h3 className="font-tanker text-textcolor text-lg mb-1 line-clamp-2">
-                            {item.title}
+                            {item.name}
                           </h3>
-                          <p className="text-sm text-gray-600 mb-2">
-                            {item.category}
-                          </p>
-                          <p className="text-sm text-gray-600 mb-2">
-                            {item.description}
-                          </p>
+                          {item.description && (
+                            <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+                              {item.description}
+                            </p>
+                          )}
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() =>
@@ -186,22 +184,22 @@ const Quote = () => {
                 {/* First Name */}
                 <div>
                   <label
-                    htmlFor="firstName"
+                    htmlFor="first_name"
                     className="block text-base font-tanker text-textcolor mb-2 "
                   >
                     First Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
-                    id="firstName"
-                    {...register("firstName", {
+                    id="first_name"
+                    {...register("first_name", {
                       required: "First name is required",
                     })}
                     className="w-full px-4 py-3 border border-textcolor/40  focus:outline-none focus:ring-2 focus:ring-textcolor focus:border-transparent font-tanker text-textcolor"
                   />
-                  {errors.firstName && (
+                  {errors.first_name && (
                     <p className="text-red-500 text-sm mt-1">
-                      {errors.firstName.message}
+                      {errors.first_name.message}
                     </p>
                   )}
                 </div>
@@ -209,22 +207,22 @@ const Quote = () => {
                 {/* Last Name */}
                 <div>
                   <label
-                    htmlFor="lastName"
+                    htmlFor="last_name"
                     className="block text-base font-tanker text-textcolor mb-2 "
                   >
                     Last Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
-                    id="lastName"
-                    {...register("lastName", {
+                    id="last_name"
+                    {...register("last_name", {
                       required: "Last name is required",
                     })}
                     className="w-full px-4 py-3 border border-textcolor/40  focus:outline-none focus:ring-2 focus:ring-textcolor focus:border-transparent font-tanker text-textcolor"
                   />
-                  {errors.lastName && (
+                  {errors.last_name && (
                     <p className="text-red-500 text-sm mt-1">
-                      {errors.lastName.message}
+                      {errors.last_name.message}
                     </p>
                   )}
                 </div>
@@ -282,22 +280,22 @@ const Quote = () => {
                 {/* Address */}
                 <div>
                   <label
-                    htmlFor="address"
+                    htmlFor="address_1"
                     className="block text-base font-tanker text-textcolor mb-2 "
                   >
                     Address <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
-                    id="address"
-                    {...register("address", {
+                    id="address_1"
+                    {...register("address_1", {
                       required: "Address is required",
                     })}
                     className="w-full px-4 py-3 border border-textcolor/40  focus:outline-none focus:ring-2 focus:ring-textcolor focus:border-transparent font-tanker text-textcolor"
                   />
-                  {errors.address && (
+                  {errors.address_1 && (
                     <p className="text-red-500 text-sm mt-1">
-                      {errors.address.message}
+                      {errors.address_1.message}
                     </p>
                   )}
                 </div>
@@ -329,30 +327,24 @@ const Quote = () => {
               {/* Additional Notes */}
               <div className="mb-6">
                 <label
-                  htmlFor="additionalNotes"
+                  htmlFor="note"
                   className="block text-base font-tanker text-textcolor mb-2 "
                 >
                   Additional Notes
                 </label>
                 <textarea
-                  id="additionalNotes"
-                  {...register("additionalNotes")}
+                  id="note"
+                  {...register("note")}
                   rows={4}
                   placeholder="Any specific requirements or customization?"
                   className="w-full px-4 py-3 border border-textcolor/40  focus:outline-none focus:ring-2 focus:ring-textcolor focus:border-transparent font-tanker text-textcolor resize-none"
                 />
               </div>
 
-              {/* Submit Message */}
-              {submitMessage && (
-                <div
-                  className={`mb-6 p-4 rounded-md ${
-                    submitMessage.includes("successfully")
-                      ? "bg-green-50 text-green-800"
-                      : "bg-red-50 text-red-800"
-                  }`}
-                >
-                  {submitMessage}
+              {/* Error Message */}
+              {quoteMutation.isError && (
+                <div className="mb-6 p-4 rounded-md bg-red-50 text-red-800">
+                  {quoteMutation.error?.message || "Failed to submit quote request. Please try again."}
                 </div>
               )}
 
@@ -360,11 +352,20 @@ const Quote = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={quoteMutation.isPending}
                   className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-textcolor hover:bg-textcolor/70 text-white font-tanker font-medium py-3 px-8 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <ArrowRight className="w-5 h-5" />
-                  {isSubmitting ? "Submitting..." : "Request Quote"}
+                  {quoteMutation.isPending ? (
+                    <>
+                      <Loading size="sm" />
+                      <span>Submitting...</span>
+                    </>
+                  ) : (
+                    <>
+                      <ArrowRight className="w-5 h-5" />
+                      <span>Request Quote</span>
+                    </>
+                  )}
                 </button>
                 <Link
                   to="/products"

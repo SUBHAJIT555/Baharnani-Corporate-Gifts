@@ -56,7 +56,7 @@ const categories: ProductCategory[] = [
     ],
     imageUrl: PremiumGiftSetsImage,
     buttonText: "Explore Premium Gift Sets",
-    buttonLink: "/products/premium-gift-sets",
+    buttonLink: "/product-category/premium-gift-sets",
   },
   {
     id: 2,
@@ -79,7 +79,7 @@ const categories: ProductCategory[] = [
     ],
     imageUrl: LuxuryGiftsImage,
     buttonText: "Explore Luxury Corporate Gifts",
-    buttonLink: "/products/luxury-corporate-gifts",
+    buttonLink: "/product-category/luxury-corporate-gifts",
   },
   {
     id: 3,
@@ -102,7 +102,7 @@ const categories: ProductCategory[] = [
     ],
     imageUrl: ApparelImage,
     buttonText: "Explore Apparel & Accessories",
-    buttonLink: "/products/apparel-and-accessories",
+    buttonLink: "/product-category/apparel-and-accessories",
   },
   {
     id: 4,
@@ -125,7 +125,7 @@ const categories: ProductCategory[] = [
     ],
     imageUrl: BagsTravelImage,
     buttonText: "Explore Bags & Travel",
-    buttonLink: "/products/bags-and-travel",
+    buttonLink: "/product-category/bags-and-travel",
   },
   {
     id: 5,
@@ -148,7 +148,7 @@ const categories: ProductCategory[] = [
     ],
     imageUrl: OfficeStationaryImage,
     buttonText: "Explore Office & Stationary",
-    buttonLink: "/products/office-and-stationary",
+    buttonLink: "/product-category/office-and-stationary",
   },
   {
     id: 6,
@@ -171,7 +171,7 @@ const categories: ProductCategory[] = [
     ],
     imageUrl: TechnologyImage,
     buttonText: "Explore Technology & Accessories",
-    buttonLink: "/products/technology-and-accessories",
+    buttonLink: "/product-category/technology-and-accessories",
   },
   {
     id: 7,
@@ -194,7 +194,7 @@ const categories: ProductCategory[] = [
     ],
     imageUrl: EatingDrinkingImage,
     buttonText: "Explore Eating & Drinking",
-    buttonLink: "/products/eating-and-drinking",
+    buttonLink: "/product-category/eating-and-drinking",
   },
   {
     id: 8,
@@ -217,7 +217,7 @@ const categories: ProductCategory[] = [
     ],
     imageUrl: SportsRecreationImage,
     buttonText: "Explore Sports & Recreation",
-    buttonLink: "/products/sports-and-recreation",
+    buttonLink: "/product-category/sports-and-recreation",
   },
   {
     id: 9,
@@ -240,7 +240,7 @@ const categories: ProductCategory[] = [
     ],
     imageUrl: EcoFriendlyImage,
     buttonText: "Explore Eco Friendly",
-    buttonLink: "/products/eco-friendly",
+    buttonLink: "/product-category/eco-friendly",
   },
 ];
 
@@ -274,9 +274,8 @@ const ProductCatagory = () => {
                   isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
                 }
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className={`flex flex-col ${
-                  isEven ? "lg:flex-row" : "lg:flex-row-reverse"
-                } gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-8 sm:mb-10 md:mb-12 lg:mb-16 last:mb-0`}
+                className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"
+                  } gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-8 sm:mb-10 md:mb-12 lg:mb-16 last:mb-0`}
               >
                 {/* Image Section - Smaller and Compact */}
                 <motion.div

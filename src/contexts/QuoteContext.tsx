@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
-import type { Product } from "../data/constructionMaterials";
+import type { Product } from "../services/api";
+
 
 export interface QuoteItem extends Product {
   quantity: number;
@@ -9,11 +10,11 @@ export interface QuoteItem extends Product {
 interface QuoteContextType {
   items: QuoteItem[];
   addToQuote: (product: Product, quantity?: number) => void;
-  removeFromQuote: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  removeFromQuote: (productId: number) => void;
+  updateQuantity: (productId: number, quantity: number) => void;
   clearQuote: () => void;
   getTotalItems: () => number;
-  isInQuote: (productId: string) => boolean;
+  isInQuote: (productId: number) => boolean;
 }
 
 const QuoteContext = createContext<QuoteContextType | undefined>(undefined);
@@ -48,11 +49,11 @@ export const QuoteProvider = ({ children }: QuoteProviderProps) => {
     });
   };
 
-  const removeFromQuote = (productId: string) => {
+  const removeFromQuote = (productId: number) => {
     setItems((prevItems) => prevItems.filter((item) => item.id !== productId));
   };
 
-  const updateQuantity = (productId: string, quantity: number) => {
+  const updateQuantity = (productId: number, quantity: number) => {
     if (quantity <= 0) {
       removeFromQuote(productId);
       return;
@@ -72,7 +73,7 @@ export const QuoteProvider = ({ children }: QuoteProviderProps) => {
     return items.reduce((total, item) => total + item.quantity, 0);
   };
 
-  const isInQuote = (productId: string) => {
+  const isInQuote = (productId: number) => {
     return items.some((item) => item.id === productId);
   };
 

@@ -12,15 +12,17 @@ import {
   Sparkles,
 } from "lucide-react";
 import CallToAction from "../components/CallToAction";
-import { giftItems } from "../data/giftItems";
+// import { giftItems } from "../data/giftItems";
 
 // images
 import TechnologyAndAccessoriesImage from "../assets/images/Hero-images/Home-hero-Building-Materials.webp";
+import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
+// import { useState } from "react";
 
 // Filter technology and accessories items from giftItems
-const technologyAndAccessoriesItems = giftItems.filter(
-  (item) => item.category === "Technology and accessories"
-);
+// const technologyAndAccessoriesItems = giftItems.filter(
+//   (item) => item.category === "Technology and accessories"
+// );
 
 const technologyAndAccessoriesFeatures: FeatureCard[] = [
   {
@@ -80,6 +82,11 @@ const technologyAndAccessoriesFeatures: FeatureCard[] = [
 ];
 
 const TechnologyAndAccessories = () => {
+
+  const { data: categories } = useProductCategories();
+  const { data: products, isLoading: productsLoading, error: productsError } = useProductsByCategory(113);
+  const filteredCategories = categories?.filter(category => category.id === 113);
+
   return (
     <div>
       <CommonHero
@@ -108,7 +115,11 @@ const TechnologyAndAccessories = () => {
       <ProductGrid
         title="Explore Our Collection of Technology & Accessories"
         productType="custom"
-        products={technologyAndAccessoriesItems}
+        products={products || []}
+        categories={filteredCategories || []}
+        isLoading={productsLoading}
+        error={productsError}
+        selectedCategory={113}
         id="technology-and-accessories"
       />
       <WhyChooseUs features={technologyAndAccessoriesFeatures} />

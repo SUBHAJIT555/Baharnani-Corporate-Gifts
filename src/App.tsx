@@ -1,15 +1,29 @@
 import { RouterProvider } from "react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { router } from "./routes/router";
 import { QuoteProvider } from "./contexts/QuoteContext";
 import { LenisProvider } from "./contexts/LenisContext";
 
+// Create a QueryClient instance
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    },
+  },
+});
+
 function App() {
   return (
-    <LenisProvider>
-      <QuoteProvider>
-        <RouterProvider router={router} />
-      </QuoteProvider>
-    </LenisProvider>
+    <QueryClientProvider client={queryClient}>
+      <LenisProvider>
+        <QuoteProvider>
+          <RouterProvider router={router} />
+        </QuoteProvider>
+      </LenisProvider>
+    </QueryClientProvider>
   );
 }
 
