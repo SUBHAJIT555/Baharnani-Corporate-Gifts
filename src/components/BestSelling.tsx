@@ -6,17 +6,17 @@ import ProductGrid from "./ProductGrid";
 const BestSelling = () => {
   const { data: productsData, isLoading, error } = useAllProducts();
   const { data: categories, isLoading: categoriesLoading } = useProductCategories();
-  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-  const { data: productsByCategory, isLoading: productsByCategoryLoading, error: productsByCategoryError } = useProductsByCategory(selectedCategory || 0);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const { data: productsByCategory, isLoading: productsByCategoryLoading, error: productsByCategoryError } = useProductsByCategory(selectedCategory || '');
 
   // Determine which products to display based on selected category
-  const displayedProducts = useMemo(() => {
+  const productData = useMemo(() => {
     // If no category is selected, show all products from paginated response
     if (selectedCategory === null) {
-      return productsData?.products || [];
+      return productsData;
     }
     // If a category is selected, show products from that category
-    return productsByCategory || [];
+    return productsByCategory;
   }, [productsData, productsByCategory, selectedCategory]);
 
   // Determine loading state
@@ -35,8 +35,8 @@ const BestSelling = () => {
 
   return (
     <ProductGrid
-      products={displayedProducts}
-      categories={categories}
+      productData={productData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 }}
+      categories={categories || []}
       isLoading={productsByCategoryLoading}
       error={productsByCategoryError}
       selectedCategory={selectedCategory}

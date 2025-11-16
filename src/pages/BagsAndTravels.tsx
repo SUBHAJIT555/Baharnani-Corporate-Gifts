@@ -12,73 +12,82 @@ import {
   Sparkles,
 } from "lucide-react";
 import CallToAction from "../components/CallToAction";
-import { giftItems } from "../data/giftItems";
 
 // images
 import FoodStuffImage from "../assets/images/Products-hero-image/food-stuff-hero.webp";
+import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
+import { useState } from "react";
 
-// Filter bags and travel items from giftItems
-const bagsAndTravelItems = giftItems.filter(
-  (item) => item.category === "Bags and travel"
-);
+const bagsAndTravelsFeatures: FeatureCard[] = [
+  {
+    id: 1,
+    number: "01",
+    title: "Premium Quality Bags & Travel Accessories",
+    description:
+      "From executive briefcases to luxury luggage sets, we offer high-quality bags and travel accessories perfect for corporate gifting and business professionals.",
+    icon: <Luggage size={32} />,
+    iconColor: "#4CAF50",
+  },
+  {
+    id: 2,
+    number: "02",
+    title: "Custom Branding Options",
+    description:
+      "Personalize your corporate gifts with custom logo printing, embroidery, and branded packaging to strengthen your brand identity with every journey.",
+    icon: <Sparkles size={32} />,
+    iconColor: "#FF6B6B",
+  },
+  {
+    id: 3,
+    number: "03",
+    title: "Wide Range of Products",
+    description:
+      "Explore our collection of briefcases, backpacks, travel bags, luggage sets, and document holders that make perfect corporate gifts for clients and employees.",
+    icon: <Package size={32} />,
+    iconColor: "#FF9800",
+  },
+  {
+    id: 4,
+    number: "04",
+    title: "Perfect for Business Travelers",
+    description:
+      "Our travel accessories are designed for professionals on the go, featuring durable materials, smart compartments, and modern designs.",
+    icon: <Briefcase size={32} />,
+    iconColor: "#8BC34A",
+  },
+  {
+    id: 5,
+    number: "05",
+    title: "Flexible Ordering",
+    description:
+      "From individual gifts to bulk orders, we accommodate orders of all sizes with reliable delivery across Dubai and the UAE.",
+    icon: <Globe size={32} />,
+    iconColor: "#3F3F9F",
+  },
+  {
+    id: 6,
+    number: "06",
+    title: "Trusted Quality",
+    description:
+      "Sourced from leading manufacturers, our bags and travel accessories combine style, durability, and functionality for lasting impressions.",
+    icon: <Award size={32} />,
+    iconColor: "#4CAF50",
+  },
+];
 
 const BagsAndTravels = () => {
-  const bagsAndTravelsFeatures: FeatureCard[] = [
-    {
-      id: 1,
-      number: "01",
-      title: "Premium Quality Bags & Travel Accessories",
-      description:
-        "From executive briefcases to luxury luggage sets, we offer high-quality bags and travel accessories perfect for corporate gifting and business professionals.",
-      icon: <Luggage size={32} />,
-      iconColor: "#4CAF50",
-    },
-    {
-      id: 2,
-      number: "02",
-      title: "Custom Branding Options",
-      description:
-        "Personalize your corporate gifts with custom logo printing, embroidery, and branded packaging to strengthen your brand identity with every journey.",
-      icon: <Sparkles size={32} />,
-      iconColor: "#FF6B6B",
-    },
-    {
-      id: 3,
-      number: "03",
-      title: "Wide Range of Products",
-      description:
-        "Explore our collection of briefcases, backpacks, travel bags, luggage sets, and document holders that make perfect corporate gifts for clients and employees.",
-      icon: <Package size={32} />,
-      iconColor: "#FF9800",
-    },
-    {
-      id: 4,
-      number: "04",
-      title: "Perfect for Business Travelers",
-      description:
-        "Our travel accessories are designed for professionals on the go, featuring durable materials, smart compartments, and modern designs.",
-      icon: <Briefcase size={32} />,
-      iconColor: "#8BC34A",
-    },
-    {
-      id: 5,
-      number: "05",
-      title: "Flexible Ordering",
-      description:
-        "From individual gifts to bulk orders, we accommodate orders of all sizes with reliable delivery across Dubai and the UAE.",
-      icon: <Globe size={32} />,
-      iconColor: "#3F3F9F",
-    },
-    {
-      id: 6,
-      number: "06",
-      title: "Trusted Quality",
-      description:
-        "Sourced from leading manufacturers, our bags and travel accessories combine style, durability, and functionality for lasting impressions.",
-      icon: <Award size={32} />,
-      iconColor: "#4CAF50",
-    },
-  ];
+  const categorySlug = "bags-and-travel";
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 12;
+  const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(categorySlug, currentPage, perPage);
+  const productData = productsData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 };
+  console.log("products data in bags and travels", productData);
+  const { data: categories } = useProductCategories();
+  const filteredCategories = categories?.filter(category => category.slug === categorySlug);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <div>
@@ -108,7 +117,12 @@ const BagsAndTravels = () => {
       <ProductGrid
         title="Explore Our Collection of Bags & Travel Accessories"
         productType="custom"
-        products={bagsAndTravelItems}
+        productData={productData}
+        onPageChange={handlePageChange}
+        selectedCategory={categorySlug}
+        categories={filteredCategories || []}
+        isLoading={productsLoading}
+        error={productsError}
         id="bags-travel"
       />
       <WhyChooseUs features={bagsAndTravelsFeatures} />

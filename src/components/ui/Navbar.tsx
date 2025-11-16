@@ -46,7 +46,6 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log("scrollY", scrollY?.get(), scrollY?.getPrevious());
       setHidden(
         scrollY?.get() > 50 &&
         (scrollY?.getPrevious() ?? 0) < (scrollY?.get() ?? 0)
@@ -61,7 +60,6 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  console.log("issclollingDown", isScrollingDown);
 
   const closeMenu = () => {
     setIsMenuOpen(false);
@@ -71,9 +69,9 @@ const Navbar = () => {
     { key: 1, name: "Home", href: "/" },
     { key: 2, name: "About", href: "/about-us" },
     { key: 3, name: "Products", href: "/products", hasDropdown: true },
-    { key: 3, name: "Shop", href: "/shop" },
-    { key: 4, name: "Blog", href: "https://stagingv1.corporategiftsdubaii.ae/blog" },
-    { key: 5, name: "Contact", href: "/contact-us" },
+    { key: 4, name: "Shop", href: "/shop" },
+    { key: 5, name: "Blog", href: "https://stagingv1.corporategiftsdubaii.ae/blog" },
+    { key: 6, name: "Contact", href: "/contact-us" },
   ];
 
   const productCategories = [

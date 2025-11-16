@@ -1,22 +1,25 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { Product, ProductCategory } from "../services/api";
+import type { PaginatedProductsResponse, Product, ProductCategory } from "../services/api";
 import { useQuote } from "../contexts/QuoteContext";
 import { FiFilter } from "react-icons/fi";
 import { ImCross } from "react-icons/im";
-import { IoArrowForwardOutline } from "react-icons/io5";
+import { IoArrowForwardOutline, IoChevronBack, IoChevronForward } from "react-icons/io5";
 import { cn } from "../lib/utilts";
+import Loading from "./ui/Loading";
+import { ProductCard } from "./ProductCard";
 
 
 interface ProductGridProps {
-  products: Product[];
-  categories: ProductCategory[];
+  productData: PaginatedProductsResponse;
+  categories: ProductCategory[] | [];
   title?: string;
   isLoading: boolean;
   error: Error | null;
   subtitle?: string;
-  selectedCategory?: number | null;
-  setSelectedCategory?: (category: number | null) => void;
+  onPageChange?: (page: number) => void;
+  selectedCategory: string | null;
+  setSelectedCategory?: (category: string | null) => void;
   productType?:
   | "construction"
   | "foodstuff"
@@ -33,17 +36,18 @@ interface ProductGridProps {
 }
 
 const ProductGrid = ({
-  products,
+  productData,
   categories,
   isLoading,
   error,
   title,
   subtitle,
+  onPageChange,
   selectedCategory,
   setSelectedCategory,
   id,
 }: ProductGridProps) => {
-  const { addToQuote, isInQuote } = useQuote();
+  const { addToQuote, isInQuote, updateQuantity } = useQuote();
   const [showFloatingFilter, setShowFloatingFilter] = useState(false);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -51,12 +55,16 @@ const ProductGrid = ({
   const sectionRef = useRef<HTMLElement>(null);
   const lastScrollY = useRef(0);
 
-  // Update selected category when categoryFilter prop changes
-  // useEffect(() => {
-  //   if (categoryFilter !== undefined) {
-  //     setSelectedCategory(categoryFilter as unknown as number | null);
-  //   }
-  // }, [categoryFilter]);
+  const products = productData?.products || [];
+
+  const paginationInfo = productData && {
+    currentPage: productData.page,
+    totalPages: productData.total_pages,
+    total: productData.total,
+  };
+  console.log("selectedCategory", selectedCategory);
+
+
 
   // Handle scroll to show/hide floating filter button
   useEffect(() => {
@@ -99,63 +107,15 @@ const ProductGrid = ({
     };
   }, []);
 
-  // Get products based on productType
-  // const getProducts = (): Product[] => {
-  //   // If products prop is provided, use it (highest priority)
-  //   if (products) {
-  //     return products;
-  //   }
 
-  //   // Otherwise, use productType to determine which dataset to use
-  //   // switch (productType) {
-  //   //   case "construction":
-  //   //     return constructionMaterials;
-  //   //   case "foodstuff":
-  //   //     return foodstuff;
-  //   //   case "building":
-  //   //     return buildingMaterials;
-  //   //   case "custom":
-  //   //   case "contracting":
-  //   //     return contractingServices;
-  //   //   case "importandexport":
-  //   //     return importExportServices;
-  //   //   case "electronicsandit":
-  //   //     return electronicsandit;
-  //   //   case "chemicalsandadditives":
-  //   //     return chemicalsandadditives;
-  //   //   case "oilproducts":
-  //   //     return oilproducts;
-  //   //   case "bestsellingitems":
-  //   //     return bestSellingItems;
-  //   //   default:
-  //   //     // If custom type but no products provided, return empty array
-  //   //     // This allows for future product types to be added easily
-  //   //     return [];
-  //   // }
-  // };
 
-  // const allProducts = getProducts();
-
-  // Get unique categories from products
-  // const categories = Array.from(
-  //   new Set(allProducts.map((product) => product.category))
-  // ).sort();
-
-  // Filter products by selected category
-  // const filteredProducts = selectedCategory
-  //   ? allProducts.filter((product) => product.category === selectedCategory)
-  //   : allProducts;
-
-  const handleAddToQuote = (product: Product, e?: React.MouseEvent) => {
-    e?.stopPropagation(); // Prevent card click when clicking button
-    if (!isInQuote(product.id)) {
-      addToQuote(product, 1);
+  const handleAddToQuote = (product: Product, quantity: number, e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (isInQuote(product.id)) {
+      updateQuantity(product.id, quantity);
+    } else {
+      addToQuote(product, quantity);
     }
-  };
-
-  const handleProductClick = (product: Product) => {
-    setSelectedProduct(product);
-    setIsProductModalOpen(true);
   };
 
   const handleCloseModal = () => {
@@ -164,8 +124,8 @@ const ProductGrid = ({
     setTimeout(() => setSelectedProduct(null), 300);
   };
 
-  const handleCategoryFilter = (category: number | null) => {
-    setSelectedCategory?.(category);
+  const handleCategoryFilter = (categorySlug: string | null) => {
+    setSelectedCategory?.(categorySlug);
     // Close bottom sheet after selection on mobile
     if (window.innerWidth < 1024) {
       setIsBottomSheetOpen(false);
@@ -190,8 +150,8 @@ const ProductGrid = ({
     isAll?: boolean;
   }) => (
     <button
-      onClick={() => handleCategoryFilter(category?.id || null)}
-      className={cn(`px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-md font-switzer font-medium text-sm sm:text-base transition-all duration-200 whitespace-nowrap bg-gray-200 text-textcolor hover:bg-gray-300`, selectedCategory === category?.id || selectedCategory === null && isAll
+      onClick={() => handleCategoryFilter(category?.slug || null)}
+      className={cn(`px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-md font-switzer font-medium text-sm sm:text-base transition-all duration-200 whitespace-nowrap bg-gray-200 text-textcolor hover:bg-gray-300`, selectedCategory === category?.slug || selectedCategory === null && isAll
         ? "bg-textcolor text-white shadow-md"
         : "bg-gray-200 text-textcolor hover:bg-gray-300"
       )}
@@ -343,8 +303,8 @@ const ProductGrid = ({
                       {categories && categories.map((category) => (
                         <button
                           key={category.id}
-                          onClick={() => handleCategoryFilter(category.id)}
-                          className={`w-full px-5 py-3.5 rounded-lg font-switzer font-medium text-left transition-all duration-200 ${selectedCategory === category.id
+                          onClick={() => handleCategoryFilter(category.slug)}
+                          className={`w-full px-5 py-3.5 rounded-lg font-switzer font-medium text-left transition-all duration-200 ${selectedCategory === category.slug
                             ? "bg-textcolor text-white shadow-md"
                             : "bg-gray-100 text-textcolor hover:bg-gray-200"
                             } `}
@@ -360,7 +320,8 @@ const ProductGrid = ({
           )}
         </AnimatePresence>
 
-        {isLoading ? (<div>Loading...</div>) : (
+
+        {isLoading ? (<div className="min-h-[550px] flex items-center justify-center"><Loading size="md" message="Loading products..." /></div>) : (
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-5 md:gap-6">
             {products?.map((product, index) => (
               <motion.div
@@ -368,46 +329,118 @@ const ProductGrid = ({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                onClick={() => handleProductClick(product)}
-                className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col cursor-pointer"
+
+                className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col "
               >
-                {/* Product Image */}
-                <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-200">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Product Content */}
-                <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
-                  {/* Category Badge */}
-                  <span className="text-xs sm:text-sm font-switzer text-textcolor/60 mb-2 uppercase tracking-wide">
-                    {/* {product.category?.name} */}
-                  </span>
-
-                  {/* Product Title */}
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-tanker text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
-                    {product.name}
-                  </h3>
-
-                  {/* Add to Quote Button */}
-                  <button
-                    disabled={isInQuote(product.id)}
-                    className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(product.id)
-                      ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                      : "bg-textcolor hover:bg-textcolor/70 text-white "
-                      } `}
-                    onClick={(e) => handleAddToQuote(product, e)}
-                  >
-                    {isInQuote(product.id) ? "Added to Quote" : "Add to Quote"}
-                  </button>
-                </div>
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  index={index}
+                  onAddToQuote={handleAddToQuote}
+                  isInQuote={isInQuote(product.id)}
+                  currentQuantity={1}
+                />
               </motion.div>
+              // <motion.div
+              //   key={product.id}
+              //   initial={{ opacity: 0, y: 20 }}
+              //   animate={{ opacity: 1, y: 0 }}
+              //   transition={{ duration: 0.4, delay: index * 0.05 }}
+
+              //   className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col "
+              // >
+
+              //   {/* Product Image */}
+              //   <Link to={getProductUrl(product)} className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-200">
+              //     <img
+              //       src={product.image}
+              //       alt={product.name}
+              //       className="w-full h-full object-cover"
+              //     />
+              //   </Link>
+
+              //   {/* Product Content */}
+              //   <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
+              //     {/* Category Badge */}
+              //     <span className="text-xs font-switzer text-textcolor/60 mb-2 uppercase tracking-wide line-clamp-1 overflow-hidden text-ellipsis">
+              //       {product.categories[0]}
+              //     </span>
+
+              //     {/* Product Title */}
+              //     <h3 className="text-sm font-tanker text-textcolor mb-4 sm:mb-5 grow line-clamp-1 overflow-hidden text-ellipsis">
+              //       <Link to={getProductUrl(product)}>
+              //         {product.name}
+              //       </Link>
+              //     </h3>
+
+              //     {/* Add to Quote Button */}
+              //     <div className="space-y-3">
+              //       <QuantitySelector
+              //         quantity={quantity}
+              //         onQuantityChange={setQuantity}
+              //       />
+              //       <button
+              //         disabled={isInQuote(product.id)}
+              //         className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(product.id)
+              //           ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+              //           : "bg-textcolor hover:bg-textcolor/70 text-white "
+              //           } `}
+              //         onClick={(e) => {
+              //           handleAddToQuote(product, e);
+              //         }}
+              //       >
+              //         {isInQuote(product.id) ? "Added to Quote" : "Add to Quote"}
+              //       </button>
+              //     </div>
+              //   </div>
+
+              // </motion.div>
             ))}
           </div>
         )}
+
+
+        {/* Pagination */}
+        {paginationInfo && paginationInfo.totalPages > 1 && onPageChange && (
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button
+              onClick={() => onPageChange(paginationInfo.currentPage - 1)}
+              disabled={paginationInfo.currentPage === 1}
+              className={cn(
+                "p-2 rounded-full border border-gray-300 transition-colors duration-200",
+                paginationInfo.currentPage === 1
+                  ? "opacity-50 cursor-not-allowed text-gray-400"
+                  : "text-textcolor hover:bg-gray-100"
+              )}
+              aria-label="Previous page"
+            >
+              <IoChevronBack className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-2 font-switzer text-textcolor">
+              <span className="px-4 py-2 bg-textcolor text-white rounded-md">
+                {paginationInfo.currentPage}
+              </span>
+              <span className="px-2">/</span>
+              <span className="px-2">{paginationInfo.totalPages}</span>
+            </div>
+
+            <button
+              onClick={() => onPageChange(paginationInfo.currentPage + 1)}
+              disabled={paginationInfo.currentPage === paginationInfo.totalPages}
+              className={cn(
+                "p-2 rounded-full border border-gray-300 transition-colors duration-200",
+                paginationInfo.currentPage === paginationInfo.totalPages
+                  ? "opacity-50 cursor-not-allowed text-gray-400"
+                  : "text-textcolor hover:bg-gray-100"
+              )}
+              aria-label="Next page"
+            >
+              <IoChevronForward className="w-5 h-5" />
+            </button>
+          </div>
+        )}
+
         {error && (
           <div>Error: {error?.message}</div>
         )}
@@ -495,7 +528,7 @@ const ProductGrid = ({
                               } `}
                             onClick={(e) => {
                               e.stopPropagation();
-                              handleAddToQuote(selectedProduct, e);
+                              handleAddToQuote(selectedProduct, 1, e);
                             }}
                           >
                             {isInQuote(selectedProduct.id)
@@ -517,7 +550,7 @@ const ProductGrid = ({
                         } `}
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleAddToQuote(selectedProduct, e);
+                        handleAddToQuote(selectedProduct, 1, e);
                       }}
                     >
                       {isInQuote(selectedProduct.id)

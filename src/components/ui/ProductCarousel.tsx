@@ -10,18 +10,16 @@ import { useQuote } from "../../contexts/QuoteContext";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import type { Product } from "../../services/api";
+import { useNavigate } from "react-router-dom";
+import { getProductUrl } from "../../lib/utilts";
+import Loading from "./Loading";
 
-export interface Product {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-}
 
 interface ProductCarouselProps {
-  products: Product[];
+  products: Product[] | [];
   heading: string;
+  isLoading: boolean;
   description: string;
   paginationId?: string;
   autoplay?: boolean;
@@ -30,12 +28,14 @@ interface ProductCarouselProps {
 
 const ProductCarousel = ({
   products,
+  isLoading,
   heading,
   description,
   paginationId = "product-carousel-pagination",
   autoplay = true,
   autoplayDelay = 4000,
 }: ProductCarouselProps) => {
+  const navigate = useNavigate();
   const { addToQuote, isInQuote } = useQuote();
   const headingRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<HTMLDivElement>(null);
@@ -117,14 +117,14 @@ const ProductCarousel = ({
 
   const handleAddToQuote = (product: Product, e?: React.MouseEvent) => {
     e?.stopPropagation();
-    if (!isInQuote(product.id)) {
+    if (!isInQuote(Number(product.id))) {
       addToQuote(product, 1);
     }
   };
 
   const handleProductClick = (product: Product) => {
-    setSelectedProduct(product);
-    setIsProductModalOpen(true);
+    // Navigate to product details page with SEO-friendly URL
+    navigate(getProductUrl(product));
   };
 
   const handleCloseModal = () => {
@@ -133,6 +133,7 @@ const ProductCarousel = ({
     setTimeout(() => setSelectedProduct(null), 300);
   };
 
+  console.log("products in product carousel", products);
   return (
     <section className="w-full py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20 2xl:py-24 overflow-x-hidden">
       <div className="w-full px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 max-w-[1920px] mx-auto">
@@ -163,161 +164,172 @@ const ProductCarousel = ({
           transition={{ duration: 0.6, delay: 0.2 }}
           className="w-full"
         >
-          <Swiper
-            modules={[Pagination, Autoplay]}
-            spaceBetween={12}
-            slidesPerView={2}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 24,
-              },
-              1024: {
-                slidesPerView: 4,
-                spaceBetween: 24,
-              },
-              1280: {
-                slidesPerView: 5,
-                spaceBetween: 28,
-              },
-              1536: {
-                slidesPerView: 6,
-                spaceBetween: 32,
-              },
-            }}
-            pagination={{
-              clickable: true,
-              el: `.${paginationId}`,
-            }}
-            autoplay={
-              autoplay
-                ? {
-                    delay: autoplayDelay,
-                    disableOnInteraction: false,
-                  }
-                : false
-            }
-            grabCursor={true}
-            className="product-carousel-swiper"
-            onSwiper={(swiper) => {
-              swiperInstanceRef.current = swiper;
-              // Equalize heights after swiper is initialized
-              setTimeout(() => {
-                equalizeHeights();
-              }, 500);
-              setTimeout(() => {
-                equalizeHeights();
-              }, 1000);
-            }}
-            onResize={() => {
-              equalizeHeights();
-            }}
-            onSlideChange={() => {
-              equalizeHeights();
-            }}
-          >
-            {products.map((product, index) => (
-              <SwiperSlide key={product.id}>
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={
-                    isSwiperInView
-                      ? { opacity: 1, y: 0 }
-                      : { opacity: 0, y: 30 }
-                  }
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="h-full w-full"
-                >
-                  <div
-                    ref={(el) => {
-                      cardRefs.current[index] = el;
-                    }}
-                    onClick={() => handleProductClick(product)}
-                    className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col cursor-pointer h-full"
-                  >
-                    {/* Product Image */}
-                    <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-200">
-                      <img
-                        src={product.image}
-                        alt={product.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-
-                    {/* Product Content */}
-                    <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
-                      {/* Category Badge */}
-                      <span className="text-xs sm:text-sm font-switzer text-textcolor/60 mb-2 uppercase tracking-wide">
-                        {product.category}
-                      </span>
-
-                      {/* Product Title */}
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-tanker text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
-                        {product.title}
-                      </h3>
-
-                      {/* Add to Quote Button */}
-                      <button
-                        disabled={isInQuote(product.id)}
-                        className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${
-                          isInQuote(product.id)
-                            ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                            : "bg-textcolor hover:bg-textcolor/70 text-white"
-                        }`}
-                        onClick={(e) => handleAddToQuote(product, e)}
+          {isLoading ? (
+            <div className="flex min-h-[450px] justify-center items-center h-full w-full">
+              <Loading size="md" message="Loading products..." />
+            </div>
+          ) : products?.length > 0 ? (
+            <>
+              <Swiper
+                modules={[Pagination, Autoplay]}
+                spaceBetween={12}
+                slidesPerView={2}
+                breakpoints={{
+                  640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                  },
+                  768: {
+                    slidesPerView: 3,
+                    spaceBetween: 24,
+                  },
+                  1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 24,
+                  },
+                  1280: {
+                    slidesPerView: 5,
+                    spaceBetween: 28,
+                  },
+                  1536: {
+                    slidesPerView: 6,
+                    spaceBetween: 32,
+                  },
+                }}
+                pagination={{
+                  clickable: true,
+                  el: `.${paginationId}`,
+                }}
+                autoplay={
+                  autoplay
+                    ? {
+                      delay: autoplayDelay,
+                      disableOnInteraction: false,
+                    }
+                    : false
+                }
+                grabCursor={true}
+                className="product-carousel-swiper"
+                onSwiper={(swiper) => {
+                  swiperInstanceRef.current = swiper;
+                  // Equalize heights after swiper is initialized
+                  setTimeout(() => {
+                    equalizeHeights();
+                  }, 500);
+                  setTimeout(() => {
+                    equalizeHeights();
+                  }, 1000);
+                }}
+                onResize={() => {
+                  equalizeHeights();
+                }}
+                onSlideChange={() => {
+                  equalizeHeights();
+                }}
+              >
+                {
+                  products?.map((product, index) => (
+                    <SwiperSlide key={product.id}>
+                      <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={
+                          isSwiperInView
+                            ? { opacity: 1, y: 0 }
+                            : { opacity: 0, y: 30 }
+                        }
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="h-full w-full"
                       >
-                        {isInQuote(product.id)
-                          ? "Added to Quote"
-                          : "Add to Quote"}
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                        <div
+                          ref={(el) => {
+                            cardRefs.current[index] = el;
+                          }}
+                          onClick={() => handleProductClick(product)}
+                          className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col cursor-pointer h-full"
+                        >
 
-          {/* Pagination Dots - Bottom Middle */}
-          <div className="flex justify-center mt-6 sm:mt-8 md:mt-10">
-            <div
-              className={paginationId}
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                width: "100%",
-              }}
-            ></div>
-          </div>
-          {/* Navigation Buttons - Top */}
-          <div className="flex items-center justify-end gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 md:mb-10">
-            {/* Previous Button */}
-            <button
-              className="flex items-center gap-2 hover:opacity-70 transition-opacity"
-              onClick={() => swiperInstanceRef.current?.slidePrev()}
-              aria-label="Previous slide"
-            >
-              <ChevronLeft size={24} className="text-textcolor" />
-              <span className="text-textcolor font-tanker font-medium">
-                Previous
-              </span>
-            </button>
+                          <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-200">
+                            <img
+                              src={product.image}
+                              alt={product.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
 
-            {/* Next Button */}
-            <button
-              className="flex items-center gap-2 hover:opacity-70 transition-opacity"
-              onClick={() => swiperInstanceRef.current?.slideNext()}
-              aria-label="Next slide"
-            >
-              <span className="text-textcolor font-tanker font-medium">
-                Next
-              </span>
-              <ChevronRight size={24} className="text-textcolor" />
-            </button>
-          </div>
+
+                          <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
+
+                            <span className="text-xs sm:text-sm font-switzer text-textcolor/60 mb-2 uppercase tracking-wide">
+                              {product.categories[0]}
+                            </span>
+
+
+                            <h3 className="text-lg sm:text-xl md:text-2xl font-tanker text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
+                              {product.name}
+                            </h3>
+
+
+                            <button
+                              disabled={isInQuote(Number(product.id))}
+                              className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(Number(product.id))
+                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                                : "bg-textcolor hover:bg-textcolor/70 text-white"
+                                }`}
+                              onClick={(e) => handleAddToQuote(product, e)}
+                            >
+                              {isInQuote(Number(product.id))
+                                ? "Added to Quote"
+                                : "Add to Quote"}
+                            </button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </SwiperSlide>
+                  ))
+                }
+              </Swiper>
+              <div className="flex justify-center mt-6 sm:mt-8 md:mt-10">
+                <div
+                  className={paginationId}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100%",
+                  }}
+                ></div>
+              </div>
+
+              <div className="flex items-center justify-end gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 md:mb-10">
+
+                <button
+                  className="flex items-center gap-2 hover:opacity-70 transition-opacity"
+                  onClick={() => swiperInstanceRef.current?.slidePrev()}
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft size={24} className="text-textcolor" />
+                  <span className="text-textcolor font-tanker font-medium">
+                    Previous
+                  </span>
+                </button>
+
+
+                <button
+                  className="flex items-center gap-2 hover:opacity-70 transition-opacity"
+                  onClick={() => swiperInstanceRef.current?.slideNext()}
+                  aria-label="Next slide"
+                >
+                  <span className="text-textcolor font-tanker font-medium">
+                    Next
+                  </span>
+                  <ChevronRight size={24} className="text-textcolor" />
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="flex justify-center items-center h-full w-full">
+              <p className="text-textcolor text-sm">No products found</p>
+            </div>
+          )}
         </motion.div>
 
         {/* Product Detail Modal */}
@@ -365,7 +377,7 @@ const ProductCarousel = ({
                       <div className="w-full lg:w-1/2 h-56 sm:h-72 md:h-80 lg:h-full bg-gray-100 shrink-0">
                         <img
                           src={selectedProduct.image}
-                          alt={selectedProduct.title}
+                          alt={selectedProduct.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -374,12 +386,12 @@ const ProductCarousel = ({
                       <div className="w-full lg:w-1/2 p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col pb-20 sm:pb-6 lg:pb-10">
                         {/* Category Badge */}
                         <span className="text-xs font-switzer text-textcolor mb-2 sm:mb-3 uppercase border border-textcolor/30 rounded-md w-fit p-1 bg-white tracking-wide">
-                          {selectedProduct.category}
+                          {selectedProduct.categories[0]}
                         </span>
 
                         {/* Product Title */}
                         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-tanker text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight">
-                          {selectedProduct.title}
+                          {selectedProduct.name}
                         </h2>
 
                         {/* Description/Details */}
@@ -388,25 +400,24 @@ const ProductCarousel = ({
                             Product Details :
                           </h3>
                           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-switzer text-textcolor/80 leading-relaxed">
-                            {selectedProduct.description}
+                            {selectedProduct.short_desc}
                           </p>
                         </div>
 
                         {/* Desktop Button (inside content section) */}
                         <div className="hidden lg:block mt-auto">
                           <button
-                            disabled={isInQuote(selectedProduct.id)}
-                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${
-                              isInQuote(selectedProduct.id)
-                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                                : "bg-textcolor hover:bg-textcolor/70 text-white"
-                            }`}
+                            disabled={isInQuote(Number(selectedProduct.id))}
+                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${isInQuote(Number(selectedProduct.id))
+                              ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                              : "bg-textcolor hover:bg-textcolor/70 text-white"
+                              }`}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleAddToQuote(selectedProduct, e);
                             }}
                           >
-                            {isInQuote(selectedProduct.id)
+                            {isInQuote(Number(selectedProduct.id))
                               ? "Added to Quote"
                               : "Add to Quote"}
                           </button>
@@ -418,18 +429,17 @@ const ProductCarousel = ({
                   {/* Sticky Button for Mobile */}
                   <div className="lg:hidden sticky bottom-0 left-0 right-0 bg-bg border-t border-gray-200 p-4 pt-3 shadow-lg z-10">
                     <button
-                      disabled={isInQuote(selectedProduct.id)}
-                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${
-                        isInQuote(selectedProduct.id)
-                          ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                          : "bg-textcolor hover:bg-textcolor/70 text-white"
-                      }`}
+                      disabled={isInQuote(Number(selectedProduct.id))}
+                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${isInQuote(Number(selectedProduct.id))
+                        ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                        : "bg-textcolor hover:bg-textcolor/70 text-white"
+                        }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleAddToQuote(selectedProduct, e);
                       }}
                     >
-                      {isInQuote(selectedProduct.id)
+                      {isInQuote(Number(selectedProduct.id))
                         ? "Added to Quote"
                         : "Add to Quote"}
                     </button>

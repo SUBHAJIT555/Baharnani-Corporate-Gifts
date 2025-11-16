@@ -6,35 +6,50 @@ import { FiGrid, FiList } from "react-icons/fi";
 import { IoChevronForward, IoChevronBack } from "react-icons/io5";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { motion } from "framer-motion";
-import { cn } from "../lib/utilts";
+import { Link } from "react-router-dom";
+import { cn, getProductUrl } from "../lib/utilts";
 import Loading from "../components/ui/Loading";
+import { ProductCard, type ProductCardProps } from "../components/ProductCard";
 
 type ViewMode = "grid" | "list";
 
 const Shop = () => {
-    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [viewMode, setViewMode] = useState<ViewMode>("grid");
-    const [sortBy] = useState<string>("default");
+    // const [sortBy] = useState<string>("default");
     const perPage = 12;
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
 
     // Fetch data
     const { data: productsData, isLoading, error } = useAllProducts(currentPage, perPage);
     const { data: categories, isLoading: categoriesLoading } = useProductCategories();
-    const { data: productsByCategory, isLoading: categoryLoading } = useProductsByCategory(selectedCategory || 0);
+    const { data: productsByCategory, isLoading: categoryLoading } = useProductsByCategory(
+        selectedCategory || "",
+        currentPage,
+        perPage
+    );
 
     // Reset page when category changes
-    const handleCategoryChange = (categoryId: number | null) => {
-        setSelectedCategory(categoryId);
+    const handleCategoryChange = (categorySlug: string | null) => {
+        setSelectedCategory(categorySlug);
         setCurrentPage(1);
+        // Don't set isInitialLoad to true for category changes - only for first page load
     };
+
+    // Track when initial load is complete (only on first mount)
+    useEffect(() => {
+        if (!isLoading && !categoryLoading && !categoriesLoading && isInitialLoad) {
+            setIsInitialLoad(false);
+        }
+    }, [isLoading, categoryLoading, categoriesLoading, isInitialLoad]);
 
     // Determine which products to display
     const displayedProducts = useMemo(() => {
         if (selectedCategory === null) {
             return productsData?.products || [];
         }
-        return productsByCategory || [];
+        return productsByCategory?.products || [];
     }, [productsData, productsByCategory, selectedCategory]);
 
     // Get pagination info
@@ -46,31 +61,34 @@ const Shop = () => {
                 total: productsData?.total || 0,
             };
         }
-        // For category products, we might need to calculate pages
-        // For now, assume single page for category products
-        const categoryProducts = productsByCategory || [];
         return {
-            currentPage: 1,
-            totalPages: 1,
-            total: categoryProducts.length,
+            currentPage: productsByCategory?.page || 1,
+            totalPages: productsByCategory?.total_pages || 1,
+            total: productsByCategory?.total || 0,
         };
     }, [productsData, productsByCategory, selectedCategory]);
 
+    // Determine loading state
+    const isProductsLoading = selectedCategory === null ? isLoading : categoryLoading;
+    // Only show full-page loading on very first load (when categories are also loading)
+    const showFullPageLoading = isInitialLoad && categoriesLoading;
+
     // Sort products
-    const sortedProducts = useMemo(() => {
-        const products = [...displayedProducts];
-        switch (sortBy) {
-            case "name-asc":
-                return products.sort((a, b) => a.name.localeCompare(b.name));
-            case "name-desc":
-                return products.sort((a, b) => b.name.localeCompare(a.name));
-            default:
-                return products;
-        }
-    }, [displayedProducts, sortBy]);
+    // const sortedProducts = useMemo(() => {
+    //     const products = [...(displayedProducts as Product[])];
+    //     switch (sortBy) {
+    //         case "name-asc":
+    //             return products.sort((a, b) => a.name.localeCompare(b.name));
+    //         case "name-desc":
+    //             return products.sort((a, b) => b.name.localeCompare(a.name));
+    //         default:
+    //             return products;
+    //     }
+    // }, [displayedProducts, sortBy]);
 
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
+        setIsInitialLoad(false); // Not initial load when paginating
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
@@ -90,7 +108,8 @@ const Shop = () => {
         return item ? item.quantity : 1;
     };
 
-    if (isLoading || categoriesLoading) {
+    // Show full-page loading only on initial load
+    if (showFullPageLoading) {
         return (
             <Loading
                 fullScreen
@@ -161,10 +180,10 @@ const Shop = () => {
                                 {categories?.map((category) => (
                                     <li key={category.id}>
                                         <button
-                                            onClick={() => handleCategoryChange(category.id)}
+                                            onClick={() => handleCategoryChange(category.slug)}
                                             className={cn(
                                                 "w-full text-left px-4 py-2 rounded-md transition-colors duration-200 font-switzer flex items-center justify-between",
-                                                selectedCategory === category.id
+                                                selectedCategory === category.slug
                                                     ? "bg-textcolor text-white font-semibold"
                                                     : "text-textcolor hover:bg-gray-100"
                                             )}
@@ -231,19 +250,26 @@ const Shop = () => {
                         </div>
 
                         {/* Products Grid/List */}
-                        {categoryLoading ? (
-                            <div className="flex items-center justify-center py-12">
-                                <Loading size="md" message="Loading products..." />
-                            </div>
-                        ) : sortedProducts.length === 0 ? (
+                        {displayedProducts.length === 0 && !isProductsLoading ? (
                             <div className="text-center py-12">
                                 <div className="text-lg text-textcolor">No products found</div>
                             </div>
                         ) : (
-                            <>
+                            <div className="relative">
+                                {/* Loading overlay for pagination */}
+                                {isProductsLoading && !isInitialLoad && (
+                                    <div className="absolute inset-0 bg-white/80 z-10 flex items-center justify-center min-h-[400px] rounded-lg">
+                                        <Loading size="md" message="Loading products..." />
+                                    </div>
+                                )}
+
+                                {/* Products Grid/List */}
                                 {viewMode === "grid" ? (
-                                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 mb-8">
-                                        {sortedProducts.map((product, index) => (
+                                    <div className={cn(
+                                        "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 mb-8",
+                                        isProductsLoading && !isInitialLoad && "opacity-50"
+                                    )}>
+                                        {displayedProducts.map((product, index) => (
                                             <ProductCard
                                                 key={product.id}
                                                 product={product}
@@ -255,8 +281,11 @@ const Shop = () => {
                                         ))}
                                     </div>
                                 ) : (
-                                    <div className="space-y-4 mb-8">
-                                        {sortedProducts.map((product, index) => (
+                                    <div className={cn(
+                                        "space-y-4 mb-8",
+                                        isProductsLoading && !isInitialLoad && "opacity-50"
+                                    )}>
+                                        {displayedProducts.map((product, index) => (
                                             <ProductCardList
                                                 key={product.id}
                                                 product={product}
@@ -270,7 +299,7 @@ const Shop = () => {
                                 )}
 
                                 {/* Pagination */}
-                                {selectedCategory === null && paginationInfo.totalPages > 1 && (
+                                {paginationInfo.totalPages > 1 && (
                                     <div className="flex items-center justify-center gap-4 mt-8">
                                         <button
                                             onClick={() => handlePageChange(paginationInfo.currentPage - 1)}
@@ -309,7 +338,7 @@ const Shop = () => {
                                         </button>
                                     </div>
                                 )}
-                            </>
+                            </div>
                         )}
                     </main>
                 </div>
@@ -326,7 +355,7 @@ interface QuantitySelectorProps {
     max?: number;
 }
 
-const QuantitySelector = ({ quantity, onQuantityChange, min = 1, max = 999 }: QuantitySelectorProps) => {
+export const QuantitySelector = ({ quantity, onQuantityChange, min = 1, max = 999 }: QuantitySelectorProps) => {
     const handleDecrease = (e: React.MouseEvent) => {
         e.stopPropagation();
         if (quantity > min) onQuantityChange(quantity - 1);
@@ -380,126 +409,6 @@ const QuantitySelector = ({ quantity, onQuantityChange, min = 1, max = 999 }: Qu
     );
 };
 
-// const QuantitySelector = ({ quantity, onQuantityChange, min = 1, max = 999 }: QuantitySelectorProps) => {
-//     const handleDecrease = (e: React.MouseEvent) => {
-//         e.stopPropagation();
-//         if (quantity > min) {
-//             onQuantityChange(quantity - 1);
-//         }
-//     };
-
-//     const handleIncrease = (e: React.MouseEvent) => {
-//         e.stopPropagation();
-//         if (quantity < max) {
-//             onQuantityChange(quantity + 1);
-//         }
-//     };
-
-//     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//         e.stopPropagation();
-//         const value = parseInt(e.target.value) || min;
-//         const clampedValue = Math.max(min, Math.min(max, value));
-//         onQuantityChange(clampedValue);
-//     };
-
-//     return (
-//         <div className="flex items-center rounded-md bg-white overflow-hidden border border-gray-300">
-//             <button
-//                 onClick={handleDecrease}
-//                 disabled={quantity <= min}
-//                 className={cn(
-//                     "px-3 py-2 bg-white hover:bg-gray-100 transition-colors duration-200",
-//                     quantity <= min && "opacity-50 cursor-not-allowed"
-//                 )}
-//             >
-//                 <HiMinus className="w-4 h-4 text-textcolor" />
-//             </button>
-//             <input
-//                 type="number"
-//                 value={quantity}
-//                 onChange={handleInputChange}
-//                 min={min}
-//                 max={max}
-//                 className="w-16 px-2 py-2 text-center border-x border-gray-300 focus:outline-none focus:ring-2 focus:ring-textcolor font-switzer text-textcolor"
-//             />
-//             <button
-//                 onClick={handleIncrease}
-//                 disabled={quantity >= max}
-//                 className={cn(
-//                     "px-3 py-2 bg-white hover:bg-gray-100 transition-colors duration-200",
-//                     quantity >= max && "opacity-50 cursor-not-allowed"
-//                 )}
-//             >
-//                 <HiPlus className="w-4 h-4 text-textcolor" />
-//             </button>
-//         </div>
-//     );
-// };
-
-// Product Card Component (Grid View)
-interface ProductCardProps {
-    product: Product;
-    index: number;
-    onAddToQuote: (product: Product, quantity: number, e?: React.MouseEvent) => void;
-    isInQuote: boolean;
-    currentQuantity: number;
-}
-
-const ProductCard = ({ product, index, onAddToQuote, isInQuote, currentQuantity }: ProductCardProps) => {
-    const [quantity, setQuantity] = useState(currentQuantity);
-
-    useEffect(() => {
-        setQuantity(currentQuantity);
-    }, [currentQuantity]);
-
-    const handleAddToQuote = (e: React.MouseEvent) => {
-        onAddToQuote(product, quantity, e);
-    };
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
-        >
-            {/* Product Image */}
-            <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-200 cursor-pointer">
-                <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover"
-                />
-            </div>
-
-            {/* Product Content */}
-            <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
-                {/* Product Title */}
-                <h3 className="text-lg sm:text-xl md:text-2xl font-tanker text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
-                    {product.name}
-                </h3>
-
-                {/* Quantity Selector and Add to Quote Button */}
-                <div className="space-y-3">
-                    <QuantitySelector
-                        quantity={quantity}
-                        onQuantityChange={setQuantity}
-                    />
-                    <button
-                        onClick={handleAddToQuote}
-                        className={cn(
-                            "w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base",
-                            "bg-textcolor hover:bg-textcolor/70 text-white"
-                        )}
-                    >
-                        {isInQuote ? "Update Quote" : "Add to Quote"}
-                    </button>
-                </div>
-            </div>
-        </motion.div>
-    );
-};
-
 // Product Card Component (List View)
 const ProductCardList = ({ product, index, onAddToQuote, isInQuote, currentQuantity }: ProductCardProps) => {
     const [quantity, setQuantity] = useState(currentQuantity);
@@ -520,20 +429,26 @@ const ProductCardList = ({ product, index, onAddToQuote, isInQuote, currentQuant
             className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col sm:flex-row gap-4 sm:gap-6 p-4 sm:p-6"
         >
             {/* Product Image */}
-            <div className="relative w-full sm:w-32 md:w-40 h-32 sm:h-32 md:h-40 overflow-hidden bg-gray-200 rounded-lg shrink-0 cursor-pointer">
+            <Link
+                to={getProductUrl(product)}
+                className="relative w-full sm:w-32 md:w-40 h-32 sm:h-32 md:h-40 overflow-hidden bg-gray-200 rounded-lg shrink-0 cursor-pointer block"
+            >
                 <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover"
                 />
-            </div>
+            </Link>
 
             {/* Product Content - Middle */}
             <div className="flex flex-col flex-1 justify-center">
                 {/* Product Title */}
-                <h3 className="text-base sm:text-lg md:text-xl font-tanker text-textcolor mb-2 line-clamp-2 cursor-pointer hover:underline">
+                <Link
+                    to={getProductUrl(product)}
+                    className="text-base sm:text-lg md:text-xl font-tanker text-textcolor mb-2 line-clamp-2 cursor-pointer hover:underline"
+                >
                     {product.name}
-                </h3>
+                </Link>
             </div>
 
             {/* Quantity and Add to Quote - Right Side */}

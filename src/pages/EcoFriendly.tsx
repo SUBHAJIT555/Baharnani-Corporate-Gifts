@@ -5,15 +5,12 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
 import { Leaf, Award, Package, Users, Globe } from "lucide-react";
 import CallToAction from "../components/CallToAction";
-import { giftItems } from "../data/giftItems";
 
 // images
 import EcoFriendlyImage from "../assets/images/Products-hero-image/Contracting-Solutions-hero.webp";
+import { useState } from "react";
+import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 
-// Filter eco-friendly items from giftItems
-const ecoFriendlyItems = giftItems.filter(
-  (item) => item.category === "Eco friendly"
-);
 
 const ecoFriendlyFeatures: FeatureCard[] = [
   {
@@ -73,6 +70,19 @@ const ecoFriendlyFeatures: FeatureCard[] = [
 ];
 
 const EcoFriendly = () => {
+  const categorySlug = "eco-friendly";
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 12;
+  const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(categorySlug, currentPage, perPage);
+  const productData = productsData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 };
+  console.log("products in eco-friendly", productData);
+  const { data: categories } = useProductCategories();
+  const filteredCategories = categories?.filter(category => category.slug === categorySlug);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <div>
       <CommonHero
@@ -102,7 +112,12 @@ const EcoFriendly = () => {
       <ProductGrid
         title="Explore Our Collection of Eco-Friendly Corporate Gifts"
         productType="custom"
-        products={ecoFriendlyItems}
+        productData={productData}
+        selectedCategory={categorySlug}
+        onPageChange={handlePageChange}
+        categories={filteredCategories || []}
+        isLoading={productsLoading}
+        error={productsError}
         id="eco-friendly"
       />
       <WhyChooseUs features={ecoFriendlyFeatures} />

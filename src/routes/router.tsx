@@ -19,6 +19,7 @@ import CookiePolicy from "../pages/CookiePolicy";
 import LuxuryCorporateGifts from "../pages/LuxuryCorporateGifts";
 import Shop from "../pages/Shop";
 import ThankYou from "../pages/ThankYou";
+import ProductDetails from "../pages/ProductDetails";
 
 
 export const router = createBrowserRouter([
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/about-us", element: <About /> },
       { path: "/shop", element: <Shop /> },
+      { path: "/shop/:category/:slug", element: <ProductDetails /> },
       {
         path: "/products",
         element: <Product />,
@@ -63,7 +65,7 @@ export const router = createBrowserRouter([
         element: <EcoFriendly />,
       },
       {
-        path: "/product-category/gift-sets",
+        path: "/product-category/premium-gift-sets",
         element: <GiftSet />,
       },
       {

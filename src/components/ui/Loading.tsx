@@ -8,17 +8,17 @@ interface LoadingProps {
   className?: string;
 }
 
-const Loading = ({ 
-  size = "md", 
-  fullScreen = false, 
+const Loading = ({
+  size = "md",
+  fullScreen = false,
   message,
-  className 
+  className
 }: LoadingProps) => {
-  const sizeClasses = {
-    sm: "w-8 h-8",
-    md: "w-12 h-12",
-    lg: "w-16 h-16",
-  };
+  // const sizeClasses = {
+  //   sm: "w-8 h-8",
+  //   md: "w-12 h-12",
+  //   lg: "w-16 h-16",
+  // };
 
   const spinnerSizeClasses = {
     sm: "w-6 h-6 border-2",
@@ -43,7 +43,7 @@ const Loading = ({
             ease: "linear",
           }}
         />
-        
+
         {/* Inner counter-rotating ring */}
         <motion.div
           className={cn(
@@ -102,11 +102,11 @@ const Loading = ({
 };
 
 // Alternative Loading Component with Pulse Animation
-export const LoadingPulse = ({ 
-  size = "md", 
-  fullScreen = false, 
+export const LoadingPulse = ({
+  size = "md",
+  fullScreen = false,
   message,
-  className 
+  className
 }: LoadingProps) => {
   const sizeClasses = {
     sm: "w-8 h-8",
@@ -164,11 +164,11 @@ export const LoadingPulse = ({
 };
 
 // Skeleton Loading Component
-export const LoadingSkeleton = ({ 
+export const LoadingSkeleton = ({
   className,
-  count = 1 
-}: { 
-  className?: string; 
+  count = 1
+}: {
+  className?: string;
   count?: number;
 }) => {
   return (

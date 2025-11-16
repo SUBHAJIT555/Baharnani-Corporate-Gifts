@@ -6,9 +6,30 @@ const API_BASE_URL =
 export interface Product {
   id: number;
   name: string;
+  slug: string;
+  permalink: string;
+  short_desc: string;
   image: string;
-  description?: string;
-  categories: number[];
+  categories: string[];
+  category_slug?: string[];
+}
+
+export interface ProductDetails {
+  id: number;
+  slug: string;
+  name: string;
+  type: string;
+  permalink: string;
+  sku: string;
+  price: number;
+  regular_price: string;
+  sale_price: string;
+  description: string;
+  short_desc: string;
+  main_image: string;
+  gallery: string[];
+  categories: string[];
+  category_slug?: string[];
 }
 
 export interface ProductCategory {
@@ -53,7 +74,7 @@ export interface QuoteRequestPayload {
 export interface QuoteResponse {
   status: boolean;
   message: string;
-  data?: any;
+  data?: unknown;
 }
 
 export interface PaginatedProductsResponse {
@@ -67,18 +88,36 @@ export interface PaginatedProductsResponse {
 // API Functions
 
 /**
- * Fetch all products with pagination
+ * Fetch all products with pagination and optional query parameters
  */
 export const fetchAllProducts = async (
-  page: number = 1,
-  per_page: number = 48
+  page?: number,
+  per_page?: number,
+  queryParams?: Record<string, string | number | boolean>
 ): Promise<PaginatedProductsResponse> => {
-  const response = await fetch(
-    `${API_BASE_URL}/products?page=${page}&per_page=${per_page}`
-  );
+  if (!page) {
+    page = 1;
+  }
+  if (!per_page) {
+    per_page = 48;
+  }
+  // Build query string
+  const params = new URLSearchParams({
+    page: page.toString(),
+    per_page: per_page.toString(),
+  });
+
+  // Add optional query parameters
+  if (queryParams) {
+    Object.entries(queryParams).forEach(([key, value]) => {
+      params.append(key, value.toString());
+    });
+  }
+
+  const response = await fetch(`${API_BASE_URL}/products?${params.toString()}`);
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch all products: ${response.statusText}`);
+    throw new Error(`Failed to fetch products: ${response.statusText}`);
   }
 
   const data = await response.json();
@@ -117,19 +156,43 @@ export const fetchProductCategories = async (): Promise<ProductCategory[]> => {
  * Fetch products by category ID
  */
 export const fetchProductsByCategory = async (
-  categoryId: number
-): Promise<Product[]> => {
+  categorySlug: string,
+  page?: number,
+  per_page?: number
+): Promise<PaginatedProductsResponse> => {
+  if (!page) {
+    page = 1;
+  }
+  if (!per_page) {
+    per_page = 48;
+  }
   const response = await fetch(
-    `${API_BASE_URL}/products-by-category?category_id=${categoryId}`
+    `${API_BASE_URL}/products-by-category?category_slug=${categorySlug}&page=${page}&per_page=${per_page}`
   );
 
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch products for category ${categoryId}: ${response.statusText}`
+      `Failed to fetch products for category ${categorySlug}: ${response.statusText}`
     );
   }
 
   return response.json();
+};
+
+/**
+ * Fetch product details by slug
+ */
+export const fetchProductBySlug = async (
+  slug: string
+): Promise<ProductDetails> => {
+  const response = await fetch(`${API_BASE_URL}/product/${slug}`);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch product: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data;
 };
 
 /**

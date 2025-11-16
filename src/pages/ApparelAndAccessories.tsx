@@ -5,15 +5,17 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
 import { Package, Award, Users, Shirt, Sparkles } from "lucide-react";
 import CallToAction from "../components/CallToAction";
-import { giftItems } from "../data/giftItems";
+// import { giftItems } from "../data/giftItems";
 
 // images
 import ConstructionMaterialsImage from "../assets/images/Products-hero-image/Construction-Materials-hero.webp";
+import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
+import { useState } from "react";
 
 // Filter apparel and accessories items from giftItems
-const apparelAndAccessoriesItems = giftItems.filter(
-  (item) => item.category === "Apparel and accessories"
-);
+// const apparelAndAccessoriesItems = giftItems.filter(
+//   (item) => item.category === "Apparel and accessories"
+// );
 
 const apparelAndAccessoriesFeatures: FeatureCard[] = [
   {
@@ -64,6 +66,18 @@ const apparelAndAccessoriesFeatures: FeatureCard[] = [
 ];
 
 const ApparelAndAccessories = () => {
+  const categorySlug = "apparel-and-accessories";
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 12;
+  const { data: categories } = useProductCategories();
+  const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(categorySlug, currentPage, perPage);
+
+  const filteredCategories = categories?.filter(category => category.slug === categorySlug);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <div>
       <CommonHero
@@ -92,7 +106,12 @@ const ApparelAndAccessories = () => {
       <ProductGrid
         title="Explore Our Collection of Apparel & Accessories"
         productType="custom"
-        products={apparelAndAccessoriesItems}
+        productData={productsData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 }}
+        onPageChange={handlePageChange}
+        categories={filteredCategories || []}
+        isLoading={productsLoading}
+        error={productsError}
+        selectedCategory={categorySlug}
         id="apparel-accessories"
       />
       <WhyChooseUs features={apparelAndAccessoriesFeatures} />

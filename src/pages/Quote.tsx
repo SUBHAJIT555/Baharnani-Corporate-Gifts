@@ -130,9 +130,9 @@ const Quote = () => {
                           <h3 className="font-tanker text-textcolor text-lg mb-1 line-clamp-2">
                             {item.name}
                           </h3>
-                          {item.description && (
+                          {item.short_desc && (
                             <p className="text-sm text-gray-600 mb-2 line-clamp-2">
-                              {item.description}
+                              {item.short_desc}
                             </p>
                           )}
                           <div className="flex items-center gap-2">

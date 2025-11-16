@@ -5,15 +5,17 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
 import { Award, Globe, Leaf, Package, Users, PenTool } from "lucide-react";
 import CallToAction from "../components/CallToAction";
-import { giftItems } from "../data/giftItems";
+// import { giftItems } from "../data/giftItems";
 
 // images
 import BuildingMaterialsImage from "../assets/images/Products-hero-image/Building-Materials-hero.webp";
+import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
+import { useState } from "react";
 
 // Filter office and stationary items from giftItems
-const officeAndStationaryItems = giftItems.filter(
-  (item) => item.category === "Office and stationary"
-);
+// const officeAndStationaryItems = giftItems.filter(
+//   (item) => item.category === "Office and stationary"
+// );
 
 const officeAndStationaryFeatures: FeatureCard[] = [
   {
@@ -72,6 +74,19 @@ const officeAndStationaryFeatures: FeatureCard[] = [
   },
 ];
 const OfficeAndStationary = () => {
+  const categorySlug = "office-and-stationary";
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 12;
+  const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(categorySlug, currentPage, perPage);
+  const productData = productsData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 };
+  console.log("products in office and stationary", productData);
+  const { data: categories } = useProductCategories();
+  const filteredCategories = categories?.filter(category => category.slug === categorySlug);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <div>
       <CommonHero
@@ -101,7 +116,12 @@ const OfficeAndStationary = () => {
       <ProductGrid
         title="Explore Our Collection of Office & Stationery"
         productType="custom"
-        products={officeAndStationaryItems}
+        productData={productData}
+        onPageChange={handlePageChange}
+        categories={filteredCategories || []}
+        isLoading={productsLoading}
+        error={productsError}
+        selectedCategory={categorySlug}
         id="office-and-stationary"
       />
       <WhyChooseUs features={officeAndStationaryFeatures} />

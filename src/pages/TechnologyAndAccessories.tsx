@@ -17,6 +17,7 @@ import CallToAction from "../components/CallToAction";
 // images
 import TechnologyAndAccessoriesImage from "../assets/images/Hero-images/Home-hero-Building-Materials.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
+import { useState } from "react";
 // import { useState } from "react";
 
 // Filter technology and accessories items from giftItems
@@ -82,10 +83,20 @@ const technologyAndAccessoriesFeatures: FeatureCard[] = [
 ];
 
 const TechnologyAndAccessories = () => {
+  const categorySlug = "technology-and-accessories";
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 12;
+
+  const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(categorySlug, currentPage, perPage);
+  const productData = productsData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 };
+  console.log("products in technology and accessories", productData);
 
   const { data: categories } = useProductCategories();
-  const { data: products, isLoading: productsLoading, error: productsError } = useProductsByCategory(113);
-  const filteredCategories = categories?.filter(category => category.id === 113);
+  const filteredCategories = categories?.filter(category => category.slug === categorySlug);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <div>
@@ -115,11 +126,12 @@ const TechnologyAndAccessories = () => {
       <ProductGrid
         title="Explore Our Collection of Technology & Accessories"
         productType="custom"
-        products={products || []}
+        productData={productData}
+        selectedCategory={categorySlug}
+        onPageChange={handlePageChange}
         categories={filteredCategories || []}
         isLoading={productsLoading}
         error={productsError}
-        selectedCategory={113}
         id="technology-and-accessories"
       />
       <WhyChooseUs features={technologyAndAccessoriesFeatures} />

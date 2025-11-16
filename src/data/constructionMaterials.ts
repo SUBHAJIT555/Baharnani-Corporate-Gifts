@@ -22,7 +22,6 @@ import PrecastConcreteElements from "../assets/images/Construction-Materials-pro
 import SteelWireRope from "../assets/images/Construction-Materials-products-images/Steel Wire Rope.webp";
 import GravelCrushedStone from "../assets/images/Construction-Materials-products-images/Gravel & Crushed Stone.webp";
 import FormworkPlywood from "../assets/images/Construction-Materials-products-images/Formwork Plywood.webp";
-import type { Product } from "../services/api";
 
 export const constructionMaterials = [
   {

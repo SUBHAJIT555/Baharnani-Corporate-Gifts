@@ -1,31 +1,34 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Pagination, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ImCross } from "react-icons/im";
 import { useQuote } from "../contexts/QuoteContext";
-import type { Product } from "../data/foodstuff";
-import { foodstuff } from "../data/foodstuff";
+// import { foodstuff } from "../data/foodstuff"
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { PiSealPercentDuotone } from "react-icons/pi";
+import type { Product } from "../services/api";
+import { useRandomProducts } from "../hooks/useProducts";
+import { getProductUrl } from "../lib/utilts";
 
 interface TopSaverProps {
-  products?: Product[];
+
   videoUrl?: string;
 }
 
 // Get first 12 products as default (10-15 range)
-const defaultProducts = foodstuff.slice(0, 12);
+// const defaultProducts = foodstuff.slice(0, 12);
 
 const TopSaver = ({
-  products = defaultProducts,
   videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
 }: TopSaverProps) => {
+  const { data: products } = useRandomProducts()
   const { addToQuote, isInQuote } = useQuote();
   const headingRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<HTMLDivElement>(null);
@@ -108,15 +111,15 @@ const TopSaver = ({
 
   const handleAddToQuote = (product: Product, e?: React.MouseEvent) => {
     e?.stopPropagation();
-    if (!isInQuote(product.id)) {
+    if (!isInQuote(Number(product.id))) {
       addToQuote(product, 1);
     }
   };
 
-  const handleProductClick = (product: Product) => {
-    setSelectedProduct(product);
-    setIsProductModalOpen(true);
-  };
+  // const handleProductClick = (product: Product) => {
+  //   // Navigate to product details page with SEO-friendly URL
+  //   navigate(getProductUrl(product));
+  // };
 
   const handleCloseModal = () => {
     setIsProductModalOpen(false);
@@ -235,7 +238,7 @@ const TopSaver = ({
                   equalizeHeights();
                 }}
               >
-                {products.map((product, index) => (
+                {products?.map((product, index) => (
                   <SwiperSlide key={product.id}>
                     <motion.div
                       initial={{ opacity: 0, y: 30 }}
@@ -247,18 +250,15 @@ const TopSaver = ({
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       className="h-full w-full"
                     >
-                      <div
-                        ref={(el) => {
-                          cardRefs.current[index] = el;
-                        }}
-                        onClick={() => handleProductClick(product)}
+                      <Link
+                        to={getProductUrl(product)}
                         className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col cursor-pointer h-full"
                       >
                         {/* Product Image */}
                         <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-200">
                           <img
                             src={product.image}
-                            alt={product.title}
+                            alt={product.name}
                             className="w-full h-full object-cover"
                           />
                         </div>
@@ -266,23 +266,22 @@ const TopSaver = ({
                         {/* Product Content */}
                         <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
                           {/* Category Badge */}
-                          <span className="text-xs sm:text-sm font-switzer text-textcolor/60 mb-2 uppercase tracking-wide">
-                            {product.category}
+                          <span className="text-xs font-switzer text-textcolor/60 mb-2 uppercase tracking-wide line-clamp-1 overflow-hidden text-ellipsis">
+                            {product.categories[0]}
                           </span>
 
                           {/* Product Title */}
-                          <h3 className="text-lg sm:text-xl md:text-2xl font-tanker text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
-                            {product.title}
+                          <h3 className="text-sm font-tanker text-textcolor mb-4 grow line-clamp-1 overflow-hidden text-ellipsis">
+                            {product.name}
                           </h3>
 
                           {/* Add to Quote Button */}
                           <button
                             disabled={isInQuote(product.id)}
-                            className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${
-                              isInQuote(product.id)
-                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                                : "bg-textcolor hover:bg-textcolor/70 text-white"
-                            }`}
+                            className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(product.id)
+                              ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                              : "bg-textcolor hover:bg-textcolor/70 text-white"
+                              }`}
                             onClick={(e) => handleAddToQuote(product, e)}
                           >
                             {isInQuote(product.id)
@@ -290,7 +289,7 @@ const TopSaver = ({
                               : "Add to Quote"}
                           </button>
                         </div>
-                      </div>
+                      </Link>
                     </motion.div>
                   </SwiperSlide>
                 ))}
@@ -382,7 +381,7 @@ const TopSaver = ({
                       <div className="w-full lg:w-1/2 h-56 sm:h-72 md:h-80 lg:h-full bg-gray-100 shrink-0">
                         <img
                           src={selectedProduct.image}
-                          alt={selectedProduct.title}
+                          alt={selectedProduct.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -391,12 +390,12 @@ const TopSaver = ({
                       <div className="w-full lg:w-1/2 p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col pb-20 sm:pb-6 lg:pb-10">
                         {/* Category Badge */}
                         <span className="text-xs font-switzer text-textcolor mb-2 sm:mb-3 uppercase border border-textcolor/30 rounded-md w-fit p-1 bg-white tracking-wide">
-                          {selectedProduct.category}
+                          {selectedProduct.categories[0]}
                         </span>
 
                         {/* Product Title */}
                         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-tanker text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight">
-                          {selectedProduct.title}
+                          {selectedProduct.name}
                         </h2>
 
                         {/* Description/Details */}
@@ -405,7 +404,7 @@ const TopSaver = ({
                             Product Details :
                           </h3>
                           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-switzer text-textcolor/80 leading-relaxed">
-                            {selectedProduct.description}
+                            {selectedProduct.short_desc}
                           </p>
                         </div>
 
@@ -413,11 +412,10 @@ const TopSaver = ({
                         <div className="hidden lg:block mt-auto">
                           <button
                             disabled={isInQuote(selectedProduct.id)}
-                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${
-                              isInQuote(selectedProduct.id)
-                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                                : "bg-textcolor hover:bg-textcolor/70 text-white"
-                            }`}
+                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${isInQuote(selectedProduct.id)
+                              ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                              : "bg-textcolor hover:bg-textcolor/70 text-white"
+                              }`}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleAddToQuote(selectedProduct, e);
@@ -436,11 +434,10 @@ const TopSaver = ({
                   <div className="lg:hidden sticky bottom-0 left-0 right-0 bg-bg border-t border-gray-200 p-4 pt-3 shadow-lg z-10">
                     <button
                       disabled={isInQuote(selectedProduct.id)}
-                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${
-                        isInQuote(selectedProduct.id)
-                          ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                          : "bg-textcolor hover:bg-textcolor/70 text-white"
-                      }`}
+                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${isInQuote(selectedProduct.id)
+                        ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                        : "bg-textcolor hover:bg-textcolor/70 text-white"
+                        }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleAddToQuote(selectedProduct, e);

@@ -6,94 +6,95 @@ import { Pagination, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ImCross } from "react-icons/im";
 import { useQuote } from "../contexts/QuoteContext";
-import type { Product } from "../data/constructionMaterials";
+
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { PiCrownDuotone } from "react-icons/pi";
+import type { Product } from "../services/api";
+import { useFeaturedProducts } from "../hooks/useProducts";
 
-export interface BrandCard {
-  id: number;
-  category: string;
-  productName: string;
-  image: string;
-  description?: string;
-}
+// export interface BrandCard {
+//   id: number;
+//   category: string;
+//   productName: string;
+//   image: string;
+//   description?: string;
+// }
 
-interface FeatureBrandProps {
-  brands?: BrandCard[];
-}
 
-const defaultBrands: BrandCard[] = [
-  {
-    id: 1,
-    category: "EATING AND DRINKING",
-    productName: "HYDRATEHAVEN",
-    image:
-      "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=300&fit=crop",
-  },
-  {
-    id: 2,
-    category: "BAGS AND TRAVEL",
-    productName: "BRG LAPTOP BAG",
-    image:
-      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=300&fit=crop",
-  },
-  {
-    id: 3,
-    category: "OFFICE AND STATIONARY",
-    productName: "SLIM ROLLER",
-    image:
-      "https://images.unsplash.com/photo-1583484963886-cfe2bff2945f?w=400&h=300&fit=crop",
-  },
-  {
-    id: 4,
-    category: "PREMIUMS AND TOOLS",
-    productName: "Anti Stress Round Flat Surface",
-    image:
-      "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
-  },
-  {
-    id: 5,
-    category: "SPORTS AND RECREATION",
-    productName: "ECO FRIENDLY",
-    image:
-      "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
-  },
-  {
-    id: 6,
-    category: "ECO FRIENDLY",
-    productName: "ECO FRIENDLY",
-    image:
-      "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
-  },
-  {
-    id: 7,
-    category: "ECO FRIENDLY",
-    productName: "ECO FRIENDLY",
-    image:
-      "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
-  },
-  {
-    id: 8,
-    category: "ECO FRIENDLY",
-    productName: "ECO FRIENDLY",
-    image:
-      "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
-  },
-];
+// const defaultBrands: BrandCard[] = [
+//   {
+//     id: 1,
+//     category: "EATING AND DRINKING",
+//     productName: "HYDRATEHAVEN",
+//     image:
+//       "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=300&fit=crop",
+//   },
+//   {
+//     id: 2,
+//     category: "BAGS AND TRAVEL",
+//     productName: "BRG LAPTOP BAG",
+//     image:
+//       "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=300&fit=crop",
+//   },
+//   {
+//     id: 3,
+//     category: "OFFICE AND STATIONARY",
+//     productName: "SLIM ROLLER",
+//     image:
+//       "https://images.unsplash.com/photo-1583484963886-cfe2bff2945f?w=400&h=300&fit=crop",
+//   },
+//   {
+//     id: 4,
+//     category: "PREMIUMS AND TOOLS",
+//     productName: "Anti Stress Round Flat Surface",
+//     image:
+//       "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
+//   },
+//   {
+//     id: 5,
+//     category: "SPORTS AND RECREATION",
+//     productName: "ECO FRIENDLY",
+//     image:
+//       "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
+//   },
+//   {
+//     id: 6,
+//     category: "ECO FRIENDLY",
+//     productName: "ECO FRIENDLY",
+//     image:
+//       "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
+//   },
+//   {
+//     id: 7,
+//     category: "ECO FRIENDLY",
+//     productName: "ECO FRIENDLY",
+//     image:
+//       "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
+//   },
+//   {
+//     id: 8,
+//     category: "ECO FRIENDLY",
+//     productName: "ECO FRIENDLY",
+//     image:
+//       "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
+//   },
+// ];
 
-const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
+const FeatureBrand = () => {
   const headingRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<HTMLDivElement>(null);
   const swiperInstanceRef = useRef<SwiperType | null>(null);
   const { addToQuote, isInQuote } = useQuote();
-  const [selectedBrand, setSelectedBrand] = useState<BrandCard | null>(null);
+  const [selectedBrand, setSelectedBrand] = useState<Product | null>(null);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
+  const { data: brandsData } = useFeaturedProducts();
+  const brands = brandsData?.products || [];
   const isHeadingInView = useInView(headingRef, {
     once: true,
     margin: "-50px",
@@ -104,19 +105,19 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
   });
 
   // Convert BrandCard to Product format for quote
-  const convertBrandToProduct = (brand: BrandCard): Product => {
-    return {
-      id: `brand-${brand.id}`,
-      title: brand.productName,
-      description:
-        brand.description ||
-        `Premium corporate gift from ${brand.category}. ${brand.productName} is a high-quality product perfect for corporate gifting and business promotions.`,
-      category: brand.category,
-      image: brand.image,
-    };
-  };
+  // const convertBrandToProduct = (brand: BrandCard): Product => {
+  //   return {
+  //     id: `brand-${brand.id}`,
+  //     title: brand.productName,
+  //     description:
+  //       brand.description ||
+  //       `Premium corporate gift from ${brand.category}. ${brand.productName} is a high-quality product perfect for corporate gifting and business promotions.`,
+  //     category: brand.category,
+  //     image: brand.image,
+  //   };
+  // };
 
-  const handleBrandClick = (brand: BrandCard) => {
+  const handleBrandClick = (brand: Product) => {
     setSelectedBrand(brand);
     setIsProductModalOpen(true);
   };
@@ -127,11 +128,10 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
     setTimeout(() => setSelectedBrand(null), 300);
   };
 
-  const handleAddToQuote = (brand: BrandCard, e?: React.MouseEvent) => {
+  const handleAddToQuote = (brand: Product, e?: React.MouseEvent) => {
     e?.stopPropagation(); // Prevent card click when clicking button
-    const product = convertBrandToProduct(brand);
-    if (!isInQuote(product.id)) {
-      addToQuote(product, 1);
+    if (!isInQuote(brand.id)) {
+      addToQuote(brand, 1);
     }
   };
 
@@ -178,11 +178,10 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
               {/* Previous Button */}
               <button
                 disabled={isBeginning}
-                className={`flex items-center gap-2 transition-opacity ${
-                  isBeginning
-                    ? "opacity-40 cursor-not-allowed"
-                    : "hover:opacity-70 cursor-pointer"
-                }`}
+                className={`flex items-center gap-2 transition-opacity ${isBeginning
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:opacity-70 cursor-pointer"
+                  }`}
                 onClick={() => swiperInstanceRef.current?.slidePrev()}
                 aria-label="Previous slide"
               >
@@ -195,11 +194,10 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
               {/* Next Button */}
               <button
                 disabled={isEnd}
-                className={`flex items-center gap-2 transition-opacity ${
-                  isEnd
-                    ? "opacity-40 cursor-not-allowed"
-                    : "hover:opacity-70 cursor-pointer"
-                }`}
+                className={`flex items-center gap-2 transition-opacity ${isEnd
+                  ? "opacity-40 cursor-not-allowed"
+                  : "hover:opacity-70 cursor-pointer"
+                  }`}
                 onClick={() => swiperInstanceRef.current?.slideNext()}
                 aria-label="Next slide"
               >
@@ -269,19 +267,19 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
                       <div className="w-full h-40 sm:h-44 md:h-48 lg:h-52 xl:h-56 mb-4 sm:mb-5 md:mb-6 flex items-center justify-center">
                         <img
                           src={brand.image}
-                          alt={brand.productName}
+                          alt={brand.name}
                           className="w-full h-full object-contain"
                         />
                       </div>
 
                       {/* Category */}
-                      <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-switzer font-bold text-textcolor/70 tracking-widest mb-2 sm:mb-3 text-center uppercase">
-                        {brand.category}
+                      <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-switzer font-bold text-textcolor/70 tracking-widest mb-2 sm:mb-3 text-center uppercase line-clamp-1 overflow-hidden text-ellipsis">
+                        {brand.categories[0]}
                       </h3>
 
                       {/* Product Name */}
-                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-tanker text-textcolor text-center">
-                        {brand.productName}
+                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-tanker text-textcolor text-center line-clamp-1 overflow-hidden text-ellipsis">
+                        {brand.name}
                       </p>
                     </div>
                   </motion.div>
@@ -341,7 +339,7 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
                       <div className="w-full lg:w-1/2 h-56 sm:h-72 md:h-80 lg:h-full bg-gray-100 shrink-0">
                         <img
                           src={selectedBrand.image}
-                          alt={selectedBrand.productName}
+                          alt={selectedBrand.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -350,12 +348,12 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
                       <div className="w-full lg:w-1/2 p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col pb-20 sm:pb-6 lg:pb-10">
                         {/* Category Badge */}
                         <span className="text-xs font-switzer text-textcolor mb-2 sm:mb-3 uppercase border border-textcolor/30 rounded-md w-fit p-1 bg-white tracking-wide">
-                          {selectedBrand.category}
+                          {selectedBrand.categories[0]}
                         </span>
 
                         {/* Product Title */}
-                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-tanker text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight">
-                          {selectedBrand.productName}
+                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-tanker text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight ">
+                          {selectedBrand.name}
                         </h2>
 
                         {/* Description/Details */}
@@ -364,26 +362,25 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
                             Product Details :
                           </h3>
                           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-switzer text-textcolor/80 leading-relaxed">
-                            {selectedBrand.description ||
-                              `Premium corporate gift from ${selectedBrand.category}. ${selectedBrand.productName} is a high-quality product perfect for corporate gifting and business promotions. Elevate your brand image with this carefully curated item from Baharnani Advertising.`}
+                            {selectedBrand.short_desc ||
+                              `Premium corporate gift from ${selectedBrand.categories[0]}. ${selectedBrand.name} is a high-quality product perfect for corporate gifting and business promotions. Elevate your brand image with this carefully curated item from Baharnani Advertising.`}
                           </p>
                         </div>
 
                         {/* Desktop Button (inside content section) */}
                         <div className="hidden lg:block mt-auto">
                           <button
-                            disabled={isInQuote(`brand-${selectedBrand.id}`)}
-                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${
-                              isInQuote(`brand-${selectedBrand.id}`)
-                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                                : "bg-textcolor hover:bg-textcolor/70 text-white"
-                            }`}
+                            disabled={isInQuote(selectedBrand.id)}
+                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${isInQuote(selectedBrand.id)
+                              ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                              : "bg-textcolor hover:bg-textcolor/70 text-white"
+                              }`}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleAddToQuote(selectedBrand, e);
                             }}
                           >
-                            {isInQuote(`brand-${selectedBrand.id}`)
+                            {isInQuote(selectedBrand.id)
                               ? "Added to Quote"
                               : "Add to Quote"}
                           </button>
@@ -395,18 +392,17 @@ const FeatureBrand = ({ brands = defaultBrands }: FeatureBrandProps) => {
                   {/* Sticky Button for Mobile */}
                   <div className="lg:hidden sticky bottom-0 left-0 right-0 bg-bg border-t border-gray-200 p-4 pt-3 shadow-lg z-10">
                     <button
-                      disabled={isInQuote(`brand-${selectedBrand.id}`)}
-                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${
-                        isInQuote(`brand-${selectedBrand.id}`)
-                          ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                          : "bg-textcolor hover:bg-textcolor/70 text-white"
-                      }`}
+                      disabled={isInQuote(selectedBrand.id)}
+                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${isInQuote(selectedBrand.id)
+                        ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                        : "bg-textcolor hover:bg-textcolor/70 text-white"
+                        }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleAddToQuote(selectedBrand, e);
                       }}
                     >
-                      {isInQuote(`brand-${selectedBrand.id}`)
+                      {isInQuote(selectedBrand.id)
                         ? "Added to Quote"
                         : "Add to Quote"}
                     </button>

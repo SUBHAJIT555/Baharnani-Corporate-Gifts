@@ -1,8 +1,7 @@
 import CommonHero from "../components/ui/CommonHero";
 import OverView from "../components/OverView";
 import ProductGrid from "../components/ProductGrid";
-import ProductCarousel from "../components/ui/ProductCarousel";
-import { giftItems } from "../data/giftItems";
+// import ProductCarousel from "../components/ui/ProductCarousel";
 // images
 import GiftSetImage from "../assets/images/Hero-images/Home-hero-Cookie Policy.webp";
 import WhyChooseUs from "../components/WhyChooseUs";
@@ -11,6 +10,9 @@ import FAQ, { type FAQItem } from "../components/FAQ";
 import AdditionalForSeo, {
   type SeoSection,
 } from "../components/ui/AdditionalForSeo";
+import { useProductCategories, useProductsByCategory, } from "../hooks/useProducts";
+import ProductCarousel from "../components/ui/ProductCarousel";
+import { useState } from "react";
 
 const giftSetFeatures = [
   {
@@ -137,6 +139,33 @@ const seoSections: SeoSection[] = [
 ];
 
 const GiftSet = () => {
+  const categorySlug = "gift-sets";
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 12;
+
+  const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(
+    categorySlug,
+    currentPage,
+    perPage
+  );
+  const products = productsData?.products || [];
+  console.log("products in gift set", products);
+  const { data: categories } = useProductCategories();
+  const filteredCategories = categories?.filter(category => category.slug === categorySlug);
+  console.log("filtered categories in gift set", filteredCategories);
+
+  // const paginationInfo = useMemo(() => {
+  //   return {
+  //     currentPage: productsData?.page || 1,
+  //     totalPages: productsData?.total_pages || 1,
+  //     total: productsData?.total || 0,
+  //   };
+  // }, [productsData]);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <div>
       <CommonHero
@@ -162,12 +191,18 @@ const GiftSet = () => {
       <ProductGrid
         title="Explore Our Collection of Gift Sets"
         productType="custom"
-        products={giftItems}
+        productData={productsData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 }}
+        categories={filteredCategories || []}
+        onPageChange={handlePageChange}
+        isLoading={productsLoading}
+        error={productsError}
+        selectedCategory={categorySlug}
         id="gift-set"
       />
       {/* Luxury Gift Sets Dubai */}
       <ProductCarousel
-        products={giftItems}
+        products={products || []}
+        isLoading={productsLoading}
         heading="Luxury Gift Sets Dubai"
         description="Indulge in sophistication with premium packaging, high-end brands, and exclusive fragrances. Perfect for anniversaries, festive occasions, or VIP clients who deserve only the best."
         paginationId="gift-set-carousel-pagination"
@@ -176,7 +211,8 @@ const GiftSet = () => {
       />
       {/* Perfume Gift Sets Dubai & UAE */}
       <ProductCarousel
-        products={giftItems}
+        isLoading={productsLoading}
+        products={products || []}
         heading="Perfume Gift Sets Dubai & UAE"
         description="Our perfume gift sets feature world-class scents from renowned brands, beautifully presented in elegant boxes. They make a timeless and unforgettable gift for him or her."
         paginationId="gift-set-carousel-pagination"
@@ -185,7 +221,8 @@ const GiftSet = () => {
       />
       {/* Birthday Gift Sets Dubai */}
       <ProductCarousel
-        products={giftItems}
+        isLoading={productsLoading}
+        products={products || []}
         heading="Birthday Gift Sets Dubai"
         description="Celebrate birthdays in style with curated birthday gift sets packed with thoughtful goodies, personal care products, or luxury chocolates."
         paginationId="gift-set-carousel-pagination"
@@ -194,7 +231,8 @@ const GiftSet = () => {
       />
       {/* Gift Sets for Her UAE */}
       <ProductCarousel
-        products={giftItems}
+        isLoading={productsLoading}
+        products={products || []}
         heading="Gift Sets for Her UAE"
         description="Delight the special woman in your life with our handpicked gift sets for her, featuring perfumes, wellness hampers, and accessories that define elegance."
         paginationId="gift-set-carousel-pagination"
@@ -203,7 +241,8 @@ const GiftSet = () => {
       />
       {/* Corporate Gift Sets Dubai */}
       <ProductCarousel
-        products={giftItems}
+        isLoading={productsLoading}
+        products={products || []}
         heading="Corporate Gift Sets Dubai"
         description="Show appreciation to clients and employees with professional yet stylish corporate gift sets — personalized and delivered across Dubai and the UAE."
         paginationId="gift-set-carousel-pagination"

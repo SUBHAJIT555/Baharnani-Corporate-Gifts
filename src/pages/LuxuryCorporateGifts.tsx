@@ -2,12 +2,14 @@ import CommonHero from "../components/ui/CommonHero"
 import LuxuryCorporateGiftsImage from "../assets/images/Products-hero-image/food-stuff-hero.webp"
 import OverView from "../components/OverView"
 import ProductGrid from "../components/ProductGrid"
-import { giftItems } from "../data/giftItems";
-import ProductCarousel from "../components/ui/ProductCarousel"
+// import { giftItems } from "../data/giftItems";
+// import ProductCarousel from "../components/ui/ProductCarousel"
 import WhyChooseUs, { type FeatureCard } from "../components/WhyChooseUs";
 import { Award } from "lucide-react";
 import { AnimatedTestimonials } from "../components/ui/AnimatedTestimonial";
 import FAQ, { type FAQItem } from "../components/FAQ";
+import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
+import { useState } from "react";
 
 const testimonials = [
   {
@@ -57,7 +59,7 @@ const luxuryCorporateGiftsFeatures: FeatureCard[] = [
     description: "Shop the finest selection of luxury corporate gifts available online in Dubai. Our curated collection features premium brands and exclusive items that reflect your company's commitment to excellence and quality.",
     icon: <Award size={32} />,
     iconColor: "#4CAF50",
-    },
+  },
   {
     id: 3,
     number: "03",
@@ -153,6 +155,18 @@ const faqItems: FAQItem[] = [
   },
 ];
 const LuxuryCorporateGifts = () => {
+  const categorySlug = "office-and-stationary";
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 12;
+  const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(categorySlug, currentPage, perPage);
+  const productData = productsData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 };
+  console.log("products in luxury corporate gifts", productData);
+  const { data: categories } = useProductCategories();
+  const filteredCategories = categories?.filter(category => category.slug === categorySlug);
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <div>
       <CommonHero
@@ -177,20 +191,25 @@ const LuxuryCorporateGifts = () => {
       <ProductGrid
         title="Explore Our Collection of Gift Sets"
         productType="custom"
-        products={giftItems}
+        productData={productData}
+        selectedCategory={categorySlug}
+        onPageChange={handlePageChange}
+        categories={filteredCategories || []}
+        isLoading={productsLoading}
+        error={productsError}
         id="gift-set"
       />
       {/* Top Corporate Gifts for Clients & Employees in Dubai */}
-      <ProductCarousel
+      {/* <ProductCarousel
         products={giftItems}
         heading="Top Corporate Gifts for Clients & Employees in Dubai"
         description=""
         paginationId="luxury-corporate-gifts-carousel-pagination"
         autoplay={true}
         autoplayDelay={4000}
-      />
+      /> */}
       {/* Customized Luxury Corporate Gifts */}
-      <ProductCarousel
+      {/* <ProductCarousel
         products={giftItems}
         heading="Customized Luxury Corporate Gifts"
         description="<strong>Personalized Gifts:</strong> Get your corporate gifts personalized with your company’s logo or a special message for that extra touch.<br />
@@ -198,16 +217,16 @@ const LuxuryCorporateGifts = () => {
         paginationId="luxury-corporate-gifts-carousel-pagination"
         autoplay={true}
         autoplayDelay={4000}
-      />
+      /> */}
       {/* Premium Gift Ideas for Clients & Partners */}
-      <ProductCarousel
+      {/* <ProductCarousel
         products={giftItems}
         heading="Premium Gift Ideas for Clients & Partners"
         description="<strong>Corporate Gift Ideas:</strong> Whether it's a high-end watch, leather accessories, or customized electronics, we offer a wide selection for every business need."
         paginationId="luxury-corporate-gifts-carousel-pagination"
         autoplay={true}
         autoplayDelay={4000}
-      />
+      /> */}
       {/* why choose us section */}
       <WhyChooseUs
         title="Featured Corporate Gift Categories"
