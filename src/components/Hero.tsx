@@ -6,27 +6,27 @@ import CustomButton from "./ui/CustomButton";
 import { Link } from "react-router-dom";
 
 // images
-import ConstructionMaterialsImage from "../assets/images/Hero-images/Home-hero-Construction-Materials.webp";
-import FoodStuffImage from "../assets/images/Hero-images/Home-hero-food-stuff.webp";
-import ContractingSolutionsImage from "../assets/images/Hero-images/Home-hero-Contracting-Solutions.webp";
-import ImportExportImage from "../assets/images/Hero-images/Home-hero-Import-&-Export.webp";
-import ElectronicsITImage from "../assets/images/Hero-images/Home-hero-Electronics-&-IT.webp";
-import ChemicalsImage from "../assets/images/Hero-images/Home-hero-Chemicals-&-Additives.webp";
-import OilProductsImage from "../assets/images/Hero-images/Home-hero-oil-products.webp";
-import PremiumGiftSetsImage from "../assets/images/Hero-images/Home-hero-Contact.webp";
-import LuxuryCorporateGiftsImage from "../assets/images/Hero-images/Home-hero-Terms & Condition.webp";
+import ApparelAndAccessoriesImage from "../assets/images/Home-page-hero-images/Apparel-&-accessories.webp";
+import BagsTravelImage from "../assets/images/Home-page-hero-images/Bags-&-travel.webp";
+import OfficeStationaryImage from "../assets/images/Home-page-hero-images/Office-&-stationary.webp";
+import TechnologyAccessoriesImage from "../assets/images/Home-page-hero-images/Technology-&-accessories.webp";
+import EatingDrinkingImage from "../assets/images/Home-page-hero-images/Eating-&-drinking.webp";
+import PremiumGiftSetImage from '../assets/images/Home-page-hero-images/Premiums-gift-sets.webp';
+import SportsRecreationImage from "../assets/images/Home-page-hero-images/Sports-&-recreation.webp";
+import EcoFriendlyImage from "../assets/images/Home-page-hero-images/Eco-friendly.webp";
+import LuxuryCorporateGiftsImage from "../assets/images/Home-page-hero-images/Luxury-corporate-gifts.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const IMAGES = [
-  ConstructionMaterialsImage,
-  FoodStuffImage,
-  ContractingSolutionsImage,
-  ImportExportImage,
-  ElectronicsITImage,
-  ChemicalsImage,
-  OilProductsImage,
-  PremiumGiftSetsImage,
+  ApparelAndAccessoriesImage,
+  BagsTravelImage,
+  OfficeStationaryImage,
+  TechnologyAccessoriesImage,
+  EatingDrinkingImage,
+  PremiumGiftSetImage,
+  SportsRecreationImage,
+  EcoFriendlyImage,
   LuxuryCorporateGiftsImage,
 ];
 
@@ -433,11 +433,10 @@ const HeroSection = () => {
           <button
             key={i}
             onClick={() => goToSlide(i)}
-            className={`transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50 ${
-              i === index
-                ? "w-8 h-3 sm:w-10 sm:h-3.5 rounded-full bg-[#499F68]"
-                : "w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#D9D9D9] hover:bg-[#C0C0C0]"
-            }`}
+            className={`transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50 ${i === index
+              ? "w-8 h-3 sm:w-10 sm:h-3.5 rounded-full bg-[#499F68]"
+              : "w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#D9D9D9] hover:bg-[#C0C0C0]"
+              }`}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}

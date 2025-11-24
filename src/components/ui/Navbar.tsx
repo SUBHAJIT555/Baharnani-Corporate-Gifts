@@ -83,7 +83,7 @@ const Navbar = () => {
     {
       id: "2",
       title: "Luxury corporate gifts",
-      link: "/product-category/luxury-corporate-gifts",
+      link: "/product-category/luxury-corporate-gifts-dubai",
     },
     {
       id: "3",

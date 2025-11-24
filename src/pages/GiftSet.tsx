@@ -3,7 +3,7 @@ import OverView from "../components/OverView";
 import ProductGrid from "../components/ProductGrid";
 // import ProductCarousel from "../components/ui/ProductCarousel";
 // images
-import GiftSetImage from "../assets/images/Hero-images/Home-hero-Cookie Policy.webp";
+import GiftSetImage from "../assets/images/Products-hero-image/Premiums-gift-sets.webp";
 import WhyChooseUs from "../components/WhyChooseUs";
 import { Package, Award } from "lucide-react";
 import FAQ, { type FAQItem } from "../components/FAQ";
@@ -139,7 +139,7 @@ const seoSections: SeoSection[] = [
 ];
 
 const GiftSet = () => {
-  const categorySlug = "gift-sets";
+  const categorySlug = "premium-gift-sets";
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 12;
 

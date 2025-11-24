@@ -69,7 +69,7 @@ export const router = createBrowserRouter([
         element: <GiftSet />,
       },
       {
-        path: "/product-category/luxury-corporate-gifts",
+        path: "/product-category/luxury-corporate-gifts-dubai",
         element: <LuxuryCorporateGifts />,
       },
       {

@@ -15,7 +15,7 @@ import CallToAction from "../components/CallToAction";
 // import { giftItems } from "../data/giftItems";
 
 // images
-import TechnologyAndAccessoriesImage from "../assets/images/Hero-images/Home-hero-Building-Materials.webp";
+import TechnologyAndAccessoriesImage from "../assets/images/Products-hero-image/Technology-&-accessories.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useState } from "react";
 // import { useState } from "react";

@@ -109,7 +109,7 @@ const HomeAbout = () => {
               gifts for every occasion.
             </motion.p>
 
-            
+
           </motion.div>
         </div>
 

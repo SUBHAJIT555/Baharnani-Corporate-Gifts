@@ -8,7 +8,7 @@ import CallToAction from "../components/CallToAction";
 // import { giftItems } from "../data/giftItems";
 
 // images
-import BuildingMaterialsImage from "../assets/images/Products-hero-image/Building-Materials-hero.webp";
+import OfficeStationaryImage from "../assets/images/Products-hero-image/Office-&-stationary.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useState } from "react";
 
@@ -93,7 +93,7 @@ const OfficeAndStationary = () => {
         title="Premium Office & Stationery for Corporate Gifting in Dubai"
         titlesuffix=""
         subtitle="Discover our exclusive collection of high-quality office supplies and luxury stationery, perfect for corporate gifts, client appreciation, and employee recognition programs."
-        imageUrl={BuildingMaterialsImage}
+        imageUrl={OfficeStationaryImage}
         buttonLink="#office-and-stationary"
         buttonText="Shop Office & Stationery"
       />
@@ -128,7 +128,7 @@ const OfficeAndStationary = () => {
       <CallToAction
         title="Your Trusted Partner for Corporate Office & Stationery in Dubai"
         subtitle="From custom-branded pen sets to luxury desk accessories, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence."
-        backgroundImageUrl={BuildingMaterialsImage}
+        backgroundImageUrl={OfficeStationaryImage}
         buttons={[
           {
             text: "Contact Our Team",

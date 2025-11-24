@@ -250,7 +250,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="/product-category/luxury-corporate-gifts">
+                  <Link to="/product-category/luxury-corporate-gifts-dubai">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}

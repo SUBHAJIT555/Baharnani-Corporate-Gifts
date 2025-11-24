@@ -7,7 +7,7 @@ import { Coffee, Award, Package, Users, Gift, Sparkles } from "lucide-react";
 import CallToAction from "../components/CallToAction";
 
 // images
-import FoodStuffImage from "../assets/images/Products-hero-image/food-stuff-hero.webp";
+import EatingDrinkingImage from "../assets/images/Products-hero-image/Eating-&-drinking.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useState } from "react";
 
@@ -92,7 +92,7 @@ const EatingAndDrinking = () => {
         title="Premium Eating & Drinking Products for Corporate Gifting in Dubai"
         titlesuffix=""
         subtitle="Discover our exclusive collection of high-quality food and beverage products, perfect for corporate gifts, client appreciation, and employee recognition programs."
-        imageUrl={FoodStuffImage}
+        imageUrl={EatingDrinkingImage}
         buttonLink="#eating-drinking"
         buttonText="Shop Eating & Drinking"
       />
@@ -126,7 +126,7 @@ const EatingAndDrinking = () => {
       <CallToAction
         title="Your Trusted Partner for Corporate Food & Beverage Gifts in Dubai"
         subtitle="From custom-branded coffee sets to luxury tea collections, we deliver premium quality eating and drinking products that strengthen relationships and elevate your brand presence."
-        backgroundImageUrl={FoodStuffImage}
+        backgroundImageUrl={EatingDrinkingImage}
         buttons={[
           {
             text: "Contact Our Team",

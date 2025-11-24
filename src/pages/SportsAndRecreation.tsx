@@ -7,7 +7,7 @@ import { Dumbbell, Trophy, Activity, Target, Heart, Gift } from "lucide-react";
 import CallToAction from "../components/CallToAction";
 
 // images
-import SportsAndRecreationImage from "../assets/images/Hero-images/Home-hero-Contact.webp";
+import SportsAndRecreationImage from "../assets/images/Products-hero-image/Sports-&-recreation.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useState } from "react";
 

@@ -14,7 +14,7 @@ import {
 import CallToAction from "../components/CallToAction";
 
 // images
-import FoodStuffImage from "../assets/images/Products-hero-image/food-stuff-hero.webp";
+import BagsTravelImage from "../assets/images/Products-hero-image/Bags-&-travel.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useState } from "react";
 
@@ -95,7 +95,7 @@ const BagsAndTravels = () => {
         title="Premium Bags & Travel Accessories for Corporate Gifting in Dubai"
         titlesuffix=""
         subtitle="Discover our exclusive collection of high-quality bags and luxury travel accessories, perfect for corporate gifts, client appreciation, and employee recognition programs."
-        imageUrl={FoodStuffImage}
+        imageUrl={BagsTravelImage}
         buttonLink="#bags-travel"
         buttonText="Shop Bags & Travel"
       />
@@ -129,7 +129,7 @@ const BagsAndTravels = () => {
       <CallToAction
         title="Your Trusted Partner for Corporate Bags & Travel Accessories in Dubai"
         subtitle="From custom-branded briefcases to luxury luggage sets, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence."
-        backgroundImageUrl={FoodStuffImage}
+        backgroundImageUrl={BagsTravelImage}
         buttons={[
           {
             text: "Contact Our Team",

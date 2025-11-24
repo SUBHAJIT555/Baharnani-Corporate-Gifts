@@ -7,7 +7,7 @@ import { Leaf, Award, Package, Users, Globe } from "lucide-react";
 import CallToAction from "../components/CallToAction";
 
 // images
-import EcoFriendlyImage from "../assets/images/Products-hero-image/Contracting-Solutions-hero.webp";
+import EcoFriendlyImage from "../assets/images/Products-hero-image/Eco-friendly.webp";
 import { useState } from "react";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 

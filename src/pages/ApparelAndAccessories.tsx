@@ -8,7 +8,7 @@ import CallToAction from "../components/CallToAction";
 // import { giftItems } from "../data/giftItems";
 
 // images
-import ConstructionMaterialsImage from "../assets/images/Products-hero-image/Construction-Materials-hero.webp";
+import ApparelAndAccessoriesImage from "../assets/images/Products-hero-image/Apparel-&-accessories.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useState } from "react";
 
@@ -84,7 +84,7 @@ const ApparelAndAccessories = () => {
         title="Premium Apparel & Accessories for Corporate Gifting in Dubai"
         titlesuffix=""
         subtitle="Discover our exclusive collection of high-quality apparel and luxury accessories, perfect for corporate gifts, client appreciation, and employee recognition programs."
-        imageUrl={ConstructionMaterialsImage}
+        imageUrl={ApparelAndAccessoriesImage}
         buttonLink="#apparel-accessories"
         buttonText="Shop Apparel & Accessories"
       />
@@ -118,7 +118,7 @@ const ApparelAndAccessories = () => {
       <CallToAction
         title="Your Trusted Partner for Corporate Apparel & Accessories in Dubai"
         subtitle="From custom-branded apparel to luxury accessories, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence."
-        backgroundImageUrl={ConstructionMaterialsImage}
+        backgroundImageUrl={ApparelAndAccessoriesImage}
         buttons={[
           {
             text: "Contact Our Team",

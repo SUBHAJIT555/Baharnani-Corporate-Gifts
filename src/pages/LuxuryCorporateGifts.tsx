@@ -1,5 +1,5 @@
 import CommonHero from "../components/ui/CommonHero"
-import LuxuryCorporateGiftsImage from "../assets/images/Products-hero-image/food-stuff-hero.webp"
+import LuxuryCorporateGiftsImage from "../assets/images/Products-hero-image/Luxury-corporate-gifts.webp"
 import OverView from "../components/OverView"
 import ProductGrid from "../components/ProductGrid"
 // import { giftItems } from "../data/giftItems";
@@ -155,7 +155,7 @@ const faqItems: FAQItem[] = [
   },
 ];
 const LuxuryCorporateGifts = () => {
-  const categorySlug = "office-and-stationary";
+  const categorySlug = "luxury-corporate-gifts-dubai";
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 12;
   const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(categorySlug, currentPage, perPage);

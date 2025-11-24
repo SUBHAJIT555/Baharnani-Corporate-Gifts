@@ -79,7 +79,7 @@ const categories: ProductCategory[] = [
     ],
     imageUrl: LuxuryGiftsImage,
     buttonText: "Explore Luxury Corporate Gifts",
-    buttonLink: "/product-category/luxury-corporate-gifts",
+    buttonLink: "/product-category/luxury-corporate-gifts-dubai",
   },
   {
     id: 3,
