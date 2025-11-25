@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { PiSealQuestionDuotone } from "react-icons/pi";
 
+
 const testimonials = [
   {
     quote:
@@ -116,7 +117,7 @@ const About = () => {
         title="Your Trusted Partner for Premium Corporate Gifts"
         titlesuffix=""
         subtitle="Baharnani Advertising LLC is a Dubai-based gift supplier specializing in bulk orders, corporate gifts, event gifts, and fully customized solutions. We deliver quality, creativity, and excellence for all your gifting needs."
-        imageUrl="https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg"
+        imageUrl="/assets/images/Hero-images/About-hero.webp"
         buttonLink="/products"
         buttonText="Explore Our Products"
       />

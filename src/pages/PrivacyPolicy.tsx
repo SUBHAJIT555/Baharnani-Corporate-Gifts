@@ -15,7 +15,7 @@ const PrivacyPolicy = () => {
         title="Privacy Policy"
         titlesuffix=""
         subtitle="This Privacy Notice for Baharnani Advertising L.L.C describes how and why we might access, collect, store, use, and/or share your personal information when you use our services, including when you visit our website or engage with us in other related ways."
-        imageUrl="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg"
+        imageUrl="/assets/images/Hero-images/PrivacyPolicy-hero.webp"
         buttonLink="#"
         buttonText="Get in Touch"
       />

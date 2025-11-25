@@ -50,7 +50,7 @@ const Arrow = styled.span<{ isVisible: boolean }>`
   opacity: ${(props: { isVisible: boolean }) => (props.isVisible ? 1 : 0)};
   transform: translate(-50%, -50%)
     ${(props: { isVisible: boolean }) =>
-      props.isVisible ? "scale(1)" : "scale(0.5)"};
+    props.isVisible ? "scale(1)" : "scale(0.5)"};
   transition: opacity 0.2s, transform 0.2s;
   color: #080f0f;
   font-size: 1.25rem;

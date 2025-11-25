@@ -26,7 +26,7 @@ interface TopSaverProps {
 // const defaultProducts = foodstuff.slice(0, 12);
 
 const TopSaver = ({
-  videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  videoUrl = "/assets/video/GIFMaker_mezeeyand.webm",
 }: TopSaverProps) => {
   const { data: products } = useRandomProducts()
   const { addToQuote, isInQuote } = useQuote();
@@ -34,9 +34,11 @@ const TopSaver = ({
   const swiperRef = useRef<HTMLDivElement>(null);
   const swiperInstanceRef = useRef<SwiperType | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
 
   const isHeadingInView = useInView(headingRef, {
     once: true,
@@ -109,6 +111,29 @@ const TopSaver = ({
     }
   }, [isSwiperInView, products]);
 
+  // Lazy load video when it enters viewport
+  useEffect(() => {
+    if (!videoContainerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVideoVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        rootMargin: "50px", // Start loading slightly before it enters viewport
+      }
+    );
+
+    observer.observe(videoContainerRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   const handleAddToQuote = (product: Product, e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (!isInQuote(Number(product.id))) {
@@ -157,11 +182,11 @@ const TopSaver = ({
           initial={{ opacity: 0 }}
           animate={isSwiperInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full"
+          className="w-full "
         >
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 xl:gap-10">
             {/* Left Side: Product Carousel */}
-            <div className="w-full lg:w-2/3 relative">
+            <div className="w-full lg:w-9/12 relative">
               {/* Navigation Buttons */}
               <div className="flex items-center justify-end gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 md:mb-10">
                 {/* Previous Button */}
@@ -192,14 +217,18 @@ const TopSaver = ({
               <Swiper
                 modules={[Pagination, Autoplay]}
                 spaceBetween={12}
-                slidesPerView={2}
+                slidesPerView={1}
                 breakpoints={{
                   640: {
                     slidesPerView: 2,
                     spaceBetween: 20,
                   },
+                  768: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                  },
                   1024: {
-                    slidesPerView: 4,
+                    slidesPerView: 3,
                     spaceBetween: 24,
                   },
                   1280: {
@@ -211,10 +240,10 @@ const TopSaver = ({
                     spaceBetween: 32,
                   },
                 }}
-                pagination={{
-                  clickable: true,
-                  el: ".swiper-pagination-topsaver",
-                }}
+                // pagination={{
+                //   clickable: true,
+                //   el: ".swiper-pagination-topsaver",
+                // }}
                 autoplay={{
                   delay: 4000,
                   disableOnInteraction: false,
@@ -309,26 +338,34 @@ const TopSaver = ({
             </div>
 
             {/* Right Side: Video Banner */}
-            <div className="w-full lg:w-1/3 shrink-0">
+            <div className="w-full lg:w-3/12 shrink-0 h-[400px] sm:h-[480px]">
               <motion.div
+                ref={videoContainerRef}
                 initial={{ opacity: 0, x: 50 }}
                 animate={
                   isSwiperInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }
                 }
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="relative w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-full lg:min-h-[500px] xl:min-h-[600px] 2xl:min-h-[700px] rounded-lg overflow-hidden shadow-lg"
+                className="relative w-full h-full rounded-lg overflow-hidden shadow-lg bg-gray-900"
               >
-                <video
-                  ref={videoRef}
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                >
-                  <source src={videoUrl} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                {isVideoVisible ? (
+                  <video
+                    ref={videoRef}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="none"
+                    width="640"
+                    height="360"
+                  >
+                    <source src={videoUrl} type="video/webm" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <div className="w-full h-full bg-gray-200 animate-pulse" />
+                )}
                 {/* Optional overlay for better text readability if needed */}
                 <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none" />
               </motion.div>

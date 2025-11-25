@@ -128,7 +128,7 @@ const Shop = () => {
     }
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-bg">
             {/* Hero Banner Section */}
             <section className="relative w-full bg-linear-to-r from-textcolor via-textcolor/90 to-textcolor/80 overflow-hidden">
                 <div className="absolute inset-0 opacity-10">

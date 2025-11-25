@@ -20,6 +20,7 @@ import LuxuryCorporateGifts from "../pages/LuxuryCorporateGifts";
 import Shop from "../pages/Shop";
 import ThankYou from "../pages/ThankYou";
 import ProductDetails from "../pages/ProductDetails";
+import NotFound from "../pages/NotFound";
 
 
 export const router = createBrowserRouter([
@@ -95,6 +96,10 @@ export const router = createBrowserRouter([
       {
         path: "/cookie-policy",
         element: <CookiePolicy />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

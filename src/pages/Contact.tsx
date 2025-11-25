@@ -8,7 +8,7 @@ const Contact = () => {
         title="Connect With Dubai's Premier Corporate Gift Supplier"
         titlesuffix=""
         subtitle="Ready to elevate your corporate gifting? Our team is here to help with custom gift solutions, bulk orders, branding inquiries, and partnership opportunities. Get in touch today and let's create memorable gifts that strengthen your business relationships."
-        imageUrl="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg"
+        imageUrl="/assets/images/Hero-images/Contact-hero.webp"
         buttonLink="#"
         buttonText="Get in Touch"
       />

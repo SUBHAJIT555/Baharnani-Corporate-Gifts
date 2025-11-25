@@ -8,15 +8,15 @@ import { PiGiftDuotone } from "react-icons/pi";
 
 // images 
 
-import ApparelAndAccessoriesImage from "../assets/images/Home-page-hero-images/Apparel-&-accessories.webp";
-import BagsTravelImage from "../assets/images/Home-page-hero-images/Bags-&-travel.webp";
-import OfficeStationaryImage from "../assets/images/Home-page-hero-images/Office-&-stationary.webp";
-import TechnologyAccessoriesImage from "../assets/images/Home-page-hero-images/Technology-&-accessories.webp";
-import EatingDrinkingImage from "../assets/images/Home-page-hero-images/Eating-&-drinking.webp";
-import PremiumGiftSetImage from '../assets/images/Home-page-hero-images/Premiums-gift-sets.webp';
-import SportsRecreationImage from "../assets/images/Home-page-hero-images/Sports-&-recreation.webp";
-import EcoFriendlyImage from "../assets/images/Home-page-hero-images/Eco-friendly.webp";
-import LuxuryCorporateGiftsImage from "../assets/images/Home-page-hero-images/Luxury-corporate-gifts.webp";
+// import ApparelAndAccessoriesImage from "../assets/images/Home-page-hero-images/Apparel-&-accessories.webp";
+// import BagsTravelImage from "../assets/images/Home-page-hero-images/Bags-&-travel.webp";
+// import OfficeStationaryImage from "../assets/images/Home-page-hero-images/Office-&-stationary.webp";
+// import TechnologyAccessoriesImage from "../assets/images/Home-page-hero-images/Technology-&-accessories.webp";
+// import EatingDrinkingImage from "../assets/images/Home-page-hero-images/Eating-&-drinking.webp";
+// import PremiumGiftSetImage from '../assets/images/Home-page-hero-images/Premiums-gift-sets.webp';
+// import SportsRecreationImage from "../assets/images/Home-page-hero-images/Sports-&-recreation.webp";
+// import EcoFriendlyImage from "../assets/images/Home-page-hero-images/Eco-friendly.webp";
+// import LuxuryCorporateGiftsImage from "../assets/images/Home-page-hero-images/Luxury-corporate-gifts.webp";
 
 // import ConstructionMaterialsImage from "../assets/images/Products-hero-image/Construction-Materials-hero.webp";
 // import FoodStuffImage from "../assets/images/Products-hero-image/food-stuff-hero.webp";
@@ -42,7 +42,7 @@ const products: ProductCategory[] = [
     description:
       "Custom branded t-shirts, polo shirts, caps, and accessories with premium printing and embroidery.",
     image:
-      ApparelAndAccessoriesImage,
+      '/assets/images/Home-page-hero-images/Apparel-&-accessories.webp',
     link: "/product-category/apparel-and-accessories",
   },
   {
@@ -51,7 +51,7 @@ const products: ProductCategory[] = [
     description:
       "Personalized laptop bags, backpacks, travel kits, and luggage with custom logo printing.",
     image:
-      BagsTravelImage,
+      '/assets/images/Home-page-hero-images/Bags-&-travel.webp',
     link: "/product-category/bags-and-travel",
   },
   {
@@ -59,7 +59,7 @@ const products: ProductCategory[] = [
     title: "Office & stationary",
     description: "Branded pens, notebooks, planners, and desk accessories with laser engraving and custom printing.",
     image:
-      OfficeStationaryImage,
+      '/assets/images/Home-page-hero-images/Office-&-stationary.webp',
     link: "/product-category/office-and-stationary",
   },
   {
@@ -67,7 +67,7 @@ const products: ProductCategory[] = [
     title: "Technology & accessories",
     description: "Custom power banks, USB drives, wireless chargers, and tech gadgets with logo printing.",
     image:
-      TechnologyAccessoriesImage,
+      '/assets/images/Home-page-hero-images/Technology-&-accessories.webp',
     link: "/product-category/technology-and-accessories",
   },
   {
@@ -76,7 +76,7 @@ const products: ProductCategory[] = [
     description:
       "Personalized mugs, water bottles, tumblers, and drinkware with premium printing and engraving.",
     image:
-      EatingDrinkingImage,
+      '/assets/images/Home-page-hero-images/Eating-&-drinking.webp',
     link: "/product-category/eating-and-drinking",
   },
   {
@@ -85,7 +85,7 @@ const products: ProductCategory[] = [
     description:
       "Curated luxury gift hampers and premium sets with custom packaging and branding solutions.",
     image:
-      PremiumGiftSetImage,
+      '/assets/images/Home-page-hero-images/Premiums-gift-sets.webp',
     link: "/product-category/premium-gift-sets",
   },
   {
@@ -93,7 +93,7 @@ const products: ProductCategory[] = [
     title: "Sports & recreation",
     description: "Custom sports equipment, fitness accessories, and recreational items with branded printing.",
     image:
-      SportsRecreationImage,
+      '/assets/images/Home-page-hero-images/Sports-&-recreation.webp',
     link: "/product-category/sports-and-recreation",
   },
   {
@@ -101,7 +101,7 @@ const products: ProductCategory[] = [
     title: "Eco friendly",
     description: "Sustainable bamboo products, reusable items, and eco-conscious gifts with custom branding.",
     image:
-      EcoFriendlyImage,
+      '/assets/images/Home-page-hero-images/Eco-friendly.webp',
     link: "/product-category/eco-friendly",
   },
   {
@@ -109,7 +109,7 @@ const products: ProductCategory[] = [
     title: "Luxury corporate gifts Dubai",
     description: "Premium executive gifts, leather accessories, and high-end corporate presents with elegant customization.",
     image:
-      LuxuryCorporateGiftsImage,
+      '/assets/images/Home-page-hero-images/Luxury-corporate-gifts.webp',
     link: "/product-category/luxury-corporate-gifts-dubai",
   },
 ];

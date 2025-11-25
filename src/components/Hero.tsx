@@ -6,28 +6,28 @@ import CustomButton from "./ui/CustomButton";
 import { Link } from "react-router-dom";
 
 // images
-import ApparelAndAccessoriesImage from "../assets/images/Home-page-hero-images/Apparel-&-accessories.webp";
-import BagsTravelImage from "../assets/images/Home-page-hero-images/Bags-&-travel.webp";
-import OfficeStationaryImage from "../assets/images/Home-page-hero-images/Office-&-stationary.webp";
-import TechnologyAccessoriesImage from "../assets/images/Home-page-hero-images/Technology-&-accessories.webp";
-import EatingDrinkingImage from "../assets/images/Home-page-hero-images/Eating-&-drinking.webp";
-import PremiumGiftSetImage from '../assets/images/Home-page-hero-images/Premiums-gift-sets.webp';
-import SportsRecreationImage from "../assets/images/Home-page-hero-images/Sports-&-recreation.webp";
-import EcoFriendlyImage from "../assets/images/Home-page-hero-images/Eco-friendly.webp";
-import LuxuryCorporateGiftsImage from "../assets/images/Home-page-hero-images/Luxury-corporate-gifts.webp";
+// import ApparelAndAccessoriesImage from "../assets/images/Home-page-hero-images/Apparel-&-accessories.webp";
+// import BagsTravelImage from "../assets/images/Home-page-hero-images/Bags-&-travel.webp";
+// import OfficeStationaryImage from "../assets/images/Home-page-hero-images/Office-&-stationary.webp";
+// import TechnologyAccessoriesImage from "../assets/images/Home-page-hero-images/Technology-&-accessories.webp";
+// import EatingDrinkingImage from "../assets/images/Home-page-hero-images/Eating-&-drinking.webp";
+// import PremiumGiftSetImage from '../assets/images/Home-page-hero-images/Premiums-gift-sets.webp';
+// import SportsRecreationImage from "../assets/images/Home-page-hero-images/Sports-&-recreation.webp";
+// import EcoFriendlyImage from "../assets/images/Home-page-hero-images/Eco-friendly.webp";
+// import LuxuryCorporateGiftsImage from "../assets/images/Home-page-hero-images/Luxury-corporate-gifts.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const IMAGES = [
-  ApparelAndAccessoriesImage,
-  BagsTravelImage,
-  OfficeStationaryImage,
-  TechnologyAccessoriesImage,
-  EatingDrinkingImage,
-  PremiumGiftSetImage,
-  SportsRecreationImage,
-  EcoFriendlyImage,
-  LuxuryCorporateGiftsImage,
+  '/assets/images/Home-page-hero-images/Apparel-&-accessories.webp',
+  '/assets/images/Home-page-hero-images/Bags-&-travel.webp',
+  '/assets/images/Home-page-hero-images/Office-&-stationary.webp',
+  '/assets/images/Home-page-hero-images/Technology-&-accessories.webp',
+  '/assets/images/Home-page-hero-images/Eating-&-drinking.webp',
+  '/assets/images/Home-page-hero-images/Premiums-gift-sets.webp',
+  '/assets/images/Home-page-hero-images/Sports-&-recreation.webp',
+  '/assets/images/Home-page-hero-images/Eco-friendly.webp',
+  '/assets/images/Home-page-hero-images/Luxury-corporate-gifts.webp',
 ];
 
 const H2_TEXTS = [

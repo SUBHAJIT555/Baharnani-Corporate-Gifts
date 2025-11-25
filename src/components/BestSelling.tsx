@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useAllProducts, useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import ProductGrid from "./ProductGrid";
+import Loading from "./ui/Loading";
 // import { bestSellingItems } from "../data/bestselling";
 
 const BestSelling = () => {
@@ -24,12 +25,14 @@ const BestSelling = () => {
     ? isLoading
     : (isLoading || categoriesLoading);
 
+
   // Determine error state
   const productsError = selectedCategory === null
     ? error
     : (error || productsByCategoryError);
 
-  if (isLoadingProducts) return <div>Loading...</div>;
+
+
   if (productsError) return <div>Error: {productsError?.message}</div>;
   console.log(categories);
 
@@ -37,7 +40,7 @@ const BestSelling = () => {
     <ProductGrid
       productData={productData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 }}
       categories={categories || []}
-      isLoading={productsByCategoryLoading}
+      isLoading={productsByCategoryLoading || isLoadingProducts}
       error={productsByCategoryError}
       selectedCategory={selectedCategory}
       setSelectedCategory={setSelectedCategory}

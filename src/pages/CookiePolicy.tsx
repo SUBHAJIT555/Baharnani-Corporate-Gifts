@@ -15,7 +15,7 @@ const CookiePolicy = () => {
         title="Cookie Policy"
         titlesuffix=""
         subtitle="This Cookie Policy explains how Baharnani Advertising L.L.C uses cookies and similar tracking technologies on our website. By continuing to browse or use our Website, you consent to the use of cookies as described below."
-        imageUrl="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg"
+        imageUrl="/assets/images/Hero-images/Cookie-policy-hero.webp"
         buttonLink="#"
         buttonText="Get in Touch"
       />

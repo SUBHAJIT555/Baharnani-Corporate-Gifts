@@ -14,74 +14,10 @@ import "swiper/css/pagination";
 import { PiCrownDuotone } from "react-icons/pi";
 import type { Product } from "../services/api";
 import { useFeaturedProducts } from "../hooks/useProducts";
-
-// export interface BrandCard {
-//   id: number;
-//   category: string;
-//   productName: string;
-//   image: string;
-//   description?: string;
-// }
+import { Link } from "react-router-dom";
+import { getProductUrl } from "../lib/utilts";
 
 
-// const defaultBrands: BrandCard[] = [
-//   {
-//     id: 1,
-//     category: "EATING AND DRINKING",
-//     productName: "HYDRATEHAVEN",
-//     image:
-//       "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=300&fit=crop",
-//   },
-//   {
-//     id: 2,
-//     category: "BAGS AND TRAVEL",
-//     productName: "BRG LAPTOP BAG",
-//     image:
-//       "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=300&fit=crop",
-//   },
-//   {
-//     id: 3,
-//     category: "OFFICE AND STATIONARY",
-//     productName: "SLIM ROLLER",
-//     image:
-//       "https://images.unsplash.com/photo-1583484963886-cfe2bff2945f?w=400&h=300&fit=crop",
-//   },
-//   {
-//     id: 4,
-//     category: "PREMIUMS AND TOOLS",
-//     productName: "Anti Stress Round Flat Surface",
-//     image:
-//       "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
-//   },
-//   {
-//     id: 5,
-//     category: "SPORTS AND RECREATION",
-//     productName: "ECO FRIENDLY",
-//     image:
-//       "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
-//   },
-//   {
-//     id: 6,
-//     category: "ECO FRIENDLY",
-//     productName: "ECO FRIENDLY",
-//     image:
-//       "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
-//   },
-//   {
-//     id: 7,
-//     category: "ECO FRIENDLY",
-//     productName: "ECO FRIENDLY",
-//     image:
-//       "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
-//   },
-//   {
-//     id: 8,
-//     category: "ECO FRIENDLY",
-//     productName: "ECO FRIENDLY",
-//     image:
-//       "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop",
-//   },
-// ];
 
 const FeatureBrand = () => {
   const headingRef = useRef<HTMLDivElement>(null);
@@ -103,19 +39,6 @@ const FeatureBrand = () => {
     once: true,
     margin: "-100px",
   });
-
-  // Convert BrandCard to Product format for quote
-  // const convertBrandToProduct = (brand: BrandCard): Product => {
-  //   return {
-  //     id: `brand-${brand.id}`,
-  //     title: brand.productName,
-  //     description:
-  //       brand.description ||
-  //       `Premium corporate gift from ${brand.category}. ${brand.productName} is a high-quality product perfect for corporate gifting and business promotions.`,
-  //     category: brand.category,
-  //     image: brand.image,
-  //   };
-  // };
 
   const handleBrandClick = (brand: Product) => {
     setSelectedBrand(brand);
@@ -212,6 +135,7 @@ const FeatureBrand = () => {
               modules={[Pagination, Autoplay]}
               spaceBetween={20}
               slidesPerView={1}
+              loop={true}
               breakpoints={{
                 640: {
                   slidesPerView: 2,
@@ -230,10 +154,7 @@ const FeatureBrand = () => {
                   spaceBetween: 32,
                 },
               }}
-              pagination={{
-                clickable: true,
-                el: ".swiper-pagination-custom",
-              }}
+
               autoplay={{
                 delay: 4000,
                 disableOnInteraction: false,
@@ -249,40 +170,42 @@ const FeatureBrand = () => {
             >
               {brands.map((brand, index) => (
                 <SwiperSlide key={brand.id}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={
-                      isSwiperInView
-                        ? { opacity: 1, y: 0 }
-                        : { opacity: 0, y: 30 }
-                    }
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="h-full w-full"
-                  >
-                    <div
-                      onClick={() => handleBrandClick(brand)}
-                      className="bg-[#e1e1e1] rounded-lg p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col items-center justify-center min-h-[300px] sm:min-h-[320px] md:min-h-[360px] lg:min-h-[400px] border border-textcolor hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                  <Link to={getProductUrl(brand)}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={
+                        isSwiperInView
+                          ? { opacity: 1, y: 0 }
+                          : { opacity: 0, y: 30 }
+                      }
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="h-full w-full"
                     >
-                      {/* Image */}
-                      <div className="w-full h-40 sm:h-44 md:h-48 lg:h-52 xl:h-56 mb-4 sm:mb-5 md:mb-6 flex items-center justify-center">
-                        <img
-                          src={brand.image}
-                          alt={brand.name}
-                          className="w-full h-full object-contain"
-                        />
+                      <div
+
+                        className="bg-[#e1e1e1] rounded-lg p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col items-center justify-center min-h-[300px] sm:min-h-[320px] md:min-h-[360px] lg:min-h-[400px] border border-textcolor hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                      >
+                        {/* Image */}
+                        <div className="w-full h-40 sm:h-44 md:h-48 lg:h-52 xl:h-56 mb-4 sm:mb-5 md:mb-6 flex items-center justify-center">
+                          <img
+                            src={brand.image}
+                            alt={brand.name}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+
+                        {/* Category */}
+                        <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-switzer font-bold text-textcolor/70 tracking-widest mb-2 sm:mb-3 text-center uppercase line-clamp-1 overflow-hidden text-ellipsis">
+                          {brand.categories[0]}
+                        </h3>
+
+                        {/* Product Name */}
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-tanker text-textcolor text-center line-clamp-1 overflow-hidden text-ellipsis">
+                          {brand.name}
+                        </p>
                       </div>
-
-                      {/* Category */}
-                      <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-switzer font-bold text-textcolor/70 tracking-widest mb-2 sm:mb-3 text-center uppercase line-clamp-1 overflow-hidden text-ellipsis">
-                        {brand.categories[0]}
-                      </h3>
-
-                      {/* Product Name */}
-                      <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-tanker text-textcolor text-center line-clamp-1 overflow-hidden text-ellipsis">
-                        {brand.name}
-                      </p>
-                    </div>
-                  </motion.div>
+                    </motion.div>
+                  </Link>
                 </SwiperSlide>
               ))}
             </Swiper>

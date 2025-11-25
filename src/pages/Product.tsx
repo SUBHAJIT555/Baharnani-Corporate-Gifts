@@ -44,7 +44,7 @@ const Product = () => {
         title="Explore Wide Range of Premium Gifts Items in Dubai"
         titlesuffix=""
         subtitle="Discover our extensive collection of corporate gifts designed to strengthen relationships and elevate your brand. From luxury items to eco-friendly solutions, we offer premium quality products perfect for clients, employees, and business partners."
-        imageUrl="https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg"
+        imageUrl="/assets/images/Hero-images/Product-hero.webp"
         buttonLink="#product-varieties"
         buttonText="Explore Our Varieties"
       />

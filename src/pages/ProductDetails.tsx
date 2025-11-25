@@ -54,7 +54,7 @@ const ProductDetails = () => {
 
     if (isLoading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-white pt-24">
+            <div className="min-h-screen flex items-center justify-center bg-bg pt-24">
                 <Loading size="lg" message="Loading product details..." />
             </div>
         );
@@ -62,7 +62,7 @@ const ProductDetails = () => {
 
     if (error || !product) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-white pt-24">
+            <div className="min-h-screen flex items-center justify-center bg-bg pt-24">
                 <div className="text-center">
                     <h2 className="text-2xl font-tanker text-textcolor mb-4">
                         Product Not Found
@@ -80,9 +80,26 @@ const ProductDetails = () => {
         );
     }
 
-
     return (
-        <div className="min-h-screen bg-white pt-24 sm:pt-28 md:pt-32">
+        <div className="min-h-screen bg-bg">
+            {/* Hero Section */}
+            <section className="relative w-full bg-gradient-to-r from-textcolor via-textcolor/90 to-textcolor/80 overflow-hidden pt-24 sm:pt-28 md:pt-32">
+                <div className="absolute inset-0 opacity-10">
+                    <div
+                        className="absolute inset-0"
+                        style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                        }}
+                    />
+                </div>
+                <div className="relative w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-8 sm:py-10 md:py-12">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-tanker text-white leading-tight">
+                        {product.name}
+                    </h1>
+                    <div className="w-16 sm:w-20 h-1 bg-white/80 rounded-md mt-3 sm:mt-4" />
+                </div>
+            </section>
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Breadcrumbs */}
                 <nav className="mb-6">
@@ -136,28 +153,6 @@ const ProductDetails = () => {
                     {/* Product Details */}
                     <div className="space-y-6">
                         <div>
-                            <h1 className="text-3xl sm:text-4xl md:text-5xl font-tanker text-textcolor mb-4">
-                                {product.name}
-                            </h1>
-
-                            {/* Price */}
-                            {/* <div className="flex items-center gap-4 mb-6">
-                {product.sale_price && parseFloat(product.sale_price) > 0 ? (
-                  <>
-                    <span className="text-2xl font-tanker text-textcolor">
-                      AED {product.sale_price}
-                    </span>
-                    <span className="text-xl font-switzer text-gray-400 line-through">
-                      AED {product.regular_price}
-                    </span>
-                  </>
-                ) : (
-                  <span className="text-2xl font-tanker text-textcolor">
-                    AED {product.regular_price}
-                  </span>
-                )}
-              </div> */}
-
                             {/* Categories */}
                             {product.categories.length > 0 && (
                                 <div className="mb-6">
