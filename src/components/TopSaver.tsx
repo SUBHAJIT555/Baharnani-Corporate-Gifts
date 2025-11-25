@@ -100,13 +100,13 @@ const TopSaver = ({
       const handleResize = () => {
         equalizeHeights();
       };
-      window.addEventListener("resize", handleResize);
+      self.addEventListener("resize", handleResize);
 
       return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);
         clearTimeout(timer3);
-        window.removeEventListener("resize", handleResize);
+        self.removeEventListener("resize", handleResize);
       };
     }
   }, [isSwiperInView, products]);

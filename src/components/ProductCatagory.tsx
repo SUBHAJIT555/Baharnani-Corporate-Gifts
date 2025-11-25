@@ -4,24 +4,24 @@ import { Link } from "react-router";
 import CustomButton from "./ui/CustomButton";
 
 // Image URLs from internet
-const ApparelImage =
-  "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80";
-const BagsTravelImage =
-  "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80";
-const OfficeStationaryImage =
-  "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&q=80";
-const TechnologyImage =
-  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80";
-const EatingDrinkingImage =
-  "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80";
-const SportsRecreationImage =
-  "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80";
-const EcoFriendlyImage =
-  "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80";
-const PremiumGiftSetsImage =
-  "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&q=80";
-const LuxuryGiftsImage =
-  "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80";
+// const ApparelImage =
+//   "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80";
+// const BagsTravelImage =
+//   "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=80";
+// const OfficeStationaryImage =
+//   "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&q=80";
+// const TechnologyImage =
+//   "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80";
+// const EatingDrinkingImage =
+//   "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&q=80";
+// const SportsRecreationImage =
+//   "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80";
+// const EcoFriendlyImage =
+//   "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80";
+// const PremiumGiftSetsImage =
+//   "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&q=80";
+// const LuxuryGiftsImage =
+//   "https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80";
 
 interface ProductCategory {
   id: number;
@@ -54,7 +54,7 @@ const categories: ProductCategory[] = [
       "Customizable contents and branding",
       "Perfect for special occasions and milestones",
     ],
-    imageUrl: PremiumGiftSetsImage,
+    imageUrl: "/assets/images/product-page-images/Premium-Gift-Sets.webp",
     buttonText: "Explore Premium Gift Sets",
     buttonLink: "/product-category/premium-gift-sets",
   },
@@ -77,7 +77,7 @@ const categories: ProductCategory[] = [
       "Personalized engraving and customization",
       "Elegant presentation and packaging",
     ],
-    imageUrl: LuxuryGiftsImage,
+    imageUrl: "/assets/images/product-page-images/Luxury-Corporate-Gifts.webp",
     buttonText: "Explore Luxury Corporate Gifts",
     buttonLink: "/product-category/luxury-corporate-gifts-dubai",
   },
@@ -100,7 +100,7 @@ const categories: ProductCategory[] = [
       "Wide range of sizes and color options",
       "Bulk order discounts and flexible delivery",
     ],
-    imageUrl: ApparelImage,
+    imageUrl: "/assets/images/product-page-images/Apparel-and-Accessories.webp",
     buttonText: "Explore Apparel & Accessories",
     buttonLink: "/product-category/apparel-and-accessories",
   },
@@ -123,7 +123,7 @@ const categories: ProductCategory[] = [
       "Ergonomic designs for comfort",
       "Variety of styles for different occasions",
     ],
-    imageUrl: BagsTravelImage,
+    imageUrl: "/assets/images/product-page-images/Bags-and-Travel.webp",
     buttonText: "Explore Bags & Travel",
     buttonLink: "/product-category/bags-and-travel",
   },
@@ -146,7 +146,7 @@ const categories: ProductCategory[] = [
       "Eco-friendly options available",
       "Bulk pricing for corporate orders",
     ],
-    imageUrl: OfficeStationaryImage,
+    imageUrl: "/assets/images/product-page-images/Office-and-Stationary.webp",
     buttonText: "Explore Office & Stationary",
     buttonLink: "/product-category/office-and-stationary",
   },
@@ -169,7 +169,7 @@ const categories: ProductCategory[] = [
       "Warranty and support included",
       "Compatible with all major devices",
     ],
-    imageUrl: TechnologyImage,
+    imageUrl: "/assets/images/product-page-images/Technology-and-Accessories.webp",
     buttonText: "Explore Technology & Accessories",
     buttonLink: "/product-category/technology-and-accessories",
   },
@@ -192,7 +192,7 @@ const categories: ProductCategory[] = [
       "Eco-friendly and sustainable options",
       "Perfect for corporate events and gifting",
     ],
-    imageUrl: EatingDrinkingImage,
+    imageUrl: "/assets/images/product-page-images/Eating-and-Drinking.webp",
     buttonText: "Explore Eating & Drinking",
     buttonLink: "/product-category/eating-and-drinking",
   },
@@ -215,7 +215,7 @@ const categories: ProductCategory[] = [
       "Suitable for corporate wellness programs",
       "Variety for different sports and activities",
     ],
-    imageUrl: SportsRecreationImage,
+    imageUrl: "/assets/images/product-page-images/Sports-and-Recreation.webp",
     buttonText: "Explore Sports & Recreation",
     buttonLink: "/product-category/sports-and-recreation",
   },
@@ -238,7 +238,7 @@ const categories: ProductCategory[] = [
       "Eco-friendly packaging",
       "Supports corporate sustainability goals",
     ],
-    imageUrl: EcoFriendlyImage,
+    imageUrl: "/assets/images/product-page-images/Eco-Friendly.webp",
     buttonText: "Explore Eco Friendly",
     buttonLink: "/product-category/eco-friendly",
   },

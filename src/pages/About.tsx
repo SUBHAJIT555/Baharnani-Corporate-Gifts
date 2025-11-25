@@ -20,38 +20,38 @@ const testimonials = [
   {
     quote:
       "Baharnani Advertising has been our trusted corporate gift supplier for over 4 years. Their team, especially Amit, always ensures we get the perfect gifts for our Dubai and Abu Dhabi offices. Exceptional service and quality every time.",
-    name: "Sarah Al-Zahra",
+    name: "Sarah Ahmed",
     designation: "Marketing Director",
-    src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+    src: "/assets/images/Testimonials/Sarah-Ahmed.webp",
   },
   {
     quote:
       "Working with Vivek from Baharnani Advertising has been a game-changer for our corporate gifting needs across Sharjah and Dubai. His attention to detail and understanding of our requirements is outstanding.",
-    name: "Mohammed Hassan",
+    name: "Mohammed Al Rashid",
     designation: "Business Development Manager",
-    src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+    src: "/assets/images/Testimonials/Mohammed-Al-Rashid.webp",
   },
   {
     quote:
       "The team at Baharnani Advertising, particularly Amit, goes above and beyond to deliver premium corporate gifts. From Dubai to Abu Dhabi, they've helped us maintain excellent client relationships through thoughtful gifting.",
-    name: "Fatima Al-Rashid",
+    name: "Fatima Hassan",
     designation: "HR Director",
-    src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+    src: "/assets/images/Testimonials/Fatima-Hassan.webp",
   },
-  {
-    quote:
-      "Vivek  and the Baharnani team have consistently delivered exceptional corporate gifts for our events across Dubai, Abu Dhabi, and Sharjah. Their professionalism and product quality are unmatched in the UAE market.",
-    name: "Rajesh Kumar",
-    designation: "Operations Manager",
-    src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
-  },
-  {
-    quote:
-      "Baharnani Advertising's corporate gift solutions have exceeded our expectations. Their Dubai-based team understands our needs perfectly, and the customization options they offer are simply outstanding.",
-    name: "Layla Abdullah",
-    designation: "Procurement Head",
-    src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
-  },
+  // {
+  //   quote:
+  //     "Vivek  and the Baharnani team have consistently delivered exceptional corporate gifts for our events across Dubai, Abu Dhabi, and Sharjah. Their professionalism and product quality are unmatched in the UAE market.",
+  //   name: "Rajesh Kumar",
+  //   designation: "Operations Manager",
+  //   src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+  // },
+  // {
+  //   quote:
+  //     "Baharnani Advertising's corporate gift solutions have exceeded our expectations. Their Dubai-based team understands our needs perfectly, and the customization options they offer are simply outstanding.",
+  //   name: "Layla Abdullah",
+  //   designation: "Procurement Head",
+  //   src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
+  // },
 ];
 
 const aboutFeatures: FeatureCard[] = [

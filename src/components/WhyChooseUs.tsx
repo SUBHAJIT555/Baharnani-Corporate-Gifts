@@ -97,17 +97,17 @@ const WhyChooseUs = ({
   // Detect mobile screen size
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
+      setIsMobile(self.innerWidth < 768); // md breakpoint
     };
 
     // Check on mount
     checkMobile();
 
     // Check on resize
-    window.addEventListener("resize", checkMobile);
+    self.addEventListener("resize", checkMobile);
 
     return () => {
-      window.removeEventListener("resize", checkMobile);
+      self.removeEventListener("resize", checkMobile);
     };
   }, []);
 
@@ -122,13 +122,13 @@ const WhyChooseUs = ({
       const handleResize = () => {
         equalizeHeights();
       };
-      window.addEventListener("resize", handleResize);
+      self.addEventListener("resize", handleResize);
 
       return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);
         clearTimeout(timer3);
-        window.removeEventListener("resize", handleResize);
+        self.removeEventListener("resize", handleResize);
       };
     }
   }, [isSwiperInView, features, hasFewItems]);

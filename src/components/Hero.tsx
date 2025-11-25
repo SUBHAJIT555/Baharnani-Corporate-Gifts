@@ -212,7 +212,7 @@ const HeroSection = () => {
 
   // Auto-advance
   useEffect(() => {
-    timeoutRef.current = window.setTimeout(() => {
+    timeoutRef.current = self.setTimeout(() => {
       setDirection(1);
       setIndex((prev) => (prev + 1) % IMAGES.length);
     }, AUTO_ADVANCE);

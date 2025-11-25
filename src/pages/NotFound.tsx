@@ -93,7 +93,7 @@ const NotFound = () => {
 
                             {/* Back Button */}
                             <button
-                                onClick={() => window.history.back()}
+                                onClick={() => self.history.back()}
                                 className="inline-flex items-center justify-center gap-2 text-textcolor hover:text-textcolor/70 font-switzer font-medium transition-colors duration-200"
                             >
                                 <ArrowLeft className="w-5 h-5" />

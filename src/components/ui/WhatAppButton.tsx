@@ -8,7 +8,7 @@ const WhatsAppButton = () => {
 
   // Show button when page is scrolled up to given distance
   const toggleVisibility = () => {
-    if (window.scrollY > 300) {
+    if (self.scrollY > 300) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
@@ -17,9 +17,9 @@ const WhatsAppButton = () => {
 
   // Set the scroll event listener
   useEffect(() => {
-    window.addEventListener("scroll", toggleVisibility);
+    self.addEventListener("scroll", toggleVisibility);
     return () => {
-      window.removeEventListener("scroll", toggleVisibility);
+      self.removeEventListener("scroll", toggleVisibility);
     };
   }, []);
 
@@ -30,7 +30,7 @@ const WhatsAppButton = () => {
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;
-    window.open(whatsappUrl, "_blank");
+    self.open(whatsappUrl, "_blank");
   };
 
   return (

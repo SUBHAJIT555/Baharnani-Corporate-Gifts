@@ -8,7 +8,7 @@ import { motion, useInView } from "framer-motion";
 import companyIcon from "../assets/images/icons/icon.svg";
 
 const aboutImage =
-  "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80";
+  "/assets/images/Home-page-image/About-image-home.webp";
 
 const HomeAbout = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -59,7 +59,7 @@ const HomeAbout = () => {
               isImageInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }
             }
             transition={{ duration: 0.7 }}
-            className="w-full lg:w-1/2 xl:w-2/5 shrink-0"
+            className="w-full lg:w-1/2 xl:w-2/5 shrink-0 "
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -69,10 +69,10 @@ const HomeAbout = () => {
                   : { opacity: 0, scale: 0.9 }
               }
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative group"
+              className="relative group "
             >
               <div className="absolute -inset-2 sm:-inset-4  duration-300" />
-              <div className="relative overflow-hidden ">
+              <div className="relative overflow-hidden rounded-lg">
                 <motion.img
                   src={aboutImage}
                   alt="About Leading Network LLC"

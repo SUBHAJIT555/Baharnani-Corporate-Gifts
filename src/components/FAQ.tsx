@@ -19,7 +19,7 @@ const FAQ = ({
   faqData,
   title,
   subtitle,
-  imageUrl = "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+  imageUrl = "/assets/images/Home-page-image/FAQ-home.webp",
 }: FAQProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const headingRef = useRef<HTMLDivElement>(null);
@@ -89,7 +89,7 @@ const FAQ = ({
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="relative group"
               >
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden rounded-xl">
                   <motion.img
                     src={imageUrl}
                     alt="FAQ"

@@ -23,7 +23,7 @@ const ScrollToTop = () => {
 
   // Native scroll handler
   const handleNativeScroll = () => {
-    checkVisibility(window.scrollY);
+    checkVisibility(self.scrollY);
   };
 
   // Set the scroll event listener
@@ -36,11 +36,11 @@ const ScrollToTop = () => {
         lenis.off("scroll", handleLenisScroll);
       };
     } else {
-      window.addEventListener("scroll", handleNativeScroll);
+      self.addEventListener("scroll", handleNativeScroll);
       // Initial check
       handleNativeScroll();
       return () => {
-        window.removeEventListener("scroll", handleNativeScroll);
+        self.removeEventListener("scroll", handleNativeScroll);
       };
     }
   }, [lenis]);
@@ -50,7 +50,7 @@ const ScrollToTop = () => {
     if (lenis) {
       lenis.scrollTo(0, { duration: 1.5 });
     } else {
-      window.scrollTo({
+      self.scrollTo({
         top: 0,
         behavior: "smooth",
       });

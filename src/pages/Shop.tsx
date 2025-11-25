@@ -89,7 +89,7 @@ const Shop = () => {
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
         setIsInitialLoad(false); // Not initial load when paginating
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        self.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const { addToQuote, isInQuote, items, updateQuantity } = useQuote();
