@@ -40,10 +40,10 @@ const FeatureBrand = () => {
     margin: "-100px",
   });
 
-  const handleBrandClick = (brand: Product) => {
-    setSelectedBrand(brand);
-    setIsProductModalOpen(true);
-  };
+  // const handleBrandClick = (brand: Product) => {
+  //   setSelectedBrand(brand);
+  //   setIsProductModalOpen(true);
+  // };
 
   const handleCloseModal = () => {
     setIsProductModalOpen(false);

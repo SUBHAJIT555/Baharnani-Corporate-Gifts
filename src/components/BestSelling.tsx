@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useAllProducts, useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import ProductGrid from "./ProductGrid";
-import Loading from "./ui/Loading";
+// import Loading from "./ui/Loading";
 // import { bestSellingItems } from "../data/bestselling";
 
 const BestSelling = () => {

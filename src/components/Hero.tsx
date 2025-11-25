@@ -58,11 +58,12 @@ const HeroSection = () => {
   const isAnimatingRef = useRef(false);
   const prevIndexRef = useRef<number>(0);
 
-  // GSAP Slide Animation Function
-  const animateSlide = (newIndex: number, dir: number) => {
+  // GSAP Crossfade Animation Function
+  const animateSlide = (newIndex: number) => {
     if (isAnimatingRef.current) return;
     isAnimatingRef.current = true;
 
+    const prevImg = imageRefs.current[prevIndexRef.current];
     const newImg = imageRefs.current[newIndex];
 
     if (!newImg) {
@@ -70,59 +71,49 @@ const HeroSection = () => {
       return;
     }
 
-    // Determine start position based on direction
-    // dir > 0: next (slide from right), dir < 0: prev (slide from left)
-    const startX = dir > 0 ? 100 : -100;
+    // Kill any existing animations
+    gsap.killTweensOf([prevImg, newImg]);
 
-    // Reset z-index and hide all images except the new one
-    // This ensures proper stacking when wrapping around
-    IMAGES.forEach((_, i) => {
-      const img = imageRefs.current[i];
-      if (img) {
-        if (i !== newIndex) {
-          // Hide previous images and set base z-index
-          gsap.set(img, {
-            zIndex: i + 1,
-            opacity: 0, // Hide all images except the current one
-          });
-        }
-      }
-    });
-
-    // Kill any existing animations on the new image
-    gsap.killTweensOf(newImg);
-
-    // Always reset new image to starting position (critical for wrap-around)
-    // This ensures the image starts from the correct side even if it was previously shown
+    // Set up the new image to be ready to fade in
     gsap.set(newImg, {
-      xPercent: startX, // Start from right (next) or left (prev)
-      opacity: 1,
-      zIndex: IMAGES.length + 10, // Very high z-index to overlap all previous images
+      opacity: 0,
+      zIndex: IMAGES.length + 10, // Higher z-index to be on top
+      xPercent: 0, // No sliding, just fading
     });
 
-    // Animate new image sliding in
+    // Create timeline for smooth crossfade
     const tl = gsap.timeline({
       onComplete: () => {
-        // Set final z-index after animation
-        gsap.set(newImg, { zIndex: newIndex + 1 });
-
-        // Ensure all other images are hidden (important for full cycle completion)
+        // Clean up: hide all images except the current one
         IMAGES.forEach((_, i) => {
           const img = imageRefs.current[i];
           if (img && i !== newIndex) {
-            gsap.set(img, { opacity: 0 });
+            gsap.set(img, { opacity: 0, zIndex: i + 1 });
           }
         });
+
+        // Set final z-index for new image
+        gsap.set(newImg, { zIndex: newIndex + 1 });
 
         isAnimatingRef.current = false;
       },
     });
 
+    // Crossfade: fade out old, fade in new simultaneously
     tl.to(newImg, {
-      xPercent: 0,
-      duration: 1.2,
-      ease: "power3.out",
-    });
+      opacity: 1,
+      duration: 1.5, // Longer duration for smoother fade
+      ease: "power2.inOut",
+    }, 0); // Start at time 0
+
+    // Optionally fade out the previous image (creates a true crossfade)
+    if (prevImg) {
+      tl.to(prevImg, {
+        opacity: 0,
+        duration: 1.5,
+        ease: "power2.inOut",
+      }, 0); // Start at the same time as fade in
+    }
   };
 
   // GSAP Initial Animations
@@ -188,16 +179,16 @@ const HeroSection = () => {
         const img = imageRefs.current[i];
         if (img) {
           if (i === 0) {
-            // First image
+            // First image visible
             gsap.set(img, {
               xPercent: 0,
               opacity: 1,
               zIndex: 1,
             });
           } else {
-            // Other images start off-screen
+            // Other images hidden, no offset (for crossfade)
             gsap.set(img, {
-              xPercent: 100,
+              xPercent: 0, // No sliding, just fading
               opacity: 0,
               zIndex: i + 1,
             });
@@ -211,7 +202,7 @@ const HeroSection = () => {
   useEffect(() => {
     if (imageRefs.current[index] && direction !== 0) {
       // Animate slide when index changes (except on initial mount)
-      animateSlide(index, direction);
+      animateSlide(index);
       prevIndexRef.current = index;
     } else if (direction === 0) {
       // On initial mount, just set the previous index
@@ -302,7 +293,7 @@ const HeroSection = () => {
       {/* GSAP Slider Container */}
       <div
         ref={sliderContainerRef}
-        className="absolute inset-0 w-full h-full overflow-hidden z-0"
+        className="absolute inset-0 w-full h-full overflow-hidden z-0 bg-black"
       >
         {/* All Images - GSAP will handle animations */}
         {IMAGES.map((img, i) => {
