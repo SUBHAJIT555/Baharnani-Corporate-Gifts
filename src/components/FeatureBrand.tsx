@@ -200,7 +200,7 @@ const FeatureBrand = () => {
                         </h3>
 
                         {/* Product Name */}
-                        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-tanker text-textcolor text-center line-clamp-1 overflow-hidden text-ellipsis">
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-switzer font-bold text-textcolor text-center line-clamp-1 overflow-hidden text-ellipsis">
                           {brand.name}
                         </p>
                       </div>
@@ -275,7 +275,7 @@ const FeatureBrand = () => {
                         </span>
 
                         {/* Product Title */}
-                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-tanker text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight ">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-switzer font-bold text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight ">
                           {selectedBrand.name}
                         </h2>
 

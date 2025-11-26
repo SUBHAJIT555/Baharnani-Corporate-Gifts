@@ -300,7 +300,7 @@ const TopSaver = ({
                           </span>
 
                           {/* Product Title */}
-                          <h3 className="text-sm font-tanker text-textcolor mb-4 grow line-clamp-1 overflow-hidden text-ellipsis">
+                          <h3 className="text-base font-switzer font-bold text-textcolor mb-4 grow line-clamp-1 overflow-hidden text-ellipsis">
                             {product.name}
                           </h3>
 
@@ -431,7 +431,7 @@ const TopSaver = ({
                         </span>
 
                         {/* Product Title */}
-                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-tanker text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight">
+                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-switzer font-bold text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight">
                           {selectedProduct.name}
                         </h2>
 

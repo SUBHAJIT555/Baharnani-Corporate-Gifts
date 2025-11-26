@@ -209,7 +209,7 @@ const LuxuryCorporateGifts = () => {
       <CommonHero
         title="Luxury Corporate Gifts in Dubai - Make Your Business Relationships Stronger"
         titlesuffix=""
-        subtitle="xplore the Best Selection of Customized Corporate Gifts for Clients & Employees in Dubai"
+        subtitle="Explore the Best Selection of Customized Corporate Gifts for Clients & Employees in Dubai"
         imageUrl={LuxuryCorporateGiftsImage}
         buttonLink="#luxury-corporate-gifts"
         buttonText="Shop Luxury Corporate Gifts"

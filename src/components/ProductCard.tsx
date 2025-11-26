@@ -49,7 +49,7 @@ export const ProductCard = ({ product, index, onAddToQuote, isInQuote, currentQu
                 {/* Product Title */}
                 <Link
                     to={getProductUrl(product)}
-                    className="text-sm font-tanker text-textcolor mb-4 sm:mb-5 grow line-clamp-1  cursor-pointer"
+                    className="text-sm font-switzer font-bold text-textcolor mb-4 sm:mb-5 grow line-clamp-1  cursor-pointer"
                 >
                     {product.name}
                 </Link>
