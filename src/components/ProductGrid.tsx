@@ -97,7 +97,7 @@ const ProductGrid = ({
   const { addToQuote, isInQuote, updateQuantity } = useQuote();
 
   const [showFloatingFilter, setShowFloatingFilter] = useState(false);
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  // const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
   const rafRef = useRef<number | null>(null);
@@ -175,12 +175,12 @@ const ProductGrid = ({
     (slug: string | null) => {
       setSelectedCategory?.(slug);
 
-      if (window.innerWidth < 1024) {
-        setIsBottomSheetOpen(false);
+      if (self.innerWidth < 1024) {
+        // setIsBottomSheetOpen(false);
         setTimeout(() => {
           const el = sectionRef.current;
           if (el) {
-            window.scrollTo({
+            self.scrollTo({
               top: el.offsetTop - 20,
               behavior: "smooth",
             });
@@ -286,8 +286,8 @@ const ProductGrid = ({
               exit={{ y: 100, opacity: 0 }}
               transition={{ duration: 0.25 }}
               onClick={() => {
-                if (window.innerWidth < 1024) setIsBottomSheetOpen(true);
-                else window.scrollTo({ top: sectionRef.current?.offsetTop ?? 0, behavior: "smooth" });
+                if (self.innerWidth < 1024) {/* setIsBottomSheetOpen(true); */ }
+                else self.scrollTo({ top: sectionRef.current?.offsetTop ?? 0, behavior: "smooth" });
               }}
               className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-textcolor/50 backdrop-blur-sm text-white px-6 py-3 rounded-md shadow-lg font-tanker flex items-center gap-2"
             >
