@@ -264,7 +264,7 @@ const ProductCarousel = ({
                             </span>
 
 
-                            <h3 className="text-lg sm:text-xl md:text-2xl font-tanker text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
+                            <h3 className="text-lg font-switzer font-bold sm:text-xl md:text-2xl  text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
                               {product.name}
                             </h3>
 

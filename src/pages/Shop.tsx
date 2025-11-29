@@ -445,7 +445,7 @@ const ProductCardList = ({ product, index, onAddToQuote, isInQuote, currentQuant
                 {/* Product Title */}
                 <Link
                     to={getProductUrl(product)}
-                    className="text-base sm:text-lg md:text-xl font-tanker text-textcolor mb-2 line-clamp-2 cursor-pointer hover:underline"
+                    className="text-base font-switzer font-bold text-textcolor mb-2 line-clamp-2 cursor-pointer hover:underline"
                 >
                     {product.name}
                 </Link>

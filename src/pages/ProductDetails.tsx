@@ -93,7 +93,7 @@ const ProductDetails = () => {
                     />
                 </div>
                 <div className="relative w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-8 sm:py-10 md:py-12">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-tanker text-white leading-tight">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-switzer font-bold text-white leading-tight">
                         {product.name}
                     </h1>
                     <div className="w-16 sm:w-20 h-1 bg-white/80 rounded-md mt-3 sm:mt-4" />
