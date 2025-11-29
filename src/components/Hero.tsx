@@ -19,15 +19,15 @@ import { Link } from "react-router-dom";
 gsap.registerPlugin(ScrollTrigger);
 
 const IMAGES = [
-  '/assets/images/Home-page-hero-images/Apparel-&-accessories.webp',
-  '/assets/images/Home-page-hero-images/Bags-&-travel.webp',
-  '/assets/images/Home-page-hero-images/Office-&-stationary.webp',
-  '/assets/images/Home-page-hero-images/Technology-&-accessories.webp',
-  '/assets/images/Home-page-hero-images/Eating-&-drinking.webp',
-  '/assets/images/Home-page-hero-images/Premiums-gift-sets.webp',
-  '/assets/images/Home-page-hero-images/Sports-&-recreation.webp',
-  '/assets/images/Home-page-hero-images/Eco-friendly.webp',
-  '/assets/images/Home-page-hero-images/Luxury-corporate-gifts.webp',
+  "/assets/images/Home-page-hero-images/Apparel-&-accessories.webp",
+  "/assets/images/Home-page-hero-images/Bags-&-travel.webp",
+  "/assets/images/Home-page-hero-images/Office-&-stationary.webp",
+  "/assets/images/Home-page-hero-images/Technology-&-accessories.webp",
+  "/assets/images/Home-page-hero-images/Eating-&-drinking.webp",
+  "/assets/images/Home-page-hero-images/Premiums-gift-sets.webp",
+  "/assets/images/Home-page-hero-images/Sports-&-recreation.webp",
+  "/assets/images/Home-page-hero-images/Eco-friendly.webp",
+  "/assets/images/Home-page-hero-images/Luxury-corporate-gifts.webp",
 ];
 
 const H2_TEXTS = [
@@ -100,19 +100,27 @@ const HeroSection = () => {
     });
 
     // Crossfade: fade out old, fade in new simultaneously
-    tl.to(newImg, {
-      opacity: 1,
-      duration: 1.5, // Longer duration for smoother fade
-      ease: "power2.inOut",
-    }, 0); // Start at time 0
+    tl.to(
+      newImg,
+      {
+        opacity: 1,
+        duration: 1.5, // Longer duration for smoother fade
+        ease: "power2.inOut",
+      },
+      0
+    ); // Start at time 0
 
     // Optionally fade out the previous image (creates a true crossfade)
     if (prevImg) {
-      tl.to(prevImg, {
-        opacity: 0,
-        duration: 1.5,
-        ease: "power2.inOut",
-      }, 0); // Start at the same time as fade in
+      tl.to(
+        prevImg,
+        {
+          opacity: 0,
+          duration: 1.5,
+          ease: "power2.inOut",
+        },
+        0
+      ); // Start at the same time as fade in
     }
   };
 
@@ -308,6 +316,10 @@ const HeroSection = () => {
               className="absolute inset-0 w-full h-full object-cover pointer-events-none"
               style={{
                 willChange: "transform",
+                maskImage:
+                  "radial-gradient(ellipse 85% 75% at 50% 45%, black 40%, rgba(0,0,0,0.7) 70%, transparent 100%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 85% 75% at 50% 45%, black 40%, rgba(0,0,0,0.7) 70%, transparent 100%)",
               }}
               draggable={false}
               loading={i === 0 ? "eager" : "lazy"}
@@ -317,7 +329,7 @@ const HeroSection = () => {
       </div>
 
       {/* Overlay for contrast */}
-      <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
+      {/* <div className="absolute inset-0 bg-black/40  z-10 pointer-events-none" /> */}
 
       {/* Text Overlay */}
       <div
@@ -330,7 +342,16 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="text-[#e1e1e1] text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl  leading-tight mb-3 sm:mb-4 drop-shadow-lg font-khand font-black max-w-7xl mx-auto "
+            className="text-[#e1e1e1] text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight mb-3 sm:mb-4 font-khand font-black max-w-7xl mx-auto"
+            style={{
+              textShadow: `
+                2px 2px 4px #000000AA,
+                0 4px 18px #1a232c99,
+                2px 4px 0px #33333399,
+                0px 1px 0px #fff,
+                0px 2px 0px #fff
+              `,
+            }}
           >
             Premium Corporate Gifts Suppliers in Dubai & Across the UAE
           </motion.h1>
@@ -352,6 +373,15 @@ const HeroSection = () => {
                   ease: [0.4, 0, 0.2, 1],
                 }}
                 className="absolute text-white text-2xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-light tracking-normal leading-tight drop-shadow-lg font-tanker whitespace-normal sm:whitespace-nowrap text-center px-4 w-full max-w-full"
+                style={{
+                  textShadow: `
+                2px 2px 4px #000000AA,
+                0 4px 18px #1a232c99,
+                2px 4px 0px #33333399,
+                0px 1px 0px #fff,
+                0px 2px 0px #fff
+              `,
+                }}
               >
                 {H2_TEXTS[index]}
               </motion.h2>
@@ -424,10 +454,11 @@ const HeroSection = () => {
           <button
             key={i}
             onClick={() => goToSlide(i)}
-            className={`transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50 ${i === index
-              ? "w-8 h-3 sm:w-10 sm:h-3.5 rounded-full bg-[#499F68]"
-              : "w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#D9D9D9] hover:bg-[#C0C0C0]"
-              }`}
+            className={`transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50 ${
+              i === index
+                ? "w-8 h-3 sm:w-10 sm:h-3.5 rounded-full bg-[#499F68]"
+                : "w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#D9D9D9] hover:bg-[#C0C0C0]"
+            }`}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}

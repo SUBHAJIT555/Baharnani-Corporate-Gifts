@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import aboutVideo from "../assets/images/aboutVideo.webm";
 
 const WhoWeAre = () => {
   const headingRef = useRef<HTMLDivElement>(null);
@@ -104,7 +105,7 @@ const WhoWeAre = () => {
         transition={{ duration: 0.8 }}
         className="w-full px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-16 "
       >
-        <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] xl:h-[85vh] overflow-hidden rounded-lg">
+        <div className="relative w-full h-[30vh] sm:h-[40vh] md:h-[40vh] lg:h-[55vh] xl:h-[70vh] overflow-hidden rounded-lg">
           <video
             autoPlay
             loop
@@ -113,8 +114,8 @@ const WhoWeAre = () => {
             className="absolute inset-0 w-full h-full object-cover"
           >
             <source
-              src="https://www.pexels.com/download/video/34606865/"
-              type="video/mp4"
+              src={aboutVideo}
+              type="video/webm"
             />
             Your browser does not support the video tag.
           </video>

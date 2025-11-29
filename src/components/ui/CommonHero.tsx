@@ -57,7 +57,18 @@ const CommonHero: React.FC<CommonHeroProps> = ({
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-tanker  text-white leading-none">
+            <h1
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-tanker  text-white leading-none"
+              style={{
+                textShadow: `
+                2px 2px 4px #000000AA,
+                0 4px 18px #1a232c99,
+                2px 4px 0px #33333399,
+                0px 1px 0px #fff,
+                0px 2px 0px #fff
+              `,
+              }}
+            >
               {title} <br />
               <span className="font-tanker font-light tracking-wide  text-2xl md:text-3xl lg:text-4xl">
                 {titlesuffix}

@@ -18,7 +18,6 @@ import { useRandomProducts } from "../hooks/useProducts";
 import { getProductUrl } from "../lib/utilts";
 
 interface TopSaverProps {
-
   videoUrl?: string;
 }
 
@@ -28,7 +27,7 @@ interface TopSaverProps {
 const TopSaver = ({
   videoUrl = "/assets/video/GIFMaker_mezeeyand.webm",
 }: TopSaverProps) => {
-  const { data: products } = useRandomProducts()
+  const { data: products } = useRandomProducts();
   const { addToQuote, isInQuote } = useQuote();
   const headingRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<HTMLDivElement>(null);
@@ -39,6 +38,7 @@ const TopSaver = ({
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const [displayedText, setDisplayedText] = useState("");
 
   const isHeadingInView = useInView(headingRef, {
     once: true,
@@ -134,6 +134,53 @@ const TopSaver = ({
     };
   }, []);
 
+  // Typewriter animation for "Need Help?" - infinite back and forth
+  useEffect(() => {
+    if (!isSwiperInView) return;
+
+    const text = "Need Help ?";
+    let currentIndex = 0;
+    let isDeleting = false;
+    let waitCount = 0;
+    const waitTime = 20; // 20 * 100ms = 2 seconds wait after typing
+    const deleteWaitTime = 10; // 10 * 100ms = 1 second wait after deleting
+    setDisplayedText("");
+
+    const typeInterval = setInterval(() => {
+      if (!isDeleting) {
+        // Typing forward
+        if (currentIndex < text.length) {
+          setDisplayedText(text.slice(0, currentIndex + 1));
+          currentIndex++;
+        } else {
+          // Finished typing, wait before deleting
+          waitCount++;
+          if (waitCount >= waitTime) {
+            isDeleting = true;
+            waitCount = 0;
+          }
+        }
+      } else {
+        // Deleting backward
+        if (currentIndex > 0) {
+          currentIndex--;
+          setDisplayedText(text.slice(0, currentIndex));
+        } else {
+          // Finished deleting, wait before typing again
+          waitCount++;
+          if (waitCount >= deleteWaitTime) {
+            isDeleting = false;
+            waitCount = 0;
+          }
+        }
+      }
+    }, 100); // Typing/deleting speed: 100ms per character
+
+    return () => {
+      clearInterval(typeInterval);
+    };
+  }, [isSwiperInView]);
+
   const handleAddToQuote = (product: Product, e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (!isInQuote(Number(product.id))) {
@@ -166,7 +213,8 @@ const TopSaver = ({
           className="mb-8 sm:mb-10 md:mb-12 lg:mb-16"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-tanker text-textcolor leading-tight mb-3 sm:mb-4 md:mb-5 lg:mb-6">
-            Top Saver <PiSealPercentDuotone className="inline-block align-middle " />
+            Top Saver{" "}
+            <PiSealPercentDuotone className="inline-block align-middle " />
             Corporate Gift Deals in Dubai
           </h2>
           <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-switzer tracking-widest sm:tracking-wider md:tracking-widest text-textcolor font-medium">
@@ -307,10 +355,11 @@ const TopSaver = ({
                           {/* Add to Quote Button */}
                           <button
                             disabled={isInQuote(product.id)}
-                            className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(product.id)
-                              ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                              : "bg-textcolor hover:bg-textcolor/70 text-white"
-                              }`}
+                            className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${
+                              isInQuote(product.id)
+                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                                : "bg-textcolor hover:bg-textcolor/70 text-white"
+                            }`}
                             onClick={(e) => handleAddToQuote(product, e)}
                           >
                             {isInQuote(product.id)
@@ -366,8 +415,33 @@ const TopSaver = ({
                 ) : (
                   <div className="w-full h-full bg-gray-200 animate-pulse" />
                 )}
-                {/* Optional overlay for better text readability if needed */}
-                <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none" />
+                {/* Overlay for better text readability */}
+                <div className="absolute inset-0 bg-linear-to-t from-transparent via-black/80 to-transparent pointer-events-none" />
+
+                {/* Text Content Overlay */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-5 md:p-6 lg:p-4 xl:p-5 2xl:p-6 z-10">
+                  {/* Heading with blue band background */}
+                  <div className="w-full flex justify-center mb-4 sm:mb-5 md:mb-6">
+                    <div className="px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-lg">
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-tanker font-bold text-bg text-center">
+                        {displayedText}
+                        <span className="inline-block w-0.5 h-6 sm:h-8 md:h-10 bg-bg ml-1 animate-pulse" />
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Paragraph text */}
+                  <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-tanker font-bold text-bg text-center mb-6 sm:mb-8 md:mb-10 max-w-md tracking-wide">
+                    Contact us for unique gift ideas for your company
+                  </p>
+
+                  {/* Contact Us Button */}
+                  <Link to="/contact-us" className="inline-block">
+                    <button className="font-switzer font-semibold py-2 sm:py-2 md:py-2 px-8 sm:px-10 md:px-12 rounded-md transition-colors duration-200 text-base sm:text-sm md:text-xl bg-textcolor hover:bg-textcolor/70 text-white shadow-lg">
+                      Contact Us
+                    </button>
+                  </Link>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -449,10 +523,11 @@ const TopSaver = ({
                         <div className="hidden lg:block mt-auto">
                           <button
                             disabled={isInQuote(selectedProduct.id)}
-                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${isInQuote(selectedProduct.id)
-                              ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                              : "bg-textcolor hover:bg-textcolor/70 text-white"
-                              }`}
+                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${
+                              isInQuote(selectedProduct.id)
+                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                                : "bg-textcolor hover:bg-textcolor/70 text-white"
+                            }`}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleAddToQuote(selectedProduct, e);
@@ -471,10 +546,11 @@ const TopSaver = ({
                   <div className="lg:hidden sticky bottom-0 left-0 right-0 bg-bg border-t border-gray-200 p-4 pt-3 shadow-lg z-10">
                     <button
                       disabled={isInQuote(selectedProduct.id)}
-                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${isInQuote(selectedProduct.id)
-                        ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                        : "bg-textcolor hover:bg-textcolor/70 text-white"
-                        }`}
+                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${
+                        isInQuote(selectedProduct.id)
+                          ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                          : "bg-textcolor hover:bg-textcolor/70 text-white"
+                      }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleAddToQuote(selectedProduct, e);

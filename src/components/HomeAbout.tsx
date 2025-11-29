@@ -101,12 +101,7 @@ const HomeAbout = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl font-switzer text-textcolor leading-relaxed sm:leading-relaxed md:leading-relaxed"
             >
-              Find the perfect way to appreciate your clients and employees with
-              Baharnani Advertising, as we are one of the most trusted suppliers
-              of corporate gifts in Dubai, Abu Dhabi, and across the UAE. Check
-              out our below items, as we offer the best promotional gifts that
-              have a variety of ranges, from luxury to customized and branded
-              gifts for every occasion.
+              From premium gift sets to innovative branded solutions, Baharnani Advertising helps you strengthen business relationships through thoughtful corporate gifting. Discover our curated range of products, designed to suit every occasion and budget, and see why we’re the top choice for promotional gifts in Dubai and the UAE.
             </motion.p>
 
 

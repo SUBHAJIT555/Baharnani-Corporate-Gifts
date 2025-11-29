@@ -136,6 +136,7 @@ const Stats = () => {
             </motion.div>
             <motion.div
               className="text-base sm:text-lg md:text-xl lg:text-2xl text-textcolor font-khand text-center font-bold"
+             
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
