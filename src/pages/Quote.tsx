@@ -81,11 +81,11 @@ const Quote = () => {
             Add products to your quote cart to get started.
           </p>
           <Link
-            to="/products"
+            to="/shop"
             className="inline-flex items-center gap-2 bg-bg hover:bg-bg/70 text-textcolor font-tanker font-medium py-3 px-6 rounded-md transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
-            Back to Products
+            Back to Shop
           </Link>
         </div>
       </div>
@@ -368,11 +368,11 @@ const Quote = () => {
                   )}
                 </button>
                 <Link
-                  to="/products"
+                  to="/shop"
                   className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-bg border border-textcolor/40 hover:bg-bg/70 text-textcolor font-tanker font-medium py-3 px-8 rounded-md transition-colors"
                 >
                   <ArrowLeft className="w-5 h-5" />
-                  Back to Products
+                  Back to Shop
                 </Link>
               </div>
             </form>

@@ -110,7 +110,7 @@ const Footer = () => {
                     href="https://facebook.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-bg hover:text-[#499F68] transition-colors duration-300"
+                    className="text-bg hover:text-[#499F68] transition-colors duration-300 border border-bg/30 rounded-md p-2 bg-bg/10 hover:bg-bg/20 backdrop-blur-sm"
                   >
                     <FaFacebookF size={24} />
                   </a>
@@ -118,7 +118,7 @@ const Footer = () => {
                     href="https://instagram.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-bg hover:text-[#499F68] transition-colors duration-300"
+                    className="text-bg hover:text-[#499F68] transition-colors duration-300 border border-bg/30 rounded-md p-2 bg-bg/10 hover:bg-bg/20 backdrop-blur-sm"
                   >
                     <FaInstagram size={24} />
                   </a>
@@ -126,7 +126,7 @@ const Footer = () => {
                     href="https://linkedin.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-bg hover:text-[#499F68] transition-colors duration-300"
+                    className="text-bg hover:text-[#499F68] transition-colors duration-300 border border-bg/30 rounded-md p-2 bg-bg/10 hover:bg-bg/20 backdrop-blur-sm"
                   >
                     <FaLinkedinIn size={24} />
                   </a>
@@ -136,7 +136,7 @@ const Footer = () => {
               {/* Useful Links */}
               <div className="col-span-2 sm:col-span-1">
                 <h3 className="text-[#499F68] text-2xl font-tanker flex items-center gap-2">
-                  <div className="h-6 w-1 bg-bg"></div>
+                  <div className="h-6 w-1 bg-bg shrink-0"></div>
                   Useful Links{" "}
                   <PiLinkSimpleDuotone className="inline-block text-bg" />
                 </h3>
@@ -247,7 +247,7 @@ const Footer = () => {
               {/* Products */}
               <div className="col-span-2 sm:col-span-1">
                 <h3 className="text-[#499F68] text-2xl font-tanker flex items-center gap-2">
-                  <div className="h-6 w-1 bg-bg"></div>
+                  <div className="h-6 w-1 bg-bg shrink-0"></div>
                   Product Categories{" "}
                   <SlSocialDropbox className="inline-block text-bg" />
                 </h3>
@@ -438,7 +438,7 @@ const Footer = () => {
               {/* Legals */}
               <div className="col-span-2 sm:col-span-1">
                 <h3 className="text-[#499F68] text-2xl font-tanker flex items-center gap-2">
-                  <div className="h-6 w-1 bg-bg"></div>
+                  <div className="h-6 w-1 bg-bg shrink-0"></div>
                   Legals <GoLaw className="inline-block text-bg" />
                 </h3>
                 <ul className="text-bg text-xl font-tanker mt-5">
@@ -528,7 +528,7 @@ const Footer = () => {
               {/* Newsletter */}
               <div className="col-span-2 sm:col-span-1">
                 <h3 className="text-[#499F68] text-2xl font-tanker mb-5 flex items-center gap-2">
-                  <div className="h-6 w-1 bg-bg"></div>
+                  <div className="h-6 w-1 bg-bg shrink-0"></div>
                   Newsletter <PiMailboxDuotone className="inline-block text-bg" />
                 </h3>
                 <p className="text-bg text-lg font-tanker">
