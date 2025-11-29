@@ -18,8 +18,8 @@ interface CallToActionProps {
 }
 
 const CallToAction = ({
-  title = "Partner With a Leading Trading Company in Oman",
-  subtitle = "From construction and chemicals to food and IT — Leading Network LLC is your one-stop trading partner for reliable supply and sustainable growth.",
+  title = "Ready to Elevate Your Corporate Gifting?",
+  subtitle = "Partner with Baharnani Advertising, Dubai's premier corporate gift supplier. From premium gift sets to custom branding solutions, we help you make lasting impressions that strengthen business relationships.",
   backgroundImageUrl = "https://images.pexels.com/photos/17485710/pexels-photo-17485710.png",
   buttons = [
     {
@@ -57,7 +57,7 @@ const CallToAction = ({
           ></div>
 
           {/* Overlay */}
-          <div className="absolute inset-0 bg-white/50"></div>
+          <div className="absolute inset-0 bg-black/30"></div>
 
           {/* Content Container */}
           <div className="relative z-10 px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-12 sm:py-16 md:py-20 lg:py-24">
@@ -69,10 +69,10 @@ const CallToAction = ({
                   isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
                 }
                 transition={{ duration: 0.6 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-tanker text-textcolor leading-tight mb-4 sm:mb-6"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-tanker text-bg leading-tight mb-4 sm:mb-6"
                 style={{
                   textShadow:
-                    "2px 2px 0px rgba(255, 255, 255, 0.8), 4px 4px 8px rgba(0, 0, 0, 0.3)",
+                    "2px 2px 0px rgba(000, 000, 000, 0.8), 4px 4px 8px rgba(0, 0, 0, 0.3)",
                 }}
               >
                 {title}
@@ -85,10 +85,10 @@ const CallToAction = ({
                   isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
                 }
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-xl sm:text-2xl md:text-3xl font-khand font-bold text-textcolor leading-relaxed mb-8 sm:mb-10 md:mb-12"
+                className="text-xl sm:text-2xl md:text-3xl font-khand font-bold text-bg leading-relaxed mb-8 sm:mb-10 md:mb-12"
                 style={{
                   textShadow:
-                    "2px 2px 0px rgba(255, 255, 255, 0.8), 4px 4px 8px rgba(0, 0, 0, 0.3)",
+                    "2px 2px 0px rgba(000, 000, 000, 0.8), 4px 4px 8px rgba(0, 0, 0, 0.3)",
                 }}
               >
                 {subtitle}

@@ -7,27 +7,27 @@ const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { lenis } = useLenisContext();
 
-  // Show button when page is scrolled up to given distance
-  const checkVisibility = (scrollPosition: number) => {
-    if (scrollPosition > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
-
-  // Lenis scroll handler
-  const handleLenisScroll = (e: { scroll: number }) => {
-    checkVisibility(e.scroll);
-  };
-
-  // Native scroll handler
-  const handleNativeScroll = () => {
-    checkVisibility(self.scrollY);
-  };
-
   // Set the scroll event listener
   useEffect(() => {
+    // Show button when page is scrolled up to given distance
+    const checkVisibility = (scrollPosition: number) => {
+      if (scrollPosition > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    // Lenis scroll handler
+    const handleLenisScroll = (e: { scroll: number }) => {
+      checkVisibility(e.scroll);
+    };
+
+    // Native scroll handler
+    const handleNativeScroll = () => {
+      checkVisibility(self.scrollY);
+    };
+
     if (lenis) {
       lenis.on("scroll", handleLenisScroll);
       // Initial check
@@ -66,10 +66,10 @@ const ScrollToTop = () => {
           exit={{ opacity: 0, y: 200 }}
           transition={{ duration: 0.3 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-4 sm:right-8 p-3 rounded-full bg-[#080f0f]/30 backdrop-blur-sm text-[#e1e1e1] border border-[#e1e1e1] shadow-lg hover:bg-[#080f0f] transition-colors duration-300 z-50 hover:text-[#e1e1e1] hover:border-[#e1e1e1]"
+          className="fixed bottom-8 right-4 sm:right-8 p-3 rounded-md bg-[#080f0f]/30 backdrop-blur-sm text-[#e1e1e1] border border-[#e1e1e1] shadow-lg hover:bg-[#080f0f] transition-colors duration-300 z-50 hover:text-[#e1e1e1] hover:border-[#e1e1e1]"
           aria-label="Scroll to top"
         >
-          <ArrowUp className="w-6 h-6" />
+          <ArrowUp className="md:size-7 size-5" />
         </motion.button>
       )}
     </AnimatePresence>

@@ -83,7 +83,7 @@ const ProductDetails = () => {
     return (
         <div className="min-h-screen bg-bg">
             {/* Hero Section */}
-            <section className="relative w-full bg-gradient-to-r from-textcolor via-textcolor/90 to-textcolor/80 overflow-hidden pt-24 sm:pt-28 md:pt-32">
+            <section className="relative w-full bg-linear-to-r from-textcolor via-textcolor/90 to-textcolor/80 overflow-hidden pt-24 sm:pt-28 md:pt-32">
                 <div className="absolute inset-0 opacity-10">
                     <div
                         className="absolute inset-0"

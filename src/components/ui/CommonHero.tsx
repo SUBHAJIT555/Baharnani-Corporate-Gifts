@@ -45,7 +45,7 @@ const CommonHero: React.FC<CommonHeroProps> = ({
           alt="Hero Background"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-black via-black/50 to-black/70" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/10 to-black/50" />
       </motion.div>
 
       {/* Content */}

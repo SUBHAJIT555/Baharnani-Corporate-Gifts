@@ -42,10 +42,10 @@ const WhatsAppButton = () => {
           exit={{ opacity: 0, y: 200 }}
           transition={{ duration: 0.3 }}
           onClick={handleWhatsAppClick}
-          className="fixed bottom-24 right-4 sm:right-8 p-3 rounded-full bg-[#080f0f]/30 backdrop-blur-sm text-[#e1e1e1] border border-[#e1e1e1] hover:bg-[#080f0f] hover:text-[#e1e1e1] hover:border-[#e1e1e1] transition-colors duration-300 z-50"
+          className="fixed bottom-24 right-4 sm:right-8 p-3 rounded-md bg-[#080f0f]/30 backdrop-blur-sm text-[#e1e1e1] border border-[#e1e1e1] hover:bg-[#ffffff] hover:text-[#499F68] hover:border-[#e1e1e1] transition-colors duration-300 z-50 "
           aria-label="Contact on WhatsApp"
         >
-          <IoLogoWhatsapp className="w-7 h-7" />
+          <IoLogoWhatsapp className="md:size-7 size-5" />
         </motion.button>
       )}
     </AnimatePresence>

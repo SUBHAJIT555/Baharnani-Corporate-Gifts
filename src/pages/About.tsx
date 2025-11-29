@@ -14,6 +14,7 @@ import {
   TicketCheck,
 } from "lucide-react";
 import { PiSealQuestionDuotone } from "react-icons/pi";
+import ctaImage from "/assets/images/Hero and footer image/About-hero.webp";
 
 
 
@@ -139,18 +140,18 @@ const About = () => {
       <CallToAction
         title="Partner With a Corporate Gift Supplier That Delivers Excellence"
         subtitle="Whether you need customized promotional items, luxury corporate gifts, eco-friendly solutions, or festive hampers, Baharnani Advertising ensures creative designs, premium quality, and timely delivery across Dubai and the UAE."
-        backgroundImageUrl="https://images.pexels.com/photos/17485710/pexels-photo-17485710.png"
+        backgroundImageUrl={ctaImage}
         buttons={[
           {
             text: "Contact Us",
             className:
-              "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker!",
+              "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! border! border-bg/30! font-tanker!",
             link: "/contact-us",
           },
           {
             text: "Explore Products",
             className:
-              "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-textcolor! text-textcolor! font-tanker!",
+              "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-bg/30! text-bg! font-tanker!",
             link: "/products",
           },
         ]}

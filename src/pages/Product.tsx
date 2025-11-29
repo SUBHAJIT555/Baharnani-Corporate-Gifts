@@ -3,6 +3,7 @@ import ProductCatagory from "../components/ProductCatagory";
 import FAQ from "../components/FAQ";
 import type { FAQItem } from "../components/FAQ";
 import CallToAction from "../components/CallToAction";
+import ctaImage from "/assets/images/Hero-images/Product-hero.webp";
 
 const productFaqData: FAQItem[] = [
   {
@@ -57,18 +58,18 @@ const Product = () => {
       <CallToAction
         title="Ready to Elevate Your Corporate Gifting?"
         subtitle="Partner with Baharnani Advertising, Dubai's premier corporate gift supplier. From premium gift sets to custom branding solutions, we help you make lasting impressions that strengthen business relationships."
-        backgroundImageUrl="https://images.pexels.com/photos/17485710/pexels-photo-17485710.png"
+        backgroundImageUrl={ctaImage}
         buttons={[
           {
             text: "Get Quote",
             className:
-              "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker!",
+              "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! border! border-bg/30! font-tanker!",
             link: "/contact-us",
           },
           {
             text: "View Products",
             className:
-              "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-textcolor! text-textcolor! font-tanker!",
+              "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-bg/30! text-bg! font-tanker!",
             link: "#product-varieties",
           },
         ]}

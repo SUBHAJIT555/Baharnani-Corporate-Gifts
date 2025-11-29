@@ -11,6 +11,15 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 
+import { PiLinkSimpleDuotone } from "react-icons/pi";
+import { SlSocialDropbox } from "react-icons/sl";
+import { PiMailboxDuotone } from "react-icons/pi";
+import { GoLaw } from "react-icons/go";
+
+
+
+
+
 const Footer = () => {
   const [message, setMessage] = useState<string>("");
   const {
@@ -61,8 +70,17 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="w-full bg-textcolor ">
-        <div className="w-full mx-auto px-5 py-10 sm:px-6 lg:px-8 xl:px-12 bg-textcolor rounded-t-3xl">
+      <footer className="w-full bg-linear-to-r from-textcolor via-textcolor/90 to-textcolor/80 relative overflow-hidden">
+        {/* SVG Pattern Overlay - same as hero section */}
+        <div className="absolute inset-0 opacity-10">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
+        </div>
+        <div className="w-full mx-auto px-5 pt-10 sm:px-6 lg:px-8 xl:px-12 rounded-t-3xl relative z-10">
           <div className="lg:flex lg:items-start lg:gap-8">
             <div className="mt-8 grid grid-cols-2 gap-8 lg:mt-0 lg:grid-cols-6 lg:gap-y-16">
               {/* About */}
@@ -71,13 +89,13 @@ const Footer = () => {
                   <Link to="/">
                     <img
                       src={footerlogo}
-                      alt="Leading Network LLC Logo"
+                      alt="baharnani advertising logo"
                       className="w-50 h-25"
                     />
                   </Link>
                 </div>
                 <a target="_blank" href="/">
-                  <h3 className="text-bg text-xl  font-tanker tracking-widest mt-2 bg-bg/10 px-2 py-1 rounded-md w-fit">
+                  <h3 className="text-bg text-xl  font-tanker tracking-widest mt-2 bg-bg/10 px-2 py-1 rounded-md w-fit border border-dashed border-bg/60 ">
                     Baharnani Advertising L.L.C.
                   </h3>
                 </a>
@@ -117,8 +135,10 @@ const Footer = () => {
 
               {/* Useful Links */}
               <div className="col-span-2 sm:col-span-1">
-                <h3 className="text-[#499F68] text-2xl  underline underline-offset-4 decoration-[#499F68] decoration-1 font-tanker">
-                  Useful Links
+                <h3 className="text-[#499F68] text-2xl font-tanker flex items-center gap-2">
+                  <div className="h-6 w-1 bg-bg"></div>
+                  Useful Links{" "}
+                  <PiLinkSimpleDuotone className="inline-block text-bg" />
                 </h3>
                 <ul className="text-bg text-xl font-tanker mt-5">
                   <Link to="/">
@@ -226,8 +246,10 @@ const Footer = () => {
 
               {/* Products */}
               <div className="col-span-2 sm:col-span-1">
-                <h3 className="text-[#499F68] text-2xl underline underline-offset-4 decoration-[#499F68] decoration-1 font-tanker">
-                  Product Categories
+                <h3 className="text-[#499F68] text-2xl font-tanker flex items-center gap-2">
+                  <div className="h-6 w-1 bg-bg"></div>
+                  Product Categories{" "}
+                  <SlSocialDropbox className="inline-block text-bg" />
                 </h3>
                 <ul className="text-bg text-xl font-tanker mt-5">
                   <Link to="/product-category/premium-gift-sets">
@@ -415,8 +437,9 @@ const Footer = () => {
 
               {/* Legals */}
               <div className="col-span-2 sm:col-span-1">
-                <h3 className="text-[#499F68] text-2xl font-tanker underline underline-offset-4 decoration-[#499F68] decoration-1">
-                  Legals
+                <h3 className="text-[#499F68] text-2xl font-tanker flex items-center gap-2">
+                  <div className="h-6 w-1 bg-bg"></div>
+                  Legals <GoLaw className="inline-block text-bg" />
                 </h3>
                 <ul className="text-bg text-xl font-tanker mt-5">
                   <Link to="/terms-and-conditions">
@@ -504,8 +527,9 @@ const Footer = () => {
 
               {/* Newsletter */}
               <div className="col-span-2 sm:col-span-1">
-                <h3 className="text-[#499F68] text-2xl font-tanker mb-5 underline underline-offset-4 decoration-[#499F68] decoration-1">
-                  Newsletter
+                <h3 className="text-[#499F68] text-2xl font-tanker mb-5 flex items-center gap-2">
+                  <div className="h-6 w-1 bg-bg"></div>
+                  Newsletter <PiMailboxDuotone className="inline-block text-bg" />
                 </h3>
                 <p className="text-bg text-lg font-tanker">
                   Stay updated with our latest news, industry insights, and
@@ -518,11 +542,11 @@ const Footer = () => {
                     required
                     {...register("email")}
                     placeholder="Enter Your Email"
-                    className="w-full mt-5 px-4 py-3 bg-transparent border border-bg rounded-lg text-bg placeholder:text-bg/50 text-lg focus:outline-none focus:border-bg focus:ring-1 focus:ring-bg hover:border-bg transition-all duration-300 ease-in-out font-tanker!"
+                    className="w-full mt-5 px-4 py-3 bg-neutral-800 border border-bg rounded-lg text-bg placeholder:text-bg/50 text-lg focus:outline-none focus:border-bg focus:ring-1 focus:ring-bg hover:border-bg transition-all duration-300 ease-in-out font-tanker!"
                   />
                   <CustomButton
                     type="submit"
-                    className="h-[50px] w-fit bg-transparent! border! border-bg! text-bg! mt-5 font-tanker!"
+                    className="h-[50px] w-fit bg-neutral-800! border! border-bg! text-bg! mt-5 font-tanker!"
                     text={isSubmitting ? "Submitting..." : "Subscribe Us"}
                     disabled={isSubmitting}
                   />
@@ -543,21 +567,21 @@ const Footer = () => {
           <div className="w-full h-px bg-bg/50 mt-8"></div>
 
           {/* Bottom Bar */}
-          <div className="w-full flex justify-center items-center py-5 px-10 font-khand">
-            <p className="text-bg text-lg leading-none text-center">
+          <div className="w-full flex justify-center items-center py-5 px-10 font-switzer">
+            <p className="text-bg text-sm sm:text-base md:text-lg leading-none text-left md:text-center">
               &copy; {new Date().getFullYear()}{" "}
-              <Link to="/" className="text-[#aef6c7] text-lg font-normal">
-                {`[ Baharnani Advertising L.L.C. ]`}
+              <Link to="/" className="text-[#aef6c7] text-sm sm:text-base md:text-lg font-normal">
+                {` Baharnani Advertising L.L.C. `}
               </Link>{" "}
-              All rights reserved.&nbsp; Made with{" "}
+              All Rights Reserved.&nbsp; Made with{" "}
               <FaHeart className="inline text-bg text-base" /> by:&nbsp;
               <a
                 href="https://www.codecobble.com"
                 target="_blank"
-                className="text-[#aef6c7] text-lg font-normal "
+                className="text-[#aef6c7] text-sm sm:text-base md:text-lg font-normal "
                 rel="noopener noreferrer"
               >
-                {`{ CodeCobble }`}
+                {` CodeCobble   `}
               </a>
             </p>
           </div>

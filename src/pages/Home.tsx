@@ -15,6 +15,7 @@ import { PiSealQuestionDuotone, PiGiftDuotone, PiHandshakeDuotone} from "react-i
 import FeatureBrand from "../components/FeatureBrand";
 import TopSaver from "../components/TopSaver";
 import BestSelling from "../components/BestSelling";
+import backgroundImage from "../assets/images/Products-hero-image/Luxury-corporate-gifts.webp";
 
 const homeFaqData: FAQItem[] = [
   {
@@ -186,18 +187,18 @@ const Home = () => {
       <CallToAction
         title="Ready to Elevate Your Corporate Gifting?"
         subtitle="Partner with Baharnani Advertising, Dubai's premier corporate gift supplier. From premium gift sets to custom branding solutions, we help you make lasting impressions that strengthen business relationships."
-        backgroundImageUrl="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&q=80"
+        backgroundImageUrl={backgroundImage}
         buttons={[
           {
             text: "Get Quote",
             className:
-              "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker!",
+              "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! border! border-bg/30! font-tanker!",
             link: "/contact-us",
           },
           {
             text: "View Products",
             className:
-              "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-textcolor! text-textcolor! font-tanker!",
+              "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-bg/30! text-bg! font-tanker!",
             link: "/products",
           },
         ]}
