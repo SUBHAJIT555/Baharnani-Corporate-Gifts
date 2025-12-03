@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { useProductBySlug } from "../hooks/useProducts";

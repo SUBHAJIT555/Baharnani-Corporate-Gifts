@@ -6,7 +6,7 @@ import { FiGrid, FiList } from "react-icons/fi";
 import { IoChevronForward, IoChevronBack } from "react-icons/io5";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { cn, getProductUrl } from "../lib/utilts";
 import Loading from "../components/ui/Loading";
 import { ProductCard, type ProductCardProps } from "../components/ProductCard";

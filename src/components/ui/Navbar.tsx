@@ -2,7 +2,7 @@ import { AlignJustify, X, ChevronDown, ChevronUp } from "lucide-react";
 import logo from "../../assets/images/icons/logo.svg"
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const Navbar = () => {
   const { scrollY } = useScroll();
