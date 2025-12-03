@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useQuote } from "../../contexts/QuoteContext";
 
 const FloatingCartButton = () => {

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import CustomButton from "./ui/CustomButton";
 import { PiGiftDuotone } from "react-icons/pi";
 

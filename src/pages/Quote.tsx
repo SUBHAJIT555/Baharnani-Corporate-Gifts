@@ -1,6 +1,6 @@
 import { useQuote } from "../contexts/QuoteContext";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { ArrowLeft, ArrowRight, Trash2, Plus, Minus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useQuoteSubmission } from "../hooks/useQuoteSubmission";

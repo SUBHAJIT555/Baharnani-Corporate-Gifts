@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Pagination, Autoplay } from "swiper/modules";
@@ -355,11 +355,10 @@ const TopSaver = ({
                           {/* Add to Quote Button */}
                           <button
                             disabled={isInQuote(product.id)}
-                            className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${
-                              isInQuote(product.id)
+                            className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(product.id)
                                 ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
                                 : "bg-textcolor hover:bg-textcolor/70 text-white"
-                            }`}
+                              }`}
                             onClick={(e) => handleAddToQuote(product, e)}
                           >
                             {isInQuote(product.id)
@@ -523,11 +522,10 @@ const TopSaver = ({
                         <div className="hidden lg:block mt-auto">
                           <button
                             disabled={isInQuote(selectedProduct.id)}
-                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${
-                              isInQuote(selectedProduct.id)
+                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${isInQuote(selectedProduct.id)
                                 ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
                                 : "bg-textcolor hover:bg-textcolor/70 text-white"
-                            }`}
+                              }`}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleAddToQuote(selectedProduct, e);
@@ -546,11 +544,10 @@ const TopSaver = ({
                   <div className="lg:hidden sticky bottom-0 left-0 right-0 bg-bg border-t border-gray-200 p-4 pt-3 shadow-lg z-10">
                     <button
                       disabled={isInQuote(selectedProduct.id)}
-                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${
-                        isInQuote(selectedProduct.id)
+                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${isInQuote(selectedProduct.id)
                           ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
                           : "bg-textcolor hover:bg-textcolor/70 text-white"
-                      }`}
+                        }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleAddToQuote(selectedProduct, e);

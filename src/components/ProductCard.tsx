@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Product } from "../services/api";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { cn, getProductUrl } from "../lib/utilts";
 import { QuantitySelector } from "../pages/Shop";
 

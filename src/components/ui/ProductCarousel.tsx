@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import type { Product } from "../../services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { getProductUrl } from "../../lib/utilts";
 import Loading from "./Loading";
 

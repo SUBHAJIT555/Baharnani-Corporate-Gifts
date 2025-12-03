@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CustomButton from "./ui/CustomButton";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 // images
 // import ApparelAndAccessoriesImage from "../assets/images/Home-page-hero-images/Apparel-&-accessories.webp";
@@ -454,11 +454,10 @@ const HeroSection = () => {
           <button
             key={i}
             onClick={() => goToSlide(i)}
-            className={`transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50 ${
-              i === index
+            className={`transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/50 ${i === index
                 ? "w-8 h-3 sm:w-10 sm:h-3.5 rounded-full bg-[#499F68]"
                 : "w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#D9D9D9] hover:bg-[#C0C0C0]"
-            }`}
+              }`}
             aria-label={`Go to slide ${i + 1}`}
           />
         ))}

@@ -1,20 +1,21 @@
 import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView, } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Pagination, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ImCross } from "react-icons/im";
-import { useQuote } from "../contexts/QuoteContext";
+// import { ImCross } from "react-icons/im";
+// import { useQuote } from "../contexts/QuoteContext";
+import { Icon } from "@iconify/react";
 
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { PiCrownDuotone } from "react-icons/pi";
-import type { Product } from "../services/api";
+// import { PiCrownDuotone } from "react-icons/pi";
+// import type { Product } from "../services/api";
 import { useFeaturedProducts } from "../hooks/useProducts";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { getProductUrl } from "../lib/utilts";
 
 
@@ -23,9 +24,9 @@ const FeatureBrand = () => {
   const headingRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<HTMLDivElement>(null);
   const swiperInstanceRef = useRef<SwiperType | null>(null);
-  const { addToQuote, isInQuote } = useQuote();
-  const [selectedBrand, setSelectedBrand] = useState<Product | null>(null);
-  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  // const { addToQuote, isInQuote } = useQuote();
+  // const [selectedBrand, setSelectedBrand] = useState<Product | null>(null);
+  // const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
@@ -45,18 +46,18 @@ const FeatureBrand = () => {
   //   setIsProductModalOpen(true);
   // };
 
-  const handleCloseModal = () => {
-    setIsProductModalOpen(false);
-    // Small delay to allow exit animation before clearing brand
-    setTimeout(() => setSelectedBrand(null), 300);
-  };
+  // const handleCloseModal = () => {
+  //   setIsProductModalOpen(false);
+  //   // Small delay to allow exit animation before clearing brand
+  //   setTimeout(() => setSelectedBrand(null), 300);
+  // };
 
-  const handleAddToQuote = (brand: Product, e?: React.MouseEvent) => {
-    e?.stopPropagation(); // Prevent card click when clicking button
-    if (!isInQuote(brand.id)) {
-      addToQuote(brand, 1);
-    }
-  };
+  // const handleAddToQuote = (brand: Product, e?: React.MouseEvent) => {
+  //   e?.stopPropagation(); // Prevent card click when clicking button
+  //   if (!isInQuote(brand.id)) {
+  //     addToQuote(brand, 1);
+  //   }
+  // };
 
   const handleSlideChange = (swiper: SwiperType) => {
     setIsBeginning(swiper.isBeginning);
@@ -77,7 +78,7 @@ const FeatureBrand = () => {
           className="mb-8 sm:mb-10 md:mb-12 lg:mb-16"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-tanker text-textcolor leading-tight mb-3 sm:mb-4 md:mb-5 lg:mb-6">
-            Featured Corporate Gift Brands <PiCrownDuotone className="inline-block align-middle -rotate-45" />
+            Featured Corporate Gift Brands <Icon icon="ph:crown-duotone" className="inline-block align-middle -rotate-45" />
             Trusted by Businesses Across Dubai
           </h2>
           <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-switzer tracking-widest sm:tracking-wider md:tracking-widest text-textcolor font-medium">
@@ -218,10 +219,10 @@ const FeatureBrand = () => {
         </motion.div>
 
         {/* Product Detail Modal */}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {isProductModalOpen && selectedBrand && (
             <>
-              {/* Backdrop */}
+          
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -231,7 +232,7 @@ const FeatureBrand = () => {
                 className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
               />
 
-              {/* Modal Content */}
+            
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 50 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -246,19 +247,19 @@ const FeatureBrand = () => {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="w-full h-[95vh] sm:h-full sm:max-h-[90vh] max-w-6xl bg-bg shadow-2xl overflow-hidden flex flex-col relative">
-                  {/* Close Button - Inside modal for desktop */}
+                
                   <button
                     onClick={handleCloseModal}
                     className="hidden lg:block absolute top-4 right-4 z-10 p-2.5 bg-red-500 hover:bg-textcolor rounded-full shadow-lg transition-colors"
                     aria-label="Close modal"
                   >
-                    <ImCross className="h-6 w-6 text-bg" />
+                    <Icon icon="icomoon-free:cross" className="h-6 w-6 text-bg" />
                   </button>
 
-                  {/* Modal Content - Scrollable */}
+           
                   <div className="flex-1 overflow-y-auto">
                     <div className="flex flex-col lg:flex-row h-full">
-                      {/* Image Section */}
+           
                       <div className="w-full lg:w-1/2 h-56 sm:h-72 md:h-80 lg:h-full bg-gray-100 shrink-0">
                         <img
                           src={selectedBrand.image}
@@ -267,19 +268,19 @@ const FeatureBrand = () => {
                         />
                       </div>
 
-                      {/* Content Section */}
+                
                       <div className="w-full lg:w-1/2 p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col pb-20 sm:pb-6 lg:pb-10">
-                        {/* Category Badge */}
+             
                         <span className="text-xs font-switzer text-textcolor mb-2 sm:mb-3 uppercase border border-textcolor/30 rounded-md w-fit p-1 bg-white tracking-wide">
                           {selectedBrand.categories[0]}
                         </span>
 
-                        {/* Product Title */}
+    
                         <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-switzer font-bold text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight ">
                           {selectedBrand.name}
                         </h2>
 
-                        {/* Description/Details */}
+
                         <div className="mb-4 sm:mb-6 md:mb-8 flex-1">
                           <h3 className="text-base sm:text-lg md:text-xl font-tanker text-textcolor mb-2 sm:mb-3 md:mb-4">
                             Product Details :
@@ -290,7 +291,7 @@ const FeatureBrand = () => {
                           </p>
                         </div>
 
-                        {/* Desktop Button (inside content section) */}
+              
                         <div className="hidden lg:block mt-auto">
                           <button
                             disabled={isInQuote(selectedBrand.id)}
@@ -312,7 +313,6 @@ const FeatureBrand = () => {
                     </div>
                   </div>
 
-                  {/* Sticky Button for Mobile */}
                   <div className="lg:hidden sticky bottom-0 left-0 right-0 bg-bg border-t border-gray-200 p-4 pt-3 shadow-lg z-10">
                     <button
                       disabled={isInQuote(selectedBrand.id)}
@@ -332,7 +332,6 @@ const FeatureBrand = () => {
                   </div>
                 </div>
 
-                {/* Close Button - Outside modal for mobile/tablet */}
                 <button
                   onClick={handleCloseModal}
                   className="lg:hidden absolute top-3 right-3 sm:top-4 sm:right-4 z-50 p-2 sm:p-2.5 bg-red-500 hover:bg-textcolor rounded-full shadow-lg transition-colors"
@@ -343,7 +342,7 @@ const FeatureBrand = () => {
               </motion.div>
             </>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </div>
     </section>
   );
