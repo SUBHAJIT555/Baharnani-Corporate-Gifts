@@ -15,7 +15,7 @@ const TermsAndConditions = () => {
         title="Terms and Conditions"
         titlesuffix=""
         subtitle="These Legal Terms constitute a legally binding agreement made between you and Baharnani Advertising L.L.C. Please read these terms carefully before using our services."
-        imageUrl="/assets/images/Hero-images/TermsAndConditions-hero.webp"
+        imageUrl="/assets/images/Hero-images/Terms-and-Condition-hero.webp"
         buttonLink="#"
         buttonText="Get in Touch"
       />

@@ -1,6 +1,5 @@
 // API Base URL
-const API_BASE_URL =
-  "https://stagingv1.corporategiftsdubaii.ae/backend/wp-json/custom/v1";
+const API_BASE_URL = "https://corporategiftsdubaii.ae/wp-json/custom/v1";
 
 // Types
 export interface Product {

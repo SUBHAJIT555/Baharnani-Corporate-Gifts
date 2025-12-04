@@ -70,7 +70,7 @@ const Navbar = () => {
     { key: 2, name: "About", href: "/about-us" },
     { key: 3, name: "Products", href: "/products", hasDropdown: true },
     { key: 4, name: "Shop", href: "/shop" },
-    { key: 5, name: "Blog", href: "https://stagingv1.corporategiftsdubaii.ae/blog" },
+    { key: 5, name: "Blog", href: "https://corporategiftsdubaii.ae/blog" },
     { key: 6, name: "Contact", href: "/contact-us" },
   ];
 
