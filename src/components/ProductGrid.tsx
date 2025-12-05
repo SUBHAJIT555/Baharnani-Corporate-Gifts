@@ -128,15 +128,17 @@ const ProductGrid = ({
           return;
         }
 
-        const scrollY = window.scrollY;
-        const top = section.offsetTop;
-        const bottom = top + section.offsetHeight;
-        const viewport = window.innerHeight;
+        const scrollY = window.scrollY || window.pageYOffset;
+        const rect = section.getBoundingClientRect();
 
-        const shouldShow =
-          scrollY > top + 150 &&
-          scrollY < bottom - viewport &&
-          scrollY > 100;
+        // Show floating filter when:
+        // 1. User has scrolled past the section start (section top is above viewport)
+        // 2. Section bottom is still visible or just below viewport (section not completely scrolled past)
+        // 3. User has scrolled at least 200px from page top
+        const sectionTopScrolledPast = rect.top < 0;
+        const sectionBottomStillVisible = rect.bottom > 0; // Section bottom is still in or above viewport
+
+        const shouldShow = sectionTopScrolledPast && sectionBottomStillVisible && scrollY > 200;
 
         setShowFloatingFilter(shouldShow);
 
@@ -147,7 +149,8 @@ const ProductGrid = ({
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll, { passive: true });
 
-    handleScroll(); // first run
+    // Initial check after mount
+    setTimeout(handleScroll, 100);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -270,28 +273,40 @@ const ProductGrid = ({
 
         {/* MOBILE STICKY FILTER */}
         {categories?.length > 0 && (
-          <div className="lg:hidden sticky top-0 z-40 bg-white/95 backdrop-blur-sm py-3 mb-4 -mx-3 px-3 shadow-sm">
-            <div className="overflow-x-auto scrollbar-hide">
-              <div className="flex gap-3 min-w-max">{categoryButtons}</div>
+          <div className="lg:hidden sticky top-0 z-50  backdrop-blur-sm py-3 mb-4  w-screen -ml-3 sm:-ml-4 md:-ml-6 lg:-ml-8 xl:-ml-12">
+            <div className="px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12">
+              <div className="overflow-x-auto scrollbar-hide">
+                <div className="flex gap-3 min-w-max">{categoryButtons}</div>
+              </div>
             </div>
           </div>
         )}
 
         {/* FLOATING FILTER BUTTON */}
         <AnimatePresence>
-          {showFloatingFilter && (
+          {showFloatingFilter && categories && categories.length > 1 && (
             <motion.button
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 100, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              onClick={() => {
-                if (self.innerWidth < 1024) {/* setIsBottomSheetOpen(true); */ }
-                else self.scrollTo({ top: sectionRef.current?.offsetTop ?? 0, behavior: "smooth" });
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const section = sectionRef.current;
+                if (section) {
+                  // Scroll to the section top where filters are located
+                  const scrollTarget = section.offsetTop - 20;
+
+                  window.scrollTo({
+                    top: scrollTarget,
+                    behavior: "smooth"
+                  });
+                }
               }}
-              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-textcolor/50 backdrop-blur-sm text-white px-6 py-3 rounded-md shadow-lg font-tanker flex items-center gap-2"
+              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] bg-textcolor hover:bg-textcolor/90 backdrop-blur-sm text-white px-6 py-3 rounded-md shadow-lg font-tanker flex items-center gap-2 transition-colors"
             >
-              <FiFilter />
+              <FiFilter className="w-5 h-5" />
               Filter
             </motion.button>
           )}
