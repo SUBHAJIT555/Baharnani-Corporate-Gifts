@@ -16,8 +16,7 @@ import CallToAction from "../components/CallToAction";
 // images
 import BagsTravelImage from "../assets/images/Products-hero-image/Bags-&-travel.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
-import { useState, useEffect } from "react";
-import { useParams, useNavigate, useLocation } from "react-router";
+import { useState } from "react";
 
 const bagsAndTravelsFeatures: FeatureCard[] = [
   {
