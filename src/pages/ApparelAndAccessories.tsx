@@ -10,7 +10,8 @@ import CallToAction from "../components/CallToAction";
 // images
 import ApparelAndAccessoriesImage from "../assets/images/Products-hero-image/Apparel-&-accessories.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate, useLocation } from "react-router";
 
 // Filter apparel and accessories items from giftItems
 // const apparelAndAccessoriesItems = giftItems.filter(
@@ -67,15 +68,49 @@ const apparelAndAccessoriesFeatures: FeatureCard[] = [
 
 const ApparelAndAccessories = () => {
   const categorySlug = "apparel-and-accessories";
-  const [currentPage, setCurrentPage] = useState(1);
+  const { page: pageParam } = useParams<{ page?: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  const [currentPage, setCurrentPage] = useState(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    return isNaN(page) || page < 1 ? 1 : page;
+  });
   const perPage = 12;
   const { data: categories } = useProductCategories();
   const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(categorySlug, currentPage, perPage);
 
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
 
+  // Sync page from URL params
+  useEffect(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    if (!isNaN(page) && page >= 1) {
+      setCurrentPage(page);
+    } else if (pageParam) {
+      // Invalid page number, redirect to base category page
+      navigate(`/product-category/${categorySlug}`, { replace: true });
+    }
+  }, [pageParam, navigate, categorySlug]);
+
+  // Redirect /product-category/{slug}/page/1 to /product-category/{slug}
+  useEffect(() => {
+    if (location.pathname === `/product-category/${categorySlug}/page/1`) {
+      navigate(`/product-category/${categorySlug}`, { replace: true });
+    }
+  }, [location.pathname, navigate, categorySlug]);
+
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
+    
+    // Update URL based on page number
+    if (newPage === 1) {
+      navigate(`/product-category/${categorySlug}`, { replace: true });
+    } else {
+      navigate(`/product-category/${categorySlug}/page/${newPage}`, { replace: true });
+    }
+    
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

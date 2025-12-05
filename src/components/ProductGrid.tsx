@@ -304,7 +304,7 @@ const ProductGrid = ({
                   });
                 }
               }}
-              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] bg-textcolor hover:bg-textcolor/90 backdrop-blur-sm text-white px-6 py-3 rounded-md shadow-lg font-tanker flex items-center gap-2 transition-colors"
+              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-100 bg-textcolor hover:bg-textcolor/90 backdrop-blur-sm text-white px-6 py-3 rounded-md shadow-lg font-tanker flex items-center gap-2 transition-colors"
             >
               <FiFilter className="w-5 h-5" />
               Filter

@@ -56,6 +56,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/about-us", element: <About /> },
       { path: "/shop", element: <Shop /> },
+      { path: "/shop/page/:page", element: <Shop /> },
       { path: "/shop/:category/:slug", element: <ProductDetails /> },
       {
         path: "/products",
@@ -66,16 +67,31 @@ export const router = createBrowserRouter([
         element: <ApparelAndAccessories />,
       },
       {
+        path: "/product-category/apparel-and-accessories/page/:page",
+        element: <ApparelAndAccessories />,
+      },
+      {
         path: "/product-category/bags-and-travel",
+        element: <BagsAndTravels />,
+      },
+      {
+        path: "/product-category/bags-and-travel/page/:page",
         element: <BagsAndTravels />,
       },
       {
         path: "/product-category/office-and-stationary",
         element: <OfficeAndStationary />,
       },
-
+      {
+        path: "/product-category/office-and-stationary/page/:page",
+        element: <OfficeAndStationary />,
+      },
       {
         path: "/product-category/technology-and-accessories",
+        element: <TechnologyAndAccessories />,
+      },
+      {
+        path: "/product-category/technology-and-accessories/page/:page",
         element: <TechnologyAndAccessories />,
       },
       {
@@ -83,7 +99,15 @@ export const router = createBrowserRouter([
         element: <EatingAndDrinking />,
       },
       {
+        path: "/product-category/eating-and-drinking/page/:page",
+        element: <EatingAndDrinking />,
+      },
+      {
         path: "/product-category/sports-and-recreation",
+        element: <SportsAndRecreation />,
+      },
+      {
+        path: "/product-category/sports-and-recreation/page/:page",
         element: <SportsAndRecreation />,
       },
       {
@@ -91,11 +115,23 @@ export const router = createBrowserRouter([
         element: <EcoFriendly />,
       },
       {
+        path: "/product-category/eco-friendly/page/:page",
+        element: <EcoFriendly />,
+      },
+      {
         path: "/product-category/premium-gift-sets",
         element: <GiftSet />,
       },
       {
+        path: "/product-category/premium-gift-sets/page/:page",
+        element: <GiftSet />,
+      },
+      {
         path: "/product-category/luxury-corporate-gifts-dubai",
+        element: <LuxuryCorporateGifts />,
+      },
+      {
+        path: "/product-category/luxury-corporate-gifts-dubai/page/:page",
         element: <LuxuryCorporateGifts />,
       },
       {

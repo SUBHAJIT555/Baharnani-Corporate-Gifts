@@ -9,7 +9,8 @@ import { Award } from "lucide-react";
 import { AnimatedTestimonials } from "../components/ui/AnimatedTestimonial";
 import FAQ, { type FAQItem } from "../components/FAQ";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate, useLocation } from "react-router";
 
 const testimonials = [
   {
@@ -193,15 +194,48 @@ const faqItems: FAQItem[] = [
 ];
 const LuxuryCorporateGifts = () => {
   const categorySlug = "luxury-corporate-gifts-dubai";
-  const [currentPage, setCurrentPage] = useState(1);
+  const { page: pageParam } = useParams<{ page?: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [currentPage, setCurrentPage] = useState(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    return isNaN(page) || page < 1 ? 1 : page;
+  });
   const perPage = 12;
   const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(categorySlug, currentPage, perPage);
   const productData = productsData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 };
   console.log("products in luxury corporate gifts", productData);
   const { data: categories } = useProductCategories();
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
+
+  // Sync page from URL params
+  useEffect(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    if (!isNaN(page) && page >= 1) {
+      setCurrentPage(page);
+    } else if (pageParam) {
+      navigate(`/product-category/${categorySlug}`, { replace: true });
+    }
+  }, [pageParam, navigate, categorySlug]);
+
+  // Redirect /product-category/{slug}/page/1 to /product-category/{slug}
+  useEffect(() => {
+    if (location.pathname === `/product-category/${categorySlug}/page/1`) {
+      navigate(`/product-category/${categorySlug}`, { replace: true });
+    }
+  }, [location.pathname, navigate, categorySlug]);
+
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
+
+    if (newPage === 1) {
+      navigate(`/product-category/${categorySlug}`, { replace: true });
+    } else {
+      navigate(`/product-category/${categorySlug}/page/${newPage}`, { replace: true });
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

@@ -1,12 +1,13 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useAllProducts, useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useQuote } from "../contexts/QuoteContext";
 import type { Product } from "../services/api";
-import { FiGrid, FiList } from "react-icons/fi";
+import { FiGrid, FiList, FiFilter } from "react-icons/fi";
 import { IoChevronForward, IoChevronBack } from "react-icons/io5";
 import { HiMinus, HiPlus } from "react-icons/hi";
-import { motion } from "framer-motion";
-import { Link } from "react-router";
+import { X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link, useParams, useNavigate, useLocation, useSearchParams } from "react-router";
 import { cn, getProductUrl } from "../lib/utilts";
 import Loading from "../components/ui/Loading";
 import { ProductCard, type ProductCardProps } from "../components/ProductCard";
@@ -14,12 +15,65 @@ import { ProductCard, type ProductCardProps } from "../components/ProductCard";
 type ViewMode = "grid" | "list";
 
 const Shop = () => {
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-    const [currentPage, setCurrentPage] = useState(1);
+    const { page: pageParam } = useParams<{ page?: string }>();
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    // Read category from query parameter
+    const categoryFromQuery = searchParams.get("category");
+
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryFromQuery);
+    const [currentPage, setCurrentPage] = useState(() => {
+        const page = pageParam ? parseInt(pageParam, 10) : 1;
+        return isNaN(page) || page < 1 ? 1 : page;
+    });
     const [viewMode, setViewMode] = useState<ViewMode>("grid");
+    const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+    const [showFloatingFilter, setShowFloatingFilter] = useState(false);
+    const mainContentRef = useRef<HTMLElement>(null);
+    const rafRef = useRef<number | null>(null);
     // const [sortBy] = useState<string>("default");
     const perPage = 12;
     const [isInitialLoad, setIsInitialLoad] = useState(true);
+
+    // Sync category from query parameter on mount
+    useEffect(() => {
+        const category = searchParams.get("category");
+        if (category) {
+            setSelectedCategory(category);
+        } else {
+            setSelectedCategory(null);
+        }
+    }, [searchParams]);
+
+    // Sync page from URL params
+    useEffect(() => {
+        const page = pageParam ? parseInt(pageParam, 10) : 1;
+        if (!isNaN(page) && page >= 1) {
+            setCurrentPage(page);
+        } else if (pageParam) {
+            // Invalid page number, redirect to shop
+            const category = searchParams.get("category");
+            if (category) {
+                navigate(`/shop?category=${category}`, { replace: true });
+            } else {
+                navigate("/shop", { replace: true });
+            }
+        }
+    }, [pageParam, navigate, searchParams]);
+
+    // Redirect /shop/page/1 to /shop (with category query if exists)
+    useEffect(() => {
+        if (location.pathname === "/shop/page/1") {
+            const category = searchParams.get("category");
+            if (category) {
+                navigate(`/shop?category=${category}`, { replace: true });
+            } else {
+                navigate("/shop", { replace: true });
+            }
+        }
+    }, [location.pathname, navigate, searchParams]);
 
     // Fetch data
     const { data: productsData, isLoading, error } = useAllProducts(currentPage, perPage);
@@ -30,10 +84,37 @@ const Shop = () => {
         perPage
     );
 
+    // If category is selected but current page exceeds total pages, redirect to page 1 for that category
+    useEffect(() => {
+        if (
+            selectedCategory &&
+            productsByCategory &&
+            !categoryLoading &&
+            currentPage > 1 &&
+            (productsByCategory.products.length === 0 || currentPage > productsByCategory.total_pages)
+        ) {
+            // Current page has no products or exceeds total pages, redirect to page 1 with category
+            const newSearchParams = new URLSearchParams();
+            newSearchParams.set("category", selectedCategory);
+            navigate(`/shop?${newSearchParams.toString()}`, { replace: true });
+            setCurrentPage(1);
+        }
+    }, [selectedCategory, productsByCategory, categoryLoading, currentPage, navigate]);
+
     // Reset page when category changes
     const handleCategoryChange = (categorySlug: string | null) => {
         setSelectedCategory(categorySlug);
         setCurrentPage(1);
+
+        // Update URL with category query parameter
+        const newSearchParams = new URLSearchParams();
+        if (categorySlug) {
+            newSearchParams.set("category", categorySlug);
+        }
+
+        // Navigate to base shop page with category query
+        const queryString = newSearchParams.toString();
+        navigate(queryString ? `/shop?${queryString}` : "/shop", { replace: true });
         // Don't set isInitialLoad to true for category changes - only for first page load
     };
 
@@ -43,6 +124,62 @@ const Shop = () => {
             setIsInitialLoad(false);
         }
     }, [isLoading, categoryLoading, categoriesLoading, isInitialLoad]);
+
+    // Scroll handler for floating filter button
+    useEffect(() => {
+        const handleScroll = () => {
+            if (rafRef.current !== null) return;
+
+            rafRef.current = requestAnimationFrame(() => {
+                const section = mainContentRef.current;
+                if (!section) {
+                    rafRef.current = null;
+                    return;
+                }
+
+                const scrollY = window.scrollY || window.pageYOffset;
+                const rect = section.getBoundingClientRect();
+
+                // Show floating filter when:
+                // 1. User has scrolled past the section start (section top is above viewport)
+                // 2. Section bottom is still visible (section not completely scrolled past)
+                // 3. User has scrolled at least 200px from page top
+                const sectionTopScrolledPast = rect.top < 0;
+                const sectionBottomStillVisible = rect.bottom > 0;
+
+                const shouldShow = sectionTopScrolledPast && sectionBottomStillVisible && scrollY > 200;
+
+                setShowFloatingFilter(shouldShow);
+
+                rafRef.current = null;
+            });
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener("resize", handleScroll, { passive: true });
+
+        // Initial check after mount
+        setTimeout(handleScroll, 100);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleScroll);
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        };
+    }, []);
+
+    // Prevent body scroll when modal is open
+    useEffect(() => {
+        if (isCategoryModalOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, [isCategoryModalOpen]);
 
     // Determine which products to display
     const displayedProducts = useMemo(() => {
@@ -89,6 +226,24 @@ const Shop = () => {
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
         setIsInitialLoad(false); // Not initial load when paginating
+
+        // Build query parameters
+        const newSearchParams = new URLSearchParams();
+        if (selectedCategory) {
+            newSearchParams.set("category", selectedCategory);
+        }
+        const queryString = newSearchParams.toString();
+
+        // Update URL based on page number
+        if (newPage === 1) {
+            navigate(queryString ? `/shop?${queryString}` : "/shop", { replace: true });
+        } else {
+            const path = queryString
+                ? `/shop/page/${newPage}?${queryString}`
+                : `/shop/page/${newPage}`;
+            navigate(path, { replace: true });
+        }
+
         self.scrollTo({ top: 0, behavior: "smooth" });
     };
 
@@ -139,7 +294,7 @@ const Shop = () => {
                         }}
                     />
                 </div>
-                <div className="relative w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-12 sm:py-16 md:py-20 lg:py-24">
+                <div className="relative w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-12 sm:py-16 md:py-20 lg:py-24 mt-15">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -159,8 +314,8 @@ const Shop = () => {
 
             <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 py-8">
                 <div className="flex flex-col lg:flex-row gap-8">
-                    {/* Sidebar - Categories */}
-                    <aside className="w-full lg:w-64 xl:w-80 shrink-0">
+                    {/* Sidebar - Categories (Desktop Only) */}
+                    <aside className="hidden lg:block w-full lg:w-64 xl:w-80 shrink-0">
                         <div className="bg-white border border-gray-200 rounded-lg p-6 sticky top-8">
                             <h2 className="text-2xl font-tanker text-textcolor mb-6">All Categories</h2>
                             <ul className="space-y-2">
@@ -198,27 +353,51 @@ const Shop = () => {
                     </aside>
 
                     {/* Main Content */}
-                    <main className="flex-1">
-                        {/* Header with Sort and View Toggle */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mb-6">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                                {/* Sort Dropdown */}
-                                {/* <div className="flex items-center gap-2">
-                                    <label htmlFor="sort" className="text-sm font-switzer text-textcolor whitespace-nowrap">
-                                        Sort by:
-                                    </label>
-                                    <select
-                                        id="sort"
-                                        value={sortBy}
-                                        onChange={(e) => setSortBy(e.target.value)}
-                                        className="px-4 py-2 border border-gray-300 rounded-md text-sm font-switzer text-textcolor focus:outline-none focus:ring-2 focus:ring-textcolor focus:border-transparent"
-                                    >
-                                        <option value="default">Default sorting</option>
-                                        <option value="name-asc">Name: A to Z</option>
-                                        <option value="name-desc">Name: Z to A</option>
-                                    </select>
-                                </div> */}
+                    <main ref={mainContentRef} className="flex-1">
+                        {/* Mobile: Selected Category + View Toggle Row */}
+                        <div className="lg:hidden flex items-center justify-between gap-4 mb-6">
+                            {/* Selected Category Display */}
+                            <div className="flex-1 min-w-0">
+                                {/* <div className="text-sm font-switzer text-textcolor/60 mb-1">Category:</div> */}
+                                <div className="text-base font-tanker text-textcolor font-semibold truncate">
+                                    {selectedCategory === null
+                                        ? "All Products"
+                                        : categories?.find((c) => c.slug === selectedCategory)?.name || "Select Category"}
+                                </div>
+                            </div>
 
+                            {/* View Toggle */}
+                            <div className="flex items-center gap-2 border border-gray-300 rounded-md overflow-hidden shrink-0">
+                                <button
+                                    onClick={() => setViewMode("grid")}
+                                    className={cn(
+                                        "p-2 transition-colors duration-200",
+                                        viewMode === "grid"
+                                            ? "bg-textcolor text-white"
+                                            : "bg-white text-textcolor hover:bg-gray-100"
+                                    )}
+                                    aria-label="Grid view"
+                                >
+                                    <FiGrid className="w-5 h-5" />
+                                </button>
+                                <button
+                                    onClick={() => setViewMode("list")}
+                                    className={cn(
+                                        "p-2 transition-colors duration-200",
+                                        viewMode === "list"
+                                            ? "bg-textcolor text-white"
+                                            : "bg-white text-textcolor hover:bg-gray-100"
+                                    )}
+                                    aria-label="List view"
+                                >
+                                    <FiList className="w-5 h-5" />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Desktop: Header with Sort and View Toggle */}
+                        <div className="hidden lg:flex flex-col sm:flex-row sm:items-center sm:justify-end gap-4 mb-6">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                                 {/* View Toggle */}
                                 <div className="flex items-center gap-2 border border-gray-300 rounded-md overflow-hidden">
                                     <button
@@ -343,6 +522,101 @@ const Shop = () => {
                     </main>
                 </div>
             </div>
+
+            {/* Floating Filter Button (Mobile Only) */}
+            <AnimatePresence>
+                {showFloatingFilter && categories && categories.length > 1 && (
+                    <motion.button
+                        initial={{ y: 100, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: 100, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        onClick={() => setIsCategoryModalOpen(true)}
+                        className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-100 bg-textcolor hover:bg-textcolor/90 backdrop-blur-sm text-white px-6 py-3 rounded-md shadow-lg font-tanker flex items-center gap-2 transition-colors"
+                    >
+                        <FiFilter className="w-5 h-5" />
+                        Filter
+                    </motion.button>
+                )}
+            </AnimatePresence>
+
+            {/* Category Modal (Mobile Only) */}
+            <AnimatePresence>
+                {isCategoryModalOpen && (
+                    <>
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setIsCategoryModalOpen(false)}
+                            className="lg:hidden fixed inset-0 bg-black/50 z-200"
+                        />
+
+                        {/* Modal */}
+                        <motion.div
+                            initial={{ y: "-100%" }}
+                            animate={{ y: 0 }}
+                            exit={{ y: "-100%" }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                            className="lg:hidden fixed top-0 left-0 right-0 z-201 bg-white shadow-xl max-h-[80vh] overflow-y-auto"
+                        >
+                            {/* Header */}
+                            <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-4 flex items-center justify-between z-10">
+                                <h2 className="text-xl font-tanker text-textcolor">All Categories</h2>
+                                <button
+                                    onClick={() => setIsCategoryModalOpen(false)}
+                                    className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                    aria-label="Close modal"
+                                >
+                                    <X className="w-5 h-5 text-textcolor" />
+                                </button>
+                            </div>
+
+                            {/* Category List */}
+                            <div className="px-4 py-4">
+                                <ul className="space-y-2">
+                                    <li>
+                                        <button
+                                            onClick={() => {
+                                                handleCategoryChange(null);
+                                                setIsCategoryModalOpen(false);
+                                            }}
+                                            className={cn(
+                                                "w-full text-left px-4 py-3 rounded-md transition-colors duration-200 font-switzer",
+                                                selectedCategory === null
+                                                    ? "bg-textcolor text-white font-semibold"
+                                                    : "text-textcolor hover:bg-gray-100"
+                                            )}
+                                        >
+                                            All Products
+                                        </button>
+                                    </li>
+                                    {categories?.map((category) => (
+                                        <li key={category.id}>
+                                            <button
+                                                onClick={() => {
+                                                    handleCategoryChange(category.slug);
+                                                    setIsCategoryModalOpen(false);
+                                                }}
+                                                className={cn(
+                                                    "w-full text-left px-4 py-3 rounded-md transition-colors duration-200 font-switzer flex items-center justify-between",
+                                                    selectedCategory === category.slug
+                                                        ? "bg-textcolor text-white font-semibold"
+                                                        : "text-textcolor hover:bg-gray-100"
+                                                )}
+                                            >
+                                                <span>{category.name}</span>
+                                                <span className="text-sm opacity-75">({category.product_count})</span>
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
@@ -431,7 +705,7 @@ const ProductCardList = ({ product, index, onAddToQuote, isInQuote, currentQuant
             {/* Product Image */}
             <Link
                 to={getProductUrl(product)}
-                className="relative w-full sm:w-32 md:w-40 h-32 sm:h-32 md:h-40 overflow-hidden bg-gray-200 rounded-lg shrink-0 cursor-pointer block"
+                className="relative w-full sm:w-32 md:w-40 h-auto sm:h-32 md:h-40 overflow-hidden bg-gray-200 rounded-lg shrink-0 cursor-pointer block"
             >
                 <img
                     src={product.image}
