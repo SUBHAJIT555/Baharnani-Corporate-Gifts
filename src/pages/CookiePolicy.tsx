@@ -245,7 +245,7 @@ const CookiePolicy = () => {
                   href="tel:+97143805587"
                   className="text-primary hover:underline"
                 >
-                  (+971)43805587
+                  (+971) 4 380 5587
                 </a>
               </p>
               <p className="text-base md:text-lg font-switzer text-textcolor">

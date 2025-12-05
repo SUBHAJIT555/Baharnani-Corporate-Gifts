@@ -53,6 +53,24 @@ export interface ContactFormResponse {
   message: string;
 }
 
+export interface FluentFormPayload {
+  data: {
+    names: {
+      first_name: string;
+      last_name: string;
+    };
+    email: string;
+    phone: string;
+    subject: string;
+    message: string;
+  };
+}
+
+export interface FluentFormResponse {
+  message: string;
+  [key: string]: unknown;
+}
+
 export interface QuoteRequestPayload {
   billing: {
     first_name: string;
@@ -232,6 +250,32 @@ export const submitContactForm = async (
   // Handle response format where status might be false
   if (responseData.status === false) {
     throw new Error(responseData.message || "Failed to submit contact form");
+  }
+
+  return responseData;
+};
+
+/**
+ * Submit contact form via FluentForm
+ */
+export const submitFluentForm = async (
+  data: FluentFormPayload
+): Promise<FluentFormResponse> => {
+  const response = await fetch(
+    "https://corporategiftsdubaii.ae/wp-json/fluentform/v1/form3",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
+
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    throw new Error(responseData.message || "Submission failed");
   }
 
   return responseData;

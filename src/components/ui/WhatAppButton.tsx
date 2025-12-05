@@ -22,31 +22,33 @@ const WhatsAppButton = () => {
       self.removeEventListener("scroll", toggleVisibility);
     };
   }, []);
+  const phoneNumber = "+971551061045";
+  const message = "Hello! I'm interested in your services.";
 
-  const handleWhatsAppClick = () => {
-    // Replace with your WhatsApp number
-    const phoneNumber = "+971558490911";
-    const message = "Hello! I'm interested in your services.";
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-      message
-    )}`;
-    self.open(whatsappUrl, "_blank");
-  };
+  // const handleWhatsAppClick = () => {
+  //   // Replace with your WhatsApp number
+  //   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+  //     message
+  //   )}`;
+  //   self.open(whatsappUrl, "_blank");
+  // };
 
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.button
+        <motion.a
+          href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+            message
+          )}`}
           initial={{ opacity: 0, y: 200 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 200 }}
           transition={{ duration: 0.3 }}
-          onClick={handleWhatsAppClick}
           className="fixed bottom-24 right-4 sm:right-8 p-3 rounded-md bg-[#080f0f]/30 backdrop-blur-sm text-[#e1e1e1] border border-[#e1e1e1] hover:bg-[#ffffff] hover:text-[#499F68] hover:border-[#e1e1e1] transition-colors duration-300 z-50 "
           aria-label="Contact on WhatsApp"
         >
           <IoLogoWhatsapp className="md:size-7 size-5" />
-        </motion.button>
+        </motion.a>
       )}
     </AnimatePresence>
   );

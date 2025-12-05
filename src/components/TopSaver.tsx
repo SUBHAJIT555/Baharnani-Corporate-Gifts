@@ -1,11 +1,10 @@
 import { useRef, useState, useEffect } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Link } from "react-router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Pagination, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ImCross } from "react-icons/im";
 import { useQuote } from "../contexts/QuoteContext";
 // import { foodstuff } from "../data/foodstuff"
 
@@ -35,8 +34,6 @@ const TopSaver = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isVideoVisible, setIsVideoVisible] = useState(false);
   const [displayedText, setDisplayedText] = useState("");
 
@@ -193,11 +190,11 @@ const TopSaver = ({
   //   navigate(getProductUrl(product));
   // };
 
-  const handleCloseModal = () => {
-    setIsProductModalOpen(false);
-    // Small delay to allow exit animation before clearing product
-    setTimeout(() => setSelectedProduct(null), 300);
-  };
+  // const handleCloseModal = () => {
+  //   setIsProductModalOpen(false);
+  //   // Small delay to allow exit animation before clearing product
+  //   setTimeout(() => setSelectedProduct(null), 300);
+  // };
 
   return (
     <section className="w-full py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20 2xl:py-24 overflow-x-hidden">
@@ -339,41 +336,44 @@ const TopSaver = ({
                             className="w-full h-full object-cover"
                           />
                         </div>
+                      </Link>
+                      {/* Product Content */}
+                      <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
+                        {/* Category Badge */}
+                        <span className="text-xs font-switzer text-textcolor/60 mb-2 uppercase tracking-wide line-clamp-1 overflow-hidden text-ellipsis">
+                          {product.categories[0]}
+                        </span>
 
-                        {/* Product Content */}
-                        <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
-                          {/* Category Badge */}
-                          <span className="text-xs font-switzer text-textcolor/60 mb-2 uppercase tracking-wide line-clamp-1 overflow-hidden text-ellipsis">
-                            {product.categories[0]}
-                          </span>
-
+                        <Link
+                          to={getProductUrl(product)}>
                           {/* Product Title */}
                           <h3 className="text-base font-switzer font-bold text-textcolor mb-4 grow line-clamp-1 overflow-hidden text-ellipsis">
                             {product.name}
                           </h3>
+                        </Link>
 
-                          {/* Add to Quote Button */}
-                          <button
-                            disabled={isInQuote(product.id)}
-                            className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(product.id)
-                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                                : "bg-textcolor hover:bg-textcolor/70 text-white"
-                              }`}
-                            onClick={(e) => handleAddToQuote(product, e)}
-                          >
-                            {isInQuote(product.id)
-                              ? "Added to Quote"
-                              : "Add to Quote"}
-                          </button>
-                        </div>
-                      </Link>
+                        {/* Add to Quote Button */}
+                        <button
+                          disabled={isInQuote(product.id)}
+                          className={`cursor-pointer w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(product.id)
+                            ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                            : "bg-textcolor hover:bg-textcolor/70 text-white"
+                            }`}
+                          onClick={(e) => handleAddToQuote(product, e)}
+                        >
+                          {isInQuote(product.id)
+                            ? "Added to Quote"
+                            : "Add to Quote"}
+                        </button>
+                      </div>
+
                     </motion.div>
                   </SwiperSlide>
                 ))}
               </Swiper>
 
               {/* Pagination Dots */}
-              <div className="flex justify-center mt-6 sm:mt-8 md:mt-10">
+              {/* <div className="flex justify-center mt-6 sm:mt-8 md:mt-10">
                 <div
                   className="swiper-pagination-topsaver"
                   style={{
@@ -382,7 +382,7 @@ const TopSaver = ({
                     width: "100%",
                   }}
                 ></div>
-              </div>
+              </div> */}
             </div>
 
             {/* Right Side: Video Banner */}
@@ -446,132 +446,7 @@ const TopSaver = ({
           </div>
         </motion.div>
 
-        {/* Product Detail Modal */}
-        <AnimatePresence>
-          {isProductModalOpen && selectedProduct && (
-            <>
-              {/* Backdrop */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                onClick={handleCloseModal}
-                className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50"
-              />
 
-              {/* Modal Content */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 50 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 50 }}
-                transition={{
-                  type: "spring",
-                  damping: 30,
-                  stiffness: 300,
-                  duration: 0.3,
-                }}
-                className="fixed inset-0 sm:inset-4 md:inset-8 lg:inset-16 xl:inset-20 z-50 flex items-end sm:items-center justify-center"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="w-full h-[95vh] sm:h-full sm:max-h-[90vh] max-w-6xl bg-bg shadow-2xl overflow-hidden flex flex-col relative">
-                  {/* Close Button - Inside modal for desktop */}
-                  <button
-                    onClick={handleCloseModal}
-                    className="hidden lg:block absolute top-4 right-4 z-10 p-2.5 bg-red-500 hover:bg-textcolor rounded-full shadow-lg transition-colors"
-                    aria-label="Close modal"
-                  >
-                    <ImCross className="h-6 w-6 text-bg" />
-                  </button>
-
-                  {/* Modal Content - Scrollable */}
-                  <div className="flex-1 overflow-y-auto">
-                    <div className="flex flex-col lg:flex-row h-full">
-                      {/* Image Section */}
-                      <div className="w-full lg:w-1/2 h-56 sm:h-72 md:h-80 lg:h-full bg-gray-100 shrink-0">
-                        <img
-                          src={selectedProduct.image}
-                          alt={selectedProduct.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-
-                      {/* Content Section */}
-                      <div className="w-full lg:w-1/2 p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col pb-20 sm:pb-6 lg:pb-10">
-                        {/* Category Badge */}
-                        <span className="text-xs font-switzer text-textcolor mb-2 sm:mb-3 uppercase border border-textcolor/30 rounded-md w-fit p-1 bg-white tracking-wide">
-                          {selectedProduct.categories[0]}
-                        </span>
-
-                        {/* Product Title */}
-                        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-switzer font-bold text-textcolor mb-3 sm:mb-4 md:mb-6 leading-tight">
-                          {selectedProduct.name}
-                        </h2>
-
-                        {/* Description/Details */}
-                        <div className="mb-4 sm:mb-6 md:mb-8 flex-1">
-                          <h3 className="text-base sm:text-lg md:text-xl font-tanker text-textcolor mb-2 sm:mb-3 md:mb-4">
-                            Product Details :
-                          </h3>
-                          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-switzer text-textcolor/80 leading-relaxed">
-                            {selectedProduct.short_desc}
-                          </p>
-                        </div>
-
-                        {/* Desktop Button (inside content section) */}
-                        <div className="hidden lg:block mt-auto">
-                          <button
-                            disabled={isInQuote(selectedProduct.id)}
-                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${isInQuote(selectedProduct.id)
-                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                                : "bg-textcolor hover:bg-textcolor/70 text-white"
-                              }`}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleAddToQuote(selectedProduct, e);
-                            }}
-                          >
-                            {isInQuote(selectedProduct.id)
-                              ? "Added to Quote"
-                              : "Add to Quote"}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Sticky Button for Mobile */}
-                  <div className="lg:hidden sticky bottom-0 left-0 right-0 bg-bg border-t border-gray-200 p-4 pt-3 shadow-lg z-10">
-                    <button
-                      disabled={isInQuote(selectedProduct.id)}
-                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${isInQuote(selectedProduct.id)
-                          ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                          : "bg-textcolor hover:bg-textcolor/70 text-white"
-                        }`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleAddToQuote(selectedProduct, e);
-                      }}
-                    >
-                      {isInQuote(selectedProduct.id)
-                        ? "Added to Quote"
-                        : "Add to Quote"}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Close Button - Outside modal for mobile/tablet */}
-                <button
-                  onClick={handleCloseModal}
-                  className="lg:hidden absolute top-3 right-3 sm:top-4 sm:right-4 z-50 p-2 sm:p-2.5 bg-red-500 hover:bg-textcolor rounded-full shadow-lg transition-colors"
-                  aria-label="Close modal"
-                >
-                  <ImCross className="h-5 w-5 sm:h-6 sm:w-6 text-bg" />
-                </button>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
       </div>
     </section>
   );

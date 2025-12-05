@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Trash2, Plus, Minus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useQuoteSubmission } from "../hooks/useQuoteSubmission";
 import Loading from "../components/ui/Loading";
+import { useEffect } from "react";
 
 interface QuoteFormData {
   first_name: string;
@@ -20,6 +21,13 @@ const Quote = () => {
   const { items, removeFromQuote, updateQuantity, clearQuote } = useQuote();
   const navigate = useNavigate();
   const quoteMutation = useQuoteSubmission();
+
+  // Redirect to cart if empty
+  useEffect(() => {
+    if (items.length === 0) {
+      navigate("/cart");
+    }
+  }, [items.length, navigate]);
 
   const {
     register,
@@ -70,26 +78,9 @@ const Quote = () => {
     }
   };
 
+  // Show loading or nothing while redirecting
   if (items.length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-textcolor pt-24 sm:pt-28 md:pt-32 py-12 px-4">
-        <div className="text-center">
-          <h2 className="text-3xl font-tanker text-bg mb-4">
-            Your Quote Cart is Empty
-          </h2>
-          <p className="text-bg mb-8">
-            Add products to your quote cart to get started.
-          </p>
-          <Link
-            to="/shop"
-            className="inline-flex items-center gap-2 bg-bg hover:bg-bg/70 text-textcolor font-tanker font-medium py-3 px-6 rounded-md transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Shop
-          </Link>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   return (

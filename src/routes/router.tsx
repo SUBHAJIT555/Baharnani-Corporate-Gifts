@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import { MainLayout } from "../layouts/MainLayout";
-import { lazy, Suspense } from "react";
-import Loading from "../components/ui/Loading";
+import { lazy } from "react";
 import Home from "../pages/Home";
 // import About from "../pages/About";
 // import Product from "../pages/Product";
@@ -44,14 +43,15 @@ const LuxuryCorporateGifts = lazy(() => import("../pages/LuxuryCorporateGifts"))
 const Shop = lazy(() => import("../pages/Shop"));
 const ThankYou = lazy(() => import("../pages/ThankYou"));
 const ProductDetails = lazy(() => import("../pages/ProductDetails"));
+const Cart = lazy(() => import("../pages/Cart"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Suspense fallback={<Loading fullScreen message="Loading..." size="lg" />}>
+    element:
       <MainLayout />
-    </Suspense>,
+    ,
     children: [
       { path: "/", element: <Home /> },
       { path: "/about-us", element: <About /> },
@@ -99,7 +99,11 @@ export const router = createBrowserRouter([
         element: <LuxuryCorporateGifts />,
       },
       {
-        path: "/quote",
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/request-quotation",
         element: <Quote />,
       },
       {

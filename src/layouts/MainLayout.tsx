@@ -5,6 +5,8 @@ import WhatsAppButton from "../components/ui/WhatAppButton";
 import FloatingCartButton from "../components/ui/FloatingCartButton";
 import Footer from "../components/ui/Footer";
 import { LenisScrollHandler } from "../components/LenisScrollHandler";
+import Loading from "../components/ui/Loading";
+import { Suspense } from "react";
 
 export const MainLayout = () => {
   return (
@@ -12,7 +14,9 @@ export const MainLayout = () => {
       <LenisScrollHandler />
       <Navbar />
       <main className="grow w-full overflow-x-hidden">
-        <Outlet />
+        <Suspense fallback={<Loading fullScreen message="Loading..." size="lg" />}>
+          <Outlet />
+        </Suspense>
       </main>
 
       <ScrollToTop />

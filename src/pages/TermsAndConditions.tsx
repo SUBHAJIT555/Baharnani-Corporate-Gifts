@@ -69,7 +69,7 @@ const TermsAndConditions = () => {
               gifting experiences.
             </p>
             <p className="text-base md:text-lg font-switzer text-textcolor leading-relaxed mb-4">
-              You can contact us by phone at <strong>(+971)43805587</strong>,
+              You can contact us by phone at <strong>(+971) 4 380 5587 </strong>,
               email at{" "}
               <a
                 href="mailto:info@baharnani.com"
@@ -1090,7 +1090,7 @@ const TermsAndConditions = () => {
               >
                 info@baharnani.com
               </a>{" "}
-              or call at <strong>(+971)43805587</strong>.
+              or call at <strong>(+971) 4 380 5587 </strong>.
             </p>
           </section>
 
@@ -1153,7 +1153,7 @@ const TermsAndConditions = () => {
                   href="tel:+97143805587"
                   className="text-primary hover:underline"
                 >
-                  (+971)43805587
+                  (+971) 4 380 5587
                 </a>
               </p>
               <p className="text-base md:text-lg font-switzer text-textcolor">

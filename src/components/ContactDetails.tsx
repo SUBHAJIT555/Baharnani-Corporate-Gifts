@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   FaEnvelope,
@@ -11,6 +11,8 @@ import {
 import { IoLogoWhatsapp } from "react-icons/io";
 import { motion } from "framer-motion";
 import CustomButton from "./ui/CustomButton";
+import { useNavigate } from "react-router-dom";
+import { useContactFormSubmission } from "../hooks/useContactFormSubmission";
 
 type FormData = {
   firstName: string;
@@ -23,6 +25,7 @@ type FormData = {
 };
 
 const ContactDetails = () => {
+  const navigate = useNavigate();
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -63,50 +66,47 @@ const ContactDetails = () => {
     null
   );
   const [message, setMessage] = useState<string>("");
+  const contactMutation = useContactFormSubmission();
+
+  // Handle mutation status changes
+  useEffect(() => {
+    if (contactMutation.isSuccess && contactMutation.data) {
+      setMessage(contactMutation.data.message);
+      setSubmitStatus("success");
+      reset();
+      navigate("/thank-you");
+      setTimeout(() => setSubmitStatus(null), 3000);
+    } else if (contactMutation.isError) {
+      setSubmitStatus("error");
+      setMessage(contactMutation.error?.message || "Something went wrong. Please try again.");
+      setTimeout(() => setSubmitStatus(null), 3000);
+    }
+  }, [contactMutation.isSuccess, contactMutation.isError, contactMutation.data, contactMutation.error, reset, navigate]);
 
   const onSubmit = async (data: FormData) => {
     console.log(data);
     setSubmitStatus(null);
+
+    // Honeypot check
     if (data.website) {
-      // Honeypot filled, treat as success silently
       reset();
       return;
     }
 
-    try {
-      const formData = new FormData();
-      formData.append("firstName", data.firstName);
-      formData.append("lastName", data.lastName);
-      formData.append("email", data.email);
-      formData.append("phone", data.phone);
-      formData.append("message", data.message);
-      formData.append("formType", "contact");
-
-      const response = await fetch(`/contact-mail.php`, {
-        method: "POST",
-        body: formData,
-      });
-
-      const responseData = await response.json();
-
-      if (responseData.status === "error") {
-        throw new Error(responseData.message);
+    const payload = {
+      data: {
+        names: {
+          first_name: data.firstName,
+          last_name: data.lastName
+        },
+        email: data.email,
+        phone: data.phone,
+        subject: "Contact Form Submission",
+        message: data.message
       }
+    };
 
-      setMessage(responseData.message);
-      setSubmitStatus("success");
-      reset();
-
-      // Hide message after 3 seconds and show form again
-      setTimeout(() => setSubmitStatus(null), 3000);
-    } catch (error) {
-      console.error(error);
-      setSubmitStatus("error");
-      if (error instanceof Error) {
-        setMessage(error.message);
-      }
-      setTimeout(() => setSubmitStatus(null), 3000);
-    }
+    contactMutation.mutate(payload);
   };
 
   return (
@@ -199,11 +199,10 @@ const ContactDetails = () => {
                             required: "First name is required",
                           })}
                           placeholder="Enter your first name"
-                          className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-textcolor font-tanker focus:outline-none transition-colors ${
-                            errors.firstName
-                              ? "border-red-500"
-                              : "border-highlighttext"
-                          }`}
+                          className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-textcolor font-tanker focus:outline-none transition-colors ${errors.firstName
+                            ? "border-red-500"
+                            : "border-highlighttext"
+                            }`}
                         />
                         {errors.firstName && (
                           <p className="text-red-500 text-sm mt-1 font-switzer">
@@ -226,11 +225,10 @@ const ContactDetails = () => {
                             required: "Last name is required",
                           })}
                           placeholder="Enter your last name"
-                          className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-textcolor font-tanker focus:outline-none transition-colors ${
-                            errors.lastName
-                              ? "border-red-500"
-                              : "border-highlighttext"
-                          }`}
+                          className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-textcolor font-tanker focus:outline-none transition-colors ${errors.lastName
+                            ? "border-red-500"
+                            : "border-highlighttext"
+                            }`}
                         />
                         {errors.lastName && (
                           <p className="text-red-500 text-sm mt-1 font-switzer">
@@ -260,11 +258,10 @@ const ContactDetails = () => {
                             },
                           })}
                           placeholder="Enter your email address"
-                          className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-textcolor font-tanker focus:outline-none transition-colors ${
-                            errors.email
-                              ? "border-red-500"
-                              : "border-highlighttext"
-                          }`}
+                          className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-textcolor font-tanker focus:outline-none transition-colors ${errors.email
+                            ? "border-red-500"
+                            : "border-highlighttext"
+                            }`}
                         />
                         {errors.email && (
                           <p className="text-red-500 text-sm mt-1 font-switzer">
@@ -287,11 +284,10 @@ const ContactDetails = () => {
                             required: "Phone is required",
                           })}
                           placeholder="Enter your phone number"
-                          className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-textcolor font-tanker focus:outline-none transition-colors ${
-                            errors.phone
-                              ? "border-red-500"
-                              : "border-highlighttext"
-                          }`}
+                          className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-textcolor font-tanker focus:outline-none transition-colors ${errors.phone
+                            ? "border-red-500"
+                            : "border-highlighttext"
+                            }`}
                         />
                         {errors.phone && (
                           <p className="text-red-500 text-sm mt-1 font-switzer">
@@ -316,11 +312,10 @@ const ContactDetails = () => {
                         })}
                         placeholder="Enter your message"
                         rows={6}
-                        className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-textcolor font-tanker focus:outline-none transition-colors resize-none ${
-                          errors.message
-                            ? "border-red-500"
-                            : "border-highlighttext"
-                        }`}
+                        className={`w-full px-4 py-3 border-2 rounded-lg bg-transparent text-textcolor font-tanker focus:outline-none transition-colors resize-none ${errors.message
+                          ? "border-red-500"
+                          : "border-highlighttext"
+                          }`}
                       />
                       {errors.message && (
                         <p className="text-red-500 text-sm mt-1 font-switzer">
@@ -339,16 +334,14 @@ const ContactDetails = () => {
                       <input
                         type="checkbox"
                         {...register("privacy", { required: true })}
-                        className={`w-5 h-5 border-2 transition ${
-                          errors.privacy
-                            ? "border-red-500 accent-red-500"
-                            : "border-textcolor accent-textcolor"
-                        }`}
+                        className={`w-5 h-5 border-2 transition ${errors.privacy
+                          ? "border-red-500 accent-red-500"
+                          : "border-textcolor accent-textcolor"
+                          }`}
                       />
                       <span
-                        className={`text-sm ml-2 font-switzer ${
-                          errors.privacy ? "text-red-600" : "text-textcolor"
-                        }`}
+                        className={`text-sm ml-2 font-switzer ${errors.privacy ? "text-red-600" : "text-textcolor"
+                          }`}
                       >
                         I agree with the{" "}
                         <a
@@ -365,9 +358,9 @@ const ContactDetails = () => {
                     <div className="flex justify-start">
                       <CustomButton
                         type="submit"
-                        disabled={isSubmitting}
+                        disabled={contactMutation.isPending || isSubmitting}
                         className="h-[50px] w-full sm:w-fit px-8 bg-textcolor! text-white! text-base sm:text-lg font-tanker! tracking-wide"
-                        text={isSubmitting ? "Sending..." : "Send Message"}
+                        text={contactMutation.isPending || isSubmitting ? "Sending..." : "Send Message"}
                       />
                     </div>
                   </div>
@@ -407,16 +400,16 @@ const ContactDetails = () => {
                       Email
                     </p>
                     <a
-                      href="mailto:amit@baharnani.com"
+                      href="mailto:vivek@baharnani.com"
                       className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
                     >
-                      amit@baharnani.com 
+                      vivek@baharnani.com
                     </a>
                     <a
                       href="mailto:info@baharnani.com"
                       className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
                     >
-                      info@baharnani.com 
+                      info@baharnani.com
                     </a>
                   </div>
                 </motion.div>
@@ -433,16 +426,16 @@ const ContactDetails = () => {
                       Phone Number
                     </p>
                     <a
-                      href="tel:+971526240517"
+                      href="tel:+971551061045"
                       className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
                     >
-                      (+971) 52 624 0517 - WhatsApp / Phone Call
+                      (+971) 55 106 1045 - WhatsApp / Phone Call
                     </a>
                     <a
                       href="tel:+97143805587"
                       className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
                     >
-                      (+971)43805587 - Landline
+                      (+971) 4 380 5587 - Landline
                     </a>
                   </div>
                 </motion.div>
@@ -473,7 +466,7 @@ const ContactDetails = () => {
                   </p>
                   <div className="flex gap-4">
                     <motion.a
-                      href="https://www.linkedin.com/company/leading-network-llc/"
+                      href="https://www.linkedin.com/company/baharnaniadvertisingdubai/"
                       target="_blank"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
@@ -482,7 +475,7 @@ const ContactDetails = () => {
                       <FaLinkedinIn className="text-2xl" />
                     </motion.a>
                     <motion.a
-                      href="https://www.instagram.com/leadingnetworkllc/"
+                      href="https://www.instagram.com/baharnaniadv/"
                       target="_blank"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
@@ -491,7 +484,7 @@ const ContactDetails = () => {
                       <FaInstagram className="text-2xl" />
                     </motion.a>
                     <motion.a
-                      href="https://www.facebook.com/leadingnetworkllc/"
+                      href="https://www.facebook.com/BAHARNANIADV"
                       target="_blank"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
@@ -500,7 +493,7 @@ const ContactDetails = () => {
                       <FaFacebookF className="text-2xl" />
                     </motion.a>
                     <motion.a
-                      href="https://wa.me/97143805587"
+                      href="https://wa.me/+971551061045"
                       target="_blank"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
