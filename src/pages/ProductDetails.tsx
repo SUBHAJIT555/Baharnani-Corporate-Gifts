@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, use } from "react";
 import { useParams, Link, useNavigate } from "react-router";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -8,6 +8,9 @@ import { HiMinus, HiPlus } from "react-icons/hi";
 import { ArrowLeft } from "lucide-react";
 import Loading from "../components/ui/Loading";
 import { cn } from "../lib/utilts";
+import Seo from "../components/Seo";
+
+
 
 const ProductDetails = () => {
     const { category, slug } = useParams<{ category: string; slug: string }>();
@@ -15,6 +18,26 @@ const ProductDetails = () => {
     const { data: product, isLoading, error } = useProductBySlug(slug || "");
     const { addToQuote, isInQuote } = useQuote();
     const [quantity, setQuantity] = useState(1);
+    const fetchSeo = async () => {
+        if (product) {
+            return {
+                title: product.seo.title,
+                description: product.seo.description,
+                og_title: product.seo.og_title,
+                og_desc: product.seo.og_desc,
+                canonical: product.seo.canonical,
+            }
+        }
+        return {
+            title: "",
+            description: "",
+            og_title: "",
+            og_desc: "",
+            canonical: "",
+        }
+    }
+    const seo = use(fetchSeo())
+
 
     // Prepare images for react-image-gallery
     const galleryImages = useMemo(() => {
@@ -82,6 +105,7 @@ const ProductDetails = () => {
 
     return (
         <div className="min-h-screen bg-bg">
+            {seo && <Seo {...seo} />}
             {/* Hero Section */}
             <section className="relative w-full bg-linear-to-r from-textcolor via-textcolor/90 to-textcolor/80 overflow-hidden pt-24 sm:pt-28 md:pt-32">
                 <div className="absolute inset-0 opacity-10">

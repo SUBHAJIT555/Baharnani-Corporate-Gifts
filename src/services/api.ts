@@ -29,6 +29,14 @@ export interface ProductDetails {
   gallery: string[];
   categories: string[];
   category_slug?: string[];
+  seo: {
+    title: string;
+    description: string;
+    og_title: string;
+    og_desc: string;
+    canonical: string;
+    image: string;
+  };
 }
 
 export interface ProductCategory {

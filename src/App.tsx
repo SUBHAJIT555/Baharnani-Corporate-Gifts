@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { router } from "./routes/router";
 import { QuoteProvider } from "./contexts/QuoteContext";
 import { LenisProvider } from "./contexts/LenisContext";
+import { HelmetProvider } from "react-helmet-async";
 
 // Create a QueryClient instance
 const queryClient = new QueryClient({
@@ -18,11 +19,13 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <LenisProvider>
-        <QuoteProvider>
-          <RouterProvider router={router} />
-        </QuoteProvider>
-      </LenisProvider>
+      <HelmetProvider>
+        <LenisProvider>
+          <QuoteProvider>
+            <RouterProvider router={router} />
+          </QuoteProvider>
+        </LenisProvider>
+      </HelmetProvider>
     </QueryClientProvider>
   );
 }

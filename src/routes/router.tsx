@@ -2,28 +2,6 @@ import { createBrowserRouter } from "react-router";
 import { MainLayout } from "../layouts/MainLayout";
 import { lazy } from "react";
 import Home from "../pages/Home";
-// import About from "../pages/About";
-// import Product from "../pages/Product";
-// import ApparelAndAccessories from "../pages/ApparelAndAccessories";
-// import OfficeAndStationary from "../pages/OfficeAndStationary";
-// import BagsAndTravels from "../pages/BagsAndTravels";
-// import Quote from "../pages/Quote";
-// import TechnologyAndAccessories from "../pages/TechnologyAndAccessories";
-// import EatingAndDrinking from "../pages/EatingAndDrinking";
-// import SportsAndRecreation from "../pages/SportsAndRecreation";
-// import EcoFriendly from "../pages/EcoFriendly";
-// import GiftSet from "../pages/GiftSet";
-// import Contact from "../pages/Contact";
-// import PrivacyPolicy from "../pages/PrivacyPolicy";
-// import TermsAndConditions from "../pages/TermsAndConditions";
-// import CookiePolicy from "../pages/CookiePolicy";
-// import LuxuryCorporateGifts from "../pages/LuxuryCorporateGifts";
-// import Shop from "../pages/Shop";
-// import ThankYou from "../pages/ThankYou";
-// import ProductDetails from "../pages/ProductDetails";
-// import NotFound from "../pages/NotFound";
-
-
 const About = lazy(() => import("../pages/About"));
 const Product = lazy(() => import("../pages/Product"));
 const ApparelAndAccessories = lazy(() => import("../pages/ApparelAndAccessories"));
