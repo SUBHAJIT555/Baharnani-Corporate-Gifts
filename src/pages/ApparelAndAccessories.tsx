@@ -5,12 +5,13 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
 import { Package, Award, Users, Shirt, Sparkles } from "lucide-react";
 import CallToAction from "../components/CallToAction";
+import Seo from "../components/Seo";
 // import { giftItems } from "../data/giftItems";
 
 // images
 import ApparelAndAccessoriesImage from "../assets/images/Products-hero-image/Apparel-&-accessories.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 
 // Filter apparel and accessories items from giftItems
@@ -71,7 +72,7 @@ const ApparelAndAccessories = () => {
   const { page: pageParam } = useParams<{ page?: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const [currentPage, setCurrentPage] = useState(() => {
     const page = pageParam ? parseInt(pageParam, 10) : 1;
     return isNaN(page) || page < 1 ? 1 : page;
@@ -81,6 +82,32 @@ const ApparelAndAccessories = () => {
   const { data: productsData, isLoading: productsLoading, error: productsError } = useProductsByCategory(categorySlug, currentPage, perPage);
 
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
+
+  // Get category name for SEO
+  const categoryName = useMemo(() => {
+    const category = categories?.find(cat => cat.slug === categorySlug);
+    return category?.name || "Apparel & Accessories";
+  }, [categories, categorySlug]);
+
+  // SEO data - use pageParam directly to ensure it updates immediately on navigation
+  const seo = useMemo(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    const actualPage = isNaN(page) || page < 1 ? 1 : page;
+
+    const title = actualPage === 1
+      ? `${categoryName} | Baharnani`
+      : `${categoryName} – Page ${actualPage} | Baharnani`;
+
+    const baseDescription = "Discover stylish corporate apparel & accessories in Dubai. Premium shirts, hats & uniforms for branding your business.";
+    const description = actualPage === 1
+      ? baseDescription
+      : `${baseDescription} Browse page ${actualPage} of our premium apparel and accessories collection.`;
+
+    return {
+      title,
+      description,
+    };
+  }, [categoryName, pageParam]);
 
   // Sync page from URL params
   useEffect(() => {
@@ -102,19 +129,20 @@ const ApparelAndAccessories = () => {
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
-    
+
     // Update URL based on page number
     if (newPage === 1) {
       navigate(`/product-category/${categorySlug}`, { replace: true });
     } else {
       navigate(`/product-category/${categorySlug}/page/${newPage}`, { replace: true });
     }
-    
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <div>
+      {seo && <Seo {...seo} />}
       <CommonHero
         title="Premium Apparel & Accessories for Corporate Gifting in Dubai"
         titlesuffix=""

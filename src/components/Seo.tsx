@@ -30,7 +30,7 @@ export default function Seo({
     image || "https://exhibitionstandsuae.ae/images/og-default.jpg"; // fallback image
 
   return (
-    <Helmet>
+    <Helmet key={title + description}>
       <title>{title}</title>
       <meta name="description" content={description} />
       {keywords && <meta name="keywords" content={keywords} />}

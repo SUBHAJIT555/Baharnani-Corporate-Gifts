@@ -5,11 +5,12 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
 import { Coffee, Award, Package, Users, Gift, Sparkles } from "lucide-react";
 import CallToAction from "../components/CallToAction";
+import Seo from "../components/Seo";
 
 // images
 import EatingDrinkingImage from "../assets/images/Products-hero-image/Eating-&-drinking.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 
 // Filter eating and drinking items from giftItems
@@ -90,6 +91,32 @@ const EatingAndDrinking = () => {
   const { data: categories } = useProductCategories();
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
 
+  // Get category name for SEO
+  const categoryName = useMemo(() => {
+    const category = categories?.find(cat => cat.slug === categorySlug);
+    return category?.name || "Eating & Drinking";
+  }, [categories, categorySlug]);
+
+  // SEO data - use pageParam directly to ensure it updates immediately on navigation
+  const seo = useMemo(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    const actualPage = isNaN(page) || page < 1 ? 1 : page;
+
+    const title = actualPage === 1
+      ? `${categoryName} | Baharnani`
+      : `${categoryName} – Page ${actualPage} | Baharnani`;
+
+    const baseDescription = "Corporate drinkware & lunchware gifts in Dubai. Branded bottles, mugs, & tumblers for business gifting.";
+    const description = actualPage === 1
+      ? baseDescription
+      : `${baseDescription} Browse page ${actualPage} of our premium eating and drinking products collection.`;
+
+    return {
+      title,
+      description,
+    };
+  }, [categoryName, pageParam]);
+
   // Sync page from URL params
   useEffect(() => {
     const page = pageParam ? parseInt(pageParam, 10) : 1;
@@ -121,6 +148,7 @@ const EatingAndDrinking = () => {
 
   return (
     <div>
+      {seo && <Seo {...seo} />}
       <CommonHero
         title="Premium Eating & Drinking Products for Corporate Gifting in Dubai"
         titlesuffix=""

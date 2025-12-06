@@ -8,8 +8,9 @@ import WhyChooseUs, { type FeatureCard } from "../components/WhyChooseUs";
 import { Award } from "lucide-react";
 import { AnimatedTestimonials } from "../components/ui/AnimatedTestimonial";
 import FAQ, { type FAQItem } from "../components/FAQ";
+import Seo from "../components/Seo";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 
 const testimonials = [
@@ -209,6 +210,32 @@ const LuxuryCorporateGifts = () => {
   const { data: categories } = useProductCategories();
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
 
+  // Get category name for SEO
+  const categoryName = useMemo(() => {
+    const category = categories?.find(cat => cat.slug === categorySlug);
+    return category?.name || "Luxury Corporate Gifts";
+  }, [categories, categorySlug]);
+
+  // SEO data - use pageParam directly to ensure it updates immediately on navigation
+  const seo = useMemo(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    const actualPage = isNaN(page) || page < 1 ? 1 : page;
+
+    const title = actualPage === 1
+      ? `${categoryName} | Baharnani`
+      : `${categoryName} – Page ${actualPage} | Baharnani`;
+
+    const baseDescription = "High-quality tools & premium gifts for UAE businesses. Ideal for trade shows & executive gifting.";
+    const description = actualPage === 1
+      ? baseDescription
+      : `${baseDescription} Browse page ${actualPage} of our luxury corporate gifts collection.`;
+
+    return {
+      title,
+      description,
+    };
+  }, [categoryName, pageParam]);
+
   // Sync page from URL params
   useEffect(() => {
     const page = pageParam ? parseInt(pageParam, 10) : 1;
@@ -240,6 +267,7 @@ const LuxuryCorporateGifts = () => {
 
   return (
     <div>
+      {seo && <Seo {...seo} />}
       <CommonHero
         title="Luxury Corporate Gifts in Dubai - Make Your Business Relationships Stronger"
         titlesuffix=""

@@ -5,10 +5,11 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
 import { Leaf, Award, Package, Users, Globe } from "lucide-react";
 import CallToAction from "../components/CallToAction";
+import Seo from "../components/Seo";
 
 // images
 import EcoFriendlyImage from "../assets/images/Products-hero-image/Eco-friendly.webp";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useParams, useNavigate, useLocation } from "react-router";
 
@@ -87,6 +88,32 @@ const EcoFriendly = () => {
   const { data: categories } = useProductCategories();
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
 
+  // Get category name for SEO
+  const categoryName = useMemo(() => {
+    const category = categories?.find(cat => cat.slug === categorySlug);
+    return category?.name || "Eco-Friendly";
+  }, [categories, categorySlug]);
+
+  // SEO data - use pageParam directly to ensure it updates immediately on navigation
+  const seo = useMemo(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    const actualPage = isNaN(page) || page < 1 ? 1 : page;
+
+    const title = actualPage === 1
+      ? `${categoryName} | Baharnani`
+      : `${categoryName} – Page ${actualPage} | Baharnani`;
+
+    const baseDescription = "Eco-friendly corporate gifts in Dubai – bamboo, cork & recycled products for sustainable branding.";
+    const description = actualPage === 1
+      ? baseDescription
+      : `${baseDescription} Browse page ${actualPage} of our premium eco-friendly products collection.`;
+
+    return {
+      title,
+      description,
+    };
+  }, [categoryName, pageParam]);
+
   // Sync page from URL params
   useEffect(() => {
     const page = pageParam ? parseInt(pageParam, 10) : 1;
@@ -118,6 +145,7 @@ const EcoFriendly = () => {
 
   return (
     <div>
+      {seo && <Seo {...seo} />}
       <CommonHero
         title="Eco-Friendly Corporate Gifts for Sustainable Branding in Dubai"
         titlesuffix=""

@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { PiSealQuestionDuotone } from "react-icons/pi";
 import ctaImage from "/assets/images/Hero and footer image/About-hero.webp";
+import Seo from "../components/Seo";
 
 
 
@@ -115,6 +116,7 @@ const aboutFeatures: FeatureCard[] = [
 const About = () => {
   return (
     <div>
+      <Seo title={"About Us | Leading Corporate Gift Suppliers in Dubai"} description={"Discover trusted corporate gift suppliers in Dubai. Premium corporate gifts, fast delivery, and custom branding across the UAE."} canonical="https://corporategiftsdubaii.ae/about-us" og_title="About Us | Leading Corporate Gift Suppliers in Dubai" og_desc="Discover trusted corporate gift suppliers in Dubai. Premium corporate gifts, fast delivery, and custom branding across the UAE." />
       <CommonHero
         title="Your Trusted Partner for Premium Corporate Gifts"
         titlesuffix=""

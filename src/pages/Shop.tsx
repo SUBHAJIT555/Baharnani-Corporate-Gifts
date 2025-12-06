@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef, lazy } from "react";
 import { useAllProducts, useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useQuote } from "../contexts/QuoteContext";
 import type { Product } from "../services/api";
@@ -11,6 +11,7 @@ import { Link, useParams, useNavigate, useLocation, useSearchParams } from "reac
 import { cn, getProductUrl } from "../lib/utilts";
 import Loading from "../components/ui/Loading";
 import { ProductCard, type ProductCardProps } from "../components/ProductCard";
+const Seo = lazy(() => import("../components/Seo"));
 
 type ViewMode = "grid" | "list";
 
@@ -210,18 +211,51 @@ const Shop = () => {
     // Only show full-page loading on very first load (when categories are also loading)
     const showFullPageLoading = isInitialLoad && categoriesLoading;
 
-    // Sort products
-    // const sortedProducts = useMemo(() => {
-    //     const products = [...(displayedProducts as Product[])];
-    //     switch (sortBy) {
-    //         case "name-asc":
-    //             return products.sort((a, b) => a.name.localeCompare(b.name));
-    //         case "name-desc":
-    //             return products.sort((a, b) => b.name.localeCompare(a.name));
-    //         default:
-    //             return products;
-    //     }
-    // }, [displayedProducts, sortBy]);
+    // SEO data - use pageParam and categoryFromQuery directly to ensure it updates immediately
+    const seo = useMemo(() => {
+        const page = pageParam ? parseInt(pageParam, 10) : 1;
+        const actualPage = isNaN(page) || page < 1 ? 1 : page;
+        const category = categoryFromQuery || null;
+        const catName = category ? (categories?.find(cat => cat.slug === category)?.name || null) : null;
+
+        let title: string;
+        let description: string;
+
+        if (catName) {
+            // Category selected
+            if (actualPage === 1) {
+                title = `${catName} | Shop | Baharnani`;
+            } else {
+                title = `${catName} – Page ${actualPage} | Shop | Baharnani`;
+            }
+            const baseDescription = `Discover our exclusive collection of ${catName.toLowerCase()} products, perfect for corporate gifts, client appreciation, and employee recognition programs in Dubai and the UAE.`;
+            description = actualPage === 1
+                ? baseDescription
+                : `${baseDescription} Browse page ${actualPage} of our ${catName.toLowerCase()} collection.`;
+        } else {
+            // All products
+            if (actualPage === 1) {
+                title = "Shop Corporate Gifts | Premium Corporate Gifts in Dubai | Baharnani";
+            } else {
+                title = `Shop Corporate Gifts – Page ${actualPage} | Premium Corporate Gifts in Dubai | Baharnani`;
+            }
+            const baseDescription = "Shop corporate gifts in Dubai. Personalized & luxury business gifts for employees, clients & partners.";
+            description = actualPage === 1
+                ? baseDescription
+                : `${baseDescription} Browse page ${actualPage} of our complete corporate gifts collection.`;
+        }
+
+        return {
+            title,
+            description,
+            canonical: actualPage === 1
+                ? (category ? `https://corporategiftsdubaii.ae/shop?category=${category}` : "https://corporategiftsdubaii.ae/shop")
+                : (category ? `https://corporategiftsdubaii.ae/shop/page/${actualPage}?category=${category}` : `https://corporategiftsdubaii.ae/shop/page/${actualPage}`),
+            og_title: title,
+            og_desc: description,
+        };
+    }, [pageParam, categoryFromQuery, categories]);
+
 
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
@@ -284,6 +318,7 @@ const Shop = () => {
 
     return (
         <div className="min-h-screen bg-bg">
+            {seo && <Seo {...seo} />}
             {/* Hero Banner Section */}
             <section className="relative w-full bg-linear-to-r from-textcolor via-textcolor/90 to-textcolor/80 overflow-hidden">
                 <div className="absolute inset-0 opacity-10">

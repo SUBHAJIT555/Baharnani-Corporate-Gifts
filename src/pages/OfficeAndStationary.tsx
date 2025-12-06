@@ -5,12 +5,13 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
 import { Award, Globe, Leaf, Package, Users, PenTool } from "lucide-react";
 import CallToAction from "../components/CallToAction";
+import Seo from "../components/Seo";
 // import { giftItems } from "../data/giftItems";
 
 // images
 import OfficeStationaryImage from "../assets/images/Products-hero-image/Office-&-stationary.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 
 // Filter office and stationary items from giftItems
@@ -108,6 +109,32 @@ const OfficeAndStationary = () => {
   const { data: categories } = useProductCategories();
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
 
+  // Get category name for SEO
+  const categoryName = useMemo(() => {
+    const category = categories?.find(cat => cat.slug === categorySlug);
+    return category?.name || "Office & Stationary";
+  }, [categories, categorySlug]);
+
+  // SEO data - use pageParam directly to ensure it updates immediately on navigation
+  const seo = useMemo(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    const actualPage = isNaN(page) || page < 1 ? 1 : page;
+
+    const title = actualPage === 1
+      ? `${categoryName} | Baharnani`
+      : `${categoryName} – Page ${actualPage} | Baharnani`;
+
+    const baseDescription = "Custom office stationery & notebooks for corporate gifting. Premium pens, diaries & sets in Dubai.";
+    const description = actualPage === 1
+      ? baseDescription
+      : `${baseDescription} Browse page ${actualPage} of our premium office and stationery collection.`;
+
+    return {
+      title,
+      description,
+    };
+  }, [categoryName, pageParam]);
+
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
 
@@ -122,6 +149,7 @@ const OfficeAndStationary = () => {
 
   return (
     <div>
+      {seo && <Seo {...seo} />}
       <CommonHero
         title="Premium Office & Stationery for Corporate Gifting in Dubai"
         titlesuffix=""

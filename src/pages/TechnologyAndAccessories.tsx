@@ -12,12 +12,13 @@ import {
   Sparkles,
 } from "lucide-react";
 import CallToAction from "../components/CallToAction";
+import Seo from "../components/Seo";
 // import { giftItems } from "../data/giftItems";
 
 // images
 import TechnologyAndAccessoriesImage from "../assets/images/Products-hero-image/Technology-&-accessories.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 
 // Filter technology and accessories items from giftItems
@@ -101,6 +102,32 @@ const TechnologyAndAccessories = () => {
   const { data: categories } = useProductCategories();
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
 
+  // Get category name for SEO
+  const categoryName = useMemo(() => {
+    const category = categories?.find(cat => cat.slug === categorySlug);
+    return category?.name || "Technology & Accessories";
+  }, [categories, categorySlug]);
+
+  // SEO data - use pageParam directly to ensure it updates immediately on navigation
+  const seo = useMemo(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    const actualPage = isNaN(page) || page < 1 ? 1 : page;
+
+    const title = actualPage === 1
+      ? `${categoryName} | Baharnani`
+      : `${categoryName} – Page ${actualPage} | Baharnani`;
+
+    const baseDescription = "Shop premium tech gifts in Dubai – power banks, speakers, chargers & more. Ideal for corporate gifting.";
+    const description = actualPage === 1
+      ? baseDescription
+      : `${baseDescription} Browse page ${actualPage} of our premium technology and accessories collection.`;
+
+    return {
+      title,
+      description,
+    };
+  }, [categoryName, pageParam]);
+
   // Sync page from URL params
   useEffect(() => {
     const page = pageParam ? parseInt(pageParam, 10) : 1;
@@ -132,6 +159,7 @@ const TechnologyAndAccessories = () => {
 
   return (
     <div>
+      {seo && <Seo {...seo} />}
       <CommonHero
         title="Premium Technology & Accessories for Corporate Gifting in Dubai"
         titlesuffix=""

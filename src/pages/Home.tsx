@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import HeroSection from "../components/Hero";
 import HomeAbout from "../components/HomeAbout";
 import Stats from "../components/Stats";
@@ -11,11 +12,12 @@ import { TicketCheck, Users, Leaf, Clock } from "lucide-react";
 import { BiWorld } from "react-icons/bi";
 
 import { PackageSearch } from "lucide-react";
-import { PiSealQuestionDuotone, PiGiftDuotone, PiHandshakeDuotone} from "react-icons/pi";
+import { PiSealQuestionDuotone, PiGiftDuotone, PiHandshakeDuotone } from "react-icons/pi";
 import FeatureBrand from "../components/FeatureBrand";
 import TopSaver from "../components/TopSaver";
 import BestSelling from "../components/BestSelling";
 import backgroundImage from "../assets/images/Products-hero-image/Luxury-corporate-gifts.webp";
+const Seo = lazy(() => import("../components/Seo"));
 
 const homeFaqData: FAQItem[] = [
   {
@@ -149,8 +151,17 @@ const homeFeatures: FeatureCard[] = [
 ];
 
 const Home = () => {
+  const seo = {
+    title: "Corporate Gifts Dubai | Premium & Custom Business Gifts UAE",
+    description: "Your trusted partner for high-quality, personalized corporate gifts and promotional items in the UAE. Elevate your brand with impactful gifting.",
+    og_title: "Corporate Gifts Dubai | Premium & Custom Business Gifts UAE",
+    og_desc: "Your trusted partner for high-quality, personalized corporate gifts and promotional items in the UAE. Elevate your brand with impactful gifting.",
+    canonical: "https://corporategiftsdubaii.ae"
+  };
+
   return (
     <div>
+      {seo && <Seo {...seo} />}
       <HeroSection />
       <HomeAbout />
       <Stats />

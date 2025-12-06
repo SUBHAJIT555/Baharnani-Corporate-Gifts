@@ -12,7 +12,8 @@ import AdditionalForSeo, {
 } from "../components/ui/AdditionalForSeo";
 import { useProductCategories, useProductsByCategory, } from "../hooks/useProducts";
 import ProductCarousel from "../components/ui/ProductCarousel";
-import { useState, useEffect } from "react";
+import Seo from "../components/Seo";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 
 const giftSetFeatures = [
@@ -161,6 +162,32 @@ const GiftSet = () => {
   const { data: categories } = useProductCategories();
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
   console.log("filtered categories in gift set", filteredCategories);
+  
+  // Get category name for SEO
+  const categoryName = useMemo(() => {
+    const category = categories?.find(cat => cat.slug === categorySlug);
+    return category?.name || "Premium Gift Sets";
+  }, [categories, categorySlug]);
+
+  // SEO data - use pageParam directly to ensure it updates immediately on navigation
+  const seo = useMemo(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    const actualPage = isNaN(page) || page < 1 ? 1 : page;
+    
+    const title = actualPage === 1
+      ? `${categoryName} | Baharnani`
+      : `${categoryName} – Page ${actualPage} | Baharnani`;
+
+    const baseDescription = "Discover our exclusive collection of luxury gift sets in Dubai, featuring premium perfumes, skincare essentials, gourmet treats, and elegant accessories perfect for corporate gifting.";
+    const description = actualPage === 1
+      ? baseDescription
+      : `${baseDescription} Browse page ${actualPage} of our premium gift sets collection.`;
+
+    return {
+      title,
+      description,
+    };
+  }, [categoryName, pageParam]);
 
   // Sync page from URL params
   useEffect(() => {
@@ -193,6 +220,7 @@ const GiftSet = () => {
 
   return (
     <div>
+      {seo && <Seo {...seo} />}
       <CommonHero
         title="Buy Premium Gift Sets in Dubai "
         titlesuffix=""

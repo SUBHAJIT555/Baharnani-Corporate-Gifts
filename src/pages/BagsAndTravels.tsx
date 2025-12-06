@@ -12,11 +12,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import CallToAction from "../components/CallToAction";
+import Seo from "../components/Seo";
 
 // images
 import BagsTravelImage from "../assets/images/Products-hero-image/Bags-&-travel.webp";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const bagsAndTravelsFeatures: FeatureCard[] = [
@@ -93,6 +94,32 @@ const BagsAndTravels = () => {
   const { data: categories } = useProductCategories();
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
 
+  // Get category name for SEO
+  const categoryName = useMemo(() => {
+    const category = categories?.find(cat => cat.slug === categorySlug);
+    return category?.name || "Bags & Travel";
+  }, [categories, categorySlug]);
+
+  // SEO data - use pageParam directly to ensure it updates immediately on navigation
+  const seo = useMemo(() => {
+    const page = pageParam ? parseInt(pageParam, 10) : 1;
+    const actualPage = isNaN(page) || page < 1 ? 1 : page;
+
+    const title = actualPage === 1
+      ? `${categoryName} | Baharnani`
+      : `${categoryName} – Page ${actualPage} | Baharnani`;
+
+    const baseDescription = "Explore travel bags, backpacks & luggage for corporate gifting in Dubai. Custom logo branding available.";
+    const description = actualPage === 1
+      ? baseDescription
+      : `${baseDescription} Browse page ${actualPage} of our premium bags and travel accessories collection.`;
+
+    return {
+      title,
+      description,
+    };
+  }, [categoryName, pageParam]);
+
   // Sync page from URL params
   useEffect(() => {
     const page = pageParam ? parseInt(pageParam, 10) : 1;
@@ -125,6 +152,7 @@ const BagsAndTravels = () => {
 
   return (
     <div>
+      {seo && <Seo {...seo} />}
       <CommonHero
         title="Premium Bags & Travel Accessories for Corporate Gifting in Dubai"
         titlesuffix=""
