@@ -1,4 +1,4 @@
-import OverView from "../components/OverView";
+import CategoryIntro from "../components/CategoryIntro";
 import CommonHero from "../components/ui/CommonHero";
 import ProductGrid from "../components/ProductGrid";
 import WhyChooseUs from "../components/WhyChooseUs";
@@ -158,21 +158,10 @@ const OfficeAndStationary = () => {
         buttonLink="#office-and-stationary"
         buttonText="Shop Office & Stationery"
       />
-      <OverView
-        content={
-          <>
-            Looking for the perfect corporate gift that combines elegance,
-            functionality, and professionalism? Our premium collection of office
-            and stationery supplies features everything from luxury fountain pen
-            sets and custom leather-bound notebooks to executive desk organizers
-            and professional business card holders. Each item is carefully
-            selected to make a lasting impression on your clients, partners, and
-            employees. Whether you need branded stationery for client
-            appreciation or sophisticated office accessories for employee
-            recognition, we've got you covered with the finest selection across
-            Dubai and the UAE.
-          </>
-        }
+      <CategoryIntro
+        imageUrl={OfficeStationaryImage}
+        imageAlt="Office and stationery collection preview"
+        content="Looking for the perfect corporate gift that combines elegance, functionality, and professionalism? Our premium collection of office and stationery supplies features everything from luxury fountain pen sets and custom leather-bound notebooks to executive desk organizers and professional business card holders. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded stationery for client appreciation or sophisticated office accessories for employee recognition, we've got you covered with the finest selection across Dubai and the UAE."
       />
       <ProductGrid
         title="Explore Our Collection of Office & Stationery"

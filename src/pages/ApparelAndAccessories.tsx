@@ -1,11 +1,11 @@
 import CommonHero from "../components/ui/CommonHero";
-import OverView from "../components/OverView";
 import ProductGrid from "../components/ProductGrid";
 import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
 import { Package, Award, Users, Shirt, Sparkles } from "lucide-react";
 import CallToAction from "../components/CallToAction";
 import Seo from "../components/Seo";
+import CategoryIntro from "../components/CategoryIntro";
 // import { giftItems } from "../data/giftItems";
 
 // images
@@ -72,6 +72,8 @@ const ApparelAndAccessories = () => {
   const { page: pageParam } = useParams<{ page?: string }>();
   const navigate = useNavigate();
   const location = useLocation();
+  const fullIntroText =
+    "Looking for the perfect corporate gift that combines style, quality, and professionalism? Our premium collection of apparel and accessories features everything from custom-embroidered polo shirts and elegant silk ties to luxury watches and leather accessories. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded corporate apparel for team events or sophisticated accessories for client appreciation, we've got you covered with the finest selection across Dubai and the UAE.";
 
   const [currentPage, setCurrentPage] = useState(() => {
     const page = pageParam ? parseInt(pageParam, 10) : 1;
@@ -151,20 +153,10 @@ const ApparelAndAccessories = () => {
         buttonLink="#apparel-accessories"
         buttonText="Shop Apparel & Accessories"
       />
-      <OverView
-        content={
-          <>
-            Looking for the perfect corporate gift that combines style, quality,
-            and professionalism? Our premium collection of apparel and
-            accessories features everything from custom-embroidered polo shirts
-            and elegant silk ties to luxury watches and leather accessories.
-            Each item is carefully selected to make a lasting impression on your
-            clients, partners, and employees. Whether you need branded corporate
-            apparel for team events or sophisticated accessories for client
-            appreciation, we've got you covered with the finest selection across
-            Dubai and the UAE.
-          </>
-        }
+      <CategoryIntro
+        imageUrl={ApparelAndAccessoriesImage}
+        imageAlt="Apparel and accessories collection preview"
+        content={fullIntroText}
       />
       <ProductGrid
         title="Explore Our Collection of Apparel & Accessories"

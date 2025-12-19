@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Block WordPress admin & internals
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+Disallow: /wp-json/
+
+# Allow admin AJAX (required)
+Allow: /wp-admin/admin-ajax.php
+
+# Block WordPress search & parameters
+Disallow: /*?s=
+Disallow: /*?p=
+
+# Block cart / quote / internal actions if any
+Disallow: /checkout
+Disallow: /quote
+
+
+# Sitemap (React is canonical)
+Sitemap: https://corporategiftsdubaii.ae/sitemap.xml

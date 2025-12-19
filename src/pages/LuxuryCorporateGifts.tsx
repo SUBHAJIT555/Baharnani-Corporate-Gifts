@@ -1,6 +1,6 @@
 import CommonHero from "../components/ui/CommonHero"
 import LuxuryCorporateGiftsImage from "../assets/images/Products-hero-image/Luxury-corporate-gifts.webp"
-import OverView from "../components/OverView"
+import CategoryIntro from "../components/CategoryIntro"
 import ProductGrid from "../components/ProductGrid"
 // import { giftItems } from "../data/giftItems";
 // import ProductCarousel from "../components/ui/ProductCarousel"
@@ -276,16 +276,10 @@ const LuxuryCorporateGifts = () => {
         buttonLink="#luxury-corporate-gifts"
         buttonText="Shop Luxury Corporate Gifts"
       />
-      <OverView
-        content={
-          <>
-            Luxury Corporate Gifts for Every Occasion: Whether you're
-            celebrating a company milestone or rewarding your top clients, our
-            selection of luxury corporate gifts ensures your brand stands out
-            with sophistication and quality. We offer customized corporate
-            gifts, luxury gift hampers, and more, delivered across Dubai.
-          </>
-        }
+      <CategoryIntro
+        imageUrl={LuxuryCorporateGiftsImage}
+        imageAlt="Luxury corporate gifts collection preview"
+        content="Luxury Corporate Gifts for Every Occasion: Whether you're celebrating a company milestone or rewarding your top clients, our selection of luxury corporate gifts ensures your brand stands out with sophistication and quality. We offer customized corporate gifts, luxury gift hampers, and more, delivered across Dubai."
       />
       <ProductGrid
         title="Explore Our Collection of Gift Sets"

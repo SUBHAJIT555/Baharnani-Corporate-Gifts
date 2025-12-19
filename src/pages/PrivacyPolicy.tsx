@@ -1,6 +1,7 @@
 import CommonHero from "../components/ui/CommonHero";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import Seo from "../components/Seo";
 
 const PrivacyPolicy = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -11,6 +12,7 @@ const PrivacyPolicy = () => {
 
   return (
     <div>
+      <Seo title="Privacy Policy | Baharnani Corporate Gifts" description=" Learn how we protect your data and privacy. Read our privacy policy for details on data collection, usage, and security." canonical="https://corporategiftsdubaii.ae/privacy-policy" />
       <CommonHero
         title="Privacy Policy"
         titlesuffix=""

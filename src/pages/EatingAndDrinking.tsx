@@ -1,5 +1,5 @@
 import CommonHero from "../components/ui/CommonHero";
-import OverView from "../components/OverView";
+import CategoryIntro from "../components/CategoryIntro";
 import ProductGrid from "../components/ProductGrid";
 import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
@@ -157,20 +157,10 @@ const EatingAndDrinking = () => {
         buttonLink="#eating-drinking"
         buttonText="Shop Eating & Drinking"
       />
-      <OverView
-        content={
-          <>
-            Looking for the perfect corporate gift that combines taste, quality,
-            and elegance? Our premium collection of eating and drinking products
-            features everything from gourmet coffee gift sets and luxury tea
-            collections to artisan chocolate boxes and executive wine
-            accessories. Each item is carefully selected to make a lasting
-            impression on your clients, partners, and employees. Whether you
-            need branded coffee sets for client appreciation or sophisticated
-            beverage accessories for corporate events, we've got you covered
-            with the finest selection across Dubai and the UAE.
-          </>
-        }
+      <CategoryIntro
+        imageUrl={EatingDrinkingImage}
+        imageAlt="Eating and drinking products collection preview"
+        content="Looking for the perfect corporate gift that combines taste, quality, and elegance? Our premium collection of eating and drinking products features everything from gourmet coffee gift sets and luxury tea collections to artisan chocolate boxes and executive wine accessories. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded coffee sets for client appreciation or sophisticated beverage accessories for corporate events, we've got you covered with the finest selection across Dubai and the UAE."
       />
       <ProductGrid
         title="Explore Our Collection of Eating & Drinking Products"

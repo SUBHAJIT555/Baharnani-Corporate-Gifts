@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useQuoteSubmission } from "../hooks/useQuoteSubmission";
 import Loading from "../components/ui/Loading";
 import { useEffect } from "react";
+import Seo from "../components/Seo";
 
 interface QuoteFormData {
   first_name: string;
@@ -85,6 +86,7 @@ const Quote = () => {
 
   return (
     <div className="min-h-screen bg-textcolor pt-24 sm:pt-28 md:pt-32 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+      <Seo title="Request a Quote | Baharnani Corporate Gifts" description="Request a quote for your products" canonical="https://corporategiftsdubaii.ae/request-quotation" />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">

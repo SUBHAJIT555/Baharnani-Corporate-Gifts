@@ -2,6 +2,7 @@ import { useQuote } from "../contexts/QuoteContext";
 import { Link, useNavigate } from "react-router";
 import { ArrowLeft, Trash2, Plus, Minus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Seo from "../components/Seo";
 
 const Cart = () => {
     const { items, removeFromQuote, updateQuantity } = useQuote();
@@ -35,6 +36,7 @@ const Cart = () => {
 
     return (
         <div className="min-h-screen bg-textcolor pt-24 sm:pt-28 md:pt-32 py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+            <Seo title="Shopping Cart | Baharnani Corporate Gifts" description="View your shopping cart and proceed to checkout" canonical="https://corporategiftsdubaii.ae/cart" />
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="mb-8">

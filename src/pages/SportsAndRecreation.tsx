@@ -1,5 +1,5 @@
 import CommonHero from "../components/ui/CommonHero";
-import OverView from "../components/OverView";
+import CategoryIntro from "../components/CategoryIntro";
 import ProductGrid from "../components/ProductGrid";
 import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
@@ -155,20 +155,10 @@ const SportsAndRecreation = () => {
         buttonLink="#sports-recreation"
         buttonText="Shop Sports & Recreation"
       />
-      <OverView
-        content={
-          <>
-            Looking for the perfect corporate gift that promotes health,
-            wellness, and active living? Our premium collection of sports and
-            recreation products features everything from fitness trackers and
-            yoga mats to golf sets and tennis rackets. Each item is carefully
-            selected to encourage an active lifestyle while making a lasting
-            impression on your clients, partners, and employees. Whether you
-            need branded fitness equipment for wellness programs or
-            sophisticated sports accessories for corporate events, we've got you
-            covered with the finest selection across Dubai and the UAE.
-          </>
-        }
+      <CategoryIntro
+        imageUrl={SportsAndRecreationImage}
+        imageAlt="Sports and recreation products collection preview"
+        content="Looking for the perfect corporate gift that promotes health, wellness, and active living? Our premium collection of sports and recreation products features everything from fitness trackers and yoga mats to golf sets and tennis rackets. Each item is carefully selected to encourage an active lifestyle while making a lasting impression on your clients, partners, and employees. Whether you need branded fitness equipment for wellness programs or sophisticated sports accessories for corporate events, we've got you covered with the finest selection across Dubai and the UAE."
       />
       <ProductGrid
         title="Explore Our Collection of Sports & Recreation Products"

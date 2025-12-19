@@ -1,5 +1,5 @@
 import CommonHero from "../components/ui/CommonHero";
-import OverView from "../components/OverView";
+import CategoryIntro from "../components/CategoryIntro";
 import ProductGrid from "../components/ProductGrid";
 import WhyChooseUs from "../components/WhyChooseUs";
 import type { FeatureCard } from "../components/WhyChooseUs";
@@ -161,20 +161,10 @@ const BagsAndTravels = () => {
         buttonLink="#bags-travel"
         buttonText="Shop Bags & Travel"
       />
-      <OverView
-        content={
-          <>
-            Looking for the perfect corporate gift that combines style,
-            functionality, and professionalism? Our premium collection of bags
-            and travel accessories features everything from executive leather
-            briefcases and premium travel backpacks to luxury luggage sets and
-            document holders. Each item is carefully selected to make a lasting
-            impression on your clients, partners, and employees. Whether you
-            need branded travel bags for business professionals or sophisticated
-            luggage for client appreciation, we've got you covered with the
-            finest selection across Dubai and the UAE.
-          </>
-        }
+      <CategoryIntro
+        imageUrl={BagsTravelImage}
+        imageAlt="Bags and travel accessories collection preview"
+        content="Looking for the perfect corporate gift that combines style, functionality, and professionalism? Our premium collection of bags and travel accessories features everything from executive leather briefcases and premium travel backpacks to luxury luggage sets and document holders. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded travel bags for business professionals or sophisticated luggage for client appreciation, we've got you covered with the finest selection across Dubai and the UAE."
       />
       <ProductGrid
         title="Explore Our Collection of Bags & Travel Accessories"

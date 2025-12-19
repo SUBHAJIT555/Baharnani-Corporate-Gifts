@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { cn } from "../../lib/utilts";
+import "./Loading.css";
 
 interface LoadingProps {
   size?: "sm" | "md" | "lg";
@@ -14,78 +15,22 @@ const Loading = ({
   message,
   className
 }: LoadingProps) => {
-  // const sizeClasses = {
-  //   sm: "w-8 h-8",
-  //   md: "w-12 h-12",
-  //   lg: "w-16 h-16",
-  // };
-
-  const spinnerSizeClasses = {
-    sm: "w-6 h-6 border-2",
-    md: "w-10 h-10 border-3",
-    lg: "w-14 h-14 border-4",
+  const sizeClasses = {
+    sm: "loader-sm",
+    md: "loader-md",
+    lg: "loader-lg",
   };
 
   const LoaderContent = () => (
     <div className={cn("flex flex-col items-center justify-center gap-4", className)}>
-      {/* Animated Spinner */}
-      <div className="relative">
-        {/* Outer rotating ring */}
-        <motion.div
-          className={cn(
-            "border-t-textcolor border-r-transparent border-b-transparent border-l-transparent rounded-full",
-            spinnerSizeClasses[size]
-          )}
-          animate={{ rotate: 360 }}
-          transition={{
-            duration: 1,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-
-        {/* Inner counter-rotating ring */}
-        <motion.div
-          className={cn(
-            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-b-textcolor border-r-transparent border-t-transparent border-l-transparent rounded-full",
-            size === "sm" ? "w-4 h-4 border-2" : size === "md" ? "w-6 h-6 border-2" : "w-8 h-8 border-3"
-          )}
-          animate={{ rotate: -360 }}
-          transition={{
-            duration: 0.8,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-
-        {/* Center dot */}
-        <motion.div
-          className={cn(
-            "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-textcolor rounded-full",
-            size === "sm" ? "w-1.5 h-1.5" : size === "md" ? "w-2 h-2" : "w-3 h-3"
-          )}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.7, 1, 0.7],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
+      {/* Animated Loader */}
+      <span className={cn("loader", sizeClasses[size])}></span>
 
       {/* Optional message */}
       {message && (
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-sm sm:text-base font-switzer text-textcolor/70 text-center"
-        >
+        <p className="text-sm sm:text-base font-switzer text-textcolor/70 text-center">
           {message}
-        </motion.p>
+        </p>
       )}
     </div>
   );

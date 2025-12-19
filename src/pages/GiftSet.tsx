@@ -1,5 +1,5 @@
 import CommonHero from "../components/ui/CommonHero";
-import OverView from "../components/OverView";
+import CategoryIntro from "../components/CategoryIntro";
 import ProductGrid from "../components/ProductGrid";
 // import ProductCarousel from "../components/ui/ProductCarousel";
 // images
@@ -229,17 +229,10 @@ const GiftSet = () => {
         buttonLink="#gift-set"
         buttonText="Shop Gift Sets"
       />
-      <OverView
-        content={
-          <>
-            Looking for the best gift sets in Dubai to surprise someone special
-            or delight your clients? Our exclusive collection features luxury
-            gift sets, perfume gift sets, and birthday gift sets, thoughtfully
-            curated for every taste and occasion. Whether you need a gift set
-            for her, an elegant corporate gift set, or a budget-friendly option,
-            we’ve got you covered with the finest selection across the UAE.
-          </>
-        }
+      <CategoryIntro
+        imageUrl={GiftSetImage}
+        imageAlt="Premium gift sets collection preview"
+        content="Looking for the best gift sets in Dubai to surprise someone special or delight your clients? Our exclusive collection features luxury gift sets, perfume gift sets, and birthday gift sets, thoughtfully curated for every taste and occasion. Whether you need a gift set for her, an elegant corporate gift set, or a budget-friendly option, we've got you covered with the finest selection across the UAE."
       />
       <ProductGrid
         title="Explore Our Collection of Gift Sets"

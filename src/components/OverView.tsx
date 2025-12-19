@@ -28,7 +28,7 @@ const OverView = ({
       transition={{ duration: 0.6, delay: animationDelay }}
       className={`w-full ${padding} overflow-x-hidden ${className}`}
     >
-      <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-tanker text-textcolor ">
+      <h3 className="text-2xl font-switzer text-textcolor font-medium">
         {content}
       </h3>
     </motion.div>

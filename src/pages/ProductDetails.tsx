@@ -10,6 +10,17 @@ import Loading from "../components/ui/Loading";
 import { cn } from "../lib/utilts";
 import Seo from "../components/Seo";
 
+const cleanMetaDescription = (html: string) => {
+    return html
+        .replace(/<[^>]+>/g, '')   // remove HTML tags
+        .replace(/\s+/g, ' ')      // collapse whitespace
+        .trim();
+}
+
+const resolveValue = (primary: string | undefined, fallback: string | undefined, defaultValue: string) => {
+    return primary || fallback || defaultValue;
+}
+
 
 
 const ProductDetails = () => {
@@ -21,10 +32,10 @@ const ProductDetails = () => {
     const fetchSeo = async () => {
         if (product) {
             return {
-                title: product.seo.title,
-                description: product.seo.description,
-                og_title: product.seo.og_title,
-                og_desc: product.seo.og_desc,
+                title: product.seo.title ? product.seo.title : product.name + " | Baharnani Gifts",
+                description: resolveValue(product.seo.description, cleanMetaDescription(product.short_desc), product.short_desc),
+                og_title: resolveValue(product.seo.og_title, product.seo.title, product.name + " | Baharnani Gifts"),
+                og_desc: resolveValue(product.seo.og_desc, product.seo.description, cleanMetaDescription(product.short_desc)),
                 canonical: product.seo.canonical,
             }
         }
@@ -78,7 +89,7 @@ const ProductDetails = () => {
     if (isLoading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-bg pt-24">
-                <Loading size="lg" message="Loading product details..." />
+                <Loading fullScreen message="Loading..." size="lg" />
             </div>
         );
     }
