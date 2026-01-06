@@ -400,10 +400,10 @@ const ContactDetails = () => {
                       Email
                     </p>
                     <a
-                      href="mailto:vivek@baharnani.com"
+                      href="mailto:amit@baharnani.com"
                       className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
                     >
-                      vivek@baharnani.com
+                      amit@baharnani.com
                     </a>
                     <a
                       href="mailto:info@baharnani.com"
