@@ -146,10 +146,7 @@ const ProductGridHome = () => {
             Categories in Dubai
           </h2>
           <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-switzer tracking-widest sm:tracking-wider md:tracking-widest text-textcolor font-medium">
-            Discover premium, eco-friendly, and customized corporate gift
-            collections that offer you everything from apparel and travel kits
-            to gift sets, office stationery, and more across Dubai, Abu Dhabi,
-            and overall UAE.
+            Discover premium, eco-friendly, and customized corporate gift collections, including customized corporate gifts Dubai businesses trust—offering everything from apparel and travel kits to curated gift sets, office stationery, and more across Dubai, Abu Dhabi, and the UAE.
           </p>
         </motion.div>
 

@@ -89,10 +89,10 @@ const EcoFriendly = () => {
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
 
   // Get category name for SEO
-  const categoryName = useMemo(() => {
-    const category = categories?.find(cat => cat.slug === categorySlug);
-    return category?.name || "Eco-Friendly";
-  }, [categories, categorySlug]);
+  // const categoryName = useMemo(() => {
+  //   const category = categories?.find(cat => cat.slug === categorySlug);
+  //   return category?.name || "Eco-Friendly";
+  // }, [categories, categorySlug]);
 
   // SEO data - use pageParam directly to ensure it updates immediately on navigation
   const seo = useMemo(() => {
@@ -100,10 +100,10 @@ const EcoFriendly = () => {
     const actualPage = isNaN(page) || page < 1 ? 1 : page;
 
     const title = actualPage === 1
-      ? `${categoryName} | Baharnani`
-      : `${categoryName} – Page ${actualPage} | Baharnani`;
+      ? `Eco Friendly Corporate Gifts Dubai | Baharnani`
+      : `Eco Friendly Corporate Gifts Dubai – Page ${actualPage} | Baharnani`;
 
-    const baseDescription = "Eco-friendly corporate gifts in Dubai – bamboo, cork & recycled products for sustainable branding.";
+    const baseDescription = "Promote sustainability with eco-friendly corporate gifts in Dubai, including bamboo, cork, and recycled products.";
     const description = actualPage === 1
       ? baseDescription
       : `${baseDescription} Browse page ${actualPage} of our premium eco-friendly products collection.`;
@@ -112,7 +112,7 @@ const EcoFriendly = () => {
       title,
       description,
     };
-  }, [categoryName, pageParam]);
+  }, [pageParam]);
 
   // Sync page from URL params
   useEffect(() => {
@@ -157,7 +157,7 @@ const EcoFriendly = () => {
       <CategoryIntro
         imageUrl={EcoFriendlyImage}
         imageAlt="Eco-friendly products collection preview"
-        content="Looking for corporate gifts that align with your sustainability values? Our premium collection of eco-friendly products features everything from bamboo desk organizers and recycled paper notebooks to solar-powered chargers and reusable bamboo cutlery sets. Each item is carefully selected to demonstrate your commitment to environmental responsibility while making a lasting impression on your clients, partners, and employees. Whether you need sustainable office accessories for client appreciation or eco-conscious products for corporate events, we've got you covered with the finest selection across Dubai and the UAE."
+        content="Looking for corporate gifts that align with your sustainability values? Our premium collection of eco-friendly corporate gifts Dubai features everything from bamboo desk organizers and recycled paper notebooks to solar-powered chargers and reusable bamboo cutlery sets. Each item is carefully selected to demonstrate your commitment to environmental responsibility while making a lasting impression on your clients, partners, and employees. Whether you need sustainable office accessories for client appreciation or eco-conscious products for corporate events, we've got you covered with the finest selection across Dubai and the UAE."
       />
       <ProductGrid
         title="Explore Our Collection of Eco-Friendly Corporate Gifts"

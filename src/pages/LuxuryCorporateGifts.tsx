@@ -50,38 +50,6 @@ const testimonials = [
   //   src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
   // },
 ];
-// const testimonials = [
-//   {
-//     quote: "I have been working with Leading Network LLC for over 10 years and they have always been a great partner. They are reliable, transparent, and always deliver on time.",
-//     name: "Fatima Hassan",
-//     designation: "CEO",
-//     src: "/assets/images/Testimonials/Fatima-Hassan.webp",
-//   },
-//   {
-//     quote: "I have been working with Leading Network LLC for over 10 years and they have always been a great partner. They are reliable, transparent, and always deliver on time.",
-//     name: "Mohammed Al Rashid",
-//     designation: "CEO",
-//     src: "/assets/images/Testimonials/Mohammed-Al-Rashid.webp",
-//   },
-//   {
-//     quote: "I have been working with Leading Network LLC for over 10 years and they have always been a great partner. They are reliable, transparent, and always deliver on time.",
-//     name: "John Doe",
-//     designation: "CEO",
-//     src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
-//   },
-//   {
-//     quote: "I have been working with Leading Network LLC for over 10 years and they have always been a great partner. They are reliable, transparent, and always deliver on time.",
-//     name: "John Doe",
-//     designation: "CEO",
-//     src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
-//   },
-//   {
-//     quote: "I have been working with Leading Network LLC for over 10 years and they have always been a great partner. They are reliable, transparent, and always deliver on time.",
-//     name: "John Doe",
-//     designation: "CEO",
-//     src: "https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg",
-//   },
-// ];
 const luxuryCorporateGiftsFeatures: FeatureCard[] = [
   {
     id: 1,
@@ -211,10 +179,10 @@ const LuxuryCorporateGifts = () => {
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
 
   // Get category name for SEO
-  const categoryName = useMemo(() => {
-    const category = categories?.find(cat => cat.slug === categorySlug);
-    return category?.name || "Luxury Corporate Gifts";
-  }, [categories, categorySlug]);
+  // const categoryName = useMemo(() => {
+  //   const category = categories?.find(cat => cat.slug === categorySlug);
+  //   return category?.name || "Luxury Corporate Gifts";
+  // }, [categories, categorySlug]);
 
   // SEO data - use pageParam directly to ensure it updates immediately on navigation
   const seo = useMemo(() => {
@@ -222,10 +190,10 @@ const LuxuryCorporateGifts = () => {
     const actualPage = isNaN(page) || page < 1 ? 1 : page;
 
     const title = actualPage === 1
-      ? `${categoryName} | Baharnani`
-      : `${categoryName} – Page ${actualPage} | Baharnani`;
+      ? `Luxury Corporate Gifts Dubai | Baharnani`
+      : `Luxury Corporate Gifts Dubai – Page ${actualPage} | Baharnani`;
 
-    const baseDescription = "High-quality tools & premium gifts for UAE businesses. Ideal for trade shows & executive gifting.";
+    const baseDescription = " Elevate your brand with premium tools and executive giveaways in the UAE. Trusted source for luxury corporate gifts dubai.";
     const description = actualPage === 1
       ? baseDescription
       : `${baseDescription} Browse page ${actualPage} of our luxury corporate gifts collection.`;
@@ -234,7 +202,7 @@ const LuxuryCorporateGifts = () => {
       title,
       description,
     };
-  }, [categoryName, pageParam]);
+  }, [pageParam]);
 
   // Sync page from URL params
   useEffect(() => {
@@ -279,7 +247,7 @@ const LuxuryCorporateGifts = () => {
       <CategoryIntro
         imageUrl={LuxuryCorporateGiftsImage}
         imageAlt="Luxury corporate gifts collection preview"
-        content="Luxury Corporate Gifts for Every Occasion: Whether you're celebrating a company milestone or rewarding your top clients, our selection of luxury corporate gifts ensures your brand stands out with sophistication and quality. We offer customized corporate gifts, luxury gift hampers, and more, delivered across Dubai."
+        content=" Luxury Corporate Gifts Dubai for Every Occasion: Whether you're celebrating a company milestone or rewarding your top clients, our selection of luxury corporate gifts ensures your brand stands out with sophistication and quality. We offer customized corporate gifts, luxury gift hampers, and more, delivered across Dubai."
       />
       <ProductGrid
         title="Explore Our Collection of Gift Sets"

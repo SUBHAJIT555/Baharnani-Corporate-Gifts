@@ -152,10 +152,10 @@ const homeFeatures: FeatureCard[] = [
 
 const Home = () => {
   const seo = {
-    title: "Corporate Gifts Dubai | Premium & Custom Business Gifts UAE",
-    description: "Your trusted partner for high-quality, personalized corporate gifts and promotional items in the UAE. Elevate your brand with impactful gifting.",
-    og_title: "Corporate Gifts Dubai | Premium & Custom Business Gifts UAE",
-    og_desc: "Your trusted partner for high-quality, personalized corporate gifts and promotional items in the UAE. Elevate your brand with impactful gifting.",
+    title: "Corporate Gift Suppliers in UAE- Baharnani Corporate Gifts",
+    description: "Explore luxury gift sets in Dubai with perfumes, skincare, gourmet treats & accessories—perfect for customized corporate gifts Dubai.",
+    og_title: "Corporate Gift Suppliers in UAE- Baharnani Corporate Gifts",
+    og_desc: "Explore luxury gift sets in Dubai with perfumes, skincare, gourmet treats & accessories—perfect for customized corporate gifts Dubai.",
     canonical: "https://corporategiftsdubaii.ae"
   };
 
@@ -180,7 +180,7 @@ const Home = () => {
             corporate gifts supplier?
           </>
         }
-        subtitle="With years of expertise, we have become one of the most reliable names among corporate gift suppliers in Dubai and the UAE, offering creative concepts and superior-quality products that represent your brand’s identity."
+        subtitle="With years of expertise, we have become one of the most reliable names among corporate gift suppliers in UAE, especially in Dubai, offering creative concepts and superior-quality products that represent your brand’s identity."
       />
       <FAQ
         faqData={homeFaqData}
