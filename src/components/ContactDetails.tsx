@@ -426,10 +426,10 @@ const ContactDetails = () => {
                       Phone Number
                     </p>
                     <a
-                      href="tel:+971551061045"
+                      href="tel:+971526240517"
                       className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
                     >
-                      (+971) 55 106 1045 - WhatsApp / Phone Call
+                      (+971) 52 624 0517 - WhatsApp / Phone Call
                     </a>
                     <a
                       href="tel:+97143805587"
@@ -493,7 +493,7 @@ const ContactDetails = () => {
                       <FaFacebookF className="text-2xl" />
                     </motion.a>
                     <motion.a
-                      href="https://wa.me/+971551061045"
+                      href="https://wa.me/+971526240517"
                       target="_blank"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
