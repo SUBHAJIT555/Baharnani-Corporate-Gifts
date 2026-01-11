@@ -6,6 +6,7 @@ import type { FeatureCard } from "../components/WhyChooseUs";
 import { Dumbbell, Trophy, Activity, Target, Heart, Gift } from "lucide-react";
 import CallToAction from "../components/CallToAction";
 import Seo from "../components/Seo";
+import { Helmet } from "react-helmet-async";
 
 // images
 import SportsAndRecreationImage from "../assets/images/Products-hero-image/Sports-&-recreation.webp";
@@ -144,9 +145,39 @@ const SportsAndRecreation = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Homepage",
+        "item": "https://corporategiftsdubaii.ae/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": "https://corporategiftsdubaii.ae/products"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Sports and Recreation",
+        "item": "https://corporategiftsdubaii.ae/product-category/sports-and-recreation"
+      }
+    ]
+  };
+
   return (
     <div>
       {seo && <Seo {...seo} />}
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbStructuredData)}
+        </script>
+      </Helmet>
       <CommonHero
         title="Premium Sports & Recreation Products for Corporate Gifting in Dubai"
         titlesuffix=""

@@ -16,6 +16,7 @@ import {
 import { PiSealQuestionDuotone } from "react-icons/pi";
 import ctaImage from "/assets/images/Hero and footer image/About-hero.webp";
 import Seo from "../components/Seo";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -114,9 +115,53 @@ const aboutFeatures: FeatureCard[] = [
   },
 ];
 const About = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Baharnani Corporate Gifts Dubai",
+    "image": "https://corporategiftsdubaii.ae/ui/assets/logo-B4KFUfAZ.svg",
+    "@id": "https://corporategiftsdubaii.ae/#localbusiness",
+    "url": "https://corporategiftsdubaii.ae/",
+    "telephone": "+971551061045",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Baharnani Advertising L.L.C, Al Quoz – Al Quoz 3 – Dubai",
+      "addressLocality": "Dubai",
+      "postalCode": "49757",
+      "addressCountry": "AE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 25.162655,
+      "longitude": 55.2344375
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:00",
+      "closes": "18:30"
+    },
+    "sameAs": [
+      "https://www.instagram.com/baharnaniadv/",
+      "https://www.linkedin.com/company/baharnaniadvertisingdubai/"
+    ]
+  };
+
   return (
     <div>
       <Seo title={"About Us | Leading Corporate Gift Suppliers in Dubai"} description={"Discover trusted corporate gift suppliers in Dubai. Premium corporate gifts, fast delivery, and custom branding across the UAE."} canonical="https://corporategiftsdubaii.ae/about-us" og_title="About Us | Leading Corporate Gift Suppliers in Dubai" og_desc="Discover trusted corporate gift suppliers in Dubai. Premium corporate gifts, fast delivery, and custom branding across the UAE." />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
+      </Helmet>
       <CommonHero
         title="Your Trusted Partner for Premium Corporate Gifts"
         titlesuffix=""

@@ -6,6 +6,7 @@ import type { FeatureCard } from "../components/WhyChooseUs";
 import { Leaf, Award, Package, Users, Globe } from "lucide-react";
 import CallToAction from "../components/CallToAction";
 import Seo from "../components/Seo";
+import { Helmet } from "react-helmet-async";
 
 // images
 import EcoFriendlyImage from "../assets/images/Products-hero-image/Eco-friendly.webp";
@@ -143,9 +144,39 @@ const EcoFriendly = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Homepage",
+        "item": "https://corporategiftsdubaii.ae/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": "https://corporategiftsdubaii.ae/products"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Eco-friendly",
+        "item": "https://corporategiftsdubaii.ae/product-category/eco-friendly"
+      }
+    ]
+  };
+
   return (
     <div>
       {seo && <Seo {...seo} />}
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbStructuredData)}
+        </script>
+      </Helmet>
       <CommonHero
         title="Eco-Friendly Corporate Gifts for Sustainable Branding in Dubai"
         titlesuffix=""

@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import CallToAction from "../components/CallToAction";
 import Seo from "../components/Seo";
+import { Helmet } from "react-helmet-async";
 // import { giftItems } from "../data/giftItems";
 
 // images
@@ -157,9 +158,39 @@ const TechnologyAndAccessories = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Homepage",
+        "item": "https://corporategiftsdubaii.ae/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": "https://corporategiftsdubaii.ae/products"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Technology and Accessories",
+        "item": "https://corporategiftsdubaii.ae/product-category/technology-and-accessories"
+      }
+    ]
+  };
+
   return (
     <div>
       {seo && <Seo {...seo} />}
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbStructuredData)}
+        </script>
+      </Helmet>
       <CommonHero
         title="Premium Technology & Accessories for Corporate Gifting in Dubai"
         titlesuffix=""

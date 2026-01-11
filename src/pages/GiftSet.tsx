@@ -13,6 +13,7 @@ import AdditionalForSeo, {
 import { useProductCategories, useProductsByCategory, } from "../hooks/useProducts";
 import ProductCarousel from "../components/ui/ProductCarousel";
 import Seo from "../components/Seo";
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
 
@@ -162,7 +163,7 @@ const GiftSet = () => {
   const { data: categories } = useProductCategories();
   const filteredCategories = categories?.filter(category => category.slug === categorySlug);
   console.log("filtered categories in gift set", filteredCategories);
-  
+
   // Get category name for SEO
   const categoryName = useMemo(() => {
     const category = categories?.find(cat => cat.slug === categorySlug);
@@ -173,7 +174,7 @@ const GiftSet = () => {
   const seo = useMemo(() => {
     const page = pageParam ? parseInt(pageParam, 10) : 1;
     const actualPage = isNaN(page) || page < 1 ? 1 : page;
-    
+
     const title = actualPage === 1
       ? `${categoryName} | Baharnani`
       : `${categoryName} – Page ${actualPage} | Baharnani`;
@@ -218,9 +219,39 @@ const GiftSet = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Homepage",
+        "item": "https://corporategiftsdubaii.ae/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": "https://corporategiftsdubaii.ae/products"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Premium Gift Sets",
+        "item": "https://corporategiftsdubaii.ae/product-category/premium-gift-sets"
+      }
+    ]
+  };
+
   return (
     <div>
       {seo && <Seo {...seo} />}
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbStructuredData)}
+        </script>
+      </Helmet>
       <CommonHero
         title="Buy Premium Gift Sets in Dubai "
         titlesuffix=""

@@ -6,6 +6,7 @@ import type { FeatureCard } from "../components/WhyChooseUs";
 import { Award, Globe, Leaf, Package, Users, PenTool } from "lucide-react";
 import CallToAction from "../components/CallToAction";
 import Seo from "../components/Seo";
+import { Helmet } from "react-helmet-async";
 // import { giftItems } from "../data/giftItems";
 
 // images
@@ -147,9 +148,39 @@ const OfficeAndStationary = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Homepage",
+        "item": "https://corporategiftsdubaii.ae/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": "https://corporategiftsdubaii.ae/products"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Office and Stationery",
+        "item": "https://corporategiftsdubaii.ae/product-category/office-and-stationary"
+      }
+    ]
+  };
+
   return (
     <div>
       {seo && <Seo {...seo} />}
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbStructuredData)}
+        </script>
+      </Helmet>
       <CommonHero
         title="Premium Office & Stationery for Corporate Gifting in Dubai"
         titlesuffix=""

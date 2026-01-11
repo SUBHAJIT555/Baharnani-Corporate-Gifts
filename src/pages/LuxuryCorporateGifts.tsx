@@ -9,6 +9,7 @@ import { Award } from "lucide-react";
 import { AnimatedTestimonials } from "../components/ui/AnimatedTestimonial";
 import FAQ, { type FAQItem } from "../components/FAQ";
 import Seo from "../components/Seo";
+import { Helmet } from "react-helmet-async";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
@@ -233,9 +234,39 @@ const LuxuryCorporateGifts = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const breadcrumbStructuredData = {
+    "@context": "https://schema.org/",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Homepage",
+        "item": "https://corporategiftsdubaii.ae/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": "https://corporategiftsdubaii.ae/products"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Luxury Corporate Gifts",
+        "item": "https://corporategiftsdubaii.ae/product-category/luxury-corporate-gifts-dubai"
+      }
+    ]
+  };
+
   return (
     <div>
       {seo && <Seo {...seo} />}
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbStructuredData)}
+        </script>
+      </Helmet>
       <CommonHero
         title="Luxury Corporate Gifts in Dubai - Make Your Business Relationships Stronger"
         titlesuffix=""
