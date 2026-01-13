@@ -264,7 +264,8 @@ const GiftSet = () => {
       <CategoryIntro
         imageUrl={GiftSetImage}
         imageAlt="Premium gift sets collection preview"
-        content="Looking for the best gift sets in Dubai to surprise someone special or delight your clients? Our exclusive collection features luxury gift sets, perfume gift sets, and birthday gift sets, thoughtfully curated for every taste and occasion. Whether you need a gift set for her, an elegant corporate gift set, or a budget-friendly option, we've got you covered with the finest selection across the UAE."
+        content={<>Looking for the best gift sets in Dubai to surprise someone special or delight your clients? Our exclusive collection features luxury gift sets, perfume gift sets, and birthday gift sets, thoughtfully curated for every taste and occasion. Whether you need a gift set for her, an elegant corporate gift set, or a budget-friendly option, we've got you covered with the finest selection across the UAE.</>}
+        preview={<>Looking for the best gift sets in Dubai to surprise someone special or delight your clients? </>}
       />
       <ProductGrid
         title="Explore Our Collection of Gift Sets"
@@ -356,7 +357,7 @@ const GiftSet = () => {
       />
       <CallToAction
         title="Your Trusted Partner for Premium Gift Sets in Dubai"
-        subtitle="From luxury gift sets to perfume gift sets, we deliver premium quality gift sets that strengthen relationships, elevate your brand presence, and demonstrate your commitment to gifting."
+        subtitle={<>From luxury gift sets to perfume gift sets, we deliver premium quality gift sets that strengthen relationships, elevate your brand presence, and demonstrate your commitment to gifting.</>}
         backgroundImageUrl={GiftSetImage}
         buttons={[
           {

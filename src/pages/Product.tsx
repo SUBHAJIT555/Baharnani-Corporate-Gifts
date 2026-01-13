@@ -57,7 +57,7 @@ const Product = () => {
       />
       <CallToAction
         title="Ready to Elevate Your Corporate Gifting?"
-        subtitle="Partner with Baharnani Advertising, Dubai's premier corporate gift supplier. From premium gift sets to custom branding solutions, we help you make lasting impressions that strengthen business relationships."
+        subtitle={<>Partner with Baharnani Advertising, Dubai's premier corporate gift supplier. From premium gift sets to custom branding solutions, we help you make lasting impressions that strengthen business relationships.</>}
         backgroundImageUrl={ctaImage}
         buttons={[
           {

@@ -192,7 +192,8 @@ const OfficeAndStationary = () => {
       <CategoryIntro
         imageUrl={OfficeStationaryImage}
         imageAlt="Office and stationery collection preview"
-        content="Looking for the perfect corporate gift that combines elegance, functionality, and professionalism? Our premium collection of office and stationery supplies features everything from luxury fountain pen sets and custom leather-bound notebooks to executive desk organizers and professional business card holders. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded stationery for client appreciation or sophisticated office accessories for employee recognition, we've got you covered with the finest selection across Dubai and the UAE."
+        content={<>Looking for the perfect corporate gift that combines elegance, functionality, and professionalism? Our premium collection of office and stationery supplies features everything from luxury fountain pen sets and custom leather-bound notebooks to executive desk organizers and professional business card holders. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded stationery for client appreciation or sophisticated office accessories for employee recognition, we've got you covered with the finest selection across Dubai and the UAE.</>}
+        preview={<>Looking for the perfect corporate gift that combines elegance, functionality, and professionalism? </>}
       />
       <ProductGrid
         title="Explore Our Collection of Office & Stationery"
@@ -208,7 +209,7 @@ const OfficeAndStationary = () => {
       <WhyChooseUs features={officeAndStationaryFeatures} />
       <CallToAction
         title="Your Trusted Partner for Corporate Office & Stationery in Dubai"
-        subtitle="From custom-branded pen sets to luxury desk accessories, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence."
+        subtitle={<>From custom-branded pen sets to luxury desk accessories, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence.</>}
         backgroundImageUrl={OfficeStationaryImage}
         buttons={[
           {

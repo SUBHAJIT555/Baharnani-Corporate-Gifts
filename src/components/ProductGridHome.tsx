@@ -213,7 +213,7 @@ const ProductGridHome = () => {
           </h2>
           <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-switzer tracking-widest sm:tracking-wider md:tracking-widest text-textcolor font-medium">
             Discover premium, eco-friendly, and customized corporate gift
-            collections, including customized corporate gifts Dubai businesses
+            collections, including <span className="font-semibold text-textcolor">customized corporate gifts Dubai</span> businesses
             trust—offering everything from apparel and travel kits to curated
             gift sets, office stationery, and more across Dubai, Abu Dhabi, and
             the UAE.

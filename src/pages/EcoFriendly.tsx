@@ -188,7 +188,8 @@ const EcoFriendly = () => {
       <CategoryIntro
         imageUrl={EcoFriendlyImage}
         imageAlt="Eco-friendly products collection preview"
-        content="Looking for corporate gifts that align with your sustainability values? Our premium collection of eco-friendly corporate gifts Dubai features everything from bamboo desk organizers and recycled paper notebooks to solar-powered chargers and reusable bamboo cutlery sets. Each item is carefully selected to demonstrate your commitment to environmental responsibility while making a lasting impression on your clients, partners, and employees. Whether you need sustainable office accessories for client appreciation or eco-conscious products for corporate events, we've got you covered with the finest selection across Dubai and the UAE."
+        content={<>Looking for corporate gifts that align with your sustainability values? Our premium collection of <span className="font-semibold text-textcolor">eco-friendly corporate gifts Dubai</span> features everything from bamboo desk organizers and recycled paper notebooks to solar-powered chargers and reusable bamboo cutlery sets. Each item is carefully selected to demonstrate your commitment to environmental responsibility while making a lasting impression on your clients, partners, and employees. Whether you need sustainable office accessories for client appreciation or eco-conscious products for corporate events, we've got you covered with the finest selection across Dubai and the UAE.</>}
+        preview={<>Looking for corporate gifts that align with your sustainability values? </>}
       />
       <ProductGrid
         title="Explore Our Collection of Eco-Friendly Corporate Gifts"
@@ -204,7 +205,7 @@ const EcoFriendly = () => {
       <WhyChooseUs features={ecoFriendlyFeatures} />
       <CallToAction
         title="Your Trusted Partner for Eco-Friendly Corporate Gifts in Dubai"
-        subtitle="From sustainable bamboo products to reusable accessories, we deliver premium quality eco-friendly corporate gifts that strengthen relationships, elevate your brand presence, and demonstrate your commitment to environmental responsibility."
+        subtitle={<>From sustainable bamboo products to reusable accessories, we deliver premium quality eco-friendly corporate gifts that strengthen relationships, elevate your brand presence, and demonstrate your commitment to environmental responsibility.</>}
         backgroundImageUrl={EcoFriendlyImage}
         buttons={[
           {

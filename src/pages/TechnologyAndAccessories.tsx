@@ -202,7 +202,8 @@ const TechnologyAndAccessories = () => {
       <CategoryIntro
         imageUrl={TechnologyAndAccessoriesImage}
         imageAlt="Technology and accessories collection preview"
-        content="Looking for the perfect corporate gift that combines innovation, functionality, and style? Our premium collection of technology and accessories features everything from wireless charging pads and smart desk lamps to USB-C hubs and portable power banks. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded tech accessories for client appreciation or sophisticated gadgets for employee recognition, we've got you covered with the finest selection across Dubai and the UAE."
+        content={<>Looking for the perfect corporate gift that combines innovation, functionality, and style? Our premium collection of technology and accessories features everything from wireless charging pads and smart desk lamps to USB-C hubs and portable power banks. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded tech accessories for client appreciation or sophisticated gadgets for employee recognition, we've got you covered with the finest selection across Dubai and the UAE.</>}
+        preview={<>Looking for the perfect corporate gift that combines innovation, functionality, and style? </>}
       />
       <ProductGrid
         title="Explore Our Collection of Technology & Accessories"
@@ -218,7 +219,7 @@ const TechnologyAndAccessories = () => {
       <WhyChooseUs features={technologyAndAccessoriesFeatures} />
       <CallToAction
         title="Your Trusted Partner for Corporate Technology & Accessories in Dubai"
-        subtitle="From custom-branded wireless chargers to smart office accessories, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence."
+        subtitle={<>From custom-branded wireless chargers to smart office accessories, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence.</>}
         backgroundImageUrl={TechnologyAndAccessoriesImage}
         buttons={[
           {

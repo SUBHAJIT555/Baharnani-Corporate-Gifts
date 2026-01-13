@@ -186,7 +186,7 @@ const About = () => {
       <AnimatedTestimonials testimonials={testimonials} />
       <CallToAction
         title="Partner With a Corporate Gift Supplier That Delivers Excellence"
-        subtitle="Whether you need customized promotional items, luxury corporate gifts, eco-friendly solutions, or festive hampers, Baharnani Advertising ensures creative designs, premium quality, and timely delivery across Dubai and the UAE."
+        subtitle={<>Whether you need customized promotional items, luxury corporate gifts, eco-friendly solutions, or festive hampers, Baharnani Advertising ensures creative designs, premium quality, and timely delivery across Dubai and the UAE.</>}
         backgroundImageUrl={ctaImage}
         buttons={[
           {

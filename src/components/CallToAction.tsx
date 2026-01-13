@@ -12,14 +12,14 @@ export interface CTAButton {
 
 interface CallToActionProps {
   title?: string;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
   backgroundImageUrl?: string;
   buttons?: CTAButton[];
 }
 
 const CallToAction = ({
   title = "Ready to Elevate Your Corporate Gifting?",
-  subtitle = "Partner with Baharnani Advertising, one of the leading suppliers of corporate gifts in the UAE. From premium gift sets to custom branding solutions, we help you create lasting impressions that strengthen business relationships.",
+  subtitle = (<>Partner with Baharnani Advertising, one of the leading <span className='font-semibold text-textcolor'>suppliers of corporate gifts</span> in the UAE. From premium gift sets to custom branding solutions, we help you create lasting impressions that strengthen business relationships.</>),
   backgroundImageUrl = "https://images.pexels.com/photos/17485710/pexels-photo-17485710.png",
   buttons = [
     {
@@ -40,6 +40,8 @@ const CallToAction = ({
     once: true,
     margin: "-100px",
   });
+
+
 
   return (
     <section className="w-full py-4 sm:py-6 md:py-8 lg:py-10 overflow-x-hidden">

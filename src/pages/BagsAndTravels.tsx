@@ -195,7 +195,8 @@ const BagsAndTravels = () => {
       <CategoryIntro
         imageUrl={BagsTravelImage}
         imageAlt="Bags and travel accessories collection preview"
-        content="Looking for the perfect corporate gift that combines style, functionality, and professionalism? Our premium collection of bags and travel accessories features everything from executive leather briefcases and premium travel backpacks to luxury luggage sets and document holders. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded travel bags for business professionals or sophisticated luggage for client appreciation, we've got you covered with the finest selection across Dubai and the UAE."
+        content={<>Looking for the perfect corporate gift that combines style, functionality, and professionalism? Our premium collection of bags and travel accessories features everything from executive leather briefcases and premium travel backpacks to luxury luggage sets and document holders. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded travel bags for business professionals or sophisticated luggage for client appreciation, we've got you covered with the finest selection across Dubai and the UAE.</>}
+        preview={<>Looking for the perfect corporate gift that combines style, functionality, and professionalism? </>}
       />
       <ProductGrid
         title="Explore Our Collection of Bags & Travel Accessories"
@@ -211,7 +212,7 @@ const BagsAndTravels = () => {
       <WhyChooseUs features={bagsAndTravelsFeatures} />
       <CallToAction
         title="Your Trusted Partner for Corporate Bags & Travel Accessories in Dubai"
-        subtitle="From custom-branded briefcases to luxury luggage sets, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence."
+        subtitle={<>From custom-branded briefcases to luxury luggage sets, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence.</>}
         backgroundImageUrl={BagsTravelImage}
         buttons={[
           {

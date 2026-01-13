@@ -4,7 +4,8 @@ import { ChevronDown } from "lucide-react";
 interface CategoryIntroProps {
   imageUrl: string;
   imageAlt: string;
-  content: string;
+  content: React.ReactNode;
+  preview?: React.ReactNode;
   heading?: string;
 }
 
@@ -12,12 +13,13 @@ const CategoryIntro = ({
   imageUrl,
   imageAlt,
   content,
+  preview,
   heading = "About This Collection",
 }: CategoryIntroProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Extract first sentence for mobile preview
-  const introPreview = content.split(/[.!?]/)[0] + (content.match(/[.!?]/) ? "." : "");
+  // const introPreview = content.split(/[.!?]/)[0] + (content.match(/[.!?]/) ? "." : "");
 
   return (
     <section aria-labelledby="category-intro">
@@ -51,7 +53,7 @@ const CategoryIntro = ({
 
             <div className="lg:hidden">
               <p className="text-base leading-relaxed">
-                {isExpanded ? content : introPreview}
+                {isExpanded ? content : preview}
               </p>
               <button
                 type="button"

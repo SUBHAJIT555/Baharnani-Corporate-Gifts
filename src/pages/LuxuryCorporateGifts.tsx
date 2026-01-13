@@ -279,7 +279,8 @@ const LuxuryCorporateGifts = () => {
       <CategoryIntro
         imageUrl={LuxuryCorporateGiftsImage}
         imageAlt="Luxury corporate gifts collection preview"
-        content=" Luxury Corporate Gifts Dubai for Every Occasion: Whether you're celebrating a company milestone or rewarding your top clients, our selection of luxury corporate gifts ensures your brand stands out with sophistication and quality. We offer customized corporate gifts, luxury gift hampers, and more, delivered across Dubai."
+        content={<><span className="font-semibold">Luxury Corporate Gifts Dubai</span> for Every Occasion: Whether you're celebrating a company milestone or rewarding your top clients, our selection of luxury corporate gifts ensures your brand stands out with sophistication and quality. We offer customized corporate gifts, luxury gift hampers, and more, delivered across Dubai.</>}
+        preview={<><span className="font-semibold">Luxury Corporate Gifts Dubai</span> for Every Occasion: Whether you're celebrating a company milestone or rewarding your top clients, our selection of luxury corporate gifts ensures your brand stands out with sophistication and quality. </>}
       />
       <ProductGrid
         title="Explore Our Collection of Gift Sets"
@@ -341,7 +342,7 @@ const LuxuryCorporateGifts = () => {
       />
       <CallToAction
         title="Your Trusted Partner for Luxury Corporate Gifts in Dubai"
-        subtitle="From luxury gift sets to perfume gift sets, we deliver premium quality gift sets that strengthen relationships, elevate your brand presence, and demonstrate your commitment to gifting."
+        subtitle={<>From luxury gift sets to perfume gift sets, we deliver premium quality gift sets that strengthen relationships, elevate your brand presence, and demonstrate your commitment to gifting.</>}
         backgroundImageUrl={LuxuryCorporateGiftsImage}
         buttons={[
           {

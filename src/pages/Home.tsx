@@ -242,7 +242,10 @@ const Home = () => {
       />
       <CallToAction
         title="Ready to Elevate Your Corporate Gifting?"
-        subtitle="Partner with Baharnani Advertising, Dubai's premier corporate gift supplier. From premium gift sets to custom branding solutions, we help you make lasting impressions that strengthen business relationships."
+        subtitle={
+          <> Partner with Baharnani Advertising, one of the leading <span className='font-semibold font-switzer text-3xl'>suppliers of corporate gifts</span> in the UAE. From premium gift sets to custom branding solutions, we help you create lasting impressions that strengthen business relationships.</>
+        }
+
         backgroundImageUrl={backgroundImage}
         buttons={[
           {

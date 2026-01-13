@@ -191,7 +191,8 @@ const EatingAndDrinking = () => {
       <CategoryIntro
         imageUrl={EatingDrinkingImage}
         imageAlt="Eating and drinking products collection preview"
-        content="Looking for the perfect corporate gift that combines taste, quality, and elegance? Our premium collection of eating and drinking products features everything from gourmet coffee gift sets and luxury tea collections to artisan chocolate boxes and executive wine accessories. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded coffee sets for client appreciation or sophisticated beverage accessories for corporate events, we've got you covered with the finest selection across Dubai and the UAE."
+        content={<>Looking for the perfect corporate gift that combines taste, quality, and elegance? Our premium collection of eating and drinking products features everything from gourmet coffee gift sets and luxury tea collections to artisan chocolate boxes and executive wine accessories. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded coffee sets for client appreciation or sophisticated beverage accessories for corporate events, we've got you covered with the finest selection across Dubai and the UAE.</>}
+        preview={<>Looking for the perfect corporate gift that combines taste, quality, and elegance? </>}
       />
       <ProductGrid
         title="Explore Our Collection of Eating & Drinking Products"
@@ -207,7 +208,7 @@ const EatingAndDrinking = () => {
       <WhyChooseUs features={eatingAndDrinkingFeatures} />
       <CallToAction
         title="Your Trusted Partner for Corporate Food & Beverage Gifts in Dubai"
-        subtitle="From custom-branded coffee sets to luxury tea collections, we deliver premium quality eating and drinking products that strengthen relationships and elevate your brand presence."
+        subtitle={<>From custom-branded coffee sets to luxury tea collections, we deliver premium quality eating and drinking products that strengthen relationships and elevate your brand presence.</>}
         backgroundImageUrl={EatingDrinkingImage}
         buttons={[
           {

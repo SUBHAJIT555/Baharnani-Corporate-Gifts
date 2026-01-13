@@ -73,8 +73,7 @@ const ApparelAndAccessories = () => {
   const { page: pageParam } = useParams<{ page?: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  const fullIntroText =
-    "Looking for the perfect corporate gift that combines style, quality, and professionalism? Our premium collection of apparel and accessories features everything from custom-embroidered polo shirts and elegant silk ties to luxury watches and leather accessories. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded corporate apparel for team events or sophisticated accessories for client appreciation, we've got you covered with the finest selection across Dubai and the UAE.";
+  const fullIntroText = <>Looking for the perfect corporate gift that combines style, quality, and professionalism? Our premium collection of apparel and accessories features everything from custom-embroidered polo shirts and elegant silk ties to luxury watches and leather accessories. Each item is carefully selected to make a lasting impression on your clients, partners, and employees. Whether you need branded corporate apparel for team events or sophisticated accessories for client appreciation, we've got you covered with the finest selection across Dubai and the UAE.</>;
 
   const [currentPage, setCurrentPage] = useState(() => {
     const page = pageParam ? parseInt(pageParam, 10) : 1;
@@ -188,6 +187,7 @@ const ApparelAndAccessories = () => {
         imageUrl={ApparelAndAccessoriesImage}
         imageAlt="Apparel and accessories collection preview"
         content={fullIntroText}
+        preview={<>Looking for the perfect corporate gift that combines style, quality, and professionalism? </>}
       />
       <ProductGrid
         title="Explore Our Collection of Apparel & Accessories"
@@ -203,7 +203,7 @@ const ApparelAndAccessories = () => {
       <WhyChooseUs features={apparelAndAccessoriesFeatures} />
       <CallToAction
         title="Your Trusted Partner for Corporate Apparel & Accessories in Dubai"
-        subtitle="From custom-branded apparel to luxury accessories, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence."
+        subtitle={<>From custom-branded apparel to luxury accessories, we deliver premium quality corporate gifts that strengthen relationships and elevate your brand presence.</>}
         backgroundImageUrl={ApparelAndAccessoriesImage}
         buttons={[
           {
