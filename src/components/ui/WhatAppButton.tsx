@@ -36,19 +36,33 @@ const WhatsAppButton = () => {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.a
-          href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-            message
-          )}`}
+        <motion.div
           initial={{ opacity: 0, y: 200 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 200 }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-24 right-4 sm:right-8 p-3 rounded-md bg-[#080f0f]/30 backdrop-blur-sm text-[#e1e1e1] border border-[#e1e1e1] hover:bg-[#ffffff] hover:text-[#499F68] hover:border-[#e1e1e1] transition-colors duration-300 z-50 "
-          aria-label="Contact on WhatsApp"
+          className="fixed bottom-20 right-4 sm:right-8 z-50 group overflow-visible"
         >
-          <IoLogoWhatsapp className="md:size-7 size-5" />
-        </motion.a>
+          <a
+            href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+              message
+            )}`}
+            className="relative inline-block p-2 rounded-md bg-white backdrop-blur-sm text-green-600 border border-[#e1e1e1] shadow-lg hover:bg-green-500 transition-colors duration-300 z-50 hover:text-[#e1e1e1] hover:border-[#e1e1e1]  "
+            aria-label="Contact on WhatsApp"
+          >
+            <IoLogoWhatsapp className="md:size-7 size-5" />
+            {/* Chat bubble tooltip */}
+            <div className="absolute top-full right-0 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform group-hover:translate-y-0 -translate-y-2 pointer-events-none z-50">
+              <div className="relative bg-white text-gray-800 px-5 py-3 rounded-md border border-gray-200 whitespace-nowrap font-switzer text-sm">
+                Connect through WhatsApp for faster response
+                {/* Chat bubble tail pointing up */}
+                {/* <div className="absolute bottom-full right-4 -mb-1">
+                  <div className="w-4 h-4 bg-white border-l border-t border-gray-200 transform rotate-45 origin-center"></div>
+                </div> */}
+              </div>
+            </div>
+          </a>
+        </motion.div>
       )}
     </AnimatePresence>
   );

@@ -5,6 +5,7 @@ import type { Swiper as SwiperType } from "swiper";
 import { Pagination, Autoplay } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ImCross } from "react-icons/im";
+import { BsCart4 } from "react-icons/bs";
 import { useQuote } from "../../contexts/QuoteContext";
 
 import "swiper/css";
@@ -14,7 +15,6 @@ import type { Product } from "../../services/api";
 import { useNavigate } from "react-router";
 import { getProductUrl } from "../../lib/utilts";
 import Loading from "./Loading";
-
 
 interface ProductCarouselProps {
   products: Product[] | [];
@@ -203,9 +203,9 @@ const ProductCarousel = ({
                 autoplay={
                   autoplay
                     ? {
-                      delay: autoplayDelay,
-                      disableOnInteraction: false,
-                    }
+                        delay: autoplayDelay,
+                        disableOnInteraction: false,
+                      }
                     : false
                 }
                 grabCursor={true}
@@ -227,66 +227,71 @@ const ProductCarousel = ({
                   equalizeHeights();
                 }}
               >
-                {
-                  products?.map((product, index) => (
-                    <SwiperSlide key={product.id}>
-                      <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={
-                          isSwiperInView
-                            ? { opacity: 1, y: 0 }
-                            : { opacity: 0, y: 30 }
-                        }
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="h-full w-full"
+                {products?.map((product, index) => (
+                  <SwiperSlide key={product.id}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={
+                        isSwiperInView
+                          ? { opacity: 1, y: 0 }
+                          : { opacity: 0, y: 30 }
+                      }
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="h-full w-full"
+                    >
+                      <div
+                        ref={(el) => {
+                          cardRefs.current[index] = el;
+                        }}
+                        onClick={() => handleProductClick(product)}
+                        className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col cursor-pointer h-full"
                       >
-                        <div
-                          ref={(el) => {
-                            cardRefs.current[index] = el;
-                          }}
-                          onClick={() => handleProductClick(product)}
-                          className="bg-[#e1e1e1] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col cursor-pointer h-full"
-                        >
+                        <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-200">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
 
-                          <div className="relative w-full h-48 sm:h-52 md:h-56 lg:h-60 overflow-hidden bg-gray-200">
-                            <img
-                              src={product.image}
-                              alt={product.name}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
+                        <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
+                          <span className="text-xs sm:text-sm font-switzer text-textcolor/60 mb-2 uppercase tracking-wide">
+                            {product.categories[0]}
+                          </span>
 
+                          <h3 className="text-lg font-switzer font-bold sm:text-xl md:text-2xl  text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
+                            {product.name}
+                          </h3>
 
-                          <div className="p-4 sm:p-5 md:p-6 flex flex-col grow">
-
-                            <span className="text-xs sm:text-sm font-switzer text-textcolor/60 mb-2 uppercase tracking-wide">
-                              {product.categories[0]}
-                            </span>
-
-
-                            <h3 className="text-lg font-switzer font-bold sm:text-xl md:text-2xl  text-textcolor mb-4 sm:mb-5 grow line-clamp-2">
-                              {product.name}
-                            </h3>
-
-
-                            <button
-                              disabled={isInQuote(Number(product.id))}
-                              className={`w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(Number(product.id))
+                          <button
+                            disabled={isInQuote(Number(product.id))}
+                            className={`group relative w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base overflow-hidden ${
+                              isInQuote(Number(product.id))
                                 ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
                                 : "bg-textcolor hover:bg-textcolor/70 text-white"
-                                }`}
-                              onClick={(e) => handleAddToQuote(product, e)}
+                            }`}
+                            onClick={(e) => handleAddToQuote(product, e)}
+                          >
+                            <span
+                              className={`inline-block transition-all duration-300 ease-in-out ${
+                                isInQuote(Number(product.id))
+                                  ? ""
+                                  : "group-hover:-translate-y-full group-hover:opacity-0"
+                              }`}
                             >
                               {isInQuote(Number(product.id))
                                 ? "Added to Quote"
                                 : "Add to Quote"}
-                            </button>
-                          </div>
+                            </span>
+                            {!isInQuote(Number(product.id)) && (
+                              <BsCart4 className="absolute left-1/2 top-1/2 w-5 h-5 -translate-x-1/2 translate-y-full opacity-0 transition-all duration-300 ease-in-out group-hover:-translate-y-1/2 group-hover:opacity-100" />
+                            )}
+                          </button>
                         </div>
-                      </motion.div>
-                    </SwiperSlide>
-                  ))
-                }
+                      </div>
+                    </motion.div>
+                  </SwiperSlide>
+                ))}
               </Swiper>
               <div className="flex justify-center mt-6 sm:mt-8 md:mt-10">
                 <div
@@ -300,7 +305,6 @@ const ProductCarousel = ({
               </div>
 
               <div className="flex items-center justify-end gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8 md:mb-10">
-
                 <button
                   className="flex items-center gap-2 hover:opacity-70 transition-opacity"
                   onClick={() => swiperInstanceRef.current?.slidePrev()}
@@ -311,7 +315,6 @@ const ProductCarousel = ({
                     Previous
                   </span>
                 </button>
-
 
                 <button
                   className="flex items-center gap-2 hover:opacity-70 transition-opacity"
@@ -408,18 +411,30 @@ const ProductCarousel = ({
                         <div className="hidden lg:block mt-auto">
                           <button
                             disabled={isInQuote(Number(selectedProduct.id))}
-                            className={`w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg ${isInQuote(Number(selectedProduct.id))
-                              ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                              : "bg-textcolor hover:bg-textcolor/70 text-white"
-                              }`}
+                            className={`group relative w-full font-switzer font-semibold py-4 px-6 rounded-md transition-colors duration-200 text-lg overflow-hidden ${
+                              isInQuote(Number(selectedProduct.id))
+                                ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                                : "bg-textcolor hover:bg-textcolor/70 text-white"
+                            }`}
                             onClick={(e) => {
                               e.stopPropagation();
                               handleAddToQuote(selectedProduct, e);
                             }}
                           >
-                            {isInQuote(Number(selectedProduct.id))
-                              ? "Added to Quote"
-                              : "Add to Quote"}
+                            <span
+                              className={`inline-block transition-all duration-300 ease-in-out ${
+                                isInQuote(Number(selectedProduct.id))
+                                  ? ""
+                                  : "group-hover:-translate-y-full group-hover:opacity-0"
+                              }`}
+                            >
+                              {isInQuote(Number(selectedProduct.id))
+                                ? "Added to Quote"
+                                : "Add to Quote"}
+                            </span>
+                            {!isInQuote(Number(selectedProduct.id)) && (
+                              <BsCart4 className="absolute left-1/2 top-1/2 w-5 h-5 -translate-x-1/2 translate-y-full opacity-0 transition-all duration-300 ease-in-out group-hover:-translate-y-1/2 group-hover:opacity-100" />
+                            )}
                           </button>
                         </div>
                       </div>
@@ -430,18 +445,30 @@ const ProductCarousel = ({
                   <div className="lg:hidden sticky bottom-0 left-0 right-0 bg-bg border-t border-gray-200 p-4 pt-3 shadow-lg z-10">
                     <button
                       disabled={isInQuote(Number(selectedProduct.id))}
-                      className={`w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base ${isInQuote(Number(selectedProduct.id))
-                        ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                        : "bg-textcolor hover:bg-textcolor/70 text-white"
-                        }`}
+                      className={`group relative w-full font-switzer font-semibold py-3.5 px-6 rounded-md transition-colors duration-200 text-base overflow-hidden ${
+                        isInQuote(Number(selectedProduct.id))
+                          ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                          : "bg-textcolor hover:bg-textcolor/70 text-white"
+                      }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         handleAddToQuote(selectedProduct, e);
                       }}
                     >
-                      {isInQuote(Number(selectedProduct.id))
-                        ? "Added to Quote"
-                        : "Add to Quote"}
+                      <span
+                        className={`inline-block transition-all duration-300 ease-in-out ${
+                          isInQuote(Number(selectedProduct.id))
+                            ? ""
+                            : "group-hover:-translate-y-full group-hover:opacity-0"
+                        }`}
+                      >
+                        {isInQuote(Number(selectedProduct.id))
+                          ? "Added to Quote"
+                          : "Add to Quote"}
+                      </span>
+                      {!isInQuote(Number(selectedProduct.id)) && (
+                        <BsCart4 className="absolute left-1/2 top-1/2 w-5 h-5 -translate-x-1/2 translate-y-full opacity-0 transition-all duration-300 ease-in-out group-hover:-translate-y-1/2 group-hover:opacity-100" />
+                      )}
                     </button>
                   </div>
                 </div>

@@ -9,16 +9,14 @@ import {
   FaHeart,
   FaInstagram,
   FaLinkedinIn,
+  FaStar,
 } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 import { PiLinkSimpleDuotone } from "react-icons/pi";
 import { SlSocialDropbox } from "react-icons/sl";
 import { PiMailboxDuotone } from "react-icons/pi";
 import { GoLaw } from "react-icons/go";
-
-
-
-
 
 const Footer = () => {
   const [message, setMessage] = useState<string>("");
@@ -106,29 +104,87 @@ const Footer = () => {
                   competitive price!
                 </p>
                 <div className="flex items-center gap-10 mt-6">
+                  {/* Facebook */}
                   <a
                     href="https://facebook.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-bg hover:text-[#499F68] transition-colors duration-300 border border-bg/30 rounded-md p-2 bg-bg/10 hover:bg-bg/20 backdrop-blur-sm"
+                    className="group relative text-bg hover:text-[#499F68] transition-colors duration-300 border border-bg/30 rounded-md p-2 bg-bg/10 hover:bg-bg/20 backdrop-blur-sm"
                   >
                     <FaFacebookF size={24} />
+                    <div className="absolute top-full left-0 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform group-hover:translate-y-0 -translate-y-2 pointer-events-none z-50">
+                      <div className="relative bg-bg text-textcolor px-4 py-2 rounded-xl shadow-xl border border-bg/30 backdrop-blur-sm whitespace-nowrap font-switzer text-sm">
+                        Follow us on Facebook
+                        {/* Chat bubble tail pointing up */}
+                        <div className="absolute -top-2 left-4">
+                          <div className="w-4 h-4 bg-bg border-l border-t border-bg/30 transform rotate-45"></div>
+                        </div>
+                      </div>
+                    </div>
                   </a>
+
+                  {/* Instagram */}
                   <a
                     href="https://instagram.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-bg hover:text-[#499F68] transition-colors duration-300 border border-bg/30 rounded-md p-2 bg-bg/10 hover:bg-bg/20 backdrop-blur-sm"
+                    className="group relative text-bg hover:text-[#499F68] transition-colors duration-300 border border-bg/30 rounded-md p-2 bg-bg/10 hover:bg-bg/20 backdrop-blur-sm"
                   >
                     <FaInstagram size={24} />
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform group-hover:translate-y-0 -translate-y-2 pointer-events-none z-50">
+                      <div className="relative bg-bg text-textcolor px-4 py-2 rounded-xl shadow-xl border border-bg/30 backdrop-blur-sm whitespace-nowrap font-switzer text-sm">
+                        Follow us on Instagram
+                        {/* Chat bubble tail pointing up */}
+                        <div className="absolute -top-2 left-1/2 -translate-x-1/2">
+                          <div className="w-4 h-4 bg-bg border-l border-t border-bg/30 transform rotate-45"></div>
+                        </div>
+                      </div>
+                    </div>
                   </a>
+
+                  {/* LinkedIn */}
                   <a
                     href="https://linkedin.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-bg hover:text-[#499F68] transition-colors duration-300 border border-bg/30 rounded-md p-2 bg-bg/10 hover:bg-bg/20 backdrop-blur-sm"
+                    className="group relative text-bg hover:text-[#499F68] transition-colors duration-300 border border-bg/30 rounded-md p-2 bg-bg/10 hover:bg-bg/20 backdrop-blur-sm"
                   >
                     <FaLinkedinIn size={24} />
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform group-hover:translate-y-0 -translate-y-2 pointer-events-none z-50">
+                      <div className="relative bg-bg text-textcolor px-4 py-2 rounded-xl shadow-xl border border-bg/30 backdrop-blur-sm whitespace-nowrap font-switzer text-sm">
+                        Follow us on LinkedIn
+                        {/* Chat bubble tail pointing up */}
+                        <div className="absolute -top-2 left-1/2 -translate-x-1/2">
+                          <div className="w-4 h-4 bg-bg border-l border-t border-bg/30 transform rotate-45"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+
+                  {/* Google */}
+                  <a
+                    href="https://www.google.com/maps/place/Baharnani+Advertising+LLC+-+Corporate+gifts+Company+Dubai+%7C+Exhibition+stand+Contractors+Dubai/@25.1625624,55.2303193,16z/data=!4m16!1m7!3m6!1s0x3e5f69c4ae8eb43b:0x34670daac58a6f22!2sBaharnani+Advertising+LLC+-+Corporate+gifts+Company+Dubai+%7C+Exhibition+stand+Contractors+Dubai!8m2!3d25.1625188!4d55.2343055!16s%2Fg%2F11f66tl53w!3m7!1s0x3e5f69c4ae8eb43b:0x34670daac58a6f22!8m2!3d25.1625188!4d55.2343055!9m1!1b1!16s%2Fg%2F11f66tl53w?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative text-bg hover:text-[#499F68] transition-colors duration-300 border border-bg/30 rounded-md p-2 bg-bg/10 hover:bg-bg/20 backdrop-blur-sm"
+                  >
+                    <FcGoogle size={24} />
+                    <div className="absolute top-full right-0 mt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out transform group-hover:translate-y-0 -translate-y-2 pointer-events-none z-50">
+                      <div className="relative bg-bg text-textcolor px-4 py-3 rounded-xl shadow-xl border border-bg/30 backdrop-blur-sm whitespace-nowrap font-switzer text-sm">
+                        <div className="flex items-center gap-1 justify-center mb-1">
+                          <FaStar className="text-yellow-400" size={14} />
+                          <FaStar className="text-yellow-400" size={14} />
+                          <FaStar className="text-yellow-400" size={14} />
+                          <FaStar className="text-yellow-400" size={14} />
+                          <FaStar className="text-yellow-400" size={14} />
+                        </div>
+                        <div>Give your valuable feedback</div>
+                        {/* Chat bubble tail pointing up */}
+                        <div className="absolute -top-2 right-4">
+                          <div className="w-4 h-4 bg-bg border-l border-t border-bg/30 transform rotate-45"></div>
+                        </div>
+                      </div>
+                    </div>
                   </a>
                 </div>
               </div>
@@ -529,7 +585,8 @@ const Footer = () => {
               <div className="col-span-2 sm:col-span-1">
                 <h3 className="text-[#499F68] text-2xl font-tanker mb-5 flex items-center gap-2">
                   <div className="h-6 w-1 bg-bg shrink-0"></div>
-                  Newsletter <PiMailboxDuotone className="inline-block text-bg" />
+                  Newsletter{" "}
+                  <PiMailboxDuotone className="inline-block text-bg" />
                 </h3>
                 <p className="text-bg text-lg font-tanker">
                   Stay updated with our latest news, industry insights, and
@@ -570,7 +627,10 @@ const Footer = () => {
           <div className="w-full flex justify-center items-center py-5 px-10 font-switzer">
             <p className="text-bg text-sm sm:text-base md:text-lg leading-none text-left md:text-center">
               &copy; {new Date().getFullYear()}{" "}
-              <Link to="/" className="text-[#aef6c7] text-sm sm:text-base md:text-lg font-normal">
+              <Link
+                to="/"
+                className="text-[#aef6c7] text-sm sm:text-base md:text-lg font-normal"
+              >
                 {` Baharnani Advertising L.L.C. `}
               </Link>{" "}
               All Rights Reserved.&nbsp; Made with{" "}

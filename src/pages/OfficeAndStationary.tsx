@@ -214,13 +214,13 @@ const OfficeAndStationary = () => {
           {
             text: "Contact Our Team",
             className:
-              "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker!",
+              "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker! border! border-white!",
             link: "/contact-us",
           },
           {
             text: "Explore Product Categories",
             className:
-              "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-textcolor! text-textcolor! font-tanker!",
+              "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-white! text-white! font-tanker!",
             link: "/products",
           },
         ]}

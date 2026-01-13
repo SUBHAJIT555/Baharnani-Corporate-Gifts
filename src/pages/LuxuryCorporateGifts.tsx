@@ -13,6 +13,7 @@ import { Helmet } from "react-helmet-async";
 import { useProductCategories, useProductsByCategory } from "../hooks/useProducts";
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
+import CallToAction from "../components/CallToAction";
 
 const testimonials = [
   {
@@ -337,6 +338,25 @@ const LuxuryCorporateGifts = () => {
         title="Frequently Asked Questions About Corporate Gifts"
         subtitle="Get answers to common questions about our corporate gifts"
         faqData={faqItems}
+      />
+      <CallToAction
+        title="Your Trusted Partner for Luxury Corporate Gifts in Dubai"
+        subtitle="From luxury gift sets to perfume gift sets, we deliver premium quality gift sets that strengthen relationships, elevate your brand presence, and demonstrate your commitment to gifting."
+        backgroundImageUrl={LuxuryCorporateGiftsImage}
+        buttons={[
+          {
+            text: "Contact Our Team",
+            className:
+              "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker! border! border-white!",
+            link: "/contact-us",
+          },
+          {
+            text: "Explore Product Categories",
+            className:
+              "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-white! text-white! font-tanker!",
+            link: "/products",
+          },
+        ]}
       />
     </div>
   );

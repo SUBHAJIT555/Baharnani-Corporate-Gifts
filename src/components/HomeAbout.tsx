@@ -99,7 +99,7 @@ const HomeAbout = () => {
               initial={{ opacity: 0 }}
               animate={isTextInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl font-switzer text-textcolor leading-relaxed sm:leading-relaxed md:leading-relaxed"
+              className="text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl font-switzer text-textcolor leading-relaxed sm:leading-relaxed md:leading-7"
             >
               Searching for the best gift sets in Dubai for surprising a special person or treating your valuable clients? As one of the best corporate gifts company Dubai, we have been able to design a wide range of high-quality gift sets and perfume gift sets based on birthdays and all preferences. From choosing the perfect gift for her, an exquisite corporate gift set to something fashionably within your budget, you get all those and much more in the collection of gift sets UAE.
             </motion.p>

@@ -25,7 +25,8 @@
 @layer base {
   :root {
     /* Primary Colors */
-    --bg: #ffffe3;
+    /* --bg: #ffffe3; */
+    --bg: #ffffff;
     --textcolor: #10100e;
     --dark2: #3a5a40;
     --dark3: #588157;
@@ -122,9 +123,34 @@ body::-webkit-scrollbar {
   display: none !important;
 }
 
+/* Product Grid Swiper Styles */
+.product-grid-swiper {
+  height: auto !important;
+}
+
+.product-grid-swiper .swiper-wrapper {
+  align-items: stretch !important;
+}
+
+.product-grid-swiper .swiper-slide {
+  height: 100% !important;
+  display: flex !important;
+}
+
+.product-grid-swiper .swiper-button-next,
+.product-grid-swiper .swiper-button-prev {
+  display: none !important;
+}
+
+.product-grid-swiper .swiper-pagination {
+  display: none !important;
+}
+
 /* Custom Navigation Buttons */
 .swiper-button-prev-custom-style,
-.swiper-button-next-custom-style {
+.swiper-button-next-custom-style,
+.swiper-button-prev-product-grid,
+.swiper-button-next-product-grid {
   min-width: auto !important;
   height: 40px !important;
   /* background: #e1e1e1 !important; */
@@ -143,28 +169,36 @@ body::-webkit-scrollbar {
   font-size: 14px !important;
   font-weight: 500 !important;
   white-space: nowrap !important;
+  background: transparent !important;
 }
 
 .swiper-button-prev-custom-style:hover,
-.swiper-button-next-custom-style:hover {
+.swiper-button-next-custom-style:hover,
+.swiper-button-prev-product-grid:hover,
+.swiper-button-next-product-grid:hover {
   /* background: #e1e1e1 !important; */
   transform: scale(1.05) !important;
 }
 
 .swiper-button-prev-custom-style:disabled,
-.swiper-button-next-custom-style:disabled {
+.swiper-button-next-custom-style:disabled,
+.swiper-button-prev-product-grid:disabled,
+.swiper-button-next-product-grid:disabled {
   opacity: 0.5 !important;
   cursor: not-allowed !important;
 }
 
 .swiper-button-prev-custom-style svg,
-.swiper-button-next-custom-style svg {
+.swiper-button-next-custom-style svg,
+.swiper-button-prev-product-grid svg,
+.swiper-button-next-product-grid svg {
   flex-shrink: 0 !important;
 }
 
 /* Custom Pagination */
 .swiper-pagination-custom,
-.swiper-pagination-why-choose-us {
+.swiper-pagination-why-choose-us,
+.swiper-pagination-product-grid {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -175,7 +209,8 @@ body::-webkit-scrollbar {
 }
 
 .swiper-pagination-custom .swiper-pagination-bullet,
-.swiper-pagination-why-choose-us .swiper-pagination-bullet {
+.swiper-pagination-why-choose-us .swiper-pagination-bullet,
+.swiper-pagination-product-grid .swiper-pagination-bullet {
   background: #10100e !important;
   opacity: 0.3 !important;
   width: 10px !important;
@@ -188,7 +223,8 @@ body::-webkit-scrollbar {
 }
 
 .swiper-pagination-custom .swiper-pagination-bullet-active,
-.swiper-pagination-why-choose-us .swiper-pagination-bullet-active {
+.swiper-pagination-why-choose-us .swiper-pagination-bullet-active,
+.swiper-pagination-product-grid .swiper-pagination-bullet-active {
   background: #10100e !important;
   opacity: 1 !important;
   width: 10px !important;

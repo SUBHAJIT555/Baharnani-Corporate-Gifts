@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { PiSealPercentDuotone } from "react-icons/pi";
+import { BsCart4 } from "react-icons/bs";
 import type { Product } from "../services/api";
 import { useRandomProducts } from "../hooks/useProducts";
 import { getProductUrl } from "../lib/utilts";
@@ -344,8 +345,7 @@ const TopSaver = ({
                           {product.categories[0]}
                         </span>
 
-                        <Link
-                          to={getProductUrl(product)}>
+                        <Link to={getProductUrl(product)}>
                           {/* Product Title */}
                           <h3 className="text-base font-switzer font-bold text-textcolor mb-4 grow line-clamp-1 overflow-hidden text-ellipsis">
                             {product.name}
@@ -355,18 +355,31 @@ const TopSaver = ({
                         {/* Add to Quote Button */}
                         <button
                           disabled={isInQuote(product.id)}
-                          className={`cursor-pointer w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base ${isInQuote(product.id)
-                            ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
-                            : "bg-textcolor hover:bg-textcolor/70 text-white"
-                            }`}
+                          className={`group relative cursor-pointer w-full font-switzer font-semibold py-2.5 sm:py-3 px-4 rounded-md transition-colors duration-200 text-sm sm:text-base overflow-hidden ${
+                            isInQuote(product.id)
+                              ? "bg-gray-400 text-white cursor-not-allowed opacity-60"
+                              : "bg-textcolor hover:bg-textcolor/70 text-white"
+                          }`}
                           onClick={(e) => handleAddToQuote(product, e)}
                         >
-                          {isInQuote(product.id)
-                            ? "Added to Quote"
-                            : "Add to Quote"}
+                          <span
+                            className={`inline-block transition-all duration-300 ease-in-out ${
+                              isInQuote(product.id)
+                                ? ""
+                                : "group-hover:-translate-y-full group-hover:opacity-0"
+                            }`}
+                          >
+                            {isInQuote(product.id)
+                              ? "Added to Quote"
+                              : "Add to Quote"}
+                          </span>
+                          {!isInQuote(product.id) && (
+                            <BsCart4
+                              className={`absolute left-1/2 top-1/2 w-5 h-5 -translate-x-1/2 translate-y-full opacity-0 transition-all duration-300 ease-in-out group-hover:-translate-y-1/2 group-hover:opacity-100`}
+                            />
+                          )}
                         </button>
                       </div>
-
                     </motion.div>
                   </SwiperSlide>
                 ))}
@@ -445,8 +458,6 @@ const TopSaver = ({
             </div>
           </div>
         </motion.div>
-
-
       </div>
     </section>
   );

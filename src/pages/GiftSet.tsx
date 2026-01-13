@@ -16,6 +16,7 @@ import Seo from "../components/Seo";
 import { Helmet } from "react-helmet-async";
 import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router";
+import CallToAction from "../components/CallToAction";
 
 const giftSetFeatures = [
   {
@@ -268,7 +269,15 @@ const GiftSet = () => {
       <ProductGrid
         title="Explore Our Collection of Gift Sets"
         productType="custom"
-        productData={productsData || { products: [], total: 0, total_pages: 0, page: 1, per_page: 12 }}
+        productData={
+          productsData || {
+            products: [],
+            total: 0,
+            total_pages: 0,
+            page: 1,
+            per_page: 12,
+          }
+        }
         categories={filteredCategories || []}
         onPageChange={handlePageChange}
         isLoading={productsLoading}
@@ -344,6 +353,25 @@ const GiftSet = () => {
         title="FAQs – Everything About Gift Sets in Dubai"
         subtitle="Get answers to common questions about our products and services"
         faqData={faqItems}
+      />
+      <CallToAction
+        title="Your Trusted Partner for Premium Gift Sets in Dubai"
+        subtitle="From luxury gift sets to perfume gift sets, we deliver premium quality gift sets that strengthen relationships, elevate your brand presence, and demonstrate your commitment to gifting."
+        backgroundImageUrl={GiftSetImage}
+        buttons={[
+          {
+            text: "Contact Our Team",
+            className:
+              "h-[50px] w-full sm:w-auto px-8 bg-textcolor! text-white! font-tanker! border! border-white!",
+            link: "/contact-us",
+          },
+          {
+            text: "Explore Product Categories",
+            className:
+              "h-[50px] w-full sm:w-auto px-8 bg-transparent! border! border-white! text-white! font-tanker!",
+            link: "/products",
+          },
+        ]}
       />
     </div>
   );
