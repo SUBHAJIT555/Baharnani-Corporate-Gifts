@@ -119,7 +119,7 @@ const About = () => {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Baharnani Corporate Gifts Dubai",
-    "image": "https://corporategiftsdubaii.ae/ui/assets/logo-B4KFUfAZ.svg",
+    "image": "https://corporategiftsdubaii.ae/logo.svg",
     "@id": "https://corporategiftsdubaii.ae/#localbusiness",
     "url": "https://corporategiftsdubaii.ae/",
     "telephone": "+971551061045",
