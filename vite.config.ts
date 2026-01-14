@@ -6,16 +6,20 @@ import { visualizer } from "rollup-plugin-visualizer";
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   return {
-    base: mode === "production" ? "/ui/" : "/",
+    base: "/",
     plugins: [
       react(),
       tailwindcss(),
-      visualizer({
-        filename: "dist/stats.html",
-        open: true, // auto-open in browser
-        gzipSize: true,
-        brotliSize: true,
-      }),
+      ...(mode === "production"
+        ? []
+        : [
+            visualizer({
+              filename: "dist/stats.html",
+              open: true, // auto-open in browser
+              gzipSize: true,
+              brotliSize: true,
+            }),
+          ]),
     ],
   };
 });
