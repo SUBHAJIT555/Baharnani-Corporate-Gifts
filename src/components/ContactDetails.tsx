@@ -400,10 +400,10 @@ const ContactDetails = () => {
                       Email
                     </p>
                     <a
-                      href="mailto:amit@baharnani.com"
+                      href="mailto:hemant@baharnani.com"
                       className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
                     >
-                      amit@baharnani.com
+                      hemant@baharnani.com
                     </a>
                     <a
                       href="mailto:info@baharnani.com"
@@ -426,10 +426,10 @@ const ContactDetails = () => {
                       Phone Number
                     </p>
                     <a
-                      href="tel:+971526240517"
+                      href="tel:+971556545950"
                       className="text-textcolor font-switzer hover:text-textcolor/80 transition-colors"
                     >
-                      (+971) 52 624 0517 - WhatsApp / Phone Call
+                      (+971) 55 654 5950 - WhatsApp / Phone Call
                     </a>
                     <a
                       href="tel:+97143805587"
@@ -493,7 +493,7 @@ const ContactDetails = () => {
                       <FaFacebookF className="text-2xl" />
                     </motion.a>
                     <motion.a
-                      href="https://wa.me/+971526240517"
+                      href="https://wa.me/+971556545950"
                       target="_blank"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}

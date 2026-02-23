@@ -22,7 +22,7 @@ const WhatsAppButton = () => {
       self.removeEventListener("scroll", toggleVisibility);
     };
   }, []);
-  const phoneNumber = "+971526240517";
+  const phoneNumber = "+971556545950";
   const message = "Hello! I'm interested in your services.";
 
   // const handleWhatsAppClick = () => {

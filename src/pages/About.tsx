@@ -122,7 +122,7 @@ const About = () => {
     "image": "https://corporategiftsdubaii.ae/logo.svg",
     "@id": "https://corporategiftsdubaii.ae/#localbusiness",
     "url": "https://corporategiftsdubaii.ae/",
-    "telephone": "+971551061045",
+    "telephone": "+971556545950",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Baharnani Advertising L.L.C, Al Quoz – Al Quoz 3 – Dubai",

@@ -185,11 +185,17 @@ const EcoFriendly = () => {
         buttonLink="#eco-friendly"
         buttonText="Shop Eco-Friendly Gifts"
       />
+
       <CategoryIntro
         imageUrl={EcoFriendlyImage}
         imageAlt="Eco-friendly products collection preview"
-        content={<>Looking for corporate gifts that align with your sustainability values? Our premium collection of <span className="font-semibold text-textcolor">eco-friendly corporate gifts Dubai</span> features everything from bamboo desk organizers and recycled paper notebooks to solar-powered chargers and reusable bamboo cutlery sets. Each item is carefully selected to demonstrate your commitment to environmental responsibility while making a lasting impression on your clients, partners, and employees. Whether you need sustainable office accessories for client appreciation or eco-conscious products for corporate events, we've got you covered with the finest selection across Dubai and the UAE.</>}
-        preview={<>Looking for corporate gifts that align with your sustainability values? </>}
+        content={<>Looking for eco friendly corporate gifts Dubai businesses rely on to reflect their sustainability values?
+          Our premium collection of <span className="font-semibold text-textcolor">eco-friendly corporate gifts in Dubai</span> features everything from bamboo desk
+          organizers and recycled paper notebooks to solar-powered chargers, plantable pencils, and reusable
+          tote bags. Each item is carefully selected to showcase your commitment to environmental responsibility
+          while creating a lasting impression on clients, partners, and employees. All products can be
+          personalized with your company logo or message, ensuring your brand is noticed for the right reasons
+          across Dubai and the UAE.</>}
       />
       <ProductGrid
         title="Explore Our Collection of Eco-Friendly Corporate Gifts"

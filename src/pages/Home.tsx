@@ -151,12 +151,13 @@ const homeFeatures: FeatureCard[] = [
   },
 ];
 
+
 const Home = () => {
   const seo = {
     title: "Corporate Gift Suppliers in UAE- Baharnani Corporate Gifts",
-    description: "Explore luxury gift sets in Dubai with perfumes, skincare, gourmet treats & accessories—perfect for customized corporate gifts Dubai.",
+    description: "Baharnani Corporate Gifts is a top corporate gifts supplier in Dubai, offering high-quality, customized corporate gifts with fast delivery across the UAE.",
     og_title: "Corporate Gift Suppliers in UAE- Baharnani Corporate Gifts",
-    og_desc: "Explore luxury gift sets in Dubai with perfumes, skincare, gourmet treats & accessories—perfect for customized corporate gifts Dubai.",
+    og_desc: "Baharnani Corporate Gifts is a top corporate gifts supplier in Dubai, offering high-quality, customized corporate gifts with fast delivery across the UAE.",
     canonical: "https://corporategiftsdubaii.ae"
   };
 
@@ -167,7 +168,7 @@ const Home = () => {
     "image": "https://corporategiftsdubaii.ae/logo.svg",
     "@id": "https://corporategiftsdubaii.ae/#localbusiness",
     "url": "https://corporategiftsdubaii.ae/",
-    "telephone": "+971551061045",
+    "telephone": "+971556545950",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Baharnani Advertising L.L.C, Al Quoz – Al Quoz 3 – Dubai",

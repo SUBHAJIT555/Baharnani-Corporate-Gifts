@@ -558,7 +558,7 @@ const Footer = () => {
                       </span>
                     </motion.li>
                   </Link>
-                  <Link to="mailto:amit@baharnani.com">
+                  <Link to="mailto:hemant@baharnani.com">
                     <motion.li
                       className="footer-link group relative flex items-center cursor-pointer"
                       whileHover={{ x: 8 }}

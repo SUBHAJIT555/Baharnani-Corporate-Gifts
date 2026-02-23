@@ -229,6 +229,8 @@ body::-webkit-scrollbar {
   opacity: 1 !important;
   width: 10px !important;
   height: 10px !important;
+
+  
   border-radius: 50% !important;
 }
 
