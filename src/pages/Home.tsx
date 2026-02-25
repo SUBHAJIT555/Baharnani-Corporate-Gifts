@@ -154,11 +154,11 @@ const homeFeatures: FeatureCard[] = [
 
 const Home = () => {
   const seo = {
-    title: "Corporate Gift Suppliers in UAE- Baharnani Corporate Gifts",
+    title: "Baharnani: #1 Corporate Gift Suppliers in Dubai, UAE",
     description: "Baharnani Corporate Gifts is a top corporate gifts supplier in Dubai, offering high-quality, customized corporate gifts with fast delivery across the UAE.",
-    og_title: "Corporate Gift Suppliers in UAE- Baharnani Corporate Gifts",
+    og_title: "Baharnani: #1 Corporate Gift Suppliers in Dubai, UAE",
     og_desc: "Baharnani Corporate Gifts is a top corporate gifts supplier in Dubai, offering high-quality, customized corporate gifts with fast delivery across the UAE.",
-    canonical: "https://corporategiftsdubaii.ae"
+    canonical: "https://corporategiftsdubaii.ae/"
   };
 
   const structuredData = {

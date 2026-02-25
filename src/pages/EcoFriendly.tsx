@@ -101,8 +101,8 @@ const EcoFriendly = () => {
     const actualPage = isNaN(page) || page < 1 ? 1 : page;
 
     const title = actualPage === 1
-      ? `Eco Friendly Corporate Gifts Dubai | Baharnani`
-      : `Eco Friendly Corporate Gifts Dubai – Page ${actualPage} | Baharnani`;
+      ? `Eco Friendly Sustainable Corporate Gifts in Dubai | Baharnani`
+      : `Eco Friendly Sustainable Corporate Gifts in Dubai – Page ${actualPage} | Baharnani`;
 
     const baseDescription = "Promote sustainability with eco-friendly corporate gifts in Dubai, including bamboo, cork, and recycled products.";
     const description = actualPage === 1
